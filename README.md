@@ -7,7 +7,7 @@
 
 ### ∆F In Brief¹
 
->  <p style="color: white; background-color: #4f62f0ff;"> <b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-string</i>² string literals, a concise, yet powerful way to display multiline Unicode text and complex expressions in an APL-friendly style.</p>
+>  <p style="color: white; background-color: #4f62f0ff;"> <b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-string</i>² (<i></i>string literals</i>), a concise, yet powerful way to display multiline Unicode text and complex expressions in an APL-friendly style.</p>
 
 ---
 
