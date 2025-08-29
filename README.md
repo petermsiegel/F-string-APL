@@ -1,4 +1,4 @@
-[∆F_Help.md](https://github.com/user-attachments/files/22051737/F_Help.md)
+[∆F_Help.md - Github barebones version](https://github.com/user-attachments/files/22051737/F_Help.md)
 
 
 ## ∆F — Formatted String Literals
