@@ -86,10 +86,10 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
 
 ## To use **∆F**
 
-> Copy ∆Fapl.dyalog and ∆F_Help.html (from Github, etc.) into your favorite directory `dir`.
-> Then, from your Dyalog session:
+> Copy ∆Fapl.dyalog and ∆F\*Help.html (from Github, etc.) into your favorite directory **_dir_**.
+> Then, from your Dyalog session (replacing **_dir_** with the actual directory name):
 >
-> `]load <dir>/∆Fapl`
+> `]load dir/∆Fapl`
 
 ---
 
