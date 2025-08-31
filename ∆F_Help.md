@@ -1,6 +1,7 @@
 <!-- Preview in sep files: cmd-shift-V,
 Preview side-by-side: cmd-K, V,
 md->HTML: opt-shift-M
+Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help'
 -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown.css">
@@ -60,7 +61,7 @@ md->HTML: opt-shift-M
 
 ### ∆F In Brief¹
 
->  <p style="color: white; background-color: #4f62f0ff;"> <b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>,² formatted string literals, a concise, yet powerful way to display multiline Unicode text and complex expressions in an APL-friendly style.</p>
+>  <p style="color: white; background-color: #4f62f0ff;"> <b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex expressions in an APL-friendly style.<br><small><span style="color: pink; backgrcolor: #4f62f0ff;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inspired by Python's <i>&ThinSpace;f-strings</i>,² but built from the ground up for APL.</span></small></p>
 
 ---
 
@@ -110,16 +111,24 @@ md->HTML: opt-shift-M
 
 <div style="margin-left: 20px;">
 
-| Notes                                                                                                                                                                                                                                                                                                                                                                                       |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| ¹ Throughout this documentation, notably in the many examples, an index origin of zero (**⎕IO←0**) is assumed. Users may utilize _any_ index origin in the **f-string Code fields** they define, as long as it's **1** or **0**. **Code fields** inherit the index origin of the environment (i.e. namespace) from which **∆F** is called.                                                  |
-| ² **∆F** is inspired by Python _[f-strings](https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals)_, short for "**formatted string literals**", but designed for APL's multi-dimensional worldview. **∆F** f-strings and Python's are not compatible.                                                                                                               |
-| ³ **∆F Code fields** _as input_ are limited to a single, possibly very long, line.                                                                                                                                                                                                                                                                                                          |
-| ⁴ As a prototype, **∆F** is currently relatively slow, in that it analyzes the **f-string** using an APL recursive scan.                                                                                                                                                                                                                                                                    |
-| ⁵ Double angle quotation marks **«»** (guillemets) are Unicode chars <small>**⎕UCS 171 187**</small> (on the std Mac keyboard: _*option-backslash*_ and _*option-shift-backslash*_). When including literal guillemets in guillemet-bracketed quotations (_but why?_), opening guillemets **«** are _not_ doubled, but _two_ closing guillemets are needed for each literal **»** required. |
-| ⁶ Details on all the shortcuts are provided later in this document. See **_Code Field Shortcuts._**                                                                                                                                                                                                                                                                                         |
+| Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ¹ Throughout this documentation, notably in the many examples, an index origin of zero (`⎕IO=0`) is assumed. Users may utilize _any_ index origin in the **f-string Code fields** they define, as long as it's **1** or **0**. **Code fields** inherit the index origin of the environment (i.e. namespace) from which **∆F** is called.                                                                                                                      |
+| ² **∆F** is inspired by Python _[f-strings](https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals)_, short for "**formatted string literals**", but designed for APL's multi-dimensional worldview. **∆F** f-strings and Python's are not compatible.                                                                                                                                                                                 |
+| ³ **∆F Code fields** _as input_ are limited to a single, possibly very long, line.                                                                                                                                                                                                                                                                                                                                                                            |
+| ⁴ As a prototype, **∆F** is currently relatively slow, in that it analyzes the **f-string** using an APL recursive scan.                                                                                                                                                                                                                                                                                                                                      |
+| ⁵ **Double angle quotation marks** <big>**«»**</big> (_guillemets_) are Unicode chars `⎕UCS 171 187` (on the std Mac keyboard: _*option-backslash*_ and _*option-shift-backslash*_). When including literal guillemets in guillemet-bracketed quotations (<span style="color: red;">_but why?_</span>&ThinSpace;), opening guillemets <big>**«**</big> are _not_ doubled, but _two_ closing guillemets are needed for each literal <big>**»**</big> required. |
+| ⁶ Details on all the shortcuts are provided later in this document. See **_Code Field Shortcuts._**                                                                                                                                                                                                                                                                                                                                                           |
 
 </div>
+
+---
+
+## ∆F **Help** Information
+
+> To display this **HELP** information, type:
+>
+> > `∆F⍨ 'help'`
 
 ---
 
@@ -336,7 +345,7 @@ The sun's core is at 15,000,000°C or 27,000,032°F.
 
 ⍝  And for a bit of a twist, let's display either degrees centrigrade
 ⍝  or fahrenheit under user control (1 => F, 0 => C)...
-      sunFC← 'The sun''s core is at {`C C2F⍣(`⍵1)⊢ sun_core}°{"CF"⊃⍨ `⍵1}.'
+      sunFC← 'The sun''s core is at {`C C2F⍣`⍵1⊢ sun_core}°{ `⍵1⊃ "CF"}.'
       ∆F sunFC 1
 The sun's core is at 27,000,032°F.
       ∆F sunFC 0
@@ -693,3 +702,5 @@ as an ordinary backtick `` ` ``.
 5.  Bare **\`⍵** or **⍹** (i.e. with no digits appended) increments the _OIC_, `Ω+←1`, _before_ using it as the index in the expression `(⍵⊃⍨Ω+⎕IO)`.
 6.  You can only access the 0-th element of **⍵** via an _explicitly indexed omega_ `` `⍵0 `` or `⍹0`. The _implicitly indexed_ omega always increments its index _before_ use, so the first index that can be used **_implicitly_** is **1**, i.e. `` `⍵1 `` or `⍹1`.
 7.  If an element of the dfn's right argument **⍵** is accessed at runtime via any means, shortcut or traditional, that element **_must_** exist.
+
+(C) 2025 Sam the Cat Foundation

@@ -1,35 +1,40 @@
 :Namespace ⍙Fapl
-  ⎕IO ⎕ML←0 1 
+  ⎕IO ⎕ML←0 1                ⍝ In namespace only. User code is executed in caller space (⊃⎕RSI)  
   DEBUG← 0                   ⍝ DEBUG←1 simply turns off top-level error trapping...
-  helpHtml← '∆F_Help.html'   ⍝ Globally set here
+  helpHtml← '∆F_Help.html'   ⍝ Called from 'help' option. Globally set here
 ⍝ The name of the utility function visible in the target directory.
 ⍝ === BEGINNING OF CODE =====================================================================
 ⍝ === BEGINNING OF CODE =====================================================================
   ∇ result← {opts} ∆F args 
-    :Trap 0/⍨ ~⎕THIS.DEBUG        ⍝ Be sure this function is ⎕IO(etc.)-indep., since it will be promoted out of ⍙Fapl.
+   ⍝ Be sure this function is independent of ⎕IO, ⎕ML, etc., since it will be promoted out of ⍙Fapl.
+   ⍝ ¨⎕THIS¨ will be hardwired as ∆F is promoted out of ⍙Fapl.
+    :Trap 0/⍨ ~⎕THIS.DEBUG                
       :If 900⌶0 
           opts← ⍬
-      :ElseIf ~11 3∊⍨ 80|⎕DR opts ⍝ Here, just verify opts is a simple int or boolean obj.
-        ⍝ If opts aren't simple boolean, then Help will sort it out.
-          result← ⎕THIS.Help opts ⍝ Help handles invalid options (opts)
+      :ElseIf ~11 3∊⍨ 80|⎕DR opts                ⍝ Here, ensure opts is a simple int or boolean obj.
+        ⍝ If opts aren't simple boolean, then let ⎕THIS.Help sort out
+          result← ⎕THIS.Help opts                
          :Return          
       :EndIf 
-      :Select ⊃opts← 4↑opts       ⍝ FmtScan handles invalid options (opts)  
-        :Case 1                   ⍝ Returns executable dfn CODE generated from the f-string (if valid).
+      :Select ⊃opts← 4↑opts                      ⍝ Let ⎕THIS.FmtScan address any invalid opts
+        :Case 1                                  ⍝ Returns executable dfn CODE generated from the f-string (if valid).
           result← (⊃⎕RSI)⍎ opts ⎕THIS.FmtScan ,⊃,⊆args
-        :Case ¯1                  ⍝ Undoc. option-- returns dfn code in string form. 
+        :Case ¯1                        
+          result← (1, 1↓opts) ⎕THIS.FmtScan ,⊃,⊆args         
+        ⍝ Undocumented option-- returns dfn code in string form. 
         ⍝ Useful for benchmarking compile-only step using dfns.cmpx.
-        ⍝ Also, useful for later execution from a text array or file. 
         ⍝    (⍎¯1... ∆F ...)args <===> (1... ∆F ...)args     
-          result← (1, 1↓opts) ⎕THIS.FmtScan ,⊃,⊆args  
-        :Else                     ⍝ Handle 0 (valid) and other (invalid) options in FmtScan  
+        :Else                        
+          result← opts ((⊃⎕RSI){ ⍺⍺⍎ ⍺ ⎕THIS.FmtScan ,⊃⍵⊣ ⎕EX 'opts' 'args'}) ,⊆args
+        ⍝ Handle options (valid and invalid) in ⎕THIS.FmtScan
         ⍝ Returns matrix RESULT of evaluating the f-string.
         ⍝ "Hides" local vars, ¨opts¨ and ¨args¨, from embedded ⎕NL, etc.
-          result← opts ((⊃⎕RSI){ ⍺⍺⍎ ⍺ ⎕THIS.FmtScan ,⊃⍵⊣ ⎕EX 'opts' 'args'}) ,⊆args
       :EndSelect   
   :Else 
       ⎕SIGNAL ⊂⎕DMX.('EM' 'EN' 'Message' ,⍥⊂¨('∆F ',EM) EN Message)
   :EndTrap 
+
+   ⍝ (C) 2025 Sam the Foundation
   ∇
 
 ⍝ FmtScan: top level routine; the "main" function called by ∆F above. See the Executive section below.
@@ -71,12 +76,12 @@
          (c= rb)∧ nBrakG≤ 1: (TrimR pfx) w             ⍝ Return... Scan complete! 
           c∊ lb_rb:          (pfx, c) ∇ w⊣ nBrakG+← -/c= lb_rb  ⍝ Inc/dec nBrakG as appropriate
           c∊ qtsL:          (pfx, a)  ∇ w⊣  cfLenG+← c⊣ a w c← CFStr c w    
-          c= dol:            (pfx, scF) ∇ w             ⍝ $ => ⎕FMT (scF)
+          c= dol:            (pfx, scF) ∇ w             ⍝ $ => ⎕FMT (scF shortcut)
           c= esc:            (pfx, a)  ∇ w⊣ a w← CFEsc w          
-          c= omUs:           (pfx, a)  ∇ w⊣ a w← CFOm w         ⍝ ⍹, alias to `⍵ (see CFEsc).
+          c= omUs:           (pfx, a)  ∇ w⊣ a w← CFOm w ⍝ ⍹, alias to `⍵ (see CFEsc).
          ~c∊ '→↓%':          ⎕SIGNAL cfLogicÊ
         ⍝ We have one of '→', '↓', or '%'. 
-        ⍝ See if [A] it's a pseudo-fn or [B] indicator of self-doc code field (SDCF).
+        ⍝ See if [A] it's a shortcut or [B] indicator of self-doc code field (SDCF).
         ⍝ [A] Pseudo-fn: "above" '%' or APL fns '→'¹ or '↓'. Keep scanning code field. 
             p← +/∧\' '=w                         ⍝ ¹However unlikely: In a dfn stmt, only a bare → is valid!
           (rb≠ ⊃p↓w)∨ nBrakG> 1: (pfx, c scA⊃⍨ c= pct) ∇ w  
@@ -270,15 +275,13 @@
   ⍝ A (etc): a dfn
   ⍝ scA (etc): [0] local absolute name of dfn (with spaces), [1] its code              
   ⍝ Abbrev  Meaning         Valence     User Shortcuts   Notes
-  ⍝ A       [⍺]above ⍵      ambi       `A, %
+  ⍝ A       [⍺]above ⍵      ambi       `A, %             Aliases
   ⍝ B       box ⍵           ambi       `B
   ⍝ C       commas          monadic     `C               Experimental...
   ⍝ Ð       display ⍵       dyadic                       Var Ð only used internally...
-  ⍝ F       [⍺] format ⍵    ambi       `F, $
+  ⍝ F       [⍺] format ⍵    ambi       `F, $             Aliases
   ⍝ M       merge[⍺] ⍵      ambi                         Var M only used internally...
-  ⍝ T       ⍺ date-time ⍵   ambi       `T, `D  
-  ⍝ *** REMOVED ***
-  ⍝     W       ⍺ wrap ⍵        dyadic     `W                Wrap ⍺ or ⍵ with a decorator ⍵ or ⍺.
+  ⍝ T       ⍺ date-time ⍵   ambi       `T, `D            Aliases
   ⍝ Q       quote ⍵         monadic    `Q                Put quotes around text vectors, not non-text
     A← XR scA2← HT   ' ⎕THIS.A ' '{⍺←⍬⋄⎕ML←1⋄⊃⍪/(⌈2÷⍨w-m)⌽¨f↑⍤1⍨¨m←⌈/w←⊃∘⌽⍤⍴¨f←⎕FMT¨⍺⍵}' 
     B← XR scB2← HT   ' ⎕THIS.B ' '{⍺←0⋄⎕ML←1⋄⍺⎕SE.Dyalog.Utils.disp⊂⍣(1≥≡⍵),⍣(0=≡⍵)⊢⍵}' 
@@ -301,7 +304,7 @@
   ⍝    - The longer one remains unchanged.
   ⍝    - Then ⍺' and ⍵' are catenated along the last dimension (1, where ⎕IO←0).
   ⍝ Code: *** REMOVED ***
-  ⍝    W← XR scW2← HT   ' ⎕THIS.W ' '{h←⌈/≢¨a w← ⎕FMT¨⍺ ⍵ ⋄h=≢a: a,w⍴⍨h 0⌈⍴w⋄w,⍨a⍴⍨h 0⌈⍴a}'
+  ⍝ *** W← XR scW2← HT   ' ⎕THIS.W ' '{h←⌈/≢¨a w← ⎕FMT¨⍺ ⍵ ⋄h=≢a: a,w⍴⍨h 0⌈⍴w⋄w,⍨a⍴⍨h 0⌈⍴a}'
   ⍝ Q... Quote Shortcut 
   ⍝ `Q is experimental. Add APL quotes around each char element e in ⍵, 
   ⍝    i.e. e is a a char vector such that (1≥ |≡e) and (1≥ ⍴⍴⍵).
@@ -326,3 +329,5 @@
 ⍝ === END OF CODE ================================================================================
 ⍝ === END OF CODE ================================================================================
 :EndNamespace 
+
+⍝ (C) 2025 Sam the Cat Foundation

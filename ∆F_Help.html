@@ -22,6 +22,7 @@
 	<!-- Preview in sep files: cmd-shift-V,
 Preview side-by-side: cmd-K, V,
 md->HTML: opt-shift-M
+Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help'
 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown.css">
 <!-- Style stuff related to APL and random preferences... -->
@@ -76,7 +77,7 @@ md->HTML: opt-shift-M
 <hr>
 <h3>∆F In Brief¹</h3>
 <blockquote>
- <p style="color: white; background-color: #4f62f0ff;"> <b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>,² formatted string literals, a concise, yet powerful way to display multiline Unicode text and complex expressions in an APL-friendly style.</p>
+ <p style="color: white; background-color: #4f62f0ff;"> <b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex expressions in an APL-friendly style.<br><small><span style="color: pink; backgrcolor: #4f62f0ff;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inspired by Python's <i>&ThinSpace;f-strings</i>,² but built from the ground up for APL.</span></small></p>
 </blockquote>
 <hr>
 <p><strong>∆F f-strings</strong> can concisely include:</p>
@@ -140,7 +141,7 @@ The temperature is 35∘C or  95∘F.
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">¹ Throughout this documentation, notably in the many examples, an index origin of zero (<strong>⎕IO←0</strong>) is assumed. Users may utilize <em>any</em> index origin in the <strong>f-string Code fields</strong> they define, as long as it’s <strong>1</strong> or <strong>0</strong>. <strong>Code fields</strong> inherit the index origin of the environment (i.e. namespace) from which <strong>∆F</strong> is called.</td>
+<td style="text-align:left">¹ Throughout this documentation, notably in the many examples, an index origin of zero (<code>⎕IO=0</code>) is assumed. Users may utilize <em>any</em> index origin in the <strong>f-string Code fields</strong> they define, as long as it’s <strong>1</strong> or <strong>0</strong>. <strong>Code fields</strong> inherit the index origin of the environment (i.e. namespace) from which <strong>∆F</strong> is called.</td>
 </tr>
 <tr>
 <td style="text-align:left">² <strong>∆F</strong> is inspired by Python <em><a href="https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals">f-strings</a></em>, short for “<strong>formatted string literals</strong>”, but designed for APL’s multi-dimensional worldview. <strong>∆F</strong> f-strings and Python’s are not compatible.</td>
@@ -152,7 +153,7 @@ The temperature is 35∘C or  95∘F.
 <td style="text-align:left">⁴ As a prototype, <strong>∆F</strong> is currently relatively slow, in that it analyzes the <strong>f-string</strong> using an APL recursive scan.</td>
 </tr>
 <tr>
-<td style="text-align:left">⁵ Double angle quotation marks <strong>«»</strong> (guillemets) are Unicode chars <small><strong>⎕UCS 171 187</strong></small> (on the std Mac keyboard: <em><em>option-backslash</em></em> and <em><em>option-shift-backslash</em></em>). When including literal guillemets in guillemet-bracketed quotations (<em>but why?</em>), opening guillemets <strong>«</strong> are <em>not</em> doubled, but <em>two</em> closing guillemets are needed for each literal <strong>»</strong> required.</td>
+<td style="text-align:left">⁵ <strong>Double angle quotation marks</strong> <big><strong>«»</strong></big> (<em>guillemets</em>) are Unicode chars <code>⎕UCS 171 187</code> (on the std Mac keyboard: <em><em>option-backslash</em></em> and <em><em>option-shift-backslash</em></em>). When including literal guillemets in guillemet-bracketed quotations (<span style="color: red;"><em>but why?</em></span> ), opening guillemets <big><strong>«</strong></big> are <em>not</em> doubled, but <em>two</em> closing guillemets are needed for each literal <big><strong>»</strong></big> required.</td>
 </tr>
 <tr>
 <td style="text-align:left">⁶ Details on all the shortcuts are provided later in this document. See <strong><em>Code Field Shortcuts.</em></strong></td>
@@ -160,6 +161,14 @@ The temperature is 35∘C or  95∘F.
 </tbody>
 </table>
 </div>
+<hr>
+<h2>∆F <strong>Help</strong> Information</h2>
+<blockquote>
+<p>To display this <strong>HELP</strong> information, type:</p>
+<blockquote>
+<p><code>∆F⍨ 'help'</code></p>
+</blockquote>
+</blockquote>
 <hr>
 <h2>∆F EXAMPLES</h2>
 <p>Before providing information on ∆F syntax and other details, <em>let’s start with some examples</em>…</p>
@@ -331,7 +340,7 @@ The sun's core is at 15,000,000°C or 27,000,032°F.
 
 ⍝  And for a bit of a twist, let's display either degrees centrigrade
 ⍝  or fahrenheit under user control (1 =&gt; F, 0 =&gt; C)...
-      sunFC← 'The sun''s core is at {`C C2F⍣(`⍵1)⊢ sun_core}°{&quot;CF&quot;⊃⍨ `⍵1}.'
+      sunFC← 'The sun''s core is at {`C C2F⍣`⍵1⊢ sun_core}°{ `⍵1⊃ &quot;CF&quot;}.'
       ∆F sunFC 1
 The sun's core is at 27,000,032°F.
       ∆F sunFC 0
@@ -763,6 +772,7 @@ as an ordinary backtick <code>`</code>.</p>
 <li>You can only access the 0-th element of <strong>⍵</strong> via an <em>explicitly indexed omega</em> <code>`⍵0</code> or <code>⍹0</code>. The <em>implicitly indexed</em> omega always increments its index <em>before</em> use, so the first index that can be used <strong><em>implicitly</em></strong> is <strong>1</strong>, i.e. <code>`⍵1</code> or <code>⍹1</code>.</li>
 <li>If an element of the dfn’s right argument <strong>⍵</strong> is accessed at runtime via any means, shortcut or traditional, that element <strong><em>must</em></strong> exist.</li>
 </ol>
+<p>© 2025 Sam the Cat Foundation</p>
 
 </body>
 </html>
