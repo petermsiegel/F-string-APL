@@ -7,7 +7,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown.css">
 
 <!-- Style stuff related to APL and random preferences... -->
-### Github README.md (barebones)
+##### Github Published README.md
 
 ## ∆F — Formatted String Literals
 
