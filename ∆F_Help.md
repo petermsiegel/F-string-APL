@@ -128,7 +128,14 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
 
 > To display this **HELP** information, type:
 >
-> > `∆F⍨ 'help'`
+> `∆F⍨ 'help'`
+
+## To use **∆F**
+
+> Copy ∆Fapl.dyalog and ∆F_Help.html (from Github, etc.) into your favorite directory `dir`.
+> Then, from your Dyalog session:
+>
+> `]load <dir>/∆Fapl`
 
 ---
 
