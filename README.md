@@ -1,4 +1,13 @@
-#### GITHUB PREVIEW VERSION
+<!-- Preview in sep files: cmd-shift-V,
+Preview side-by-side: cmd-K, V,
+md->HTML: opt-shift-M
+Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help'
+-->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown.css">
+
+<!-- Style stuff related to APL and random preferences... -->
+### Github README.md (barebones)
 
 ## ∆F — Formatted String Literals
 
@@ -6,7 +15,7 @@
 
 ### ∆F In Brief¹
 
->  <p style="color: white; background-color: #4f62f0ff;"> <b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex expressions in an APL-friendly style.<br><small><span style="color: pink; backgrcolor: #4f62f0ff;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inspired by Python's <i>&ThinSpace;f-strings</i>,² but built from the ground up for APL.</span></small></p>
+>  <p style="padding-left: 15px;color: white; background-color: #4f62f0ff;"><b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.<br><span style="padding-left: 110px;color: pink; background-color: #4f62f0ff;">Inspired by Python's <i>&ThinSpace;f-strings</i>,²&ensp;but designed for APL.</span></p>
 
 ---
 

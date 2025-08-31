@@ -304,7 +304,9 @@
   ⍝    - The longer one remains unchanged.
   ⍝    - Then ⍺' and ⍵' are catenated along the last dimension (1, where ⎕IO←0).
   ⍝ Code: *** REMOVED ***
-  ⍝ *** W← XR scW2← HT   ' ⎕THIS.W ' '{h←⌈/≢¨a w← ⎕FMT¨⍺ ⍵ ⋄h=≢a: a,w⍴⍨h 0⌈⍴w⋄w,⍨a⍴⍨h 0⌈⍴a}'
+  ⍝ *** W← XR scW2← HT ' ⎕THIS.W ' '{h←⌈/≢¨a w← ⎕FMT¨⍺ ⍵ ⋄h=≢a: a,w⍴⍨h 0⌈⍴w⋄w,⍨a⍴⍨h 0⌈⍴a}' 
+  ⍝     Alternative:   ⍺1 ⍺2 `W ⍵.  ⍺1 goes left, ⍺2 goes right.
+  ⍝     W← XR scW2← HT ' ⎕THIS.W ' '{l r←2⍴⍺⋄h←⌈/≢¨á←⎕FMT¨l⍵r⋄⊃{h←⌈/≢¨⍺ ⍵⋄h=≢⍺: ⍺,⍵⍴⍨h 0⌈⍴⍵⋄⍵,⍨⍺⍴⍨h 0⌈⍴⍺}/á}'
   ⍝ Q... Quote Shortcut 
   ⍝ `Q is experimental. Add APL quotes around each char element e in ⍵, 
   ⍝    i.e. e is a a char vector such that (1≥ |≡e) and (1≥ ⍴⍴⍵).
