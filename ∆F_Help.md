@@ -55,7 +55,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
   }
 </style>
 
-## ∆F — Formatted String Literals
+## ∆F --- Formatted String Literals
 
 ---
 

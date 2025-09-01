@@ -9,7 +9,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
 <!-- Style stuff related to APL and random preferences... -->
 ##### Github Published README.md
 
-## ∆F — Formatted String Literals
+## ∆F --- Formatted String Literals
 
 ---
 
