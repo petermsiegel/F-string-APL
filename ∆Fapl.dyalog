@@ -152,11 +152,11 @@
   ⍝ sc[A-ZÐ] Shortcuts: A, B, C, Ð, F, M, T~D, and W, Q  
   ⍝ `A => scA "above"; `B => scB "box"; `C => scC "commas on nums"; 
   ⍝ `F => scF "⎕FMT";  `T or `D => scT "date-time" (`D is an alias of `T);  
-  ⍝ REMOVED:  `W => scW "Wrap"       (experimental); 
+  ⍝ `W => scW "Wrap"       (experimental); 
   ⍝ `Q => scQ "add Quotes around text only" (experimental)
   ⍝  Ð => scÐ an internal (pseudo-)shortcut, calling dfn "disp", for global BOX option.  
-             scA scB scC scÐ scF scM scT scQ← inline⊃¨ scList   ⍝ code fragments.
-    userSCs← scA scB scC     scF scT scT scQ            ⍝ A B C F T T Q <== esc+ 'ABCFTDQ'
+             scA scB scC scÐ scF scM scT scQ scW← inline⊃¨ scList   ⍝ code fragments.
+    userSCs← scA scB scC     scF scT scT scQ scW            ⍝ A B C F T T Q W <== esc+ 'ABCFTDQW'
  
   ⍝ Pseudo-globals  camelCaseG 
   ⍝    fldsG-   global field list
@@ -271,7 +271,7 @@
     ; XR ;HT; sc   
     XR← ⎕THIS.⍎⊃∘⌽                                   ⍝ Execute the right-hand expression
     HT← '⎕THIS' ⎕R (⍕⎕THIS)                          ⍝ "Hardwire" absolute ⎕THIS. 
-    ⎕SHADOW '; scA2; scB2; scC2; scÐ2; scF2; scM2; scT2; scQ2 '~';' 
+    ⎕SHADOW '; scA2; scB2; scC2; scÐ2; scF2; scM2; scT2; scQ2 scQ2 '~';' 
   ⍝ A (etc): a dfn
   ⍝ scA (etc): [0] local absolute name of dfn (with spaces), [1] its code              
   ⍝ Abbrev  Meaning         Valence     User Shortcuts   Notes
@@ -296,17 +296,6 @@
     F← XR scF2←      ' ⎕FMT '    ' ⎕FMT '                                                
     M← XR scM2← HT   ' ⎕THIS.M ' '{⍺←⊢⋄⎕ML←1⋄⊃,/((⌈/≢¨)↑¨⊢)⎕FMT¨⍺⍵}'                     
     T← XR scT2← HT   ' ⎕THIS.T ' '{⍺←''YYYY-MM-DD hh:mm:ss''⋄∊⍣(1=≡⍵)⊢⍺(1200⌶)⊢1⎕DT⊆⍵}'  
-  ⍝ W: *** REMOVED ***
-  ⍝    W (Wrap) is experimental...
-  ⍝    ⍺ Wrap ⍵: Converts each to a ⎕FMTed matrix, ⍺' and ⍵'. 
-  ⍝    - The shorter one (fewer lines) is treated as a decorator, so is 
-  ⍝      extended via ⍴, essentially replicating it line by line.
-  ⍝    - The longer one remains unchanged.
-  ⍝    - Then ⍺' and ⍵' are catenated along the last dimension (1, where ⎕IO←0).
-  ⍝ Code: *** REMOVED ***
-  ⍝ *** W← XR scW2← HT ' ⎕THIS.W ' '{h←⌈/≢¨a w← ⎕FMT¨⍺ ⍵ ⋄h=≢a: a,w⍴⍨h 0⌈⍴w⋄w,⍨a⍴⍨h 0⌈⍴a}' 
-  ⍝     Alternative:   ⍺1 ⍺2 `W ⍵.  ⍺1 goes left, ⍺2 goes right.
-  ⍝     W← XR scW2← HT ' ⎕THIS.W ' '{l r←2⍴⍺⋄h←⌈/≢¨á←⎕FMT¨l⍵r⋄⊃{h←⌈/≢¨⍺ ⍵⋄h=≢⍺: ⍺,⍵⍴⍨h 0⌈⍴⍵⋄⍵,⍨⍺⍴⍨h 0⌈⍴⍺}/á}'
   ⍝ Q... Quote Shortcut 
   ⍝ `Q is experimental. Add APL quotes around each char element e in ⍵, 
   ⍝    i.e. e is a a char vector such that (1≥ |≡e) and (1≥ ⍴⍴⍵).
@@ -318,9 +307,15 @@
       qQt1← '''''''''∘'                                ⍝ A single quote (LOL).
       qQt←  qQt1, '{0=80|⎕DR⍵:⍺,⍺,⍨⍵/⍨ 1+⍺=⍵⋄⍵}⍤1⊢⍵}' ⍝ If a vector/row is char, put in quotes.
     Q← XR scQ2← HT   ' ⎕THIS.Q '  (qDp, qOr, qMx, qQt)
+  ⍝ `W (Wrap) is experimental... 
+  ⍝  ⍺1 ⍺2 `W ⍵ 
+  ⍝    ⍺1, ⍺2 each a scalar or vector.
+  ⍝  Adds decorator ⍺1 to each line of (⎕FMT ⍵) on the left and ⍺2 on the right...
+  ⍝    If ⍺1 or ⍺2 is empty, ⍬ may be used in place of a 0-length string (e.g. "").
+    W← XR scW2← HT ' ⎕THIS.W ' '{l r← 2⍴⍺⋄{l,⍵,r}⍤1⊢⎕FMT ⍵}'
     
-    scList← scA2 scB2 scC2 scÐ2 scF2 scM2 scT2 scQ2    ⍝ All shortcuts, including internal ones.
-    nSC← ≢  sc← 'ABCFTDQ'                              ⍝ sc: User-callable shortcuts  (`A, etc.)
+    scList← scA2 scB2 scC2 scÐ2 scF2 scM2 scT2 scQ2 scW2  ⍝ All shortcuts, including internal ones.
+    nSC← ≢  sc← 'ABCFTDQW'                              ⍝ sc: User-callable shortcuts  (`A, etc.)
     MapSC←  sc∘⍳ 
     ok← 1 
   ∇
