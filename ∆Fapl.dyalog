@@ -1,5 +1,5 @@
 :Namespace ⍙Fapl
-  ⎕IO ⎕ML←0 1                ⍝ In namespace only. User code is executed in caller space (⊃⎕RSI)  
+  ⎕IO  ⎕ML←0 1                ⍝ In namespace only. User code is executed in caller space (⊃⎕RSI)  
   DEBUG← 0                   ⍝ DEBUG←1 simply turns off top-level error trapping...
   helpHtml← '∆F_Help.html'   ⍝ Called from 'help' option. Globally set here
 ⍝ The name of the utility function visible in the target directory.
