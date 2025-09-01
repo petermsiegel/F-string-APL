@@ -271,7 +271,7 @@
     ; XR ;HT; sc   
     XR← ⎕THIS.⍎⊃∘⌽                                   ⍝ Execute the right-hand expression
     HT← '⎕THIS' ⎕R (⍕⎕THIS)                          ⍝ "Hardwire" absolute ⎕THIS. 
-    ⎕SHADOW '; scA2; scB2; scC2; scÐ2; scF2; scM2; scT2; scQ2 scQ2 '~';' 
+    ⎕SHADOW '; scA2; scB2; scC2; scÐ2; scF2; scM2; scT2; scQ2; scW2'~';' 
   ⍝ A (etc): a dfn
   ⍝ scA (etc): [0] local absolute name of dfn (with spaces), [1] its code              
   ⍝ Abbrev  Meaning         Valence     User Shortcuts   Notes
@@ -297,22 +297,27 @@
     M← XR scM2← HT   ' ⎕THIS.M ' '{⍺←⊢⋄⎕ML←1⋄⊃,/((⌈/≢¨)↑¨⊢)⎕FMT¨⍺⍵}'                     
     T← XR scT2← HT   ' ⎕THIS.T ' '{⍺←''YYYY-MM-DD hh:mm:ss''⋄∊⍣(1=≡⍵)⊢⍺(1200⌶)⊢1⎕DT⊆⍵}'  
   ⍝ Q... Quote Shortcut 
-  ⍝ `Q is experimental. Add APL quotes around each char element e in ⍵, 
-  ⍝    i.e. e is a a char vector such that (1≥ |≡e) and (1≥ ⍴⍴⍵).
-  ⍝    Be sure to handle heterogeneous vectors, ⎕OR objects, and namespaces correctly. 
-      ⎕SHADOW '; qDp; qOr; qMx; qQt1; qQt'~';' 
+  ⍝ `Q is experimental. Via a recursive scan, adds APL quotes around each char 
+  ⍝    element e in ⍵, i.e. e is a char vector or row of an array such that
+  ⍝    (1≥ |≡e) and (1≥ ⍴⍴⍵). 
+  ⍝ Be sure to handle heterogeneous vectors, ⎕OR objects, and namespaces correctly. 
+      ⎕SHADOW '; qDp; qOr; qMx; qQt'~';' 
       qDp←  '{1<|≡⍵:∇¨⍵⋄'                              ⍝ It's not simple ==> handle.
       qOr←  '(0=⍴⍴⍵)∧1=≡⍵:⍵⋄'                          ⍝ It's an ⎕OR ==> handle.
       qMx←  '(0≠≡⍵)∧326=⎕DR⍵:∇¨⍵⋄'                     ⍝ It's heterogeneous: 1 'x' 2 3.
-      qQt1← '''''''''∘'                                ⍝ A single quote (LOL).
-      qQt←  qQt1, '{0=80|⎕DR⍵:⍺,⍺,⍨⍵/⍨ 1+⍺=⍵⋄⍵}⍤1⊢⍵}' ⍝ If a vector/row is char, put in quotes.
+                                                       ⍝ ⎕UCS 39: A single quote (LOL).
+      qQt←   '(⎕UCS 39){0=80|⎕DR⍵:⍺,⍺,⍨⍵/⍨ 1+⍺=⍵⋄⍵}⍤1⊢⍵}' ⍝ If a vector/row is char, put in quotes.
     Q← XR scQ2← HT   ' ⎕THIS.Q '  (qDp, qOr, qMx, qQt)
   ⍝ `W (Wrap) is experimental... 
   ⍝  ⍺1 ⍺2 `W ⍵ 
-  ⍝    ⍺1, ⍺2 each a scalar or vector.
+  ⍝  ∘ ⍺1, ⍺2 each a scalar or vector.
+  ⍝  ∘ Default ⍺ is a scalar single-quote (⎕UCS 39) (as if user entered "''" `W ⍵), i.e.
+  ⍝    quoting all lines of the object presented.
+  ⍝  ∘ See  `Q, Quote, for a conditional quote function which
+  ⍝    recursively scans ⍵ for char. vectors or rows or character arrays.
   ⍝  Adds decorator ⍺1 to each line of (⎕FMT ⍵) on the left and ⍺2 on the right...
   ⍝    If ⍺1 or ⍺2 is empty, ⍬ may be used in place of a 0-length string (e.g. "").
-    W← XR scW2← HT ' ⎕THIS.W ' '{l r← 2⍴⍺⋄{l,⍵,r}⍤1⊢⎕FMT ⍵}'
+    W← XR scW2← HT ' ⎕THIS.W ' '{⍺←⎕UCS 39⋄l r← 2⍴⍺⋄{l,⍵,r}⍤1⊢⎕FMT ⍵}'
     
     scList← scA2 scB2 scC2 scÐ2 scF2 scM2 scT2 scQ2 scW2  ⍝ All shortcuts, including internal ones.
     nSC← ≢  sc← 'ABCFTDQW'                              ⍝ sc: User-callable shortcuts  (`A, etc.)
