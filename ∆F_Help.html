@@ -746,7 +746,7 @@ as an ordinary backtick <code>`</code>.</p>
 <tr>
 <td style="text-align:left">`W</td>
 <td style="text-align:left">Wrap</td>
-<td style="text-align:left"><code>[L R | LR] `W ⍵`</code>. Wraps <code>⍵</code>in decorators<code>L</code> (<code>0⊃⍺</code>) and <code>R</code> (<code>1⊃⍺</code>). <code>⍵</code>is an object of any shape and depth.<code>L</code>and <code>R</code>are char. vectors or scalars or<code>⍬</code>(same as<code>''</code>); if there is one scalar or enclosed vector, it is replicated (<code>L R←2⍴⍺</code>). Each row (or vector) of <code>⍵</code>will have<code>L</code>catenated on the left and<code>R</code>on the right. By default,<code>⍺←''''</code>, i.e. APL quotes will wrap the object ⍵, row by row, whether character, numeric or otherwise. <strong>EXPERIMENTAL</strong></td>
+<td style="text-align:left">Wraps the rows of object ⍵ in decorators <code>0⊃2⍴⍺</code> (on the left) and <code>1⊃2⍴⍺</code> (on the right), with <code>⍺</code> defaulting to a single quote. See details below. <strong>**EXPERIMENTAL**</strong></td>
 </tr>
 <tr>
 <td style="text-align:left">`⍵𝒋, ⍹𝒋</td>
@@ -786,7 +786,28 @@ as an ordinary backtick <code>`</code>.</p>
 <li>You can only access the 0-th element of <strong>⍵</strong> via an <em>explicitly indexed omega</em> <code>`⍵0</code> or <code>⍹0</code>. The <em>implicitly indexed</em> omega always increments its index <em>before</em> use, so the first index that can be used <strong><em>implicitly</em></strong> is <strong>1</strong>, i.e. <code>`⍵1</code> or <code>⍹1</code>.</li>
 <li>If an element of the dfn’s right argument <strong>⍵</strong> is accessed at runtime via any means, shortcut or traditional, that element <strong><em>must</em></strong> exist.</li>
 </ol>
+<h3>Wrap (<code>`W</code>) Details</h3>
+<ol>
+<li>
+<p>Syntax: <code>[⍺←'''''] `W ⍵</code>.</p>
+</li>
+<li>
+<p>Let <code>L←0⊃2⍴⍺</code> and <code>R←1⊃2⍴⍺</code>.</p>
+</li>
+<li>
+<p>Wrap each row <code>O'</code> of the simple objects <code>O</code> in <code>⍵</code> (or the entire object <code>O</code> if a vector or scalar) in decorators<code>L</code> and <code>R</code>: <code>L, (⍕O') R</code>.</p>
+</li>
+<li>
+<p><code>⍵</code> is an object of any shape and depth.<code>L</code>and <code>R</code>are char. vectors or scalars or <code>⍬</code> (treated as <code>''</code>).</p>
+</li>
+<li>
+<p>If there is one scalar or enclosed vector <code>⍺</code>, it is replicated <em>as above</em>.</p>
+</li>
+<li>
+<p>By default,<code>⍺←''''</code>, i.e. APL quotes will wrap the object ⍵, row by row, whether character, numeric or otherwise.</p>
 <p>© 2025 Sam the Cat Foundation</p>
+</li>
+</ol>
 
 </body>
 </html>

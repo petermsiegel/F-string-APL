@@ -1,4 +1,4 @@
-<!--   Preview in sep files: cmd-shift-V,
+<!-- Preview in sep files: cmd-shift-V,
 Preview side-by-side: cmd-K, V,
 md->HTML: opt-shift-M
 Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help'
