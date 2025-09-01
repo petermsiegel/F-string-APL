@@ -58,15 +58,20 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
   table {
     background-color: #eae9ebaa;
     line-height: 1.1;
+    vertical-align: top;
     font-family: "APL386 Unicode", APL386, "APL385 Unicode", APL385 "Courier New", Courier,
     "Lucida Console", "Consolas", monospace;
   }
   /* Table header */
   th {  
     line-height: 1.1;
+    vertical-align: top;
     font-weight: 900;
     background-color: #740000ff;
     color: #f3efef;
+  }
+  td {
+    vertical-align: top;
   }
   blockquote {
     font-size: 110%;
@@ -165,9 +170,13 @@ The temperature is 35∘C or  95∘F.
 <h2>∆F <strong>Help</strong> Information</h2>
 <blockquote>
 <p>To display this <strong>HELP</strong> information, type:</p>
-<blockquote>
 <p><code>∆F⍨ 'help'</code></p>
 </blockquote>
+<h2>To use <strong>∆F</strong></h2>
+<blockquote>
+<p>Copy ∆Fapl.dyalog and ∆F*Help.html (from Github, etc.) into your favorite directory <strong><em>dir</em></strong>.
+Then, from your Dyalog session (replacing <strong><em>dir</em></strong> with the actual directory name):</p>
+<p><code>]load dir/∆Fapl</code></p>
 </blockquote>
 <hr>
 <h2>∆F EXAMPLES</h2>
@@ -733,6 +742,11 @@ as an ordinary backtick <code>`</code>.</p>
 <td style="text-align:left">`T, `D</td>
 <td style="text-align:left">Date-Time¹</td>
 <td style="text-align:left">Displays timestamp(s) <code>⍵</code> according to date-time template <code>⍺</code>. <code>⍵</code> is one or more APL timestamps <code>⎕TS</code>. <code>⍺</code> is a date-time template in <code>1200⌶</code> format. If omitted, <code>⍺← 'YYYY-MM-DD hh:mm:ss'</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left">`W</td>
+<td style="text-align:left">Wrap</td>
+<td style="text-align:left"><code>[L R | LR] `W ⍵`</code>. Wraps <code>⍵</code>in decorators<code>L</code> (<code>0⊃⍺</code>) and <code>R</code> (<code>1⊃⍺</code>). <code>⍵</code>is an object of any shape and depth.<code>L</code>and <code>R</code>are char. vectors or scalars or<code>⍬</code>(same as<code>''</code>); if there is one scalar or enclosed vector, it is replicated (<code>L R←2⍴⍺</code>). Each row (or vector) of <code>⍵</code>will have<code>L</code>catenated on the left and<code>R</code>on the right. By default,<code>⍺←''''</code>, i.e. APL quotes will wrap the object ⍵, row by row, whether character, numeric or otherwise. <strong>EXPERIMENTAL</strong></td>
 </tr>
 <tr>
 <td style="text-align:left">`⍵𝒋, ⍹𝒋</td>

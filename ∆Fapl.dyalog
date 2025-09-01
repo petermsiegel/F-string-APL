@@ -311,13 +311,13 @@
   ⍝ `W (Wrap) is experimental... 
   ⍝  ⍺1 ⍺2 `W ⍵ 
   ⍝  ∘ ⍺1, ⍺2 each a scalar or vector.
-  ⍝  ∘ Default ⍺ is a scalar single-quote (⎕UCS 39) (as if user entered "''" `W ⍵), i.e.
+  ⍝  ∘ Default ⍺ is a scalar single-quote (⍺←⎕UCS 39) (as if user entered "''" `W ⍵), i.e.
   ⍝    quoting all lines of the object presented.
-  ⍝  ∘ See  `Q, Quote, for a conditional quote function which
-  ⍝    recursively scans ⍵ for char. vectors or rows or character arrays.
-  ⍝  Adds decorator ⍺1 to each line of (⎕FMT ⍵) on the left and ⍺2 on the right...
-  ⍝    If ⍺1 or ⍺2 is empty, ⍬ may be used in place of a 0-length string (e.g. "").
-    W← XR scW2← HT ' ⎕THIS.W ' '{⍺←⎕UCS 39⋄l r← 2⍴⍺⋄{l,⍵,r}⍤1⊢⎕FMT ⍵}'
+  ⍝  Adds decorator ⍺1 to ⍵' (each line of ⍵) on the left and ⍺2 on the right:
+  ⍝    ⍺1, (⍕⍵'), ⍺2
+  ⍝  If ⍺1 or ⍺2 is empty, ⍬ may be used in place of a 0-length string (e.g. "").
+  ⍝  See  `Q, Quote, if you want to quote ONLY char vectors or rows.
+    W← XR scW2← HT ' ⎕THIS.W ' '{⍺←⎕UCS 39⋄ 1<|≡⍵: ⍺∘∇¨⍵⋄L R←2⍴⍺⋄{L,R,⍨⍕⍵}⍤1⊢⍵}'
     
     scList← scA2 scB2 scC2 scÐ2 scF2 scM2 scT2 scQ2 scW2  ⍝ All shortcuts, including internal ones.
     nSC← ≢  sc← 'ABCFTDQW'                              ⍝ sc: User-callable shortcuts  (`A, etc.)
