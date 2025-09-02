@@ -356,7 +356,7 @@ The sun's core is at 27,000,032°F.
 The sun's core is at 15,000,000°C.
 </code></pre>
 <h3>Placing quotes around string elements of an object: the <code>`Q</code> shortcut</h3>
-<p>The <code>`Q</code> shortcut recursively scans its right argument, looking for character
+<p>The <strong>Quote</strong> shortcut <code>`Q</code> recursively scans its right argument, looking for character
 scalars, vectors, and rows of character arrays, doubling internal single quotes and
 placing single quotes around each such element. Non-character data is returned as is.</p>
 <pre><code>⍝  Let's use the `Q shortcut to place quotes around just the character
@@ -375,6 +375,29 @@ placing single quotes around each such element. Non-character data is returned a
    ∆F '{`Q 1 2 &quot;x&quot; 3 &quot;y&quot;}'
 1 2  'x'  3  'y'
 </code></pre>
+<h3>Wrapping results in left and right decorators: Using the <span style="color: red;">experimental</span> feature <code>`W</code></h3>
+<p>Just a quick mention of the experimental shortcut <strong>Wrap</strong>, <code>`W</code>. Wrap takes any user object as its right argument, <code>⍵</code>, and one or two left arguments: the first, a decorator for the <strong><em>left</em></strong> side of <code>⍵</code> and the second, a decorator for the <strong><em>right</em></strong> side of <code>⍵</code>. If just one scalar or vector is included as <code>⍺</code>, then that is applied both <strong><em>left</em></strong> <em>and</em> <strong><em>right</em></strong>.</p>
+<p>If you need to omit one or the other decorator, simply make it a null string <code>&quot;&quot;</code> or, equivalently, a <em>zilde</em> <code>⍬</code>.</p>
+<h4>How are the decorators placed?</h4>
+<p>The decorators are placed immediately adjacent to each line of each simple object (depth 1, 0, ¯1) in <code>⍵</code>. By default, the left and right decorators are <em>both</em> a single quote, i.e. <code>⍺← '''''</code>. This is useful when you want to put quotes around each line of each simple object. Compare the Quote shortcut <code>`Q</code>, which only puts quotes around the character objects in <code>⍵</code>.</p>
+<p>Here are two simple examples.</p>
+<pre><code>⍝  Place ∘C after each numeric result. Note that we convert each element
+⍝  of the list of numbers on the right to separate vectors.
+⍝  Since there is no left decorator, we use &quot;&quot; or its equivalent here, ⍬.
+   ∆F '{ &quot;&quot; &quot;∘C&quot; `W ⍪18 22 33 } ...{ ⍬&quot;∘C&quot; `W ,¨ 18 22 33}'
+18∘C ... 18∘C  22∘C  33∘C
+22∘C
+33∘C
+
+⍝  Place a pair of quotes around the lines of each simple object in a complex object.
+⍝  Note that every such object will be quoted, not just character objects (see `Q).
+   ∆F '{`W  (&quot;cats&quot;)(⍳2 2 1)(2 2⍴⍳4)(3 3⍴⎕A) }'
+'cats'   '0 0 0'   '0 1'  'ABC'
+         '0 1 0'   '2 3'  'DEF'
+                          'GHI'
+         '1 0 0'
+         '1 1 0'
+</code></pre>
 <h3>Self-documenting <strong>Code fields</strong> (SDCFs) are a useful debugging tool.</h3>
 <p>What’s an SDCF? An SDCF¹ allows whatever source code is in a <strong>Code Field</strong> to be automatically displayed literally along with the result of evaluating that code.</p>
 <div style="margin-left: 25px;">
@@ -386,7 +409,7 @@ placing single quotes around each such element. Non-character data is returned a
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">¹ SDCFs are based on Python’s <strong><a href="https://docs.python.org/3/whatsnew/3.8.html#f-strings-support-for-self-documenting-expressions-and-debugging">self-documenting expressions</a></strong> in <em>f-strings</em>. SDCFs are used <strong><em>only</em></strong> in <strong>Code fields</strong> (<em>duh</em>).</td>
+<td style="text-align:left">¹ SDCFs are based on Python’s <strong><a href="https://docs.python.org/3/whatsnew/3.8.html#f-strings-support-for-self-documenting-expressions-and-debugging">self-documenting expressions</a></strong> in <em>f-strings</em>, but work slightly differently. SDCFs are used <strong><em>only</em></strong> in <strong>Code fields</strong> (<em>duh</em>).</td>
 </tr>
 </tbody>
 </table>
@@ -783,7 +806,7 @@ as an ordinary backtick <code>`</code>.</p>
 <li>All omega shortcut expressions in the <strong>f-string</strong> are evaluated left to right and are ⎕IO-independent.</li>
 <li><strong>`⍵𝒋</strong> or <strong>⍹𝒋</strong> sets the <em>OIC</em> to 𝒋, <code>Ω←𝒋</code>, and returns the expression <code>(⍵⊃⍨Ω+⎕IO)</code>. Here <strong>𝒋</strong> must be a <em>non-negative integer</em> with at least 1 digit.</li>
 <li>Bare <strong>`⍵</strong> or <strong>⍹</strong> (i.e. with no digits appended) increments the <em>OIC</em>, <code>Ω+←1</code>, <em>before</em> using it as the index in the expression <code>(⍵⊃⍨Ω+⎕IO)</code>.</li>
-<li>You can only access the 0-th element of <strong>⍵</strong> via an <em>explicitly indexed omega</em> <code>`⍵0</code> or <code>⍹0</code>. The <em>implicitly indexed</em> omega always increments its index <em>before</em> use, so the first index that can be used <strong><em>implicitly</em></strong> is <strong>1</strong>, i.e. <code>`⍵1</code> or <code>⍹1</code>.</li>
+<li>You can only access the 0-th element of <strong>⍵</strong>, the <strong><em>f-string</em></strong> itself via an <em>explicitly indexed omega</em> <code>`⍵0</code> or <code>⍹0</code>. The <em>implicitly indexed</em> omega always increments its index <em>before</em> use, so the first index that can be used <strong><em>implicitly</em></strong> is <strong>1</strong>, i.e. <code>`⍵1</code> or <code>⍹1</code>.</li>
 <li>If an element of the dfn’s right argument <strong>⍵</strong> is accessed at runtime via any means, shortcut or traditional, that element <strong><em>must</em></strong> exist.</li>
 </ol>
 <h3>Wrap (<code>`W</code>) Details</h3>

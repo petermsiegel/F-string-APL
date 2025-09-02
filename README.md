@@ -315,7 +315,7 @@ The sun's core is at 15,000,000°C.
 
 ### Placing quotes around string elements of an object: the `` `Q `` shortcut
 
-The `` `Q `` shortcut recursively scans its right argument, looking for character
+The **Quote** shortcut `` `Q `` recursively scans its right argument, looking for character
 scalars, vectors, and rows of character arrays, doubling internal single quotes and
 placing single quotes around each such element. Non-character data is returned as is.
 
@@ -337,15 +337,46 @@ placing single quotes around each such element. Non-character data is returned a
 1 2  'x'  3  'y'
 ```
 
+### Wrapping results in left and right decorators: Using the <span style="color: red;">experimental</span> feature `` `W ``
+
+Just a quick mention of the experimental shortcut **Wrap**, `` `W ``. Wrap takes any user object as its right argument, `⍵`, and one or two left arguments: the first, a decorator for the **_left_** side of `⍵` and the second, a decorator for the **_right_** side of `⍵`. If just one scalar or vector is included as `⍺`, then that is applied both **_left_** _and_ **_right_**.
+
+If you need to omit one or the other decorator, simply make it a null string `""` or, equivalently, a _zilde_ `⍬`.
+
+#### How are the decorators placed?
+
+The decorators are placed immediately adjacent to each line of each simple object (depth 1, 0, ¯1) in `⍵`. By default, the left and right decorators are _both_ a single quote, i.e. `⍺← '''''`. This is useful when you want to put quotes around each line of each simple object. Compare the Quote shortcut `` `Q ``, which only puts quotes around the character objects in `⍵`.
+
+Here are two simple examples.
+
+```
+⍝  Place ∘C after each numeric result. Note that we convert each element
+⍝  of the list of numbers on the right to separate vectors.
+⍝  Since there is no left decorator, we use "" or its equivalent here, ⍬.
+   ∆F '{ "" "∘C" `W ⍪18 22 33 } ...{ ⍬"∘C" `W ,¨ 18 22 33}'
+18∘C ... 18∘C  22∘C  33∘C
+22∘C
+33∘C
+
+⍝  Place a pair of quotes around the lines of each simple object in a complex object.
+⍝  Note that every such object will be quoted, not just character objects (see `Q).
+   ∆F '{`W  ("cats")(⍳2 2 1)(2 2⍴⍳4)(3 3⍴⎕A) }'
+'cats'   '0 0 0'   '0 1'  'ABC'
+         '0 1 0'   '2 3'  'DEF'
+                          'GHI'
+         '1 0 0'
+         '1 1 0'
+```
+
 ### Self-documenting **Code fields** (SDCFs) are a useful debugging tool.
 
 What's an SDCF? An SDCF¹ allows whatever source code is in a **Code Field** to be automatically displayed literally along with the result of evaluating that code.
 
 <div style="margin-left: 25px;">
 
-| Note                                                                                                                                                                                                                                                 |
-| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ¹ SDCFs are based on Python's **[self-documenting expressions](https://docs.python.org/3/whatsnew/3.8.html#f-strings-support-for-self-documenting-expressions-and-debugging)** in _f-strings_. SDCFs are used **_only_** in **Code fields** (_duh_). |
+| Note                                                                                                                                                                                                                                                                                |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ¹ SDCFs are based on Python's **[self-documenting expressions](https://docs.python.org/3/whatsnew/3.8.html#f-strings-support-for-self-documenting-expressions-and-debugging)** in _f-strings_, but work slightly differently. SDCFs are used **_only_** in **Code fields** (_duh_). |
 
 </div>
 
@@ -662,7 +693,7 @@ as an ordinary backtick `` ` ``.
 3.  All omega shortcut expressions in the **f-string** are evaluated left to right and are ⎕IO-independent.
 4.  **\`⍵𝒋** or **⍹𝒋** sets the _OIC_ to 𝒋, `Ω←𝒋`, and returns the expression `(⍵⊃⍨Ω+⎕IO)`. Here **𝒋** must be a _non-negative integer_ with at least 1 digit.
 5.  Bare **\`⍵** or **⍹** (i.e. with no digits appended) increments the _OIC_, `Ω+←1`, _before_ using it as the index in the expression `(⍵⊃⍨Ω+⎕IO)`.
-6.  You can only access the 0-th element of **⍵** via an _explicitly indexed omega_ `` `⍵0 `` or `⍹0`. The _implicitly indexed_ omega always increments its index _before_ use, so the first index that can be used **_implicitly_** is **1**, i.e. `` `⍵1 `` or `⍹1`.
+6.  You can only access the 0-th element of **⍵**, the **_f-string_** itself via an _explicitly indexed omega_ `` `⍵0 `` or `⍹0`. The _implicitly indexed_ omega always increments its index _before_ use, so the first index that can be used **_implicitly_** is **1**, i.e. `` `⍵1 `` or `⍹1`.
 7.  If an element of the dfn's right argument **⍵** is accessed at runtime via any means, shortcut or traditional, that element **_must_** exist.
 
 ### Wrap (`` `W ``) Details
