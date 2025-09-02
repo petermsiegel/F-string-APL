@@ -91,7 +91,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
 <p><strong>Text fields</strong>, expressions that can generate multiline Unicode text, using the sequence <code>`⋄</code> (<em><em>backtick + statement separator</em></em>) to generate a newline (<small><strong>⎕UCS 13</strong></small>);</p>
 </li>
 <li>
-<p><strong>Code fields</strong>, allowing users to evaluate and display APL objects in the user environment, objects passed as <strong>∆F</strong> arguments, as well as arbitrary APL expressions based on full multi-statement³ dfn logic; each <strong>Code field</strong> must return a value, simple or otherwise, which will be aligned and catenated with other fields and returned from <strong>∆F</strong>;</p>
+<p><strong>Code fields</strong>, allowing users to evaluate and display APL arrays in the user environment, arrays passed as <strong>∆F</strong> arguments, as well as arbitrary APL expressions based on full multi-statement³ dfn logic; each <strong>Code field</strong> must return a value, simple or otherwise, which will be aligned and catenated with other fields and returned from <strong>∆F</strong>;</p>
 <p><strong>Code fields</strong> also provide a number of concise, convenient extensions, such as:</p>
 <ul>
 <li>
@@ -113,7 +113,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
 </ul>
 <p><em>and more</em>; as well as concisely inserting data from</p>
 <ul>
-<li>user objects or arbitrary code: <code>{tempC}</code> or <code>{32+tempC×9÷5}</code>,
+<li>user arrays or arbitrary code: <code>{tempC}</code> or <code>{32+tempC×9÷5}</code>,
 and/or</li>
 <li>arguments to <strong>∆F</strong> that follow the format string: <code>{32+`⍵1×9÷5}</code>, where <code>`⍵1</code> is a shortcut for <code>(⍵⊃⍨1+⎕IO)</code>;</li>
 </ul>
@@ -136,7 +136,7 @@ The temperature is 35∘C or  95∘F.
 </code></pre>
 </li>
 </ul>
-<p><strong>∆F</strong> is designed for ease of use, <em>ad hoc</em> debugging, and informal user interaction; APL’s native tools and Dyalog’s enhancements are always the best⁴ way to build and display complex objects, unless <strong>∆F</strong>’s specific functionality is of use.</p>
+<p><strong>∆F</strong> is designed for ease of use, <em>ad hoc</em> debugging, and informal user interaction; APL’s native tools and Dyalog’s enhancements are always the best⁴ way to build and display complex arrays, unless <strong>∆F</strong>’s specific functionality is of use.</p>
 <div style="margin-left: 20px;">
 <table>
 <thead>
@@ -355,17 +355,17 @@ The sun's core is at 27,000,032°F.
       ∆F sunFC 0
 The sun's core is at 15,000,000°C.
 </code></pre>
-<h3>Placing quotes around string elements of an object: the <code>`Q</code> shortcut</h3>
+<h3>Placing quotes around string elements of an array: the <code>`Q</code> shortcut</h3>
 <p>The <strong>Quote</strong> shortcut <code>`Q</code> recursively scans its right argument, looking for character
 scalars, vectors, and rows of character arrays, doubling internal single quotes and
 placing single quotes around each such element. Non-character data is returned as is.</p>
-<pre><code>⍝  Let's use the `Q shortcut to place quotes around just the character
-⍝  components of an object. This is useful for debugging...
+<pre><code>⍝  Let's use the `Q shortcut to place quotes around just the simple character
+⍝  arrays in its right argument, ⍵. This is useful for debugging...
    ∆F '{`Q ↑&quot;This isn''t hard.&quot; &quot;This is a test.&quot;}'
 'This isn''t hard.'
 'This is a test. '
 
-⍝ A more complex object. Note how quotes are placed around each
+⍝ A more complex example. Note how quotes are placed around each
 ⍝ line of the character matrix (↑&quot;cats&quot; &quot;dogs&quot;)
    ∆F '{`Q 1 2 &quot;three&quot; 4 5 (⍳2) (↑&quot;cats&quot; &quot;dogs&quot;)}'
 1 2  'three'  4 5  0 1  'cats'
@@ -375,11 +375,11 @@ placing single quotes around each such element. Non-character data is returned a
    ∆F '{`Q 1 2 &quot;x&quot; 3 &quot;y&quot;}'
 1 2  'x'  3  'y'
 </code></pre>
-<h3>Wrapping results in left and right decorators: Using the <span style="color: red;">experimental</span> feature <code>`W</code></h3>
-<p>Just a quick mention of the experimental shortcut <strong>Wrap</strong>, <code>`W</code>. Wrap takes any user object as its right argument, <code>⍵</code>, and one or two left arguments: the first, a decorator for the <strong><em>left</em></strong> side of <code>⍵</code> and the second, a decorator for the <strong><em>right</em></strong> side of <code>⍵</code>. If just one (simple or enclosed) scalar is included as the left argument <code>⍺</code> of <code>`W</code>, then that is applied both <strong><em>left</em></strong> <em>and</em> <strong><em>right</em></strong>.</p>
+<h3><span style="color: red;">Wrapping: An Experimental Feature!!!</span><br> Wrapping results in left and right decorators: Using the Wrap shortcut <code>`W</code></h3>
+<p>Just a quick mention of the experimental shortcut <strong>Wrap</strong>, <code>`W</code>. Wrap takes any user array as its right argument, <code>⍵</code>, and one or two left arguments: the first, a decorator for the <strong><em>left</em></strong> side of <code>⍵</code> and the second, a decorator for the <strong><em>right</em></strong> side of <code>⍵</code>. If just one (simple or enclosed) scalar is included as the left argument <code>⍺</code> of <code>`W</code>, then that is applied both <strong><em>left</em></strong> <em>and</em> <strong><em>right</em></strong>.</p>
 <p>If you need to omit one or the other decorator, simply make it a null string <code>&quot;&quot;</code> or, equivalently, a <em>zilde</em> <code>⍬</code>.</p>
 <h4>How are the decorators placed?</h4>
-<p>The decorators are placed immediately adjacent to each line of each simple object (depth 1, 0, ¯1) in <code>⍵</code>. By default, the left and right decorators are <em>both</em> a single quote, i.e. <code>⍺← '''''</code>. This is useful when you want to put quotes around each line of each simple object. Compare the Quote shortcut <code>`Q</code>, which only puts quotes around the character objects in <code>⍵</code>.</p>
+<p>The decorators are placed immediately adjacent to each <strong><em>line</em></strong> of each <strong><em>simple array</em></strong> (<code>depth∊1 0 ¯1</code>) in <code>⍵</code>. By default, the left and right decorators are <em>both</em> a single quote, i.e. <code>⍺← '''''</code>. This is useful when you want to put quotes around each line of each simple array. Compare the Quote shortcut <code>`Q</code>, which only puts quotes around the character arrays in <code>⍵</code>.</p>
 <p>Here are two simple examples.</p>
 <pre><code>⍝  Place ∘C after each numeric result. Note that we convert each element
 ⍝  of the list of numbers on the right to separate vectors.
@@ -389,8 +389,8 @@ placing single quotes around each such element. Non-character data is returned a
 22∘C
 33∘C
 
-⍝  Place a pair of quotes around the lines of each simple object in a complex object.
-⍝  Note that every such object will be quoted, not just character objects (see `Q).
+⍝  Place a pair of quotes around the lines of each simple array in a complex array.
+⍝  Note that every such array will be quoted, not just character arrays (see `Q).
    ∆F '{`W  (&quot;cats&quot;)(⍳2 2 1)(2 2⍴⍳4)(3 3⍴⎕A) }'
 'cats'   '0 0 0'   '0 1'  'ABC'
          '0 1 0'   '2 3'  'DEF'
@@ -688,7 +688,7 @@ simple, unescaped curly braces <code>{}</code>, i.e. those not preceded by a bac
 </li>
 </ul>
 <p>The building blocks of an <strong>f-string</strong> are these defined “fields,” catenated left to right,
-each of which will display as a logically separate 2-D output space. While <strong>Code fields</strong> can return objects of any number of dimensions mapped onto 2-D by APL rules, <strong>Text fields</strong> and <strong>Space fields</strong> are always simple rectangles (minimally 1 row and zero columns). Between fields, <strong>∆F</strong> adds no automatic spaces. That spacing is under user control.</p>
+each of which will display as a logically separate 2-D output space. While <strong>Code fields</strong> can return arrays of any number of dimensions mapped onto 2-D by APL rules, <strong>Text fields</strong> and <strong>Space fields</strong> are always simple rectangles (minimally 1 row and zero columns). Between fields, <strong>∆F</strong> adds no automatic spaces. That spacing is under user control.</p>
 <h3>Escape Sequences for Text Fields and Quoted Strings</h3>
 <p>∆F-string <strong>Text fields</strong> and <strong>Quoted strings</strong> in <strong>Code fields</strong> may include
 a small number of escape sequences, beginning with the backtick <code>`</code>.</p>
@@ -744,12 +744,12 @@ as an ordinary backtick <code>`</code>.</p>
 <tr>
 <td style="text-align:left">%, `A</td>
 <td style="text-align:left">Above</td>
-<td style="text-align:left">Centers object <code>⍺</code> above object <code>⍵</code>. Default <code>⍺←''</code>, i.e. a blank line above <code>⍵</code>.</td>
+<td style="text-align:left">Centers array <code>⍺</code> above array <code>⍵</code>. Default <code>⍺←''</code>, i.e. a blank line above <code>⍵</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left">`B</td>
 <td style="text-align:left">Box</td>
-<td style="text-align:left">Places <code>⍵</code> in a box. <code>⍵</code> is any object.</td>
+<td style="text-align:left">Places <code>⍵</code> in a box. <code>⍵</code> is any array.</td>
 </tr>
 <tr>
 <td style="text-align:left">`C</td>
@@ -769,7 +769,7 @@ as an ordinary backtick <code>`</code>.</p>
 <tr>
 <td style="text-align:left">`W</td>
 <td style="text-align:left">Wrap</td>
-<td style="text-align:left">Wraps the rows of object ⍵ in decorators <code>0⊃2⍴⍺</code> (on the left) and <code>1⊃2⍴⍺</code> (on the right), with <code>⍺</code> defaulting to a single quote. See details below. <strong>**EXPERIMENTAL**</strong></td>
+<td style="text-align:left">Wraps the rows of simple arrays in ⍵ in decorators <code>0⊃2⍴⍺</code> (on the left) and <code>1⊃2⍴⍺</code> (on the right), with <code>⍺</code> defaulting to a single quote. See details below. <span style="color: red;"><strong>EXPERIMENTAL</strong></span></td>
 </tr>
 <tr>
 <td style="text-align:left">`⍵𝒋, ⍹𝒋</td>
@@ -818,16 +818,16 @@ as an ordinary backtick <code>`</code>.</p>
 <p>Let <code>L←0⊃2⍴⍺</code> and <code>R←1⊃2⍴⍺</code>.</p>
 </li>
 <li>
-<p>Wrap each row <code>O′</code> of the simple objects <code>O</code> in <code>⍵</code> (or the entire object <code>O</code> if a vector or scalar) in decorators <code>L</code> and <code>R</code>: <code>L,(⍕O′),R</code>.</p>
+<p>Wrap each row <code>O′</code> of the simple arrays <code>O</code> in <code>⍵</code> (or the entire array <code>O</code> if a simple vector or scalar) in decorators <code>L</code> and <code>R</code>: <code>L,(⍕O′),R</code>.</p>
 </li>
 <li>
-<p><code>⍵</code> is an object of any shape and depth.<code>L</code>and <code>R</code>are char. vectors or scalars or <code>⍬</code> (treated as <code>''</code>).</p>
+<p><code>⍵</code> is an array of any shape and depth.<code>L</code>and <code>R</code>are char. vectors or scalars or <code>⍬</code> (treated as <code>''</code>).</p>
 </li>
 <li>
 <p>If there is one scalar or enclosed vector <code>⍺</code>, it is replicated <em>as above</em>.</p>
 </li>
 <li>
-<p>By default,<code>⍺←''''</code>, i.e. APL quotes will wrap the object ⍵, row by row, whether character, numeric or otherwise.</p>
+<p>By default,<code>⍺←''''</code>, i.e. APL quotes will wrap the array ⍵, row by row, whether character, numeric or otherwise.</p>
 <p>© 2025 Sam the Cat Foundation</p>
 </li>
 </ol>

@@ -23,7 +23,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
 
 - **Text fields**, expressions that can generate multiline Unicode text, using the sequence `` `⋄ `` (_*backtick + statement separator*_) to generate a newline (<small>**⎕UCS 13**</small>);
 
-- **Code fields**, allowing users to evaluate and display APL objects in the user environment, objects passed as **∆F** arguments, as well as arbitrary APL expressions based on full multi-statement³ dfn logic; each **Code field** must return a value, simple or otherwise, which will be aligned and catenated with other fields and returned from **∆F**;
+- **Code fields**, allowing users to evaluate and display APL arrays in the user environment, arrays passed as **∆F** arguments, as well as arbitrary APL expressions based on full multi-statement³ dfn logic; each **Code field** must return a value, simple or otherwise, which will be aligned and catenated with other fields and returned from **∆F**;
 
   **Code fields** also provide a number of concise, convenient extensions, such as:
 
@@ -43,7 +43,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
 
     _and more_; as well as concisely inserting data from
 
-    - user objects or arbitrary code: `{tempC}` or `{32+tempC×9÷5}`,
+    - user arrays or arbitrary code: `{tempC}` or `{32+tempC×9÷5}`,
       and/or
     - arguments to **∆F** that follow the format string: `` {32+`⍵1×9÷5} ``, where `` `⍵1 `` is a shortcut for `(⍵⊃⍨1+⎕IO)`;
 
@@ -61,7 +61,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
   2 32
   ```
 
-**∆F** is designed for ease of use, _ad hoc_ debugging, and informal user interaction; APL's native tools and Dyalog's enhancements are always the best⁴ way to build and display complex objects, unless **∆F**'s specific functionality is of use.
+**∆F** is designed for ease of use, _ad hoc_ debugging, and informal user interaction; APL's native tools and Dyalog's enhancements are always the best⁴ way to build and display complex arrays, unless **∆F**'s specific functionality is of use.
 
 <div style="margin-left: 20px;">
 
@@ -313,20 +313,20 @@ The sun's core is at 27,000,032°F.
 The sun's core is at 15,000,000°C.
 ```
 
-### Placing quotes around string elements of an object: the `` `Q `` shortcut
+### Placing quotes around string elements of an array: the `` `Q `` shortcut
 
 The **Quote** shortcut `` `Q `` recursively scans its right argument, looking for character
 scalars, vectors, and rows of character arrays, doubling internal single quotes and
 placing single quotes around each such element. Non-character data is returned as is.
 
 ```
-⍝  Let's use the `Q shortcut to place quotes around just the character
-⍝  components of an object. This is useful for debugging...
+⍝  Let's use the `Q shortcut to place quotes around just the simple character
+⍝  arrays in its right argument, ⍵. This is useful for debugging...
    ∆F '{`Q ↑"This isn''t hard." "This is a test."}'
 'This isn''t hard.'
 'This is a test. '
 
-⍝ A more complex object. Note how quotes are placed around each
+⍝ A more complex example. Note how quotes are placed around each
 ⍝ line of the character matrix (↑"cats" "dogs")
    ∆F '{`Q 1 2 "three" 4 5 (⍳2) (↑"cats" "dogs")}'
 1 2  'three'  4 5  0 1  'cats'
@@ -337,15 +337,15 @@ placing single quotes around each such element. Non-character data is returned a
 1 2  'x'  3  'y'
 ```
 
-### Wrapping results in left and right decorators: Using the <span style="color: red;">experimental</span> feature `` `W ``
+### <span style="color: red;">Wrapping: An Experimental Feature!!!</span><br> Wrapping results in left and right decorators: Using the Wrap shortcut `` `W ``
 
-Just a quick mention of the experimental shortcut **Wrap**, `` `W ``. Wrap takes any user object as its right argument, `⍵`, and one or two left arguments: the first, a decorator for the **_left_** side of `⍵` and the second, a decorator for the **_right_** side of `⍵`. If just one (simple or enclosed) scalar is included as the left argument `⍺` of `` `W ``, then that is applied both **_left_** _and_ **_right_**.
+Just a quick mention of the experimental shortcut **Wrap**, `` `W ``. Wrap takes any user array as its right argument, `⍵`, and one or two left arguments: the first, a decorator for the **_left_** side of `⍵` and the second, a decorator for the **_right_** side of `⍵`. If just one (simple or enclosed) scalar is included as the left argument `⍺` of `` `W ``, then that is applied both **_left_** _and_ **_right_**.
 
 If you need to omit one or the other decorator, simply make it a null string `""` or, equivalently, a _zilde_ `⍬`.
 
 #### How are the decorators placed?
 
-The decorators are placed immediately adjacent to each line of each simple object (depth 1, 0, ¯1) in `⍵`. By default, the left and right decorators are _both_ a single quote, i.e. `⍺← '''''`. This is useful when you want to put quotes around each line of each simple object. Compare the Quote shortcut `` `Q ``, which only puts quotes around the character objects in `⍵`.
+The decorators are placed immediately adjacent to each **_line_** of each **_simple array_** (`depth∊1 0 ¯1`) in `⍵`. By default, the left and right decorators are _both_ a single quote, i.e. `⍺← '''''`. This is useful when you want to put quotes around each line of each simple array. Compare the Quote shortcut `` `Q ``, which only puts quotes around the character arrays in `⍵`.
 
 Here are two simple examples.
 
@@ -358,8 +358,8 @@ Here are two simple examples.
 22∘C
 33∘C
 
-⍝  Place a pair of quotes around the lines of each simple object in a complex object.
-⍝  Note that every such object will be quoted, not just character objects (see `Q).
+⍝  Place a pair of quotes around the lines of each simple array in a complex array.
+⍝  Note that every such array will be quoted, not just character arrays (see `Q).
    ∆F '{`W  ("cats")(⍳2 2 1)(2 2⍴⍳4)(3 3⍴⎕A) }'
 'cats'   '0 0 0'   '0 1'  'ABC'
          '0 1 0'   '2 3'  'DEF'
@@ -641,7 +641,7 @@ which contains 3 types of fields: **Text fields**, **Code fields**, and **Space 
 - **Space fields** are essentially a _degenerate_ form of **Code fields**, consisting of a single pair of simple curly braces `{}` with zero or more spaces in between. A **Space Field** with zero spaces is a **Null Space Field**; while it may separate any other fields, its practical use is separating two adjacent **Text Fields**.
 
 The building blocks of an **f-string** are these defined "fields," catenated left to right,
-each of which will display as a logically separate 2-D output space. While **Code fields** can return objects of any number of dimensions mapped onto 2-D by APL rules, **Text fields** and **Space fields** are always simple rectangles (minimally 1 row and zero columns). Between fields, **∆F** adds no automatic spaces. That spacing is under user control.
+each of which will display as a logically separate 2-D output space. While **Code fields** can return arrays of any number of dimensions mapped onto 2-D by APL rules, **Text fields** and **Space fields** are always simple rectangles (minimally 1 row and zero columns). Between fields, **∆F** adds no automatic spaces. That spacing is under user control.
 
 ### Escape Sequences for Text Fields and Quoted Strings
 
@@ -662,17 +662,17 @@ as an ordinary backtick `` ` ``.
 
 ∆F-string **Code fields** may contain various shortcuts, intended to be concise and expressive tools for common tasks. **Shortcuts** are valid **only** outside **Quoted strings**. They include:
 
-| Shortcut <div style="width:100px"></div> | Name <div style="width:150px"></div> | Meaning                                                                                                                                                                                        |
-| :--------------------------------------- | :----------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| $, \`F                                   | ⎕FMT                                 | `[⍺] ⎕FMT ⍵`.                                                                                                                                                                                  |
-| %, \`A                                   | Above                                | Centers object `⍺` above object `⍵`. Default `⍺←''`, i.e. a blank line above `⍵`.                                                                                                              |
-| \`B                                      | Box                                  | Places `⍵` in a box. `⍵` is any object.                                                                                                                                                        |
-| \`C                                      | Commas                               | Adds commas to `⍵` after every 3rd digit, right-to-left. `⍵` is a vector of num strings or numbers.                                                                                            |
-| \`Q                                      | Quote                                | Recursively scans `⍵`, putting char. vectors, scalars, and rows of higher-dimensional strings in APL quotes, leaving other elements as is.                                                     |
-| \`T, \`D                                 | Date-Time¹                           | Displays timestamp(s) `⍵` according to date-time template `⍺`. `⍵` is one or more APL timestamps `⎕TS`. `⍺` is a date-time template in `1200⌶` format. If omitted, `⍺← 'YYYY-MM-DD hh:mm:ss'`. |
-| \`W                                      | Wrap                                 | Wraps the rows of object ⍵ in decorators `0⊃2⍴⍺` (on the left) and `1⊃2⍴⍺` (on the right), with `⍺` defaulting to a single quote. See details below. **\*\*EXPERIMENTAL\*\***                  |
-| \`⍵𝒋, ⍹𝒋                                 | Omega explicitly indexed             | A shortcut of the form `` `⍵𝒋 `` (or `⍹𝒋`), to access the `𝒋`**th** element of `⍵`, i.e. `(⍵⊃⍨ 𝒋+⎕IO)`. _See details below._                                                                   |
-| \`⍵, ⍹                                   | Omega implicitly indexed             | A shortcut of the form `` `⍵ `` (or `⍹`), to access the **next** element of `⍵`. _See details below._                                                                                          |
+| Shortcut <div style="width:100px"></div> | Name <div style="width:150px"></div> | Meaning                                                                                                                                                                                                          |
+| :--------------------------------------- | :----------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| $, \`F                                   | ⎕FMT                                 | `[⍺] ⎕FMT ⍵`.                                                                                                                                                                                                    |
+| %, \`A                                   | Above                                | Centers array `⍺` above array `⍵`. Default `⍺←''`, i.e. a blank line above `⍵`.                                                                                                                                  |
+| \`B                                      | Box                                  | Places `⍵` in a box. `⍵` is any array.                                                                                                                                                                           |
+| \`C                                      | Commas                               | Adds commas to `⍵` after every 3rd digit, right-to-left. `⍵` is a vector of num strings or numbers.                                                                                                              |
+| \`Q                                      | Quote                                | Recursively scans `⍵`, putting char. vectors, scalars, and rows of higher-dimensional strings in APL quotes, leaving other elements as is.                                                                       |
+| \`T, \`D                                 | Date-Time¹                           | Displays timestamp(s) `⍵` according to date-time template `⍺`. `⍵` is one or more APL timestamps `⎕TS`. `⍺` is a date-time template in `1200⌶` format. If omitted, `⍺← 'YYYY-MM-DD hh:mm:ss'`.                   |
+| \`W                                      | Wrap                                 | Wraps the rows of simple arrays in ⍵ in decorators `0⊃2⍴⍺` (on the left) and `1⊃2⍴⍺` (on the right), with `⍺` defaulting to a single quote. See details below. <span style="color: red;">**EXPERIMENTAL**</span> |
+| \`⍵𝒋, ⍹𝒋                                 | Omega explicitly indexed             | A shortcut of the form `` `⍵𝒋 `` (or `⍹𝒋`), to access the `𝒋`**th** element of `⍵`, i.e. `(⍵⊃⍨ 𝒋+⎕IO)`. _See details below._                                                                                     |
+| \`⍵, ⍹                                   | Omega implicitly indexed             | A shortcut of the form `` `⍵ `` (or `⍹`), to access the **next** element of `⍵`. _See details below._                                                                                                            |
 
 ---
 
@@ -700,9 +700,9 @@ as an ordinary backtick `` ` ``.
 
 1. Syntax: `` [⍺←'''''] `W ⍵ ``.
 2. Let `L←0⊃2⍴⍺` and `R←1⊃2⍴⍺`.
-3. Wrap each row `O′` of the simple objects `O` in `⍵` (or the entire object `O` if a vector or scalar) in decorators `L` and `R`: `L,(⍕O′),R`.
-4. `⍵` is an object of any shape and depth.`L`and `R`are char. vectors or scalars or `⍬` (treated as `''`).
+3. Wrap each row `O′` of the simple arrays `O` in `⍵` (or the entire array `O` if a simple vector or scalar) in decorators `L` and `R`: `L,(⍕O′),R`.
+4. `⍵` is an array of any shape and depth.`L`and `R`are char. vectors or scalars or `⍬` (treated as `''`).
 5. If there is one scalar or enclosed vector `⍺`, it is replicated _as above_.
-6. By default,`⍺←''''`, i.e. APL quotes will wrap the object ⍵, row by row, whether character, numeric or otherwise.
+6. By default,`⍺←''''`, i.e. APL quotes will wrap the array ⍵, row by row, whether character, numeric or otherwise.
 
    (C) 2025 Sam the Cat Foundation
