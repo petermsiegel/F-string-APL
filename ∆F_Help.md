@@ -390,7 +390,7 @@ placing single quotes around each such element. Non-character data is returned a
 
 ### Wrapping results in left and right decorators: Using the <span style="color: red;">experimental</span> feature `` `W ``
 
-Just a quick mention of the experimental shortcut **Wrap**, `` `W ``. Wrap takes any user object as its right argument, `⍵`, and one or two left arguments: the first, a decorator for the **_left_** side of `⍵` and the second, a decorator for the **_right_** side of `⍵`. If just one scalar or vector is included as `⍺`, then that is applied both **_left_** _and_ **_right_**.
+Just a quick mention of the experimental shortcut **Wrap**, `` `W ``. Wrap takes any user object as its right argument, `⍵`, and one or two left arguments: the first, a decorator for the **_left_** side of `⍵` and the second, a decorator for the **_right_** side of `⍵`. If just one (simple or enclosed) scalar is included as the left argument `⍺` of `` `W ``, then that is applied both **_left_** _and_ **_right_**.
 
 If you need to omit one or the other decorator, simply make it a null string `""` or, equivalently, a _zilde_ `⍬`.
 
