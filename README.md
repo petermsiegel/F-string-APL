@@ -700,7 +700,7 @@ as an ordinary backtick `` ` ``.
 
 1. Syntax: `` [⍺←'''''] `W ⍵ ``.
 2. Let `L←0⊃2⍴⍺` and `R←1⊃2⍴⍺`.
-3. Wrap each row `O'` of the simple objects `O` in `⍵` (or the entire object `O` if a vector or scalar) in decorators`L` and `R`: `L, (⍕O') R`.
+3. Wrap each row `O′` of the simple objects `O` in `⍵` (or the entire object `O` if a vector or scalar) in decorators `L` and `R`: `L,(⍕O′),R`.
 4. `⍵` is an object of any shape and depth.`L`and `R`are char. vectors or scalars or `⍬` (treated as `''`).
 5. If there is one scalar or enclosed vector `⍺`, it is replicated _as above_.
 6. By default,`⍺←''''`, i.e. APL quotes will wrap the object ⍵, row by row, whether character, numeric or otherwise.
