@@ -283,7 +283,7 @@ The expression `` `⍵0 `` refers to the f-string itself.¹ Try this yourself:²
 
 </div>
 
-### Let's add commas to some very large numbers using the `$` (**⎕FMT**) shortcut
+### Let's add commas to some very large numbers using the `$` (`⎕FMT`) shortcut
 
 ```
 ⍝  The temperature of the sun at its core in degrees C.
@@ -343,13 +343,13 @@ placing single quotes around each such element. Non-character data is returned a
 
 ### <span style="color: red;">Wrapping: An Experimental Feature!!!</span><br> Wrapping results in left and right decorators: Using the Wrap shortcut `` `W ``
 
-Just a quick mention of the experimental shortcut **Wrap**, `` `W ``. Wrap takes any user array as its right argument, `⍵`, and one or two left arguments: the first, a decorator for the **_left_** side of `⍵` and the second, a decorator for the **_right_** side of `⍵`. If just one (simple or enclosed) scalar is included as the left argument `⍺` of `` `W ``, then that is applied both **_left_** _and_ **_right_**.
+> Just a quick mention of the experimental shortcut **Wrap**, `` `W ``. Wrap takes any user array as its right argument, `⍵`, and one or two left arguments: the first, a decorator for the **_left_** side of `⍵` and the second, a decorator for the **_right_** side of `⍵`. If just one (simple or enclosed) scalar is included as the left argument `⍺` of `` `W ``, then that is applied both **_left_** _and_ **_right_**.
 
-If you need to omit one or the other decorator, simply make it a null string `""` or, equivalently, a _zilde_ `⍬`.
+> If you need to omit one or the other decorator, simply make it a null string `""` or, equivalently, a _zilde_ `⍬`.
 
 #### How are the decorators placed?
 
-The decorators are placed immediately adjacent to each **_line_** of each **_simple array_** (`depth∊1 0 ¯1`) in `⍵`. By default, the left and right decorators are _both_ a single quote, i.e. `⍺← '''''`. This is useful when you want to put quotes around each line of each simple array. Compare the Quote shortcut `` `Q ``, which only puts quotes around the character arrays in `⍵`.
+> The decorators are placed immediately adjacent to each **_line_** of each **_simple array_** (`depth∊1 0 ¯1`) in `⍵`. By default, the left and right decorators are _both_ a single quote, i.e. `⍺← '''''`. This is useful when you want to put quotes around each line of each simple array. Compare the Quote shortcut `` `Q ``, which only puts quotes around the character arrays in `⍵`.
 
 Here are two simple examples.
 
@@ -432,7 +432,7 @@ Current employee:   name↓    age↓.
 └──────────────────┴──────────┴─┴────┴─┘
 ```
 
-### A cut above the rest. Using % (_above_).
+### A cut above the rest. Using `%` (_above_).
 
 ```
 ⍝  Let's use the shortcut % to display one expression centered above another;
@@ -471,7 +471,7 @@ Let's demonstrate the equivalence of the _implicit_ and _explicit_ **Omega expre
 1                                                   ⍝ Yes!
 ```
 
-### And Shortcuts can often make sense with expressions, not just entire Code fields
+### Shortcuts often make sense with individual expressions, not just entire Code fields
 
 ```
 ⍝  Here, we display one boxed value above the other.
@@ -490,7 +490,7 @@ Let's demonstrate the equivalence of the _implicit_ and _explicit_ **Omega expre
 └───┴───┴───┘
 ```
 
-### Formatting Dates and Times Using ⎕TS-format Timestamps: the `T shortcut...
+### Formatting Dates and Times Using `⎕TS`-format Timestamps: the `` `T `` shortcut...
 
 Here's a simple Date-Time shortcut `` `T `` built from **1200⌶** and **⎕DT**. It takes one or more Dyalog `⎕TS`-format timestamps as the right argument and a date-time specification as the (optional) left argument. Trailing elements of a timestamp may be omitted, if they are not referenced in the specification string.
 
@@ -534,7 +534,7 @@ It is now 8:08 am. ⍝ NB: this will be the current actual time, of course.
 21 Jan 2025 was a Tuesday.
 ```
 
-### Precomputed F-strings: Performance of ∆F (or 0 ∆F) vs 1 ∆F ...
+### Precomputed F-strings: Performance of `∆F...` (or `0 ∆F...`) vs `1 ∆F ...`
 
 Let's explore getting the best performance for a heavily
 used ∆F string. Using the DFN option `(⍺[0]=1)`, we can generate a
@@ -619,7 +619,7 @@ T 35    → 8.9E¯6 | -95% ⎕⎕
 | &nbsp;&nbsp;'help'                      | If `'help'` is specified, this amazing documentation is displayed.                                                                                                                                                                                                                          |
 | **_result_**                            | If `0=⊃options`, the result is always a character matrix. If `1=⊃options`, the result is a dfn that, _when executed_, generates that same character matrix.                                                                                                                                 |
 
-### Options (⍺)
+### Options (`⍺`)
 
 - If the left argument `⍺` is omitted, the options are `4⍴0`.
 - If the left argument `⍺` is a simple boolean vector or scalar, or an empty numeric vector `⍬`, the options are `4↑⍺`; subsequent elements are ignored;

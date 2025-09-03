@@ -339,7 +339,7 @@ The temperature is 11°C or 51.8°F
 </tbody>
 </table>
 </div>
-<h3>Let’s add commas to some very large numbers using the <code>$</code> (<strong>⎕FMT</strong>) shortcut</h3>
+<h3>Let’s add commas to some very large numbers using the <code>$</code> (<code>⎕FMT</code>) shortcut</h3>
 <pre><code>⍝  The temperature of the sun at its core in degrees C.
    sun_core← 15E6            ⍝ 15000000 is a bit hard to parse!
 
@@ -387,10 +387,16 @@ placing single quotes around each such element. Non-character data is returned a
 1 2  'x'  3  'y'
 </code></pre>
 <h3><span style="color: red;">Wrapping: An Experimental Feature!!!</span><br> Wrapping results in left and right decorators: Using the Wrap shortcut <code>`W</code></h3>
+<blockquote>
 <p>Just a quick mention of the experimental shortcut <strong>Wrap</strong>, <code>`W</code>. Wrap takes any user array as its right argument, <code>⍵</code>, and one or two left arguments: the first, a decorator for the <strong><em>left</em></strong> side of <code>⍵</code> and the second, a decorator for the <strong><em>right</em></strong> side of <code>⍵</code>. If just one (simple or enclosed) scalar is included as the left argument <code>⍺</code> of <code>`W</code>, then that is applied both <strong><em>left</em></strong> <em>and</em> <strong><em>right</em></strong>.</p>
+</blockquote>
+<blockquote>
 <p>If you need to omit one or the other decorator, simply make it a null string <code>&quot;&quot;</code> or, equivalently, a <em>zilde</em> <code>⍬</code>.</p>
+</blockquote>
 <h4>How are the decorators placed?</h4>
+<blockquote>
 <p>The decorators are placed immediately adjacent to each <strong><em>line</em></strong> of each <strong><em>simple array</em></strong> (<code>depth∊1 0 ¯1</code>) in <code>⍵</code>. By default, the left and right decorators are <em>both</em> a single quote, i.e. <code>⍺← '''''</code>. This is useful when you want to put quotes around each line of each simple array. Compare the Quote shortcut <code>`Q</code>, which only puts quotes around the character arrays in <code>⍵</code>.</p>
+</blockquote>
 <p>Here are two simple examples.</p>
 <pre><code>⍝  Place ∘C after each numeric result. Note that we convert each element
 ⍝  of the list of numbers on the right to separate vectors.
@@ -463,7 +469,7 @@ Current employee:   name↓    age↓.
 │                  │John Smith│ │ 34 │ │
 └──────────────────┴──────────┴─┴────┴─┘
 </code></pre>
-<h3>A cut above the rest. Using % (<em>above</em>).</h3>
+<h3>A cut above the rest. Using <code>%</code> (<em>above</em>).</h3>
 <pre><code>⍝  Let's use the shortcut % to display one expression centered above another;
 ⍝  It's called &quot;above&quot; and can also be expressed as  `A.
 ⍝  Remember, `⍵1 refers to the first argument after the f-string itself;
@@ -492,7 +498,7 @@ Mary Jones  23
     a ≡ b                                           ⍝ Are they the same?
 1                                                   ⍝ Yes!
 </code></pre>
-<h3>And Shortcuts can often make sense with expressions, not just entire Code fields</h3>
+<h3>Shortcuts often make sense with individual expressions, not just entire Code fields</h3>
 <pre><code>⍝  Here, we display one boxed value above the other.
    ∆F '{(`B ⍳`⍵1) % `B ⍳`⍵2}' (2 2)(3 3)
   ┌───┬───┐
@@ -508,7 +514,7 @@ Mary Jones  23
 │2 0│2 1│2 2│
 └───┴───┴───┘
 </code></pre>
-<h3>Formatting Dates and Times Using ⎕TS-format Timestamps: the `T shortcut…</h3>
+<h3>Formatting Dates and Times Using <code>⎕TS</code>-format Timestamps: the <code>`T</code> shortcut…</h3>
 <p>Here’s a simple Date-Time shortcut <code>`T</code> built from <strong>1200⌶</strong> and <strong>⎕DT</strong>. It takes one or more Dyalog <code>⎕TS</code>-format timestamps as the right argument and a date-time specification as the (optional) left argument. Trailing elements of a timestamp may be omitted, if they are not referenced in the specification string.</p>
 <pre><code>⍝  ∘ Let's look at the use of the `T (Date-Time) shortcut to show the
 ⍝    current time (now).
@@ -539,7 +545,7 @@ It is now 8:08 am. ⍝ NB: this will be the current actual time, of course.
    ∆F'{ &quot;D Mmm YYYY ''was a'' Dddd.&quot; `T `⍵ `⍵ `⍵}' 2025 1 21
 21 Jan 2025 was a Tuesday.
 </code></pre>
-<h3>Precomputed F-strings: Performance of ∆F (or 0 ∆F) vs 1 ∆F …</h3>
+<h3>Precomputed F-strings: Performance of <code>∆F...</code> (or <code>0 ∆F...</code>) vs <code>1 ∆F ...</code></h3>
 <p>Let’s explore getting the best performance for a heavily
 used ∆F string. Using the DFN option <code>(⍺[0]=1)</code>, we can generate a
 dfn that will display the formatted output, without having to reanalyze
@@ -670,7 +676,7 @@ T 35    → 8.9E¯6 | -95% ⎕⎕
 </tr>
 </tbody>
 </table>
-<h3>Options (⍺)</h3>
+<h3>Options (<code>⍺</code>)</h3>
 <ul>
 <li>If the left argument <code>⍺</code> is omitted, the options are <code>4⍴0</code>.</li>
 <li>If the left argument <code>⍺</code> is a simple boolean vector or scalar, or an empty numeric vector <code>⍬</code>, the options are <code>4↑⍺</code>; subsequent elements are ignored;</li>
