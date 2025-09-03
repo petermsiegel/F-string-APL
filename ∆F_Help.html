@@ -25,7 +25,7 @@ md->HTML: opt-shift-M
 Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help'
 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown.css">
-<!-- Style stuff related to APL and random preferences... -->
+<!-- Style stuff related to APL and my random preferences... -->
 <style> 
   p {
     font-family: Georgia;
@@ -122,6 +122,10 @@ and/or</li>
 </li>
 <li>
 <p><strong>Space fields</strong>, providing a simple mechanism both for separating adjacent <strong>Text fields</strong> and inserting (rectangular) blocks of any number of spaces between any two fields, where needed;</p>
+<ul>
+<li>one space: <code>{ }</code>; five spaces: <code>{     }</code>; or even, zero spaces: <code>{}</code>;</li>
+<li>1000 spaces? Use a code field instead: <code>{1000⍴&quot;&quot;}</code>.</li>
+</ul>
 </li>
 <li>
 <p>Multiline (matrix) output built up field-by-field, left-to-right, from values and expressions in the calling environment or arguments to <strong>∆F</strong>;</p>
@@ -173,11 +177,13 @@ The temperature is 35∘C or  95∘F.
 <p><code>∆F⍨ 'help'</code></p>
 </blockquote>
 <h2>To use <strong>∆F</strong></h2>
-<blockquote>
-<p>Copy ∆Fapl.dyalog and ∆F*Help.html (from Github, etc.) into your favorite directory <strong><em>dir</em></strong>.
-Then, from your Dyalog session (replacing <strong><em>dir</em></strong> with the actual directory name):</p>
-<p><code>]load dir/∆Fapl</code></p>
-</blockquote>
+<p>Copy ∆Fapl.dyalog and ∆F_Help.html from Github, etc. into your current working directory. To verify the current directory, do:</p>
+<pre><code>]cd
+</code></pre>
+<p>Then, from your Dyalog session (typically # or ⎕SE):</p>
+<pre><code>]load ∆Fapl [-target=myns]
+</code></pre>
+<p>Now ∆F is available in the active namespace (or <code>myns</code>)!</p>
 <hr>
 <h2>∆F EXAMPLES</h2>
 <p>Before providing information on ∆F syntax and other details, <em>let’s start with some examples</em>…</p>
@@ -304,26 +310,29 @@ The temperature is 11°C or 51.8°F
 <p>The expression <code>`⍵1</code> is equivalent to <code>(⍵⊃⍨ 1+⎕IO)</code>, selecting the first argument after the f-string. Similarly, <code>`⍵99</code> would select <code>(⍵⊃⍨99+⎕IO)</code>.</p>
 <pre><code>⍝  We will use `⍵1 here, both with shortcuts and an externally defined
 ⍝  function C2F.
-⍝  Later, we'll discuss bare `⍵ (i.e. w/o an adjacent non-negative integer).
+⍝  Below we discuss bare `⍵ (i.e. w/o an adjacent non-negative integer).
    ∆F'The temperature is {&quot;I2&quot; $ `⍵1}°C or {&quot;F5.1&quot; $ C2F `⍵1}°F' (11 15 20)
 The temperature is 11°C or 51.8°F
                    15      59.0
                    20      68.0
 </code></pre>
 <h3>Referencing the f-string itself: <code>`⍵0</code></h3>
-<p>The expression <code>`⍵0</code> refers to the f-string itself. Try this yourself:</p>
+<p>The expression <code>`⍵0</code> refers to the f-string itself.¹ Try this yourself:²</p>
 <pre><code>   ∆F 'Our string {`⍵0↓} is {≢`⍵0} characters'
 </code></pre>
 <div style="margin-left: 20px;">
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Note</th>
+<th style="text-align:left">Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">We explain the <code>↓</code> before the closing brace <code>}</code> under <strong><em>Self-Documenting Code Fields</em></strong> below.</td>
+<td style="text-align:left">¹ Independent of whether there are additional elements of the right argument to <code>∆F</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left">² We explain the <code>↓</code> before the closing brace <code>}</code> under <strong><em>Self-Documenting Code Fields</em></strong> below.</td>
 </tr>
 </tbody>
 </table>

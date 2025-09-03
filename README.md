@@ -6,7 +6,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown.css">
 
-<!-- Style stuff related to APL and random preferences... -->
+<!-- Style stuff related to APL and my random preferences... -->
 ##### Github Published README.md
 
 ## ∆F --- Formatted String Literals
@@ -49,6 +49,9 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
 
 - **Space fields**, providing a simple mechanism both for separating adjacent **Text fields** and inserting (rectangular) blocks of any number of spaces between any two fields, where needed;
 
+  - one space: `{ }`; five spaces: `{     }`; or even, zero spaces: `{}`;
+  - 1000 spaces? Use a code field instead: `{1000⍴""}`.
+
 - Multiline (matrix) output built up field-by-field, left-to-right, from values and expressions in the calling environment or arguments to **∆F**;
 
   - After all fields are generated, they are concatenated (after appropriate vertical conformation) to form a single **_returned_** character matrix, as in this simple example:
@@ -86,10 +89,19 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
 
 ## To use **∆F**
 
-> Copy ∆Fapl.dyalog and ∆F\*Help.html (from Github, etc.) into your favorite directory **_dir_**.
-> Then, from your Dyalog session (replacing **_dir_** with the actual directory name):
->
-> `]load dir/∆Fapl`
+Copy ∆Fapl.dyalog and ∆F_Help.html from Github, etc. into your current working directory. To verify the current directory, do:
+
+```
+]cd
+```
+
+Then, from your Dyalog session (typically # or ⎕SE):
+
+```
+]load ∆Fapl [-target=myns]
+```
+
+Now ∆F is available in the active namespace (or `myns`)!
 
 ---
 
@@ -256,7 +268,7 @@ The expression `` `⍵1 `` is equivalent to `(⍵⊃⍨ 1+⎕IO)`, selecting the
 ```
 ⍝  We will use `⍵1 here, both with shortcuts and an externally defined
 ⍝  function C2F.
-⍝  Later, we'll discuss bare `⍵ (i.e. w/o an adjacent non-negative integer).
+⍝  Below we discuss bare `⍵ (i.e. w/o an adjacent non-negative integer).
    ∆F'The temperature is {"I2" $ `⍵1}°C or {"F5.1" $ C2F `⍵1}°F' (11 15 20)
 The temperature is 11°C or 51.8°F
                    15      59.0
@@ -265,7 +277,7 @@ The temperature is 11°C or 51.8°F
 
 ### Referencing the f-string itself: `` `⍵0 ``
 
-The expression `` `⍵0 `` refers to the f-string itself. Try this yourself:
+The expression `` `⍵0 `` refers to the f-string itself.¹ Try this yourself:²
 
 ```
    ∆F 'Our string {`⍵0↓} is {≢`⍵0} characters'
@@ -273,9 +285,10 @@ The expression `` `⍵0 `` refers to the f-string itself. Try this yourself:
 
 <div style="margin-left: 20px;">
 
-| Note                                                                                            |
-| :---------------------------------------------------------------------------------------------- |
-| We explain the `↓` before the closing brace `}` under **_Self-Documenting Code Fields_** below. |
+| Notes                                                                                             |
+| :------------------------------------------------------------------------------------------------ |
+| ¹ Independent of whether there are additional elements of the right argument to `∆F`.             |
+| ² We explain the `↓` before the closing brace `}` under **_Self-Documenting Code Fields_** below. |
 
 </div>
 
