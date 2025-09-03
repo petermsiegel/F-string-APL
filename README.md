@@ -84,24 +84,15 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
 ## ∆F **Help** Information
 
 > To display this **HELP** information, type:
->
 > `∆F⍨ 'help'`
 
 ## To use **∆F**
 
-Copy ∆Fapl.dyalog and ∆F_Help.html from Github, etc. into your current working directory. To verify the current directory, do:
+> Copy the files **∆Fapl.dyalog** and **∆F_Help.html** from Github, etc. into your current working directory (the one shown via `]cd`). Then, from your Dyalog session (typically `#` or `⎕SE`):
 
-```
-]cd
-```
+> `]load ∆Fapl [-target=`**_myns_**`]`
 
-Then, from your Dyalog session (typically # or ⎕SE):
-
-```
-]load ∆Fapl [-target=myns]
-```
-
-Now ∆F is available in the active namespace (or `myns`)!
+> Now **∆F** is available in the active namespace (or **_myns_**), along with the namespace **⍙Fapl** (containing utilities used by **∆F**). The `]load` will automagically copy **∆F_Help.html** into **⍙Fapl** or note its absence.
 
 ---
 

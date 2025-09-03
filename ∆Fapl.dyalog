@@ -1,7 +1,7 @@
 :Namespace ⍙Fapl
   ⎕IO  ⎕ML←0 1                ⍝ In namespace only. User code is executed in caller space (⊃⎕RSI)  
   DEBUG← 0                   ⍝ DEBUG←1 simply turns off top-level error trapping...
-  helpHtml← '∆F_Help.html'   ⍝ Called from 'help' option. Globally set here
+  helpHtmlFi← '∆F_Help.html'   ⍝ Called from 'help' option. Globally set here
 ⍝ The name of the utility function visible in the target directory.
 ⍝ === BEGINNING OF CODE =====================================================================
 ⍝ === BEGINNING OF CODE =====================================================================
@@ -194,13 +194,14 @@
   qtsL qtsR← lDAQ rDAQ,⍨¨ ⊂dq sq                       ⍝ Expected freq hi to lo: dq sq l/rDAQ
 
 ⍝ Error constants / fns  
-    Ê← { ⊂'EN' 11,⍥⊂ 'Message' ⍵ }
-  brÊ←      Ê 'Unpaired brace "{"'
-  qtÊ←      Ê 'Unpaired quote (''"'' or "''") in code field' 
-  cfLogicÊ← Ê 'A logic error has occurred processing a code field'
-  optÊ←     Ê 'Invalid option(s) in left argument. For help: ∆F⍨''help'''
-  SCÊ←      Ê {'Sequence "`',⍵,'" does not represent a valid shortcut.'}
-  SeqÊ←     Ê {'Sequence "`',⍵,'" is not valid in code outside strings. Did you mean "',⍵,'"?'}
+    Ê← { ⍺←11 ⋄ ⊂'EN' ⍺,⍥⊂ 'Message' ⍵ }
+  brÊ←         Ê 'Unpaired brace "{"'
+  qtÊ←         Ê 'Unpaired quote (''"'' or "''") in code field' 
+  cfLogicÊ←    Ê 'A logic error has occurred processing a code field'
+  optÊ←        Ê 'Invalid option(s) in left argument. For help: ∆F⍨''help'''
+  SCÊ←         Ê {'Sequence "`',⍵,'" does not represent a valid shortcut.'}
+  SeqÊ←        Ê {'Sequence "`',⍵,'" is not valid in code outside strings. Did you mean "',⍵,'"?'}
+  helpFiÊ←  22 Ê 'Help file "',helpHtmlFi,'" not found in current directory'
 
 ⍝ Other fns/ops for FmtScan above (no side effects). 
 ⍝ =========================================================================
@@ -243,7 +244,8 @@
 ⍝ (1 0⍴⍬)← Help 'help'
   Help← { 
     'help'≢ 4↑o←⎕C⍵: ⎕SIGNAL optÊ 
-    HROpt← ('HTML'  (⊃⎕NGET helpHtml)) (900 900,⍨ ⊂'Size') (5 5,⍨ ⊂'Posn') ('Coord' 'ScaledPixel')
+     _h← { 22:: ⎕SIGNAL helpFiÊ ⋄ 0=⍵.⎕NC 'helpHtml': ⊢⍵.helpHtml← ⊃⎕NGET helpHtmlFi ⋄ ⍵.helpHtml  } ⎕THIS     
+    HROpt← ('HTML'  _h) (900 900,⍨ ⊂'Size') (5 5,⍨ ⊂'Posn') ('Coord' 'ScaledPixel')
     _← 'htmlObj' ⎕THIS.⎕WC 'HTMLRenderer',⍥⊆ HROpt           ⍝ Run HTMLRenderer
     1 0⍴⍬
   }  
@@ -324,9 +326,16 @@
     MapSC←  sc∘⍳ 
     ok← 1 
   ∇
+  ∇ ok← ⍙LoadHelp
+    :If 0=≢   {22:: ⍬ ⋄ ⎕THIS.helpHtml← ⊃⎕NGET ⍵} helpHtmlFi
+        ']Load ∆Fapl: Unable to copy in "',helpHtmlFi,'". ∆F help will not be available'
+    :EndIf 
+    ok← 1 
+  ∇
 ⍝ Execute FIX-time routines
   ⍙Promote_∆F  
   ⍙LoadShortcuts
+  ⍙LoadHelp
  
 ⍝ === END OF CODE ================================================================================
 ⍝ === END OF CODE ================================================================================

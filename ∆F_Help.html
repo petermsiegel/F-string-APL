@@ -173,17 +173,19 @@ The temperature is 35∘C or  95∘F.
 <hr>
 <h2>∆F <strong>Help</strong> Information</h2>
 <blockquote>
-<p>To display this <strong>HELP</strong> information, type:</p>
-<p><code>∆F⍨ 'help'</code></p>
+<p>To display this <strong>HELP</strong> information, type:
+<code>∆F⍨ 'help'</code></p>
 </blockquote>
 <h2>To use <strong>∆F</strong></h2>
-<p>Copy ∆Fapl.dyalog and ∆F_Help.html from Github, etc. into your current working directory. To verify the current directory, do:</p>
-<pre><code>]cd
-</code></pre>
-<p>Then, from your Dyalog session (typically # or ⎕SE):</p>
-<pre><code>]load ∆Fapl [-target=myns]
-</code></pre>
-<p>Now ∆F is available in the active namespace (or <code>myns</code>)!</p>
+<blockquote>
+<p>Copy the files <strong>∆Fapl.dyalog</strong> and <strong>∆F_Help.html</strong> from Github, etc. into your current working directory (the one shown via <code>]cd</code>). Then, from your Dyalog session (typically <code>#</code> or <code>⎕SE</code>):</p>
+</blockquote>
+<blockquote>
+<p><code>]load ∆Fapl [-target=</code><strong><em>myns</em></strong><code>]</code></p>
+</blockquote>
+<blockquote>
+<p>Now <strong>∆F</strong> is available in the active namespace (or <strong><em>myns</em></strong>), along with the namespace <strong>⍙Fapl</strong> (containing utilities used by <strong>∆F</strong>). The <code>]load</code> will automagically copy <strong>∆F_Help.html</strong> into <strong>⍙Fapl</strong> or note its absence.</p>
+</blockquote>
 <hr>
 <h2>∆F EXAMPLES</h2>
 <p>Before providing information on ∆F syntax and other details, <em>let’s start with some examples</em>…</p>
