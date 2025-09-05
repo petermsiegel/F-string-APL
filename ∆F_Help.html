@@ -77,6 +77,13 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
     font-size: 110%;
     background-color: #f4f5f5ff;  
   }
+  .content-with-bar {
+    border-left: 2px solid #ea2f0eff; /* Adjust color and thickness as needed */
+    padding-left: 15px; /* Space between the bar and content */
+    margin-left: 0px; /* Optional: Space from the left edge of the page */
+    height: auto; /* Or set a fixed height, e.g., 200px */
+    overflow: hidden; /* Clear floats if internal content uses them */
+  }
 </style>
 <h2>∆F — Formatted String Literals</h2>
 <hr>
@@ -109,13 +116,17 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
 <li><strong>format</strong>ting numeric arrays, <strong>$</strong> (short for <strong>⎕FMT</strong>): <code>{&quot;F7.5&quot; $ ?0 0}</code>,</li>
 <li>putting a <strong>box</strong> around a specific expression, <strong>`B</strong>: <code>{`B ⍳2 2}</code>,</li>
 <li>placing the output of one expression <strong>above</strong> another, <strong>%</strong>: <code>{&quot;Pi&quot;% ○1}</code>,</li>
-<li>formatting <strong>date</strong> and <strong>time</strong> expressions from APL timestamps (<strong>⎕TS</strong>) using <strong>`T</strong> ( short for an expression with <strong>1200⌶</strong> and <strong>⎕DT</strong>):<code>{&quot;hh:mm:ss&quot; `T ⎕TS}</code>:,</li>
+<li>formatting <strong>date</strong> and <strong>time</strong> expressions from APL timestamps (<strong>⎕TS</strong>) using <strong>`T</strong> ( short for an expression with <strong>1200⌶</strong> and <strong>⎕DT</strong>): <code>{&quot;hh:mm:ss&quot; `T ⎕TS}</code></li>
+<li><em>and more</em>;</li>
 </ul>
-<p><em>and more</em>; as well as concisely inserting data from</p>
+</li>
+<li>
+<p>Simple mechanisms for concisely formatting and displaying data from</p>
 <ul>
-<li>user arrays or arbitrary code: <code>{tempC}</code> or <code>{32+tempC×9÷5}</code>,
-and/or</li>
+<li>user arrays or arbitrary code: <br><code>{tempC}</code> or <code>{tempC&lt;100: 32+tempC×9÷5 ⋄ &quot;Too hot&quot;}</code>,
+<br></li>
 <li>arguments to <strong>∆F</strong> that follow the format string: <code>{32+`⍵1×9÷5}</code>, where <code>`⍵1</code> is a shortcut for <code>(⍵⊃⍨1+⎕IO)</code>;</li>
+<li><em>and more</em>;</li>
 </ul>
 </li>
 </ul>
@@ -210,8 +221,8 @@ Customer Jack wins £230!
 <h3>Now, let’s add in some Space fields</h3>
 <pre><code>⍝  Some multi-line Text fields separated by non-null Space fields
 ⍝  ∘ The backtick is our &quot;escape&quot; character.
-⍝  ∘ Here each  `⋄ displays a newline character in the left-most &quot;field.&quot;
-⍝  ∘ { } is a Space Field indicating one space, given one space
+⍝  ∘ The sequence `⋄ generates a new line in the current text field.
+⍝  ∘ { } is a Space Field indicating one space, since there is one space
 ⍝    within the braces.
 ⍝  A Space field is useful here because each multi-line field is built
 ⍝  in its own rectangular space.
@@ -369,52 +380,66 @@ The sun's core is at 15,000,000°C.
 <h3>Placing quotes around string elements of an array: the <code>`Q</code> shortcut</h3>
 <p>The <strong>Quote</strong> shortcut <code>`Q</code> recursively scans its right argument, looking for character
 scalars, vectors, and rows of character arrays, doubling internal single quotes and
-placing single quotes around each such element. Non-character data is returned as is.</p>
-<pre><code>⍝  Let's use the `Q shortcut to place quotes around just the simple character
+placing single quotes around each such element. Non-character data is returned as is. This is useful, for example, when you wish to clearly distinguish character from numeric data.</p>
+<p>Let’s look at a couple of simple examples:</p>
+<pre><code>⍝  Let's use the `Q shortcut to place quotes around the simple character
 ⍝  arrays in its right argument, ⍵. This is useful for debugging...
-   ∆F '{`Q ↑&quot;This isn''t hard.&quot; &quot;This is a test.&quot;}'
-'This isn''t hard.'
-'This is a test. '
+   ∆F '{`Q 1 2 &quot;three&quot; 4 5 (⍪1 &quot;2&quot;) (⍪&quot;cats&quot; &quot;dogs&quot;)}'
+1 2  'three'  4 5     1    'cats'
+                    '2'    'dogs'
 
-⍝ A more complex example. Note how quotes are placed around each
-⍝ line of the character matrix (↑&quot;cats&quot; &quot;dogs&quot;)
-   ∆F '{`Q 1 2 &quot;three&quot; 4 5 (⍳2) (↑&quot;cats&quot; &quot;dogs&quot;)}'
-1 2  'three'  4 5  0 1  'cats'
-                        'dogs'
+⍝  And here's an example with a simple, mixed vector.
+⍝  First, without the Quote shortcut...
+⍝  Are you sure which elements are numbers and which are character scalars?
+   ∆F '{1 2 &quot;3&quot; 4 &quot;5&quot;}'
+1 2 3 4 5
 
-⍝ A simple, mixed vector.
-   ∆F '{`Q 1 2 &quot;x&quot; 3 &quot;y&quot;}'
-1 2  'x'  3  'y'
+⍝  Now, with the Quote shortcut.
+⍝  Voila, quotes around the character digits, but not the actual numbers!
+   ∆F '{`Q 1 2 &quot;3&quot; 4 &quot;5&quot;}'
+1 2  '3'  4  '5'
 </code></pre>
-<h3><span style="color: red;">Wrapping: An Experimental Feature!!!</span><br> Wrapping results in left and right decorators: Using the Wrap shortcut <code>`W</code></h3>
-<blockquote>
-<p>Just a quick mention of the experimental shortcut <strong>Wrap</strong>, <code>`W</code>. Wrap takes any user array as its right argument, <code>⍵</code>, and one or two left arguments: the first, a decorator for the <strong><em>left</em></strong> side of <code>⍵</code> and the second, a decorator for the <strong><em>right</em></strong> side of <code>⍵</code>. If just one (simple or enclosed) scalar is included as the left argument <code>⍺</code> of <code>`W</code>, then that is applied both <strong><em>left</em></strong> <em>and</em> <strong><em>right</em></strong>.</p>
-</blockquote>
-<blockquote>
-<p>If you need to omit one or the other decorator, simply make it a null string <code>&quot;&quot;</code> or, equivalently, a <em>zilde</em> <code>⍬</code>.</p>
-</blockquote>
-<h4>How are the decorators placed?</h4>
-<blockquote>
-<p>The decorators are placed immediately adjacent to each <strong><em>line</em></strong> of each <strong><em>simple array</em></strong> (<code>depth∊1 0 ¯1</code>) in <code>⍵</code>. By default, the left and right decorators are <em>both</em> a single quote, i.e. <code>⍺← '''''</code>. This is useful when you want to put quotes around each line of each simple array. Compare the Quote shortcut <code>`Q</code>, which only puts quotes around the character arrays in <code>⍵</code>.</p>
-</blockquote>
-<p>Here are two simple examples.</p>
-<pre><code>⍝  Place ∘C after each numeric result. Note that we convert each element
-⍝  of the list of numbers on the right to separate vectors.
-⍝  Since there is no left decorator, we use &quot;&quot; or its equivalent here, ⍬.
-   ∆F '{ &quot;&quot; &quot;∘C&quot; `W ⍪18 22 33 } ...{ ⍬&quot;∘C&quot; `W ,¨ 18 22 33}'
+<h3>Wrapping results in left and right decorators: The Wrap shortcut <code>`W</code><br><span style="color: red;">An Experimental Feature!!!</span></h3>
+<div class="content-with-bar">
+<p>Just a quick mention of the experimental shortcut <strong>Wrap</strong>,¹ <code>`W</code>, which is used when you want a <strong><em>decorator</em></strong> string that is placed immediately to the left or right of <strong><em>each</em></strong> row of simple objects in the right argument, <code>⍵</code>.</p>
+<ul>
+<li>The decorators are in <code>⍺</code>, the left argument to <strong>Wrap</strong>: the left decorator, <code>0⊃2⍴⍺</code>, and the right decorator, <code>1⊃2⍴⍺</code>, with <code>⍺</code> defaulting to a single quote.</li>
+<li>If you need to omit one or the other decorator, simply make it a null string <code>&quot;&quot;</code> or a <em>zilde</em> <code>⍬</code>.</li>
+</ul>
+<div style="margin-left: 20px;">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">¹ <strong>Wrap</strong> differs from the <strong>Quote</strong> shortcut <code>`Q</code>, which puts quotes <strong><em>only</em></strong> around the character arrays in <code>⍵</code>. For more, see <strong>Wrap</strong> (<code>`W</code>) <strong>Details</strong> <em>below</em>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4>Here are two simple examples.</h4>
+<pre><code>⍝  Place ∘C after...
+⍝  [1] each row of a simple matrix (⍪`⍵2), or
+⍝  [2] each simple vector (,¨`⍵2).
+⍝  Since there is no left decorator, we can use &quot;&quot; or (as here) ⍬.
+⍝           [1]........       [2].........
+      ∆F '{ `⍵1 `W ⍪`⍵2 } ...{ `⍵1 `W ,¨`⍵2 }' (⍬ '∘C')(18 22 33)
 18∘C ... 18∘C  22∘C  33∘C
 22∘C
 33∘C
 
-⍝  Place a pair of quotes around the lines of each simple array in a complex array.
-⍝  Note that every such array will be quoted, not just character arrays (see `Q).
-   ∆F '{`W  (&quot;cats&quot;)(⍳2 2 1)(2 2⍴⍳4)(3 3⍴⎕A) }'
-'cats'   '0 0 0'   '0 1'  'ABC'
-         '0 1 0'   '2 3'  'DEF'
-                          'GHI'
-         '1 0 0'
-         '1 1 0'
+⍝  Place brackets around the lines of each simple array in a complex array.
+   ∆F '{&quot;[]&quot; `W  (&quot;cats&quot;)(⍳2 2 1)(2 2⍴⍳4)(3 3⍴⎕A) }'
+ [cats]   [0 0 0]   [0 1]  [ABC]
+          [0 1 0]   [2 3]  [DEF]
+                           [GHI]
+          [1 0 0]
+          [1 1 0]
 </code></pre>
+</div>
 <h3>Self-documenting <strong>Code fields</strong> (SDCFs) are a useful debugging tool.</h3>
 <p>What’s an SDCF? An SDCF¹ allows whatever source code is in a <strong>Code Field</strong> to be automatically displayed literally along with the result of evaluating that code.</p>
 <div style="margin-left: 25px;">
@@ -784,9 +809,9 @@ as an ordinary backtick <code>`</code>.</p>
 <td style="text-align:left">Displays timestamp(s) <code>⍵</code> according to date-time template <code>⍺</code>. <code>⍵</code> is one or more APL timestamps <code>⎕TS</code>. <code>⍺</code> is a date-time template in <code>1200⌶</code> format. If omitted, <code>⍺← 'YYYY-MM-DD hh:mm:ss'</code>.</td>
 </tr>
 <tr>
-<td style="text-align:left">`W</td>
+<td style="text-align:left">`W <span style="color: red;font-size: 70%;"><strong>EXPERIMENTAL!</strong></span></td>
 <td style="text-align:left">Wrap</td>
-<td style="text-align:left">Wraps the rows of simple arrays in ⍵ in decorators <code>0⊃2⍴⍺</code> (on the left) and <code>1⊃2⍴⍺</code> (on the right), with <code>⍺</code> defaulting to a single quote. See details below. <span style="color: red;"><strong>EXPERIMENTAL</strong></span></td>
+<td style="text-align:left">Wraps the rows of simple arrays in ⍵ in decorators <code>0⊃2⍴⍺</code> (on the left) and <code>1⊃2⍴⍺</code> (on the right), with <code>⍺</code> defaulting to a single quote. <em>See details below.</em></td>
 </tr>
 <tr>
 <td style="text-align:left">`⍵𝒋, ⍹𝒋</td>
@@ -826,28 +851,18 @@ as an ordinary backtick <code>`</code>.</p>
 <li>You can only access the 0-th element of <strong>⍵</strong>, the <strong><em>f-string</em></strong> itself via an <em>explicitly indexed omega</em> <code>`⍵0</code> or <code>⍹0</code>. The <em>implicitly indexed</em> omega always increments its index <em>before</em> use, so the first index that can be used <strong><em>implicitly</em></strong> is <strong>1</strong>, i.e. <code>`⍵1</code> or <code>⍹1</code>.</li>
 <li>If an element of the dfn’s right argument <strong>⍵</strong> is accessed at runtime via any means, shortcut or traditional, that element <strong><em>must</em></strong> exist.</li>
 </ol>
-<h3>Wrap (<code>`W</code>) Details</h3>
+<div class="content-with-bar">
+<h3>Wrap Shortcut (<code>`W</code>) Details <span style="color: red;font-size: 80%;"> <strong>(EXPERIMENTAL)</strong></span></h3>
 <ol>
-<li>
-<p>Syntax: <code>[⍺←'''''] `W ⍵</code>.</p>
-</li>
-<li>
-<p>Let <code>L←0⊃2⍴⍺</code> and <code>R←1⊃2⍴⍺</code>.</p>
-</li>
-<li>
-<p>Wrap each row <code>O′</code> of the simple arrays <code>O</code> in <code>⍵</code> (or the entire array <code>O</code> if a simple vector or scalar) in decorators <code>L</code> and <code>R</code>: <code>L,(⍕O′),R</code>.</p>
-</li>
-<li>
-<p><code>⍵</code> is an array of any shape and depth.<code>L</code>and <code>R</code>are char. vectors or scalars or <code>⍬</code> (treated as <code>''</code>).</p>
-</li>
-<li>
-<p>If there is one scalar or enclosed vector <code>⍺</code>, it is replicated <em>as above</em>.</p>
-</li>
-<li>
-<p>By default,<code>⍺←''''</code>, i.e. APL quotes will wrap the array ⍵, row by row, whether character, numeric or otherwise.</p>
-<p>© 2025 Sam the Cat Foundation</p>
-</li>
+<li>Syntax: <code>[⍺←'''''] `W ⍵</code>.</li>
+<li>Let <code>L←0⊃2⍴⍺</code> and <code>R←1⊃2⍴⍺</code>.</li>
+<li>Wrap each row <code>X′</code> of the simple arrays <code>X</code> in <code>⍵</code> (or the entire array <code>X</code> if a simple vector or scalar) in decorators <code>L</code> and <code>R</code>: <code>L,(⍕X′),R</code>.</li>
+<li><code>⍵</code> is an array of any shape and depth.<code>L</code>and <code>R</code>are char. vectors or scalars or <code>⍬</code> (treated as <code>''</code>).</li>
+<li>If there is one scalar or enclosed vector <code>⍺</code>, it is replicated <em>per (2) above</em>.</li>
+<li>By default,<code>⍺←''''</code>, i.e. APL quotes will wrap the array ⍵, row by row, whether character, numeric or otherwise.</li>
 </ol>
+</div>
+<p>© 2025 Sam the Cat Foundation</p>
 
 </body>
 </html>

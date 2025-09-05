@@ -242,9 +242,10 @@
 
 ⍝ Help: Provides help info when ∆F⍨'help[x]' (OR 'help[x]'∆F anything) is specified.'
 ⍝ (1 0⍴⍬)← Help 'help'
+⍝ Note: If DEBUG=1, we will reload the html file from the current directory (]CD) each call.
   Help← { 
     'help'≢ 4↑o←⎕C⍵: ⎕SIGNAL optÊ 
-     _h← { 22:: ⎕SIGNAL helpFiÊ ⋄ 0=⍵.⎕NC 'helpHtml': ⊢⍵.helpHtml← ⊃⎕NGET helpHtmlFi ⋄ ⍵.helpHtml  } ⎕THIS     
+     _h← { 22:: ⎕SIGNAL helpFiÊ ⋄ DEBUG∨0=⍵.⎕NC 'helpHtml': ⊢⍵.helpHtml← ⊃⎕NGET helpHtmlFi ⋄ ⍵.helpHtml  } ⎕THIS     
     HROpt← ('HTML'  _h) (900 900,⍨ ⊂'Size') (5 5,⍨ ⊂'Posn') ('Coord' 'ScaledPixel')
     _← 'htmlObj' ⎕THIS.⎕WC 'HTMLRenderer',⍥⊆ HROpt           ⍝ Run HTMLRenderer
     1 0⍴⍬
