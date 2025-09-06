@@ -1,71 +1,13 @@
 <!-- Preview in sep files: cmd-shift-V,
 Preview side-by-side: cmd-K, V,
 md->HTML: opt-shift-M
-Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◊ ∆F⍨'help'
+Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help'
 -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown.css">
 
 <!-- Style stuff related to APL and my random preferences... -->
-<style> 
-  p {
-    font-family: Georgia;
-    font-size: 110%;
-    line-height: 1.2;
-  }
-  li {
-  }
-  /* Inline code */
-  code { 
-    font-size: 110%;
-    background-color: #ddfafaff;
-    padding: 2px 4px;
-    border-radius: 3px;
-    font-family: "APL386 Unicode", APL385, "APL385 Unicode", 
-       "Courier New", Courier, Lucida Console", "Consolas", monospace;
-  }
-  /* Code blocks */ 
-  pre { 
-    background-color: #ddfafaff;  
-    color: #0a0a0aff;
-    font-size: 110%;
-    line-height: 105%;
-    padding: 15px;
-    border-radius: 5px;
-    overflow-x: auto; 
-    font-family: "APL386 Unicode", APL386, "APL385 Unicode", APL385, "Courier New", Courier,
-    "Lucida Console", "Consolas", monospace;
-  }
-  table {
-    background-color: #eae9ebaa;
-    line-height: 1.1;
-    vertical-align: top;
-    font-family: "APL386 Unicode", APL386, "APL385 Unicode", APL385 "Courier New", Courier,
-    "Lucida Console", "Consolas", monospace;
-  }
-  /* Table header */
-  th {  
-    line-height: 1.1;
-    vertical-align: top;
-    font-weight: 900;
-    background-color: #740000ff;
-    color: #f3efef;
-  }
-  td {
-    vertical-align: top;
-  }
-  blockquote {
-    font-size: 110%;
-    background-color: #f4f5f5ff;  
-  }
-  .content-with-bar {
-    border-left: 2px solid #ea2f0eff; /* Adjust color and thickness as needed */
-    padding-left: 15px; /* Space between the bar and content */
-    margin-left: 0px; /* Optional: Space from the left edge of the page */
-    height: auto; /* Or set a fixed height, e.g., 200px */
-    overflow: hidden; /* Clear floats if internal content uses them */
-  }
-</style>
+##### Github Published README.md
 
 ## ∆F --- Formatted String Literals
 
