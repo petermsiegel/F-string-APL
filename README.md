@@ -1,7 +1,7 @@
 <!-- Preview in sep files: cmd-shift-V,
 Preview side-by-side: cmd-K, V,
 md->HTML: opt-shift-M
-Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help'
+Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◊ ∆F⍨'help'
 -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown.css">
@@ -21,7 +21,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
 
 **∆F f-strings** can concisely include:
 
-- **Text fields**, expressions that can generate multiline Unicode text, using the sequence `` `⋄ `` (_*backtick + statement separator*_) to generate a newline (<small>**⎕UCS 13**</small>);
+- **Text fields**, expressions that can generate multiline Unicode text, using the sequence `` `◊ `` (_*backtick + statement separator*_) to generate a newline (<small>**⎕UCS 13**</small>);
 
 - **Code fields**, allowing users to evaluate and display APL arrays in the user environment, arrays passed as **∆F** arguments, as well as arbitrary APL expressions based on full multi-statement³ dfn logic; each **Code field** must return a value, simple or otherwise, which will be aligned and catenated with other fields and returned from **∆F**;
 
@@ -29,7 +29,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
 
   - **Quoted strings** in **Code fields**, with several quote styles:
 
-    - **double-quotes** `{"like this"}` or this `` {"on`⋄""three""`⋄lines"}``,
+    - **double-quotes** `{"like this"}` or this `` {"on`◊""three""`◊lines"}``,
     - **single-quotes**, _distractingly_ `{''shown ''''right'''' here''}'`, _or even_
     - **double angle quotation marks**,⁵ i.e. _guillemets_,  
       `{«with internal quotes like "this" or ''this''.»}`;
@@ -43,7 +43,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
     - _and more_;
 
   - Simple mechanisms for concisely formatting and displaying data from
-    - user arrays or arbitrary code: <br>`{tempC}` or `{tempC<100: 32+tempC×9÷5 ⋄ "Too hot"}`,
+    - user arrays or arbitrary code: <br>`{tempC}` or `{tempC<100: 32+tempC×9÷5 ◊ "Too hot"}`,
       <br>
     - arguments to **∆F** that follow the format string: `` {32+`⍵1×9÷5} ``, where `` `⍵1 `` is a shortcut for `(⍵⊃⍨1+⎕IO)`;
     - _and more_;
@@ -108,14 +108,14 @@ Before providing information on ∆F syntax and other details, _let's start with
 
 ```
 ⍝  Code fields with plain variables
-   name← 'Fred' ⋄ age← 43
+   name← 'Fred' ◊ age← 43
    ∆F 'The patient''s name is {name}. {name} is {age} years old.'
 The patient's name is Fred. Fred is 43 years old.
 ```
 
 ```
 ⍝  Arbitrary code expressions
-   names← 'Mary' 'Jack' 'Tony' ⋄ prize← 1000
+   names← 'Mary' 'Jack' 'Tony' ◊ prize← 1000
    ∆F 'Customer {names⊃⍨ ?≢names} wins £{?prize}!'
 Customer Jack wins £80!
    ∆F 'Customer {names⊃⍨ ?≢names} wins £{?prize}!'
@@ -129,12 +129,12 @@ Customer Jack wins £230!
 ```
 ⍝  Some multi-line Text fields separated by non-null Space fields
 ⍝  ∘ The backtick is our "escape" character.
-⍝  ∘ The sequence `⋄ generates a new line in the current text field.
+⍝  ∘ The sequence `◊ generates a new line in the current text field.
 ⍝  ∘ { } is a Space Field indicating one space, since there is one space
 ⍝    within the braces.
 ⍝  A Space field is useful here because each multi-line field is built
 ⍝  in its own rectangular space.
-   ∆F 'This`⋄is`⋄an`⋄example{ }Of`⋄multi-line{ }Text`⋄Fields'
+   ∆F 'This`◊is`◊an`◊example{ }Of`◊multi-line{ }Text`◊Fields'
 This    Of         Text
 is      multi-line Fields
 an
@@ -145,7 +145,7 @@ example
 ⍝  Two adjacent Text fields can be separated by a Null Space field {},
 ⍝  for example when at least one field contains multiline input that you
 ⍝  want formatted separately (keeping each field in is own rectangular space):
-   ∆F 'Cat`⋄Elephant `⋄Mouse{}Felix`⋄Dumbo`⋄Mickey'
+   ∆F 'Cat`◊Elephant `◊Mouse{}Felix`◊Dumbo`◊Mickey'
 Cat      Felix
 Elephant Dumbo
 Mouse    Mickey
@@ -163,7 +163,7 @@ one space would be way more convenient:
 ```
 ⍝  Here's the better way to ensure there's a space after the
 ⍝  widest element in a field.
-   ∆F 'Cat`⋄Elephant`⋄Mouse{ }Felix`⋄Dumbo`⋄Mickey'
+   ∆F 'Cat`◊Elephant`◊Mouse{ }Felix`◊Dumbo`◊Mickey'
 Cat      Felix
 Elephant Dumbo
 Mouse    Mickey
@@ -178,8 +178,8 @@ Mouse    Mickey
 
 ```
 ⍝  A similar example with double-quote-delimited strings in Code fields with
-⍝  the newline sequence (`⋄):
-   ∆F '{"This`⋄is`⋄an`⋄example"} {"Of`⋄Multi-line"} {"Strings`⋄in`⋄Code`⋄Fields"}'
+⍝  the newline sequence (`◊):
+   ∆F '{"This`◊is`◊an`◊example"} {"Of`◊Multi-line"} {"Strings`◊in`◊Code`◊Fields"}'
 This    Of          Strings
 is      Multi-line  in
 an                  Code
@@ -210,7 +210,7 @@ The temperature is 11°C or  51.8°F
 
 ```
 ⍝  Here we place boxes around key Code fields using the shortcut `B (box).
-   ∆F'`⋄The temperature is {`B "I2" $ C}`⋄°C or {`B "F5.1" $ 32+9×C÷5}`⋄°F'
+   ∆F'`◊The temperature is {`B "I2" $ C}`◊°C or {`B "F5.1" $ 32+9×C÷5}`◊°F'
                    ┌──┐      ┌─────┐
 The temperature is │11│°C or │ 51.8│°F
                    │30│      │ 86.0│
@@ -226,7 +226,7 @@ Just use **Box mode**: `0 0 1 ∆F...`, i.e. where `⍺[2]=1`...
 ⍝  While we can't place boxes around text (or space) fields using `B,
 ⍝  we can place a box around EACH of our fields by setting the
 ⍝  third ∆F option (⍺[2]):
-   0 0 1 ∆F'`⋄The temperature is {"I2" $ C}`⋄°C or {"F5.1" $ 32+9×C÷5}`⋄°F'
+   0 0 1 ∆F'`◊The temperature is {"I2" $ C}`◊°C or {"F5.1" $ 32+9×C÷5}`◊°F'
 ┌───────────────────┬──┬──────┬─────┬──┐
 │                   │11│      │ 51.8│  │
 │The temperature is │30│°C or │ 86.0│°F│
@@ -413,7 +413,7 @@ as the last **_non-space_** in the **Code field**, before the _final_ right brac
 
 ```
 ⍝  Horizontal SDCF example
-   name←'John Smith' ⋄ age← 34
+   name←'John Smith' ◊ age← 34
    ∆F 'Current employee: {name→}, {age→}.'
 Current employee: name→John Smith, age→34.
 ```
@@ -423,14 +423,14 @@ As a useful formatting feature, whatever spaces are just before or after the sym
 ```
 ⍝  Here's an example:
 ⍝  See how the spaces adjacent to the symbol "→" are mirrored in the output!
-   name←'John Smith' ⋄ age← 34
+   name←'John Smith' ◊ age← 34
    ∆F 'Current employee: {name → }, {age→   }.'
 Current employee: name → John Smith, age→   34.
 ```
 
 ```
 ⍝  Here's an example of a vertical SDCF:
-   name←'John Smith' ⋄ age← 34
+   name←'John Smith' ◊ age← 34
    ∆F 'Current employee: {name↓} {age↓}.'
 Current employee:   name↓    age↓.
                   John Smith  34
@@ -652,7 +652,7 @@ T 35    → 8.9E¯6 | -95% ⎕⎕
 The first element in the right arg to ∆F is a character vector, an **f-string**,
 which contains 3 types of fields: **Text fields**, **Code fields**, and **Space fields**.
 
-- **Text fields** consist of simple text, which may include any Unicode characters desired, including newlines. Newlines (actually, carriage returns, `⎕UCS 13`) are normally entered via the sequence `` `⋄ ``. Additionally, literal curly braces can be added via `` `{ `` and `` `} ``, so there is no confusion with the simple curly braces used to begin and end **Code fields** and **Space Fields**. Finally, a simple backtick escape can be entered into a **Text field** by simply entering two such characters ` `` `.
+- **Text fields** consist of simple text, which may include any Unicode characters desired, including newlines. Newlines (actually, carriage returns, `⎕UCS 13`) are normally entered via the sequence `` `◊ ``. Additionally, literal curly braces can be added via `` `{ `` and `` `} ``, so there is no confusion with the simple curly braces used to begin and end **Code fields** and **Space Fields**. Finally, a simple backtick escape can be entered into a **Text field** by simply entering two such characters ` `` `.
 
 - **Code fields** are run-time evaluated expressions enclosed within
   simple, unescaped curly braces `{}`, i.e. those not preceded by a back-tick (see the previous paragraph). **Code fields** are essentially a Dyalog dfn with some extras.
@@ -669,7 +669,7 @@ a small number of escape sequences, beginning with the backtick `` ` ``.
 
 | &nbsp;Sequence&nbsp; | &nbsp;Literal&nbsp; |  &nbsp;Meaning&nbsp;   |
 | :------------------: | :-----------------: | :--------------------: |
-|         \`⋄          |      (newline)      | &nbsp; (⎕UCS 13)&nbsp; |
+|         \`◊          |      (newline)      | &nbsp; (⎕UCS 13)&nbsp; |
 |         \`\`         |          `          |        backtick        |
 |          `{          |          {          |       left brace       |
 |         \`}          |          }          |      right brace       |
@@ -699,7 +699,7 @@ as an ordinary backtick `` ` ``.
 
 | Note                                                                                                                                                                                                                                                                                   |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ¹ The syntax for the Date-Time specifications (left arg) can be found in the Dyalog documentation under <b>1200⌶</b>. For the curious, here's the code actually used by the Date-Time shortcut: <br>&nbsp;&nbsp;&nbsp;&nbsp;`{⍺←'YYYY-MM-DD hh:mm:ss' ⋄ ∊⍣(1=≡⍵)⊢ ⍺(1200⌶)⊢ 1⎕DT ⊆⍵}`. |
+| ¹ The syntax for the Date-Time specifications (left arg) can be found in the Dyalog documentation under <b>1200⌶</b>. For the curious, here's the code actually used by the Date-Time shortcut: <br>&nbsp;&nbsp;&nbsp;&nbsp;`{⍺←'YYYY-MM-DD hh:mm:ss' ◊ ∊⍣(1=≡⍵)⊢ ⍺(1200⌶)⊢ 1⎕DT ⊆⍵}`. |
 
 </div>
 
