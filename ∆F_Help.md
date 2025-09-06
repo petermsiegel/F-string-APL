@@ -27,7 +27,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
   /* Code blocks */ 
   pre { 
     background-color: #ddfafaff;  
-    color: #0a0a0aff;
+    color: #0a0a0aff; 
     font-size: 110%;
     line-height: 105%;
     padding: 15px;
