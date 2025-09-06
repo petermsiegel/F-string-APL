@@ -22,7 +22,7 @@
 	<!-- Preview in sep files: cmd-shift-V,
 Preview side-by-side: cmd-K, V,
 md->HTML: opt-shift-M
-Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help'
+Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help'
 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown.css">
 <!-- Style stuff related to APL and my random preferences... -->
@@ -95,7 +95,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
 <p><strong>∆F f-strings</strong> can concisely include:</p>
 <ul>
 <li>
-<p><strong>Text fields</strong>, expressions that can generate multiline Unicode text, using the sequence <code>`⋄</code> (<em><em>backtick + statement separator</em></em>) to generate a newline (<small><strong>⎕UCS 13</strong></small>);</p>
+<p><strong>Text fields</strong>, expressions that can generate multiline Unicode text, using the sequence <code>`◇</code> (<em><em>backtick + statement separator</em></em>) to generate a newline (<small><strong>⎕UCS 13</strong></small>);</p>
 </li>
 <li>
 <p><strong>Code fields</strong>, allowing users to evaluate and display APL arrays in the user environment, arrays passed as <strong>∆F</strong> arguments, as well as arbitrary APL expressions based on full multi-statement³ dfn logic; each <strong>Code field</strong> must return a value, simple or otherwise, which will be aligned and catenated with other fields and returned from <strong>∆F</strong>;</p>
@@ -104,7 +104,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
 <li>
 <p><strong>Quoted strings</strong> in <strong>Code fields</strong>, with several quote styles:</p>
 <ul>
-<li><strong>double-quotes</strong> <code>{&quot;like this&quot;}</code> or this <code> {&quot;on`⋄&quot;&quot;three&quot;&quot;`⋄lines&quot;}</code>,</li>
+<li><strong>double-quotes</strong> <code>{&quot;like this&quot;}</code> or this <code> {&quot;on`◇&quot;&quot;three&quot;&quot;`◇lines&quot;}</code>,</li>
 <li><strong>single-quotes</strong>, <em>distractingly</em> <code>{''shown ''''right'''' here''}'</code>, <em>or even</em></li>
 <li><strong>double angle quotation marks</strong>,⁵ i.e. <em>guillemets</em>,<br>
 <code>{«with internal quotes like &quot;this&quot; or ''this''.»}</code>;</li>
@@ -123,7 +123,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
 <li>
 <p>Simple mechanisms for concisely formatting and displaying data from</p>
 <ul>
-<li>user arrays or arbitrary code: <br><code>{tempC}</code> or <code>{tempC&lt;100: 32+tempC×9÷5 ⋄ &quot;Too hot&quot;}</code>,
+<li>user arrays or arbitrary code: <br><code>{tempC}</code> or <code>{tempC&lt;100: 32+tempC×9÷5 ◇ &quot;Too hot&quot;}</code>,
 <br></li>
 <li>arguments to <strong>∆F</strong> that follow the format string: <code>{32+`⍵1×9÷5}</code>, where <code>`⍵1</code> is a shortcut for <code>(⍵⊃⍨1+⎕IO)</code>;</li>
 <li><em>and more</em>;</li>
@@ -204,12 +204,12 @@ The temperature is 35∘C or  95∘F.
    ⎕RL ⎕IO ⎕ML←2342342 0 1         ⍝ ⎕RL: Ensure our random #s aren't random!
 </code></pre>
 <pre><code>⍝  Code fields with plain variables
-   name← 'Fred' ⋄ age← 43
+   name← 'Fred' ◇ age← 43
    ∆F 'The patient''s name is {name}. {name} is {age} years old.'
 The patient's name is Fred. Fred is 43 years old.
 </code></pre>
 <pre><code>⍝  Arbitrary code expressions
-   names← 'Mary' 'Jack' 'Tony' ⋄ prize← 1000
+   names← 'Mary' 'Jack' 'Tony' ◇ prize← 1000
    ∆F 'Customer {names⊃⍨ ?≢names} wins £{?prize}!'
 Customer Jack wins £80!
    ∆F 'Customer {names⊃⍨ ?≢names} wins £{?prize}!'
@@ -221,12 +221,12 @@ Customer Jack wins £230!
 <h3>Now, let’s add in some Space fields</h3>
 <pre><code>⍝  Some multi-line Text fields separated by non-null Space fields
 ⍝  ∘ The backtick is our &quot;escape&quot; character.
-⍝  ∘ The sequence `⋄ generates a new line in the current text field.
+⍝  ∘ The sequence `◇ generates a new line in the current text field.
 ⍝  ∘ { } is a Space Field indicating one space, since there is one space
 ⍝    within the braces.
 ⍝  A Space field is useful here because each multi-line field is built
 ⍝  in its own rectangular space.
-   ∆F 'This`⋄is`⋄an`⋄example{ }Of`⋄multi-line{ }Text`⋄Fields'
+   ∆F 'This`◇is`◇an`◇example{ }Of`◇multi-line{ }Text`◇Fields'
 This    Of         Text
 is      multi-line Fields
 an
@@ -235,7 +235,7 @@ example
 <pre><code>⍝  Two adjacent Text fields can be separated by a Null Space field {},
 ⍝  for example when at least one field contains multiline input that you
 ⍝  want formatted separately (keeping each field in is own rectangular space):
-   ∆F 'Cat`⋄Elephant `⋄Mouse{}Felix`⋄Dumbo`⋄Mickey'
+   ∆F 'Cat`◇Elephant `◇Mouse{}Felix`◇Dumbo`◇Mickey'
 Cat      Felix
 Elephant Dumbo
 Mouse    Mickey
@@ -248,7 +248,7 @@ after <em>each</em> word without fiddling, so a <strong>Space field</strong> wit
 one space would be way more convenient:</p>
 <pre><code>⍝  Here's the better way to ensure there's a space after the
 ⍝  widest element in a field.
-   ∆F 'Cat`⋄Elephant`⋄Mouse{ }Felix`⋄Dumbo`⋄Mickey'
+   ∆F 'Cat`◇Elephant`◇Mouse{ }Felix`◇Dumbo`◇Mickey'
 Cat      Felix
 Elephant Dumbo
 Mouse    Mickey
@@ -261,8 +261,8 @@ Elephant Dumbo
 Mouse    Mickey
 </code></pre>
 <pre><code>⍝  A similar example with double-quote-delimited strings in Code fields with
-⍝  the newline sequence (`⋄):
-   ∆F '{&quot;This`⋄is`⋄an`⋄example&quot;} {&quot;Of`⋄Multi-line&quot;} {&quot;Strings`⋄in`⋄Code`⋄Fields&quot;}'
+⍝  the newline sequence (`◇):
+   ∆F '{&quot;This`◇is`◇an`◇example&quot;} {&quot;Of`◇Multi-line&quot;} {&quot;Strings`◇in`◇Code`◇Fields&quot;}'
 This    Of          Strings
 is      Multi-line  in
 an                  Code
@@ -287,7 +287,7 @@ The temperature is 11°C or  51.8°F
                    60      140.0
 </code></pre>
 <pre><code>⍝  Here we place boxes around key Code fields using the shortcut `B (box).
-   ∆F'`⋄The temperature is {`B &quot;I2&quot; $ C}`⋄°C or {`B &quot;F5.1&quot; $ 32+9×C÷5}`⋄°F'
+   ∆F'`◇The temperature is {`B &quot;I2&quot; $ C}`◇°C or {`B &quot;F5.1&quot; $ 32+9×C÷5}`◇°F'
                    ┌──┐      ┌─────┐
 The temperature is │11│°C or │ 51.8│°F
                    │30│      │ 86.0│
@@ -299,7 +299,7 @@ The temperature is │11│°C or │ 51.8│°F
 <pre><code>⍝  While we can't place boxes around text (or space) fields using `B,
 ⍝  we can place a box around EACH of our fields by setting the
 ⍝  third ∆F option (⍺[2]):
-   0 0 1 ∆F'`⋄The temperature is {&quot;I2&quot; $ C}`⋄°C or {&quot;F5.1&quot; $ 32+9×C÷5}`⋄°F'
+   0 0 1 ∆F'`◇The temperature is {&quot;I2&quot; $ C}`◇°C or {&quot;F5.1&quot; $ 32+9×C÷5}`◇°F'
 ┌───────────────────┬──┬──────┬─────┬──┐
 │                   │11│      │ 51.8│  │
 │The temperature is │30│°C or │ 86.0│°F│
@@ -469,19 +469,19 @@ placing single quotes around each such element. Non-character data is returned a
 </ul>
 <p>as the last <strong><em>non-space</em></strong> in the <strong>Code field</strong>, before the <em>final</em> right brace.</p>
 <pre><code>⍝  Horizontal SDCF example
-   name←'John Smith' ⋄ age← 34
+   name←'John Smith' ◇ age← 34
    ∆F 'Current employee: {name→}, {age→}.'
 Current employee: name→John Smith, age→34.
 </code></pre>
 <p>As a useful formatting feature, whatever spaces are just before or after the symbol <strong>→</strong> or <strong>↓</strong> are preserved <strong><em>verbatim</em></strong> in the output.</p>
 <pre><code>⍝  Here's an example:
 ⍝  See how the spaces adjacent to the symbol &quot;→&quot; are mirrored in the output!
-   name←'John Smith' ⋄ age← 34
+   name←'John Smith' ◇ age← 34
    ∆F 'Current employee: {name → }, {age→   }.'
 Current employee: name → John Smith, age→   34.
 </code></pre>
 <pre><code>⍝  Here's an example of a vertical SDCF:
-   name←'John Smith' ⋄ age← 34
+   name←'John Smith' ◇ age← 34
    ∆F 'Current employee: {name↓} {age↓}.'
 Current employee:   name↓    age↓.
                   John Smith  34
@@ -720,7 +720,7 @@ T 35    → 8.9E¯6 | -95% ⎕⎕
 which contains 3 types of fields: <strong>Text fields</strong>, <strong>Code fields</strong>, and <strong>Space fields</strong>.</p>
 <ul>
 <li>
-<p><strong>Text fields</strong> consist of simple text, which may include any Unicode characters desired, including newlines. Newlines (actually, carriage returns, <code>⎕UCS 13</code>) are normally entered via the sequence <code>`⋄</code>. Additionally, literal curly braces can be added via <code>`{</code> and <code>`}</code>, so there is no confusion with the simple curly braces used to begin and end <strong>Code fields</strong> and <strong>Space Fields</strong>. Finally, a simple backtick escape can be entered into a <strong>Text field</strong> by simply entering two such characters <code>``</code>.</p>
+<p><strong>Text fields</strong> consist of simple text, which may include any Unicode characters desired, including newlines. Newlines (actually, carriage returns, <code>⎕UCS 13</code>) are normally entered via the sequence <code>`◇</code>. Additionally, literal curly braces can be added via <code>`{</code> and <code>`}</code>, so there is no confusion with the simple curly braces used to begin and end <strong>Code fields</strong> and <strong>Space Fields</strong>. Finally, a simple backtick escape can be entered into a <strong>Text field</strong> by simply entering two such characters <code>``</code>.</p>
 </li>
 <li>
 <p><strong>Code fields</strong> are run-time evaluated expressions enclosed within
@@ -745,7 +745,7 @@ a small number of escape sequences, beginning with the backtick <code>`</code>.<
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">`⋄</td>
+<td style="text-align:center">`◇</td>
 <td style="text-align:center">(newline)</td>
 <td style="text-align:center">  (⎕UCS 13) </td>
 </tr>
@@ -836,7 +836,7 @@ as an ordinary backtick <code>`</code>.</p>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">¹ The syntax for the Date-Time specifications (left arg) can be found in the Dyalog documentation under <b>1200⌶</b>. For the curious, here’s the code actually used by the Date-Time shortcut: <br>    <code>{⍺←'YYYY-MM-DD hh:mm:ss' ⋄ ∊⍣(1=≡⍵)⊢ ⍺(1200⌶)⊢ 1⎕DT ⊆⍵}</code>.</td>
+<td style="text-align:left">¹ The syntax for the Date-Time specifications (left arg) can be found in the Dyalog documentation under <b>1200⌶</b>. For the curious, here’s the code actually used by the Date-Time shortcut: <br>    <code>{⍺←'YYYY-MM-DD hh:mm:ss' ◇ ∊⍣(1=≡⍵)⊢ ⍺(1200⌶)⊢ 1⎕DT ⊆⍵}</code>.</td>
 </tr>
 </tbody>
 </table>
