@@ -29,8 +29,8 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
 
   - **Quoted strings** in **Code fields**, with several quote styles:
 
-    - **double-quotes** `{"like this"}` or this `` {"on`⋄three`⋄lines"}``,
-    - **single-quotes**, _distractingly_ `{''shown ''''right'''' here''}'`, or even
+    - **double-quotes** `{"like this"}` or this `` {"on`⋄""three""`⋄lines"}``,
+    - **single-quotes**, _distractingly_ `{''shown ''''right'''' here''}'`, _or even_
     - **double angle quotation marks**,⁵ i.e. _guillemets_,  
       `{«with internal quotes like "this" or ''this''.»}`;
 
@@ -199,7 +199,8 @@ Ted  Templeton 12 High St
 
 ```
 ⍝  A slightly more interesting code expression, using the shortcut $ (⎕FMT)
-⍝   to round the calculated Fahrenheit numbers to the nearest tenth:
+⍝  to round the calculated Fahrenheit numbers to the nearest tenth.
+⍝  (You could use 1⍕⍪ instead, but that's a different demo).
    C← 11 30 60
    ∆F'The temperature is {"I2" $ C}°C or {"F5.1" $ 32+9×C÷5}°F'
 The temperature is 11°C or  51.8°F

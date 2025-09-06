@@ -104,8 +104,8 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ⋄ ∆F⍨'help
 <li>
 <p><strong>Quoted strings</strong> in <strong>Code fields</strong>, with several quote styles:</p>
 <ul>
-<li><strong>double-quotes</strong> <code>{&quot;like this&quot;}</code> or this <code> {&quot;on`⋄three`⋄lines&quot;}</code>,</li>
-<li><strong>single-quotes</strong>, <em>distractingly</em> <code>{''shown ''''right'''' here''}'</code>, or even</li>
+<li><strong>double-quotes</strong> <code>{&quot;like this&quot;}</code> or this <code> {&quot;on`⋄&quot;&quot;three&quot;&quot;`⋄lines&quot;}</code>,</li>
+<li><strong>single-quotes</strong>, <em>distractingly</em> <code>{''shown ''''right'''' here''}'</code>, <em>or even</em></li>
 <li><strong>double angle quotation marks</strong>,⁵ i.e. <em>guillemets</em>,<br>
 <code>{«with internal quotes like &quot;this&quot; or ''this''.»}</code>;</li>
 </ul>
@@ -278,7 +278,8 @@ Mary Jones     22 Smith St
 Ted  Templeton 12 High St
 </code></pre>
 <pre><code>⍝  A slightly more interesting code expression, using the shortcut $ (⎕FMT)
-⍝   to round the calculated Fahrenheit numbers to the nearest tenth:
+⍝  to round the calculated Fahrenheit numbers to the nearest tenth.
+⍝  (You could use 1⍕⍪ instead, but that's a different demo).
    C← 11 30 60
    ∆F'The temperature is {&quot;I2&quot; $ C}°C or {&quot;F5.1&quot; $ 32+9×C÷5}°F'
 The temperature is 11°C or  51.8°F
