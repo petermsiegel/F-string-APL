@@ -161,7 +161,7 @@ The temperature is 35∘C or  95∘F.
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">¹ Throughout this documentation, notably in the many examples, an index origin of zero (<code>⎕IO=0</code>) is assumed. Users may utilize <em>any</em> index origin in the <strong>f-string Code fields</strong> they define, as long as it’s <strong>1</strong> or <strong>0</strong>. <strong>Code fields</strong> inherit the index origin of the environment (i.e. namespace) from which <strong>∆F</strong> is called.</td>
+<td style="text-align:left">¹ Throughout this documentation, notably in the many examples, an index origin of zero (<code>⎕IO=0</code>) is assumed. <strong>Code fields</strong> inherit the index origin and other system variables from the environment (i.e. namespace) in which <strong>∆F</strong> is called; they can be set locally in the code field, as well: <code>∆F '{ ⎕IO←1 ◇ ⎕A ⍳ &quot;APL&quot; }'</code> .</td>
 </tr>
 <tr>
 <td style="text-align:left">² <strong>∆F</strong> is inspired by Python <em><a href="https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals">f-strings</a></em>, short for “<strong>formatted string literals</strong>”, but designed for APL’s multi-dimensional worldview. <strong>∆F</strong> f-strings and Python’s are not compatible.</td>
