@@ -6,7 +6,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown.css">
 
-<!-- Style stuff related to APL and my random preferences... -->
+<!-- . Style stuff related to APL and my random preferences... -->
 <style> 
   p {
     font-family: Georgia;
@@ -785,4 +785,4 @@ as an ordinary backtick `` ` ``.
 
 </div>
 
-(C) 2025 Sam the Cat Foundation. [20250907T181035]
+(C) 2025 Sam the Cat Foundation. [20250907T181303]
