@@ -79,7 +79,7 @@
           c= dol:            (pfx, scF) ∇ w             ⍝ $ => ⎕FMT (scF shortcut)
           c= esc:            (pfx, a)  ∇ w⊣ a w← CFEsc w          
           c= omUs:           (pfx, a)  ∇ w⊣ a w← CFOm w ⍝ ⍹, alias to `⍵ (see CFEsc).
-         ~c∊ '→↓%':          ⎕SIGNAL cfLogicÊ
+         ~c∊ sdcfCh:          ⎕SIGNAL cfLogicÊ
         ⍝ We have one of '→', '↓', or '%'. 
         ⍝ See if [A] it's a shortcut or [B] indicator of self-doc code field (SDCF).
         ⍝ [A] Pseudo-fn: "above" '%' or APL fns '→'¹ or '↓'. Keep scanning code field. 
@@ -192,6 +192,7 @@
   tfBrkList← esc lb                
   lb_rb← lb rb ⋄ om_omUs← om omUs ⋄ sp_sq← sp sq ⋄   esc_lb_rb← esc lb rb  
   qtsL qtsR← lDAQ rDAQ,⍨¨ ⊂dq sq                       ⍝ Expected freq hi to lo: dq sq l/rDAQ
+  sdcfCh← ra da pct                                    ⍝ self-doc code field chars
 
 ⍝ Error constants / fns  
     Ê← { ⍺←11 ⋄ ⊂'EN' ⍺,⍥⊂ 'Message' ⍵ }
@@ -275,6 +276,7 @@
     XR← ⎕THIS.⍎⊃∘⌽                                   ⍝ Execute the right-hand expression
     HT← '⎕THIS' ⎕R (⍕⎕THIS)                          ⍝ "Hardwire" absolute ⎕THIS. 
     ⎕SHADOW '; scA2; scB2; scC2; scÐ2; scF2; scM2; scT2; scQ2; scW2'~';' 
+  ⍝ Global: A B C Ð F M Q T
   ⍝ A (etc): a dfn
   ⍝ scA (etc): [0] local absolute name of dfn (with spaces), [1] its code              
   ⍝ Abbrev  Meaning         Valence     User Shortcuts   Notes
@@ -284,17 +286,19 @@
   ⍝ Ð       display ⍵       dyadic                       Var Ð only used internally...
   ⍝ F       [⍺] format ⍵    ambi       `F, $             Aliases
   ⍝ M       merge[⍺] ⍵      ambi                         Var M only used internally...
-  ⍝ T       ⍺ date-time ⍵   ambi       `T, `D            Aliases
   ⍝ Q       quote ⍵         monadic    `Q                Put quotes around text vectors, not non-text
+  ⍝ T       ⍺ date-time ⍵   ambi       `T, `D            Aliases
     A← XR scA2← HT   ' ⎕THIS.A ' '{⍺←⍬⋄⎕ML←1⋄⊃⍪/(⌈2÷⍨w-m)⌽¨f↑⍤1⍨¨m←⌈/w←⊃∘⌽⍤⍴¨f←⎕FMT¨⍺⍵}' 
     B← XR scB2← HT   ' ⎕THIS.B ' '{⍺←0⋄⎕ML←1⋄⍺⎕SE.Dyalog.Utils.disp⊂⍣(1≥≡⍵),⍣(0=≡⍵)⊢⍵}' 
   ⍝ C... Comma Shortut
-      ⎕SHADOW '; cPre; cSrc; cSnk; cCda'~';'
-      cPre←  '{⎕FR ⎕PP← 1287 34⋄'
-      cSrc←   't←''[.Ee].*$'' ''(?<=\d)(?=(\d{3})+([-¯.Ee]|$))''' 
-      cSnk←   '⎕R''&'' '',&'''
-      cCda←   '⍕¨⍵⋄1=≢⍵:⊃t⋄t}'
-    C← XR scC2← HT   ' ⎕THIS.C '  ( cPre, cSrc, cSnk, cCda )
+    ⎕SHADOW 'cCod' 
+    cCod← {
+        _←  '{⎕FR ⎕PP← 1287 34⋄'
+        _,←   't←''[.Ee].*$'' ''(?<=\d)(?=(\d{3})+([-¯.Ee]|$))''' 
+        _,←   '⎕R''&'' '',&'''
+        _,   '⍕¨⍵⋄1=≢⍵:⊃t⋄t}'
+    }⍬
+    C← XR scC2← HT   ' ⎕THIS.C ' cCod 
     Ð← XR scÐ2← HT   ' ⎕THIS.Ð ' ' 0∘⎕SE.Dyalog.Utils.disp¯1∘↓'                           
     F← XR scF2←      ' ⎕FMT '    ' ⎕FMT '                                                
     M← XR scM2← HT   ' ⎕THIS.M ' '{⍺←⊢⋄⎕ML←1⋄⊃,/((⌈/≢¨)↑¨⊢)⎕FMT¨⍺⍵}'                     
@@ -304,13 +308,15 @@
   ⍝    element e in ⍵, i.e. e is a char vector or row of an array such that
   ⍝    (1≥ |≡e) and (1≥ ⍴⍴⍵). 
   ⍝ Be sure to handle heterogeneous vectors, ⎕OR objects, and namespaces correctly. 
-      ⎕SHADOW '; qDp; qOr; qMx; qQt'~';' 
-      qDp←  '{1<|≡⍵:∇¨⍵⋄'                              ⍝ It's not simple ==> handle.
-      qOr←  '(0=⍴⍴⍵)∧1=≡⍵:⍵⋄'                          ⍝ It's an ⎕OR ==> handle.
-      qMx←  '(0≠≡⍵)∧326=⎕DR⍵:∇¨⍵⋄'                     ⍝ It's heterogeneous: 1 'x' 2 3.
-                                                       ⍝ ⎕UCS 39: A single quote (LOL).
-      qQt←   '(⎕UCS 39){0=80|⎕DR⍵:⍺,⍺,⍨⍵/⍨ 1+⍺=⍵⋄⍵}⍤1⊢⍵}' ⍝ If a vector/row is char, put in quotes.
-    Q← XR scQ2← HT   ' ⎕THIS.Q '  (qDp, qOr, qMx, qQt)
+    ⎕SHADOW 'qCod'
+    qCod← {
+        sq←  '(⎕UCS 39)'                               ⍝ A single quote (LOL).
+        _←  '{1<|≡⍵:∇¨⍵⋄'                              ⍝ It's not simple ==> handle.
+        _,←  '(0=⍴⍴⍵)∧1=≡⍵:⍵⋄'                         ⍝ It's an ⎕OR ==> handle.
+        _,←  '(0≠≡⍵)∧326=⎕DR⍵:∇¨⍵⋄'                    ⍝ It's heterogeneous: 1 'x' 2 3.                                              
+        _, sq,'{0=80|⎕DR⍵:⍺,⍺,⍨⍵/⍨ 1+⍺=⍵⋄⍵}⍤1⊢⍵}'     ⍝ If a vector/row is char, put in quotes.
+    }⍬
+    Q← XR scQ2← HT   ' ⎕THIS.Q ' qCod 
   ⍝ `W (Wrap) is experimental... 
   ⍝  ⍺1 ⍺2 `W ⍵ 
   ⍝  ∘ ⍺1, ⍺2 each a scalar or vector.

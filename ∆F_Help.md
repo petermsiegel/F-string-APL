@@ -685,11 +685,11 @@ T 35    → 8.9E¯6 | -95% ⎕⎕
 | **_args_**                              | elements of ⍵ after the f-string, each of which can be accessed in the f-string via a **\`⍵** shortcut (or ordinary **⍵** expression)                                                                                                                                                       |
 | **_options_**                           | [ options← [ 0 [ 0 [ 0 [ 0 ] ] ] ] \| 'help' ]                                                                                                                                                                                                                                              |
 | &nbsp;&nbsp;options[0] (**_DFN_**)      | If `1`, **∆F** returns a dfn, which (upon execution) produces the same output as the default mode. Default: **∆F** returns a char. matrix.                                                                                                                                                  |
-| &nbsp;&nbsp;options[1] (**_DBG_**)      | If `1`, prints out (via `⎕←`) the dfn-version of the f-string.                                                                                                                                                                                                                              |
+| &nbsp;&nbsp;options[1] (**_DBG_**)      | If `1`: displays the code that the f-string **_actually_** generates (if **_DFN_** is set to `1`, this will include the embedded f-string _source_ as `` `⍵0 ``).                                                                                                                           |
 | &nbsp;&nbsp;options[2] (**_BOX_**)      | If `1`, each field (except a Null Text field) is boxed separately. If `0`, you may box any **Code fields** you want using the _box_ `` `B `` routine. **BOX** mode can be used both with **DFN** and default output mode.                                                                   |
 | &nbsp;&nbsp;options[3] (**_INLINE_**)   | If `1`, a copy of each needed internal support function is included in the result. If `0`, calls are made to the library created when ∆F was loaded. Setting **_INLINE_** to `1` is only useful if the **DFN** option is set. This option is experimental and may simply disappear one day. |
 | &nbsp;&nbsp;'help'                      | If `'help'` is specified, this amazing documentation is displayed.                                                                                                                                                                                                                          |
-| **_result_**                            | If `0=⊃options`, the result is always a character matrix. If `1=⊃options`, the result is a dfn that, _when executed_, generates that same character matrix.                                                                                                                                 |
+| **_result_**                            | If `0=⊃options`, the result is always a character matrix. If `1=⊃options`, the result is a dfn that, _when executed in the same environment with the same arguments_, generates that same character matrix. Of course, if an error is signalled, no result is returned.                     |
 
 ### Options (`⍺`)
 
@@ -785,4 +785,4 @@ as an ordinary backtick `` ` ``.
 
 </div>
 
-(C) 2025 Sam the Cat Foundation. [20250907T181303]
+(C) 2025 Sam the Cat Foundation. [20250908T091034]

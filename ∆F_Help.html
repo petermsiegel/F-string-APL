@@ -25,7 +25,7 @@ md->HTML: opt-shift-M
 Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help'
 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown.css">
-<!-- Style stuff related to APL and my random preferences... -->
+<!-- . Style stuff related to APL and my random preferences... -->
 <style> 
   p {
     font-family: Georgia;
@@ -681,7 +681,7 @@ T 35    → 8.9E¯6 | -95% ⎕⎕
 </tr>
 <tr>
 <td style="text-align:left">  options[1] (<strong><em>DBG</em></strong>)</td>
-<td style="text-align:left">If <code>1</code>, prints out (via <code>⎕←</code>) the dfn-version of the f-string.</td>
+<td style="text-align:left">If <code>1</code>: displays the code that the f-string <strong><em>actually</em></strong> generates (if <strong><em>DFN</em></strong> is set to <code>1</code>, this will include the embedded f-string <em>source</em> as <code>`⍵0</code>).</td>
 </tr>
 <tr>
 <td style="text-align:left">  options[2] (<strong><em>BOX</em></strong>)</td>
@@ -697,7 +697,7 @@ T 35    → 8.9E¯6 | -95% ⎕⎕
 </tr>
 <tr>
 <td style="text-align:left"><strong><em>result</em></strong></td>
-<td style="text-align:left">If <code>0=⊃options</code>, the result is always a character matrix. If <code>1=⊃options</code>, the result is a dfn that, <em>when executed</em>, generates that same character matrix.</td>
+<td style="text-align:left">If <code>0=⊃options</code>, the result is always a character matrix. If <code>1=⊃options</code>, the result is a dfn that, <em>when executed in the same environment with the same arguments</em>, generates that same character matrix. Of course, if an error is signalled, no result is returned.</td>
 </tr>
 </tbody>
 </table>
@@ -862,7 +862,7 @@ as an ordinary backtick <code>`</code>.</p>
 <li>By default,<code>⍺←''''</code>, i.e. APL quotes will wrap the array ⍵, row by row, whether character, numeric or otherwise.</li>
 </ol>
 </div>
-<p>© 2025 Sam the Cat Foundation. [20250907T180936]</p>
+<p>© 2025 Sam the Cat Foundation. [20250908T091034]</p>
 
 </body>
 </html>
