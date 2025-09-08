@@ -727,4 +727,4 @@ as an ordinary backtick `` ` ``.
 
 </div>
 
-(C) 2025 Sam the Cat Foundation. [___TIMESTAMP___]
+(C) 2025 Sam the Cat Foundation. [XXXTIMESTAMPXXX]
