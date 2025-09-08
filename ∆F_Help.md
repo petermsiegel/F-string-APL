@@ -123,7 +123,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
   2 32
   ```
 
-**∆F** is designed for ease of use, _ad hoc_ debugging, and informal user interaction; APL's native tools and Dyalog's enhancements are always the best⁴ way to build and display complex arrays, unless **∆F**'s specific functionality is of use.
+**∆F** is designed⁴ for ease of use, _ad hoc_ debugging, fine-grained formatting and informal user interaction, built using APL's own powerful functions and operators.
 
 <div style="margin-left: 20px;">
 
@@ -142,16 +142,15 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 
 ## ∆F **Help** Information
 
-> To display this **HELP** information, type:
-> `∆F⍨ 'help'`
+> To display this **HELP** information, type: `∆F⍨ 'help'`.
 
 ## To use **∆F**
 
-> Copy the files **∆Fapl.dyalog** and **∆F_Help.html** from Github, etc. into your current working directory (the one shown via `]cd`). Then, from your Dyalog session (typically `#` or `⎕SE`):
+> Copy the files **∆Fapl.dyalog** and **∆F_Help.html** from Github, etc. into your current working directory (the one shown via `]cd`). Then, from your Dyalog session (typically `#` or `⎕SE`), enter:
 
 > `]load ∆Fapl [-target=`**_myns_**`]`
 
-> Now **∆F** is available in the active namespace (or **_myns_**), along with the namespace **⍙Fapl** (containing utilities used by **∆F**). The `]load` will automagically copy **∆F_Help.html** into **⍙Fapl** or note its absence.
+> Now, **∆F** is available in the active namespace (or **_myns_**), along with the namespace **⍙Fapl** (containing utilities used by **∆F**). The `]load` will automa<b><i>g</i></b>ically copy **∆F_Help.html** into **⍙Fapl** or note its absence.
 
 ---
 
