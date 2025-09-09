@@ -184,7 +184,7 @@ Customer Jack wins £230!
 
 > Isn't Jack lucky, winning twice in a row!
 
-### Now, let's add in some Space fields
+### Now, let's add in some **Space fields**
 
 Below, we have some multi-line **Text fields** separated by non-null **Space fields**.
 
@@ -204,7 +204,7 @@ an
 example
 ```
 
-Two adjacent Text fields can be separated by a Null **Space field** `{}`,
+Two adjacent **Text fields** can be separated by a Null **Space field** `{}`,
 for example when at least one field contains multiline input that you
 want formatted separately from others, i.e. keeping each field in is own rectangular space:
 
@@ -216,7 +216,7 @@ Mouse    Mickey
 ```
 
 In the above example, we added an extra space after the longest
-animal name...
+animal name, _Elephant_.
 
 ### But wait! There's an easier way!
 
@@ -252,7 +252,7 @@ an                 Code
 example            Fields
 ```
 
-Here is some multiline data we'll add to our Code fields, using APL _mix_ `↑` to generate multiline objects (matrices).
+Here is some multiline data we'll add to our **Code fields**, using APL _mix_ `↑` to generate multiline objects (matrices).
 
 ```
    fn← 'John' 'Mary' 'Ted'
@@ -276,7 +276,7 @@ The temperature is 11°C or 51.8°F
                    60     140.0
 ```
 
-Here we place boxes around key **Code fields** in this same example using the shortcut `` `B `` (Box).
+Here we place boxes around key **Code fields** in this same example to introduce the shortcut `` `B `` (Box).
 
 ```
    ∆F'`◇The temperature is {`B "I2" $ C}`◇°C or {`B "F5.1" $ 32+9×C÷5}`◇°F'
@@ -364,9 +364,9 @@ The `` `C `` shortcut adds commas every 3 digits (from the right) to one or more
 
 <div style="margin-left: 20px;">
 
-| Note                                                                                                                                                                  |
-| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ¹ Typically, each number or numeric string presented to `` `C `` will be an integer, but if a real number is presented, only the integer part will have commas added. |
+| Note                                                                                                                                                                         |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ¹ Typically, each number or numeric string presented to `` `C `` will represent an integer, but if a real number is presented, only the integer part will have commas added. |
 
 </div>
 
@@ -377,6 +377,8 @@ Let's use the `` `C `` shortcut to add the commas to the temperatures!
    ∆F'The sun''s core is at {`C sun_ core}°C or {`C C2F sun_core}°F.'
 The sun's core is at 15,000,000°C or 27,000,032°F.
 ```
+
+Cool! OK, not literally.
 
 And for a bit of a twist, let's display either degrees centrigrade
 or fahrenheit under user control (`1` => F, `0` => C). Here, we establish
@@ -443,13 +445,12 @@ Here we make a quick mention of the **_experimental_** shortcut **Wrap**,¹ `` `
 
 #### Here are two simple examples.
 
-In the first, we place `"∘C"` after _[a]_ each row of a table `` ⍪`⍵2 ``, or
-_[b]_ each simple vector (`` ,¨`⍵2 ``). We indicate that is no left decorator here
+In the first, we place `"∘C"` after **[a]** each row of a table `` ⍪`⍵2 ``, or **[b]** after each simple vector in `` ,¨`⍵2 ``. We indicate that is no _left_ decorator here
 using `""` or `⍬`, as here.
 
 ```
-⍝     [a]........       [b].........
-∆F '{ `⍵1 `W ⍪`⍵2 } ...{ `⍵1 `W ,¨`⍵2 }' (⍬ '∘C')(18 22 33)
+⍝         ... [a] ...       .... [b] ....
+    ∆F '{ `⍵1 `W ⍪`⍵2 } ...{ `⍵1 `W ,¨`⍵2 }' (⍬ '∘C')(18 22 33)
 18∘C ... 18∘C 22∘C 33∘C
 22∘C
 33∘C
@@ -534,8 +535,7 @@ To make it easier to see, here's the same result, but with a box around each fie
 
 ### A cut above the rest. Using `%` (_above_).
 
-Here's a useful feature. Let's use theshortcut `%` to display one expression centered above another;
-It's called **Above** and can also be expressed as `` `A ``. Remember, `` `⍵1 `` designates the **_first_** argument after the f-string itself, and `` `⍵2 `` the **_second_**.
+Here's a useful feature. Let's use the shortcut `%` to display one expression centered above another; it's called **Above** and can also be expressed as `` `A ``. Remember, `` `⍵1 `` designates the **_first_** argument after the f-string itself, and `` `⍵2 `` the **_second_**.
 
 ```
    ∆F '{"Employee" % ⍪`⍵1} {"Age" % ⍪`⍵2}' ('John Smith' 'Mary Jones')(29 23)
@@ -574,7 +574,7 @@ Let's demonstrate here the equivalence of the _implicit_ and _explicit_ **Omega 
 
 ### Shortcuts With Individual Expressions
 
-Shortcuts often make sense with individual expressions, not just entire Code fields. They can be put in parentheses and manipulated like ordinary APL functions.
+Shortcuts often make sense with individual expressions, not just entire **Code fields**. They can be put in parentheses and manipulated like ordinary APL functions.
 Here, we display one boxed value above the other.
 
 ```
@@ -845,7 +845,7 @@ it's just an ordinary backtick character `` ` ``.
 
 </div>
 
-(C) 2025 Sam the Cat Foundation. [20250909T161852]
+(C) 2025 Sam the Cat Foundation. [20250909T163734]
 
 ```
 

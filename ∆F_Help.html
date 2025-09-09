@@ -217,7 +217,7 @@ Customer Jack wins £230!
 <blockquote>
 <p>Isn’t Jack lucky, winning twice in a row!</p>
 </blockquote>
-<h3>Now, let’s add in some Space fields</h3>
+<h3>Now, let’s add in some <strong>Space fields</strong></h3>
 <p>Below, we have some multi-line <strong>Text fields</strong> separated by non-null <strong>Space fields</strong>.</p>
 <ul>
 <li>The backtick is our “escape” character.</li>
@@ -233,7 +233,7 @@ is      multi-line Fields
 an
 example
 </code></pre>
-<p>Two adjacent Text fields can be separated by a Null <strong>Space field</strong> <code>{}</code>,
+<p>Two adjacent <strong>Text fields</strong> can be separated by a Null <strong>Space field</strong> <code>{}</code>,
 for example when at least one field contains multiline input that you
 want formatted separately from others, i.e. keeping each field in is own rectangular space:</p>
 <pre><code>   ∆F 'Cat`◇Elephant `◇Mouse{}Felix`◇Dumbo`◇Mickey'
@@ -242,7 +242,7 @@ Elephant Dumbo
 Mouse    Mickey
 </code></pre>
 <p>In the above example, we added an extra space after the longest
-animal name…</p>
+animal name, <em>Elephant</em>.</p>
 <h3>But wait! There’s an easier way!</h3>
 <p>Here, you surely want the lefthand field to be guaranteed to have a space
 after <em>each</em> word without fiddling, so a <strong>Space field</strong> with at least
@@ -267,7 +267,7 @@ is      Multi-line in
 an                 Code
 example            Fields
 </code></pre>
-<p>Here is some multiline data we’ll add to our Code fields, using APL <em>mix</em> <code>↑</code> to generate multiline objects (matrices).</p>
+<p>Here is some multiline data we’ll add to our <strong>Code fields</strong>, using APL <em>mix</em> <code>↑</code> to generate multiline objects (matrices).</p>
 <pre><code>   fn← 'John' 'Mary' 'Ted'
    ln← 'Smith' 'Jones' 'Templeton'
    addr← '24 Mulberry Ln' '22 Smith St' '12 High St'
@@ -285,7 +285,7 @@ The temperature is 11°C or 51.8°F
                    30      86.0
                    60     140.0
 </code></pre>
-<p>Here we place boxes around key <strong>Code fields</strong> in this same example using the shortcut <code>`B</code> (Box).</p>
+<p>Here we place boxes around key <strong>Code fields</strong> in this same example to introduce the shortcut <code>`B</code> (Box).</p>
 <pre><code>   ∆F'`◇The temperature is {`B &quot;I2&quot; $ C}`◇°C or {`B &quot;F5.1&quot; $ 32+9×C÷5}`◇°F'
                    ┌──┐      ┌─────┐
 The temperature is │11│°C or │ 51.8│°F
@@ -362,7 +362,7 @@ The sun's core is at 15,000,000°C or 27,000,032°F
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">¹ Typically, each number or numeric string presented to <code>`C</code> will be an integer, but if a real number is presented, only the integer part will have commas added.</td>
+<td style="text-align:left">¹ Typically, each number or numeric string presented to <code>`C</code> will represent an integer, but if a real number is presented, only the integer part will have commas added.</td>
 </tr>
 </tbody>
 </table>
@@ -372,6 +372,7 @@ The sun's core is at 15,000,000°C or 27,000,032°F
    ∆F'The sun''s core is at {`C sun_ core}°C or {`C C2F sun_core}°F.'
 The sun's core is at 15,000,000°C or 27,000,032°F.
 </code></pre>
+<p>Cool! OK, not literally.</p>
 <p>And for a bit of a twist, let’s display either degrees centrigrade
 or fahrenheit under user control (<code>1</code> =&gt; F, <code>0</code> =&gt; C). Here, we establish
 the format-string <code>sunFC</code> first, then pass it to <strong>∆F</strong> with an additional argument.</p>
@@ -425,11 +426,10 @@ Voila, quotes appear around the character digits, but not the actual numbers!</p
 </table>
 </div>
 <h4>Here are two simple examples.</h4>
-<p>In the first, we place <code>&quot;∘C&quot;</code> after <em>[a]</em> each row of a table <code>⍪`⍵2</code>, or
-<em>[b]</em> each simple vector (<code>,¨`⍵2</code>). We indicate that is no left decorator here
+<p>In the first, we place <code>&quot;∘C&quot;</code> after <strong>[a]</strong> each row of a table <code>⍪`⍵2</code>, or <strong>[b]</strong> after each simple vector in <code>,¨`⍵2</code>. We indicate that is no <em>left</em> decorator here
 using <code>&quot;&quot;</code> or <code>⍬</code>, as here.</p>
-<pre><code>⍝     [a]........       [b].........
-∆F '{ `⍵1 `W ⍪`⍵2 } ...{ `⍵1 `W ,¨`⍵2 }' (⍬ '∘C')(18 22 33)
+<pre><code>⍝         ... [a] ...       .... [b] ....
+    ∆F '{ `⍵1 `W ⍪`⍵2 } ...{ `⍵1 `W ,¨`⍵2 }' (⍬ '∘C')(18 22 33)
 18∘C ... 18∘C 22∘C 33∘C
 22∘C
 33∘C
@@ -497,8 +497,7 @@ Current employee:  name↓     age↓.
 └──────────────────┴──────────┴─┴────┴─┘
 </code></pre>
 <h3>A cut above the rest. Using <code>%</code> (<em>above</em>).</h3>
-<p>Here’s a useful feature. Let’s use theshortcut <code>%</code> to display one expression centered above another;
-It’s called <strong>Above</strong> and can also be expressed as <code>`A</code>. Remember, <code>`⍵1</code> designates the <strong><em>first</em></strong> argument after the f-string itself, and <code>`⍵2</code> the <strong><em>second</em></strong>.</p>
+<p>Here’s a useful feature. Let’s use the shortcut <code>%</code> to display one expression centered above another; it’s called <strong>Above</strong> and can also be expressed as <code>`A</code>. Remember, <code>`⍵1</code> designates the <strong><em>first</em></strong> argument after the f-string itself, and <code>`⍵2</code> the <strong><em>second</em></strong>.</p>
 <pre><code>   ∆F '{&quot;Employee&quot; % ⍪`⍵1} {&quot;Age&quot; % ⍪`⍵2}' ('John Smith' 'Mary Jones')(29 23)
 Employee    Age
 John Smith  29
@@ -524,7 +523,7 @@ Mary Jones  23
 1                                                  ⍝ Yes!
 </code></pre>
 <h3>Shortcuts With Individual Expressions</h3>
-<p>Shortcuts often make sense with individual expressions, not just entire Code fields. They can be put in parentheses and manipulated like ordinary APL functions.
+<p>Shortcuts often make sense with individual expressions, not just entire <strong>Code fields</strong>. They can be put in parentheses and manipulated like ordinary APL functions.
 Here, we display one boxed value above the other.</p>
 <pre><code>   ∆F '{(`B ⍳`⍵1) % `B ⍳`⍵2}' (2 2)(3 3)
   ┌───┬───┐
@@ -886,7 +885,7 @@ it’s just an ordinary backtick character <code>`</code>.</p>
 <li>By default,<code>⍺← ''''</code>, i.e. APL quotes will wrap the array ⍵, row by row, whether character, numeric or otherwise.</li>
 </ol>
 </div>
-<p>© 2025 Sam the Cat Foundation. [20250909T161852]</p>
+<p>© 2025 Sam the Cat Foundation. [20250909T163734]</p>
 <pre><code>
 </code></pre>
 <pre><code>
