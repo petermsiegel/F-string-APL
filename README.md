@@ -100,20 +100,23 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 
 Before providing information on ∆F syntax and other details, _let's start with some examples_...
 
+Set some values we'll need for our examples...
+
 ```
-⍝  Set some values we'll need for our examples...
    ⎕RL ⎕IO ⎕ML←2342342 0 1         ⍝ ⎕RL: Ensure our random #s aren't random!
 ```
 
+Here are **Code fields** with simple variables.
+
 ```
-⍝  Code fields with plain variables
    name← 'Fred' ◇ age← 43
    ∆F 'The patient''s name is {name}. {name} is {age} years old.'
 The patient's name is Fred. Fred is 43 years old.
 ```
 
+And **Code fields** with arbitrary expressions.
+
 ```
-⍝  Arbitrary code expressions
    names← 'Mary' 'Jack' 'Tony' ◇ prize← 1000
    ∆F 'Customer {names⊃⍨ ?≢names} wins £{?prize}!'
 Customer Jack wins £80!
@@ -125,14 +128,17 @@ Customer Jack wins £230!
 
 ### Now, let's add in some Space fields
 
+Below, we have some multi-line **Text fields** separated by non-null **Space fields**.
+
+- The backtick is our "escape" character.
+- The sequence `◇ generates a new line in the current text field.
+- {&nbsp;} is a **Space Field** indicating _one_ space, since there is one space
+  within the braces.
+
+A **Space field** is useful here because each multi-line field is built
+in its own rectangular space.
+
 ```
-⍝  Some multi-line Text fields separated by non-null Space fields
-⍝  ∘ The backtick is our "escape" character.
-⍝  ∘ The sequence `◇ generates a new line in the current text field.
-⍝  ∘ { } is a Space Field indicating one space, since there is one space
-⍝    within the braces.
-⍝  A Space field is useful here because each multi-line field is built
-⍝  in its own rectangular space.
    ∆F 'This`◇is`◇an`◇example{ }Of`◇multi-line{ }Text`◇Fields'
 This    Of         Text
 is      multi-line Fields
@@ -140,10 +146,11 @@ an
 example
 ```
 
+Two adjacent Text fields can be separated by a Null **Space field** `{}`,
+for example when at least one field contains multiline input that you
+want formatted separately from others, i.e. keeping each field in is own rectangular space:
+
 ```
-⍝  Two adjacent Text fields can be separated by a Null Space field {},
-⍝  for example when at least one field contains multiline input that you
-⍝  want formatted separately (keeping each field in is own rectangular space):
    ∆F 'Cat`◇Elephant `◇Mouse{}Felix`◇Dumbo`◇Mickey'
 Cat      Felix
 Elephant Dumbo
@@ -160,55 +167,60 @@ after _each_ word without fiddling, so a **Space field** with at least
 one space would be way more convenient:
 
 ```
-⍝  Here's the better way to ensure there's a space after the
-⍝  widest element in a field.
    ∆F 'Cat`◇Elephant`◇Mouse{ }Felix`◇Dumbo`◇Mickey'
 Cat      Felix
 Elephant Dumbo
 Mouse    Mickey
+```
 
-⍝  And this is the same example, but with two Code fields separated
-⍝  by a Text field with a single space.
+And this is the same example, but with two **Code fields** separated
+by a **Text field** with a single space.
+
+```
    ∆F '{↑"Cat" "Elephant" "Mouse"} {↑"Felix" "Dumbo" "Mickey"}'
 Cat      Felix
 Elephant Dumbo
 Mouse    Mickey
 ```
 
-```
-⍝  A similar example with double-quote-delimited strings in Code fields with
-⍝  the newline sequence (`◇):
-   ∆F '{"This`◇is`◇an`◇example"} {"Of`◇Multi-line"} {"Strings`◇in`◇Code`◇Fields"}'
-This    Of          Strings
-is      Multi-line  in
-an                  Code
-example             Fields
-```
+Here's a similar example with double-quote-delimited strings in **Code fields** with
+the newline sequence, `` `◇ ``:
 
 ```
-⍝  Here is some multiline data we'll add to our Code fields
-   fn←   'John'           'Mary'         'Ted'
-   ln←   'Smith'          'Jones'        'Templeton'
-   addr← '24 Mulberry Ln' '22 Smith St'  '12 High St'
+   ∆F '{"This`◇is`◇an`◇example"} {"Of`◇Multi-line"} {"Strings`◇in`◇Code`◇Fields"}'
+This    Of         Strings
+is      Multi-line in
+an                 Code
+example            Fields
+```
+
+Here is some multiline data we'll add to our Code fields, using APL _mix_ `↑` to generate multiline objects (matrices).
+
+```
+   fn← 'John' 'Mary' 'Ted'
+   ln← 'Smith' 'Jones' 'Templeton'
+   addr← '24 Mulberry Ln' '22 Smith St' '12 High St'
    ∆F '{↑fn} {↑ln} {↑addr}'
 John Smith     24 Mulberry Ln
 Mary Jones     22 Smith St
 Ted  Templeton 12 High St
 ```
 
-```
-⍝  A slightly more interesting code expression, using the shortcut $ (⎕FMT)
-⍝  to round the calculated Fahrenheit numbers to the nearest tenth.
-⍝  (You could use 1⍕⍪ instead, but that's a different demo).
-   C← 11 30 60
-   ∆F'The temperature is {"I2" $ C}°C or {"F5.1" $ 32+9×C÷5}°F'
-The temperature is 11°C or  51.8°F
-                   30       86.0
-                   60      140.0
-```
+Here's a slightly more interesting code expression, using the shortcut `$` (`⎕FMT`)
+to round calculated Fahrenheit numbers to the nearest tenth.
+(We could have used `1⍕⍪` instead, but we wanted to show off `$` here.)
 
 ```
-⍝  Here we place boxes around key Code fields using the shortcut `B (box).
+   C← 11 30 60
+   ∆F'The temperature is {"I2" $ C}°C or {"F5.1" $ 32+9×C÷5}°F'
+The temperature is 11°C or 51.8°F
+                   30      86.0
+                   60     140.0
+```
+
+Here we place boxes around key **Code fields** in this same example using the shortcut `` `B `` (Box).
+
+```
    ∆F'`◇The temperature is {`B "I2" $ C}`◇°C or {`B "F5.1" $ 32+9×C÷5}`◇°F'
                    ┌──┐      ┌─────┐
 The temperature is │11│°C or │ 51.8│°F
@@ -219,12 +231,12 @@ The temperature is │11│°C or │ 51.8│°F
 
 ### What if you want to place a box around every **Code**, **Text**, **_and_** **Space field**?
 
-Just use **Box mode**: `0 0 1 ∆F...`, i.e. where `⍺[2]=1`...
+We can just use **Box mode**: `0 0 1 ∆F...`, i.e. where `⍺[2]=1`.
+While we can't place boxes around text (or space) fields using `` `B ``,
+we can place a box around EACH field regardless of type by setting the
+third **∆F** option (⍺[2]) to `1`, i.e. setting the left argument to **∆F** to `0 0 1`:
 
 ```
-⍝  While we can't place boxes around text (or space) fields using `B,
-⍝  we can place a box around EACH of our fields by setting the
-⍝  third ∆F option (⍺[2]):
    0 0 1 ∆F'`◇The temperature is {"I2" $ C}`◇°C or {"F5.1" $ 32+9×C÷5}`◇°F'
 ┌───────────────────┬──┬──────┬─────┬──┐
 │                   │11│      │ 51.8│  │
@@ -233,34 +245,26 @@ Just use **Box mode**: `0 0 1 ∆F...`, i.e. where `⍺[2]=1`...
 └───────────────────┴──┴──────┴─────┴──┘
 ```
 
-We said you could place a box around every field.
-**Null Space fields** `{}`, i.e. 0-width **Space fields**, are an exception: after doing their work of separating adjacent **Text fields**, **Null Space fields** are ignored and won't be placed in boxes.
-Try this expression on your own:
+We said you could place a box around every field, but there's an exception.
+**Null Space fields** `{}`, i.e. 0-width **Space fields**, are discarded once they've done their work of separating adjacent **Text fields**, so they won't be placed in boxes. Try this expression on your own:
 
 ```
-0 0 1 ∆F 'abc{}def{}{}ghi{""}jkl{ }mno'
+   0 0 1 ∆F 'abc{}def{}{}ghi{""}jkl{ }mno'
 ```
 
 In contrast, **Code fields** that return null values (like `{""}` above) _will_ be displayed!
-
-```
-⍝  Referencing an external variable (C) and function (C2F)
-   C← 11 30 60
-   C2F← 32+9×÷∘5
-   ∆F'The temperature is {"I2" $ C}°C or {"F5.1" $ C2F C}°F'
-The temperature is 11°C or 51.8°F
-                   30      86.0
-                   60     140.0
-```
 
 ### Referencing ∆F arguments after the f-string: Omega shortcut expressions like `` `⍵1 ``
 
 The expression `` `⍵1 `` is equivalent to `(⍵⊃⍨ 1+⎕IO)`, selecting the first argument after the f-string. Similarly, `` `⍵99 `` would select `(⍵⊃⍨99+⎕IO)`.
 
+We will use `` `⍵1 `` here, both with shortcuts and an externally defined
+function `C2F`, that converts Centigrade to Fahrenheit.
+A bit further below, we discuss bare `` `⍵ ``
+(i.e. without an appended non-negative integer).
+
 ```
-⍝  We will use `⍵1 here, both with shortcuts and an externally defined
-⍝  function C2F.
-⍝  Below we discuss bare `⍵ (i.e. w/o an adjacent non-negative integer).
+   C2F← 32+9×÷∘5
    ∆F'The temperature is {"I2" $ `⍵1}°C or {"F5.1" $ C2F `⍵1}°F' (11 15 20)
 The temperature is 11°C or 51.8°F
                    15      59.0
@@ -286,35 +290,45 @@ The expression `` `⍵0 `` refers to the f-string itself.¹ Try this yourself:²
 
 ### Let's add commas to some very large numbers using the `$` (`⎕FMT`) shortcut
 
+We can use Dyalog's built-in formatting specifier "C" with shortcut `$` (`⎕FMT`)
+to add appropriate commas to the temperatures!
+
 ```
 ⍝  The temperature of the sun at its core in degrees C.
-   sun_core← 15E6            ⍝ 15000000 is a bit hard to parse!
-
-⍝  Use Dyalog's built-in formatting specifier "C" with shortcut $ (⎕FMT)
-⍝  to add appropriate commas to the temperatures!
-
-   ∆F'The sun''s core is at {"CI10"$sun_ core}°C or {"CI10"$C2F sun_ core}°F'
+   sun_core← 15E6 ⍝ 15000000 is a bit hard to parse!
+   ∆F'The sun''s core is at {"CI10"$sun_ core}°C or {"CI10"$C2F sun\_ core}°F'
 The sun's core is at 15,000,000°C or 27,000,032°F
 ```
 
-### An easier way to add commas to large numbers or numeric strings: the `` `C `` shortcut
+### An easier way to add numeric commas: the `` `C `` shortcut
 
-The `` `C `` shortcut adds commas every 3 digits (from the right) to one or more numbers (or numeric strings). It has an advantage over the `$` (**⎕FMT**) specifier: it doesn't require you to guesstimate field widths.
+The `` `C `` shortcut adds commas every 3 digits (from the right) to one or more numbers or numeric strings.¹ It has an advantage over the `$` (Dyalog's `⎕FMT`) specifier: it doesn't require you to guesstimate field widths.
+
+<div style="margin-left: 20px;">
+
+| Note                                                                                                                                                                  |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ¹ Typically, each number or numeric string presented to `` `C `` will be an integer, but if a real number is presented, only the integer part will have commas added. |
+
+</div>
+
+Let's use the `` `C `` shortcut to add the commas to the temperatures!
 
 ```
-⍝  Let's use the `C shortcut to add the commas to the temperatures!
-⍝  Typically, each number presented to `C is an integer, but if a real number
-⍝  is presented, only the integer part has commas added.
-
-   ∆F'The sun''s core is at {`C sun_ core}°C or {`C C2F sun_ core}°F.'
+   sun_core← 15E6 ⍝ 15000000 is a bit hard to parse!
+   ∆F'The sun''s core is at {`C sun_ core}°C or {`C C2F sun_core}°F.'
 The sun's core is at 15,000,000°C or 27,000,032°F.
+```
 
-⍝  And for a bit of a twist, let's display either degrees centrigrade
-⍝  or fahrenheit under user control (1 => F, 0 => C)...
-      sunFC← 'The sun''s core is at {`C C2F⍣`⍵1⊢ sun_core}°{ `⍵1⊃ "CF"}.'
-      ∆F sunFC 1
+And for a bit of a twist, let's display either degrees centrigrade
+or fahrenheit under user control (`1` => F, `0` => C). Here, we establish
+the format-string `sunFC` first, then pass it to **∆F** with an additional argument.
+
+```
+   sunFC← 'The sun''s core is at {`C C2F⍣`⍵1⊢ sun_core}°{ `⍵1⊃ "CF"}.'
+   ∆F sunFC 1
 The sun's core is at 27,000,032°F.
-      ∆F sunFC 0
+   ∆F sunFC 0
 The sun's core is at 15,000,000°C.
 ```
 
@@ -326,30 +340,37 @@ placing single quotes around each such element. Non-character data is returned a
 
 Let's look at a couple of simple examples:
 
+First, let's use the `` `Q `` shortcut to place quotes around the simple character
+arrays in its right argument, `⍵`. This is useful when you want to distinguish between character output that might include numbers and _actual_ numeric output.
+
 ```
-⍝  Let's use the `Q shortcut to place quotes around the simple character
-⍝  arrays in its right argument, ⍵. This is useful for debugging...
    ∆F '{`Q 1 2 "three" 4 5 (⍪1 "2") (⍪"cats" "dogs")}'
 1 2  'three'  4 5     1    'cats'
                     '2'    'dogs'
+```
 
-⍝  And here's an example with a simple, mixed vector.
-⍝  First, without the Quote shortcut...
-⍝  Are you sure which elements are numbers and which are character scalars?
+And here's an example with a simple, mixed vector.
+First, we display an object without using the **Quote** shortcut.
+Are you **_sure_** which elements are numbers and which are character scalars?
+
+```
    ∆F '{1 2 "3" 4 "5"}'
 1 2 3 4 5
+```
 
-⍝  Now, with the Quote shortcut.
-⍝  Voila, quotes around the character digits, but not the actual numbers!
+Now, we show it **_with_** the **Quote** shortcut.
+Voila, quotes appear around the character digits, but not the actual numbers!
+
+```
    ∆F '{`Q 1 2 "3" 4 "5"}'
-1 2  '3'  4  '5'
+1 2 '3' 4 '5'
 ```
 
 ### Wrapping results in left and right decorators: The Wrap shortcut `` `W ``<br><span style="color: red;">An Experimental Feature!!!</span>
 
 <div class="content-with-bar">
 
-Just a quick mention of the experimental shortcut **Wrap**,¹ `` `W ``, which is used when you want a **_decorator_** string that is placed immediately to the left or right of **_each_** row of simple objects in the right argument, `⍵`.
+Here we make a quick mention of the **_experimental_** shortcut **Wrap**,¹ `` `W ``, which is used when you want a **_decorator_** string that is placed immediately to the left or right of **_each_** row of simple objects in the right argument, `⍵`.
 
 - The decorators are in `⍺`, the left argument to **Wrap**: the left decorator, `0⊃2⍴⍺`, and the right decorator, `1⊃2⍴⍺`, with `⍺` defaulting to a single quote.
 - If you need to omit one or the other decorator, simply make it a null string `""` or a _zilde_ `⍬`.
@@ -364,109 +385,117 @@ Just a quick mention of the experimental shortcut **Wrap**,¹ `` `W ``, which is
 
 #### Here are two simple examples.
 
+In the first, we place `"∘C"` after _[a]_ each row of a table `` ⍪`⍵2 ``, or
+_[b]_ each simple vector (`` ,¨`⍵2 ``). We indicate that is no left decorator here
+using `""` or `⍬`, as here.
+
 ```
-⍝  Place ∘C after...
-⍝  [1] each row of a simple matrix (⍪`⍵2), or
-⍝  [2] each simple vector (,¨`⍵2).
-⍝  Since there is no left decorator, we can use "" or (as here) ⍬.
-⍝           [1]........       [2].........
-      ∆F '{ `⍵1 `W ⍪`⍵2 } ...{ `⍵1 `W ,¨`⍵2 }' (⍬ '∘C')(18 22 33)
-18∘C ... 18∘C  22∘C  33∘C
+⍝     [a]........       [b].........
+∆F '{ `⍵1 `W ⍪`⍵2 } ...{ `⍵1 `W ,¨`⍵2 }' (⍬ '∘C')(18 22 33)
+18∘C ... 18∘C 22∘C 33∘C
 22∘C
 33∘C
+```
 
-⍝  Place brackets around the lines of each simple array in a complex array.
-   ∆F '{"[]" `W  ("cats")(⍳2 2 1)(2 2⍴⍳4)(3 3⍴⎕A) }'
- [cats]   [0 0 0]   [0 1]  [ABC]
-          [0 1 0]   [2 3]  [DEF]
-                           [GHI]
-          [1 0 0]
-          [1 1 0]
+In this next example, we place brackets around the lines of each simple array in a complex array.
+
+```
+   ∆F '{"[]" `W ("cats")(⍳2 2 1)(2 2⍴⍳4)(3 3⍴⎕A) }'
+[cats] [0 0 0] [0 1] [ABC]
+       [0 1 0] [2 3] [DEF]
+                     [GHI]
+       [1 0 0]
+       [1 1 0]
 ```
 
 </div>
 
-### Self-documenting **Code fields** (SDCFs) are a useful debugging tool.
+Now, let's move on to Self-documenting **Code fields**.
+
+### Self-documenting **Code fields** (SDCFs): A Useful Debugging Tool.
 
 What's an SDCF? An SDCF¹ allows whatever source code is in a **Code Field** to be automatically displayed literally along with the result of evaluating that code.
 
 <div style="margin-left: 25px;">
 
-| Note                                                                                                                                                                                                                                                                                |
-| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ¹ SDCFs are based on Python's **[self-documenting expressions](https://docs.python.org/3/whatsnew/3.8.html#f-strings-support-for-self-documenting-expressions-and-debugging)** in _f-strings_, but work slightly differently. SDCFs are used **_only_** in **Code fields** (_duh_). |
+| Note                                                                                                                                                                                                                                                                                                   |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ¹ Our SDCFs are based on Python's single type of **[self-documenting expressions](https://docs.python.org/3/whatsnew/3.8.html#f-strings-support-for-self-documenting-expressions-and-debugging)** in _f-strings_, but work somewhat differently. SDCFs are used **_only_** in **Code fields** (_duh_). |
 
 </div>
 
-You may automatically place the source for a **Code field**...
+You may automatically place the source for a **Code field**:
 
-- to the left of the result of evaluating that code; or,
-- centered above the result of evaluating that code.
+- `→` to the left of the result of evaluating that code; or,
+- `↓` centered above the result of evaluating that code.
 
 All you have to do is place
 
-- a right arrow, **→**, (for a **horizontal** SDCF), or
-- a down arrow, **↓**, (for a **vertical** SDCF)
+- the right arrow `→` for a **horizontal** SDCF, or
+- the down arrow `↓` for a **vertical** SDCF,
 
-as the last **_non-space_** in the **Code field**, before the _final_ right brace.
+as the **_last non-space_** in the **Code field**, before the _final_ right brace.
+
+Here's an example of a horizontal SDCF, i.e. using `→`:
 
 ```
-⍝  Horizontal SDCF example
    name←'John Smith' ◇ age← 34
    ∆F 'Current employee: {name→}, {age→}.'
 Current employee: name→John Smith, age→34.
 ```
 
-As a useful formatting feature, whatever spaces are just before or after the symbol **→** or **↓** are preserved **_verbatim_** in the output.
+As a useful formatting feature, whatever spaces are just **_before_** or **_after_** the symbol **→** or **↓** are preserved **_verbatim_** in the output.
+
+Here's an example with such spaces: see how the spaces adjacent to the symbol `→` are mirrored in the output!
 
 ```
-⍝  Here's an example:
-⍝  See how the spaces adjacent to the symbol "→" are mirrored in the output!
    name←'John Smith' ◇ age← 34
-   ∆F 'Current employee: {name → }, {age→   }.'
-Current employee: name → John Smith, age→   34.
+   ∆F 'Current employee: {name → }, {age→ }.'
+Current employee: name → John Smith, age→ 34.
 ```
 
+Now, let's look at an example of a vertical SDCF, i.e. using `↓`:
+
 ```
-⍝  Here's an example of a vertical SDCF:
    name←'John Smith' ◇ age← 34
    ∆F 'Current employee: {name↓} {age↓}.'
-Current employee:   name↓    age↓.
+Current employee:  name↓     age↓.
                   John Smith  34
 ```
 
+To make it easier to see, here's the same result, but with a box around each field (using the **Box** option `0 0 1`).
+
 ```
-⍝  Here's the same result, but with a box around each field, to make it
-⍝  easy to see.
-⍝     ⍵[2]=1: Box all fields (assume ⎕IO=0).
+⍝  Box all fields
    0 0 1 ∆F 'Current employee: {name↓} {age↓}.'
 ┌──────────────────┬──────────┬─┬────┬─┐
-│Current employee: │  name↓   │ │age↓│.│
+│Current employee: │ name↓    │ │age↓│.│
 │                  │John Smith│ │ 34 │ │
 └──────────────────┴──────────┴─┴────┴─┘
 ```
 
 ### A cut above the rest. Using `%` (_above_).
 
+Here's a useful feature. Let's use theshortcut `%` to display one expression centered above another;
+It's called **Above** and can also be expressed as `` `A ``. Remember, `` `⍵1 `` designates the **_first_** argument after the f-string itself, and `` `⍵2 `` the **_second_**.
+
 ```
-⍝  Let's use the shortcut % to display one expression centered above another;
-⍝  It's called "above" and can also be expressed as  `A.
-⍝  Remember, `⍵1 refers to the first argument after the f-string itself;
-⍝  And `⍵2 refers to the second.
    ∆F '{"Employee" % ⍪`⍵1} {"Age" % ⍪`⍵2}' ('John Smith' 'Mary Jones')(29 23)
- Employee   Age
+Employee    Age
 John Smith  29
 Mary Jones  23
 ```
 
 ### The _next_ best thing: the use of _bare_ `` `⍵ `` in **Code field** expressions
 
-The expression `` `⍵ `` selects the _next_ element of the right argument `⍵`, defaulting to `` `⍵1 `` when first encountered, i.e. if there are **_no_** `` `⍵ `` elements to the **_left_** in the f-string. If there is any such expression (e.g. `` `⍵5 ``), then `` `⍵ `` points to the element after that one (here, `` `⍵6 ``). If the item to the left is `` `⍵ ``, then we simply increment the index by `1` from that one. **Let's try an example.**
+We said we'd present the use of _bare_ omega shortcuts `` `⍵ `` in **Code fields**.
+
+The expression `` `⍵ `` selects the _next_ element of the right argument `⍵` to **∆F**, defaulting to `` `⍵1 `` when first encountered, i.e. if there are **_no_** `` `⍵ `` elements to the **_left_** in the entire f-string. If there is any such expression (e.g. `` `⍵5 ``), then `` `⍵ `` points to the element after that one (here, `` `⍵6 ``). If the item to the left is `` `⍵ ``, then we simply increment the index by `1` from that one.
+
+**Let's try an example.** Here, we display arbitrary 2-dimensional expressions, one above the other.
+`` `⍵ `` refers to the **_next_** argument in sequence, left to right, starting with `` `⍵1 ``, the first, i.e. `(⍵⊃⍨ 1+⎕IO)`. So, from left to right `` `⍵ `` is `` `⍵1 ``, `` `⍵2 ``, and `` `⍵3 ``. _Easy peasy._
 
 ```
-⍝  Let's display arbitrary 2-dimensional expressions, one above the other.
-⍝  `⍵ refers to the next argument in sequence, left to right, starting with `⍵1, the first.
-⍝  ☞ From left to right `⍵ is `⍵1, `⍵2, and `⍵3. Easy peasy.
    ∆F'{(⍳2⍴`⍵) % (⍳2⍴`⍵) % (⍳2⍴`⍵)}' 1 2 3
     0 0
   0 0 0 1
@@ -476,19 +505,21 @@ The expression `` `⍵ `` selects the _next_ element of the right argument `⍵`
 2 0 2 1 2 2
 ```
 
-Let's demonstrate the equivalence of the _implicit_ and _explicit_ **Omega expressions** here!
+Let's demonstrate here the equivalence of the _implicit_ and _explicit_ **Omega expressions**!
 
 ```
-    a← ∆F '{(⍳2⍴`⍵) % (⍳2⍴`⍵) % (⍳2⍴`⍵)}' 1 2 3     ⍝ Implicit Omega expressions
-    b← ∆F '{(⍳2⍴`⍵1) % (⍳2⍴`⍵2) % (⍳2⍴`⍵3)}' 1 2 3  ⍝ Explicit Omega expressions
-    a ≡ b                                           ⍝ Are they the same?
-1                                                   ⍝ Yes!
+   a← ∆F '{(⍳2⍴`⍵) % (⍳2⍴`⍵) % (⍳2⍴`⍵)}' 1 2 3     ⍝ Implicit Omega expressions
+   b← ∆F '{(⍳2⍴`⍵1) % (⍳2⍴`⍵2) % (⍳2⍴`⍵3)}' 1 2 3  ⍝ Explicit Omega expressions
+   a ≡ b                                           ⍝ Are they the same?
+1                                                  ⍝ Yes!
 ```
 
-### Shortcuts often make sense with individual expressions, not just entire Code fields
+### Shortcuts With Individual Expressions
+
+Shortcuts often make sense with individual expressions, not just entire Code fields. They can be put in parentheses and manipulated like ordinary APL functions.
+Here, we display one boxed value above the other.
 
 ```
-⍝  Here, we display one boxed value above the other.
    ∆F '{(`B ⍳`⍵1) % `B ⍳`⍵2}' (2 2)(3 3)
   ┌───┬───┐
   │0 0│0 1│
@@ -504,51 +535,70 @@ Let's demonstrate the equivalence of the _implicit_ and _explicit_ **Omega expre
 └───┴───┴───┘
 ```
 
+There are loads of other examples to discover.
+
 ### Formatting Dates and Times Using `⎕TS`-format Timestamps: the `` `T `` shortcut...
 
-Here's a simple Date-Time shortcut `` `T `` built from **1200⌶** and **⎕DT**. It takes one or more Dyalog `⎕TS`-format timestamps as the right argument and a date-time specification as the (optional) left argument. Trailing elements of a timestamp may be omitted, if they are not referenced in the specification string.
+**∆F** supports a simple **Date-Time** shortcut `` `T `` built from **1200⌶** and **⎕DT**. It takes one or more Dyalog `⎕TS`-format timestamps as the right argument and a date-time specification as the (optional) left argument. Trailing elements of a timestamp may be omitted, if they are not referenced in the specification string.
+
+Let's look at the use of the `` `T `` (Date-Time) shortcut to show the
+current time (now).
 
 ```
-⍝  ∘ Let's look at the use of the `T (Date-Time) shortcut to show the
-⍝    current time (now).
-⍝  ∘ The right argument is always a ⎕TS or any non-empty prefix thereof.
    ∆F'It is now {"t:mm pp" `T ⎕TS}.'
-It is now 8:08 am. ⍝ NB: this will be the current actual time, of course.
+It is now 8:08 am.
 ```
 
+Of course, the time displayed above will be the actual current time.
+
+Here's a fancier example (the power is in `1200⌶` and `⎕DT`).
+(We've added the _truncated_ timestamp `2025 01 01` right into the **_f-string_**.)
+
 ```
-⍝  Here's a more powerful example (the power is in 1200⌶ and ⎕DT).
-⍝  (Right arg "hardwired" into F-string)
    ∆F'{ "D MMM YYYY ''was a'' Dddd."`T 2025 01 01}'
 1 JAN 2025 was a Wednesday.
 ```
 
 ### Dates and Times: `` `D `` is an alias for `` `T ``
 
+If it bothers you to use `` `T `` for a date-only expression,
+you can use `` `D ``, which means exactly the same thing.
+
 ```
-⍝  If it bothers you to use `T for a date-only expression,
-⍝  you can use `D, which means exactly the same thing.
-   ∆F'{ "D MMM YYYY ''was a'' Dddd." `D 2025 01 02}'
+∆F'{ "D MMM YYYY ''was a'' Dddd." `D 2025 01 02}'
 2 JAN 2025 was a Thursday.
 ```
 
+Here, we'll pass the time stamp via a single omega
+expression (hence it is in parentheses): `` `⍵1 ``.
+
 ```
-⍝  Here, we'll pass the time stamp via a single omega
-⍝  expression: `⍵1.
    ∆F'{ "D Mmm YYYY ''was a'' Dddd." `T `⍵1}' (2025 1 21)
 21 Jan 2025 was a Tuesday.
 ```
 
+We could also pass the time stamp via a sequence of omega
+expressions: `` `⍵ `⍵ `⍵ ``.
+This is equivalent to the _slightly_ verbose
+expression: `` `⍵1 `⍵2 `⍵3 ``.
+
 ```
-⍝  ∘ And here, we pass the time stamp via a sequence of omega
-⍝    expressions: `⍵ `⍵ `⍵.
-⍝  ∘ Here, this is equivalent to the slightly verbose
-⍝    expression: `⍵1 `⍵2 `⍵3
    ∆F'{ "D Mmm YYYY ''was a'' Dddd." `T `⍵ `⍵ `⍵}' 2025 1 21
 21 Jan 2025 was a Tuesday.
 ```
 
-### Precomputed F-strings: Performance of `∆F...` (or `0 ∆F...`) vs `1 ∆F ...`
+### Precomputed F-strings: Performance of `∆F...` vs `1 ∆F ...`
+
+The default returned from **∆F** is always (on success) a character matrix. That can be expressed via `∆F...` or `0 ∆F...`.¹ However, if the initial option (**_DFN_**) is `1`, i.e. the call is `1 ∆F...`, **∆F** returns a dfn that— when called later— will return the same expression.² This is most useful when you are likely to make repeated use an f-string, since the overhead for examining the f-string contents would be amortized over all the calls.
+
+<div style="margin-left: 25px;">
+
+| Notes                                                                                                                 |
+| :-------------------------------------------------------------------------------------------------------------------- |
+| ¹ We discuss the options to **∆F** at the end of this documentation.                                                  |
+| ² This assumes the resulting dfn is called with the same arguments in the same calling environment in the same state. |
+
+</div>
 
 Let's explore getting the best performance for a heavily
 used ∆F string. Using the DFN option `(⍺[0]=1)`, we can generate a
@@ -557,24 +607,27 @@ the f-string each time.
 We will compare the performance of an ∆F-string evaluated on the fly
 
 ```
-    mx← ∆F '...'           ⍝ the same as   mx← 0 ∆F '...'
+   mx← ∆F '...'
 ```
 
-vs one precomputed and returned as a dfn, using
+versus one precomputed and returned as a dfn, using
 
 ```
-   dfn←  1 ∆F '...'
+   dfn← 1 ∆F '...'
 ```
 
-### First, let's get `cmpx`, so we can compare the performance...
+####First, let's get `cmpx`, so we can compare the performance...
 
 ```
    'cmpx' ⎕CY 'dfns'
+```
 
-⍝  Now, let's proceed...
+Now, let's proceed. Here's the code:
+
+```
    C← 11 30 60
 
-⍝  Here's our ∆F String t
+⍝ Here's our ∆F String t
    t←'The temperature is {"I2" $ C}°C or {"F5.1" $ F← 32+9×C÷5}°F'
 
 ⍝  Let's precompute a dfn T, given ∆F String t.
@@ -586,67 +639,74 @@ vs one precomputed and returned as a dfn, using
 ⍝  The precomputed version is about 17 times faster, in this run.
    cmpx '∆F t' 'T ⍬'
 ∆F t → 1.7E¯4 |  0% ⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕
-T ⍬  → 1.0E¯5 |-94% ⎕⎕
+ T ⍬ → 1.0E¯5 |-94% ⎕⎕
 ```
 
 ### Before we get to syntax and other information...
 
+Finally, we want to show you that the _dfn_ returned from `1 ∆F...` can retrieve argument(s) passed on the right side of **∆F**. In fact, the f-string text **_originally_** passed when the _dfn_ was generated is stored with the _dfn_ itself as `` `⍵0 ``, available for use.
+
+So, as a variation on the example above, we will pass the centigrade value,
+not as a variable, but as the first argument to **∆F** (i.e. `` `⍵1` ``).
+
 ```
-⍝  We'll leave you with this variant, where we pass the centigrade value,
-⍝  not as a variable, but as a subsequent argument to ∆F.
    t←'The temperature is {"I2" $ `⍵1}°C or {"F5.1" $ F← 32+9×`⍵1÷5}°F'
    T← 1 ∆F t
    ∆F t 35
 The temperature is 35°C or 95.0°F
+
    T 35
 The temperature is 35°C or 95.0°F
+
    cmpx '∆F t 35' 'T 35'
 ∆F t 35 → 1.7E¯4 |   0% ⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕
-T 35    → 8.9E¯6 | -95% ⎕⎕
+   T 35 → 8.9E¯6 | -95% ⎕⎕
 ```
+
+Below, we summarize key information you've already gleaned from the examples.
 
 ## ∆F Syntax and Other Information
 
 ### Call Syntax Overview
 
-| Call Syntax <div style="width:200px"></div> | Description                                                                                                                                              |
-| :------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **∆F** _f-string_                           | Display an _f-string_; use the default options. The string may reference objects in the environment or in the string itself. Returns a character matrix. |
-| **∆F** _f-string_ _arg1_ [*arg2* ...]       | Display an _f-string_; use the default options. Args presented may be referred to in the f-string. Returns a character matrix.                           |
-| _options_ **∆F** _f-string_ [*args*]        | Display an _f-string_; control result with _options_ (see below).                                                                                        |
-|                                             | If the initial option (DFN) is **0** or omitted, returns a character matrix.                                                                             |
-|                                             | If the initial option (DFN) is **1**, returns a dfn generating such a matrix.                                                                            |
-| 'help' **∆F** ''                            | Display help info and examples for **∆F**. The _f-string_ is not examined.                                                                               |
-| **∆F**⍨'help'                               | A shortcut for displaying help info and examples (above).                                                                                                |
+| Call Syntax <div style="width:200px"></div> | Description                                                                                                                                                |
+| :------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **∆F** _f-string_                           | Display an _f-string_; use the _default_ options. The string may reference objects in the environment or in the string itself. Returns a character matrix. |
+| **∆F** _f-string_ _arg1_ [*arg2* ...]       | Display an _f-string_; use the _default_ options. Arguments presented _may_ be referred to in the f-string. Returns a character matrix.                    |
+| _options_ **∆F** _f-string_ [*args*]        | Display an _f-string_; control the result with _options_ specified (see below).                                                                            |
+|                                             | If the initial option (DFN) is **0** or omitted, returns a character matrix.                                                                               |
+|                                             | If the initial option (DFN) is **1**, returns a dfn that will such a matrix (given an identical system state).                                             |
+| 'help' **∆F** ''                            | Display help info and examples for **∆F**. The _f-string_ is not examined.                                                                                 |
+| **∆F**⍨'help'                               | Display help info and examples for **∆F**.                                                                                                                 |
 
 ### Call Syntax Details
 
-| Element <div style="width:200px"></div> | Description                                                                                                                                                                                                                                                                                 |
-| :-------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **_f-string_**                          | a format string, a single character vector.                                                                                                                                                                                                                                                 |
-| **_args_**                              | elements of ⍵ after the f-string, each of which can be accessed in the f-string via a **\`⍵** shortcut (or ordinary **⍵** expression)                                                                                                                                                       |
-| **_options_**                           | [ options← [ 0 [ 0 [ 0 [ 0 ] ] ] ] \| 'help' ]                                                                                                                                                                                                                                              |
-| &nbsp;&nbsp;options[0] (**_DFN_**)      | If `1`, **∆F** returns a dfn, which (upon execution) produces the same output as the default mode. Default: **∆F** returns a char. matrix.                                                                                                                                                  |
-| &nbsp;&nbsp;options[1] (**_DBG_**)      | If `1`: displays the code that the f-string **_actually_** generates (if **_DFN_** is set to `1`, this will include the embedded f-string _source_ as `` `⍵0 ``).                                                                                                                           |
-| &nbsp;&nbsp;options[2] (**_BOX_**)      | If `1`, each field (except a Null Text field) is boxed separately. If `0`, you may box any **Code fields** you want using the _box_ `` `B `` routine. **BOX** mode can be used both with **DFN** and default output mode.                                                                   |
-| &nbsp;&nbsp;options[3] (**_INLINE_**)   | If `1`, a copy of each needed internal support function is included in the result. If `0`, calls are made to the library created when ∆F was loaded. Setting **_INLINE_** to `1` is only useful if the **DFN** option is set. This option is experimental and may simply disappear one day. |
-| &nbsp;&nbsp;'help'                      | If `'help'` is specified, this amazing documentation is displayed.                                                                                                                                                                                                                          |
-| **_result_**                            | If `0=⊃options`, the result is always a character matrix. If `1=⊃options`, the result is a dfn that, _when executed in the same environment with the same arguments_, generates that same character matrix. Of course, if an error is signalled, no result is returned.                     |
+| Element <div style="width:200px"></div>              | Description                                                                                                                                                                                                                                                                                    |
+| :--------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **_f-string_**                                       | a format string, a single character vector.                                                                                                                                                                                                                                                    |
+| **_args_**                                           | elements of ⍵ after the f-string, each of which can be accessed in the f-string via a **\`⍵** shortcut (or ordinary **⍵** expression)                                                                                                                                                          |
+| **_options_**                                        | [ options← [ 0 [ 0 [ 0 [ 0 ] ] ] ] \| 'help' ]                                                                                                                                                                                                                                                 |
+| &nbsp;&nbsp;options[0] (<small>**_DFN_**</small>)    | If `1`, **∆F** returns a dfn, which (upon execution) produces the same output as the default mode. <br>Default: **∆F** returns a char. matrix.                                                                                                                                                 |
+| &nbsp;&nbsp;options[1] (<small>**_DBG_**</small>)    | If `1`: displays the code that the f-string **_actually_** generates (if **_DFN_** is set to `1`, this will include the embedded f-string _source_ as `` `⍵0 ``).                                                                                                                              |
+| &nbsp;&nbsp;options[2] (<small>**_BOX_**</small>)    | If `1`, each field (except a Null Text field) is boxed separately. If `0`, you may box any **Code fields** you want using the _box_ `` `B `` routine.<br>**BOX** mode can be used both with **DFN** and default output mode.                                                                   |
+| &nbsp;&nbsp;options[3] (<small>**_INLINE_**</small>) | If `1`, a copy of each needed internal support function is included in the result. If `0`, calls are made to the library created when ∆F was loaded.<br>Setting **_INLINE_** to `1` is only useful if the **DFN** option is set. This option is experimental and may simply disappear one day. |
+| &nbsp;&nbsp;'help'                                   | If `'help'` is specified, this amazing documentation is displayed.                                                                                                                                                                                                                             |
+| **_result_**                                         | If `0=⊃options`, the result is always a character matrix. If `1=⊃options`, the result is a dfn that, _when executed in the same environment with the same arguments_, generates that same character matrix. <br>If an error is signalled, no result is returned.                               |
 
 ### Options (`⍺`)
 
-- If the left argument `⍺` is omitted, the options are `4⍴0`.
+- If the left argument `⍺` is omitted, the options default to `4⍴0`.
 - If the left argument `⍺` is a simple boolean vector or scalar, or an empty numeric vector `⍬`, the options are `4↑⍺`; subsequent elements are ignored;
 - If the left argument `⍺` starts with `'help'` (case ignored), this help information is displayed.
 - Otherwise, an error is signaled.
 
 ### Return Value
 
-- Unless the **DFN** option is selected, **∆F** always returns a character matrix of at least one row and zero columns, `1 0⍴0`, on success. If the 'help' option is specified, **∆F** returns `1 0⍴0`.
+- Unless the **DFN** option is selected, **∆F** always returns a character matrix of at least one row and zero columns, `1 0⍴0`, on success. If the 'help' option is specified, **∆F** displays this information, returning `1 0⍴0`.
 - If the **DFN** option is selected, **∆F** always returns a standard Dyalog dfn on success.
 - On failure of any sort, an informative APL error is signaled.
 
-### ∆F f-string building blocks
+### ∆F F-string Building Blocks
 
 The first element in the right arg to ∆F is a character vector, an **f-string**,
 which contains 3 types of fields: **Text fields**, **Code fields**, and **Space fields**.
@@ -654,14 +714,14 @@ which contains 3 types of fields: **Text fields**, **Code fields**, and **Space 
 - **Text fields** consist of simple text, which may include any Unicode characters desired, including newlines. Newlines (actually, carriage returns, `⎕UCS 13`) are normally entered via the sequence `` `◇ ``. Additionally, literal curly braces can be added via `` `{ `` and `` `} ``, so there is no confusion with the simple curly braces used to begin and end **Code fields** and **Space Fields**. Finally, a simple backtick escape can be entered into a **Text field** by simply entering two such characters ` `` `.
 
 - **Code fields** are run-time evaluated expressions enclosed within
-  simple, unescaped curly braces `{}`, i.e. those not preceded by a back-tick (see the previous paragraph). **Code fields** are essentially a Dyalog dfn with some extras.
+  simple, unescaped curly braces `{}`, i.e. those not preceded by a back-tick (see the previous paragraph). **Code fields** are essentially a Dyalog dfn with some extras. For escape sequences, see **Escape Sequences** below.
 
 - **Space fields** are essentially a _degenerate_ form of **Code fields**, consisting of a single pair of simple curly braces `{}` with zero or more spaces in between. A **Space Field** with zero spaces is a **Null Space Field**; while it may separate any other fields, its practical use is separating two adjacent **Text Fields**.
 
 The building blocks of an **f-string** are these defined "fields," catenated left to right,
-each of which will display as a logically separate 2-D output space. While **Code fields** can return arrays of any number of dimensions mapped onto 2-D by APL rules, **Text fields** and **Space fields** are always simple rectangles (minimally 1 row and zero columns). Between fields, **∆F** adds no automatic spaces. That spacing is under user control.
+each of which will display as a logically separate 2-D (matrix) output space. While **Code fields** can return arrays of any number of dimensions mapped onto 2-D by APL `⎕FMT` rules, **Text fields** and **Space fields** are always simple rectangles (minimally 1 row and zero columns). Between fields, **∆F** adds no automatic spaces; that spacing is under user control.
 
-### Escape Sequences for Text Fields and Quoted Strings
+### Escape Sequences (For Text Fields and Quoted Strings)
 
 ∆F-string **Text fields** and **Quoted strings** in **Code fields** may include
 a small number of escape sequences, beginning with the backtick `` ` ``.
@@ -670,11 +730,11 @@ a small number of escape sequences, beginning with the backtick `` ` ``.
 | :------------------: | :-----------------: | :--------------------: |
 |         \`◇          |      (newline)      | &nbsp; (⎕UCS 13)&nbsp; |
 |         \`\`         |          `          |        backtick        |
-|          `{          |          {          |       left brace       |
+|         \`{          |          {          |       left brace       |
 |         \`}          |          }          |      right brace       |
 
-Other instances of the backtick character in **Text fields** or **Quoted strings** in **Code fields** will be treated literally, _i.e._
-as an ordinary backtick `` ` ``.
+Other instances of the backtick character in **Text fields** or **Quoted strings** in **Code fields** will be treated literally without _consuming_ any adjacent characters, _i.e._
+it's just an ordinary backtick character `` ` ``.
 
 ### Code Field Shortcuts
 
@@ -682,10 +742,10 @@ as an ordinary backtick `` ` ``.
 
 | Shortcut <div style="width:100px"></div>                              | Name <div style="width:150px"></div> | Meaning                                                                                                                                                                                        |
 | :-------------------------------------------------------------------- | :----------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| $, \`F                                                                | ⎕FMT                                 | `[⍺] ⎕FMT ⍵`.                                                                                                                                                                                  |
+| $, \`F                                                                | ⎕FMT                                 | `[⍺] ⎕FMT ⍵`. (See APL documentation).                                                                                                                                                         |
 | %, \`A                                                                | Above                                | Centers array `⍺` above array `⍵`. Default `⍺←''`, i.e. a blank line above `⍵`.                                                                                                                |
 | \`B                                                                   | Box                                  | Places `⍵` in a box. `⍵` is any array.                                                                                                                                                         |
-| \`C                                                                   | Commas                               | Adds commas to `⍵` after every 3rd digit, right-to-left. `⍵` is a vector of num strings or numbers.                                                                                            |
+| \`C                                                                   | Commas                               | Adds commas to `⍵` after every 3rd digit of the integer part of `⍵`, right-to-left. `⍵` is a vector of num strings or numbers.                                                                 |
 | \`Q                                                                   | Quote                                | Recursively scans `⍵`, putting char. vectors, scalars, and rows of higher-dimensional strings in APL quotes, leaving other elements as is.                                                     |
 | \`T, \`D                                                              | Date-Time¹                           | Displays timestamp(s) `⍵` according to date-time template `⍺`. `⍵` is one or more APL timestamps `⎕TS`. `⍺` is a date-time template in `1200⌶` format. If omitted, `⍺← 'YYYY-MM-DD hh:mm:ss'`. |
 | \`W <span style="color: red;font-size: 70%;">**EXPERIMENTAL!**</span> | Wrap                                 | Wraps the rows of simple arrays in ⍵ in decorators `0⊃2⍴⍺` (on the left) and `1⊃2⍴⍺` (on the right), with `⍺` defaulting to a single quote. _See details below._                               |
@@ -727,4 +787,12 @@ as an ordinary backtick `` ` ``.
 
 </div>
 
-(C) 2025 Sam the Cat Foundation. [20250908T193748]
+(C) 2025 Sam the Cat Foundation. [20250909T161852]
+
+```
+
+```
+
+```
+
+```
