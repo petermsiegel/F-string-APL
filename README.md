@@ -718,13 +718,13 @@ as an ordinary backtick `` ` ``.
 
 ### Wrap Shortcut (`` `W ``) Details <span style="color: red;font-size: 80%;">&nbsp;**(EXPERIMENTAL)**</span>
 
-1. Syntax: `` [⍺←'''''] `W ⍵ ``.
+1. Syntax: `` [⍺←''''] `W ⍵ ``.
 2. Let `L←0⊃2⍴⍺` and `R←1⊃2⍴⍺`.
 3. Wrap each row `X′` of the simple arrays `X` in `⍵` (or the entire array `X` if a simple vector or scalar) in decorators `L` and `R`: `L,(⍕X′),R`.
 4. `⍵` is an array of any shape and depth.`L`and `R`are char. vectors or scalars or `⍬` (treated as `''`).
 5. If there is one scalar or enclosed vector `⍺`, it is replicated _per (2) above_.
-6. By default,`⍺←''''''`, i.e. APL quotes will wrap the array ⍵, row by row, whether character, numeric or otherwise.
+6. By default,`⍺← ''''`, i.e. APL quotes will wrap the array ⍵, row by row, whether character, numeric or otherwise.
 
 </div>
 
-(C) 2025 Sam the Cat Foundation. [20250908T193511]
+(C) 2025 Sam the Cat Foundation. [20250908T193748]
