@@ -73,15 +73,15 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 
 ### ∆F In Brief¹
 
->  <p style="padding-left: 15px;color: white; background-color: #4f62f0ff;"><b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.<br><span style="padding-left: 110px;color: pink; background-color: #4f62f0ff;">Inspired by Python's <i>&ThinSpace;f-strings</i>,²&ensp;but designed for APL.</span></p>
+>  <p style="padding-left: 15px;padding-bottom: 5px;color: white; background-color: #4f62f0ff;">&nbsp;&nbsp;&nbsp;<b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.<br>&nbsp;&nbsp;&nbsp;<span style="color: pink;">Inspired by Python's <i>&ThinSpace;f-strings</i>,²&ensp;but designed for APL.</span></p>
 
 ---
 
 **∆F f-strings** can concisely include:
 
-- **Text fields**, expressions that can generate multiline Unicode text, using the sequence `` `◇ `` (_*backtick + statement separator*_) to generate a newline (<small>**⎕UCS 13**</small>);
+- **Text fields**, expressions that can generate multiline Unicode text, using the sequence `` `◇ `` (**backtick** + **statement separator**³) to generate a newline (<small>**⎕UCS 13**</small>);
 
-- **Code fields**, allowing users to evaluate and display APL arrays in the user environment, arrays passed as **∆F** arguments, as well as arbitrary APL expressions based on full multi-statement³ dfn logic; each **Code field** must return a value, simple or otherwise, which will be aligned and catenated with other fields and returned from **∆F**;
+- **Code fields**, allowing users to evaluate and display APL arrays in the user environment, arrays passed as **∆F** arguments, as well as arbitrary APL expressions based on full multi-statement⁴ dfn logic; each **Code field** must return a value, simple or otherwise, which will be aligned and catenated with other fields and returned from **∆F**;
 
   **Code fields** also provide a number of concise, convenient extensions, such as:
 
@@ -123,7 +123,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
   2 32
   ```
 
-**∆F** is designed⁴ for ease of use, _ad hoc_ debugging, fine-grained formatting and informal user interaction, built using APL's own powerful functions and operators.
+**∆F** is designed⁷ for ease of use, _ad hoc_ debugging, fine-grained formatting and informal user interaction, built using APL's own powerful functions and operators.
 
 <div style="margin-left: 20px;">
 
@@ -131,10 +131,11 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | ¹ Throughout this documentation, notably in the many examples, an index origin of zero (`⎕IO=0`) is assumed. **Code fields** inherit the index origin and other system variables from the environment (i.e. namespace) in which **∆F** is called; they can be set locally in the code field, as well: `∆F '{ ⎕IO←1 ◇ ⎕A ⍳ "APL" }'` .                                                                                                                         |
 | ² **∆F** is inspired by Python _[f-strings](https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals)_, short for "**formatted string literals**", but designed for APL's multi-dimensional worldview. **∆F** f-strings and Python's are not compatible.                                                                                                                                                                                 |
-| ³ **∆F Code fields** _as input_ are limited to a single, possibly very long, line.                                                                                                                                                                                                                                                                                                                                                                            |
-| ⁴ As a prototype, **∆F** is relatively slow, using an APL recursive scan to analyze the **f-string**.                                                                                                                                                                                                                                                                                                                                                         |
+| ³ In this document, we use the character `◇` (`⎕UCS 9671`) to represent the statement separator `◇`, since the latter is displayed as a very small symbol in many venues. **∆F** only uses the actual Dyalog APL statement separator (`⎕UCS 8900`).                                                                                                                                                                                                           |
+| ⁴ **∆F Code fields** _as input_ are limited to a single, possibly very long, line.                                                                                                                                                                                                                                                                                                                                                                            |
 | ⁵ **Double angle quotation marks** <big>**«»**</big> (_guillemets_) are Unicode chars `⎕UCS 171 187` (on the std Mac keyboard: _*option-backslash*_ and _*option-shift-backslash*_). When including literal guillemets in guillemet-bracketed quotations (<span style="color: red;">_but why?_</span>&ThinSpace;), opening guillemets <big>**«**</big> are _not_ doubled, but _two_ closing guillemets are needed for each literal <big>**»**</big> required. |
 | ⁶ Details on all the shortcuts are provided later in this document. See **_Code Field Shortcuts._**                                                                                                                                                                                                                                                                                                                                                           |
+| ⁷ As a prototype, **∆F** is relatively slow, using an APL recursive scan to analyze the **f-string**.                                                                                                                                                                                                                                                                                                                                                         |
 
 </div>
 
@@ -846,4 +847,4 @@ sometimes a backtick is just a backtick.
 
 </div>
 
-(C) 2025 Sam the Cat Foundation. [20250909T195649]
+(C) 2025 Sam the Cat Foundation. [20250910T122841]
