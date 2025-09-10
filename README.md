@@ -50,7 +50,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 
 - **Space fields**, providing a simple mechanism both for separating adjacent **Text fields** and inserting (rectangular) blocks of any number of spaces between any two fields, where needed;
 
-  - one space: `{ }`; five spaces: `{     }`; or even, zero spaces: `{}`;
+  - one space: `{ }`; five spaces: `{     }`; or even, zero spaces: `{}`;
   - 1000 spaces? Use a code field instead: `{1000⍴""}`.
 
 - Multiline (matrix) output built up field-by-field, left-to-right, from values and expressions in the calling environment or arguments to **∆F**;
@@ -74,7 +74,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 | ¹ Throughout this documentation, notably in the many examples, an index origin of zero (`⎕IO=0`) is assumed. **Code fields** inherit the index origin and other system variables from the environment (i.e. namespace) in which **∆F** is called; they can be set locally in the code field, as well: `∆F '{ ⎕IO←1 ◇ ⎕A ⍳ "APL" }'` .                                                                                                                         |
 | ² **∆F** is inspired by Python _[f-strings](https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals)_, short for "**formatted string literals**", but designed for APL's multi-dimensional worldview. **∆F** f-strings and Python's are not compatible.                                                                                                                                                                                 |
 | ³ **∆F Code fields** _as input_ are limited to a single, possibly very long, line.                                                                                                                                                                                                                                                                                                                                                                            |
-| ⁴ As a prototype, **∆F** is currently relatively slow, in that it analyzes the **f-string** using an APL recursive scan.                                                                                                                                                                                                                                                                                                                                      |
+| ⁴ As a prototype, **∆F** is relatively slow, using an APL recursive scan to analyze the **f-string**.                                                                                                                                                                                                                                                                                                                                                         |
 | ⁵ **Double angle quotation marks** <big>**«»**</big> (_guillemets_) are Unicode chars `⎕UCS 171 187` (on the std Mac keyboard: _*option-backslash*_ and _*option-shift-backslash*_). When including literal guillemets in guillemet-bracketed quotations (<span style="color: red;">_but why?_</span>&ThinSpace;), opening guillemets <big>**«**</big> are _not_ doubled, but _two_ closing guillemets are needed for each literal <big>**»**</big> required. |
 | ⁶ Details on all the shortcuts are provided later in this document. See **_Code Field Shortcuts._**                                                                                                                                                                                                                                                                                                                                                           |
 
@@ -124,7 +124,7 @@ Customer Jack wins £80!
 Customer Jack wins £230!
 ```
 
-> Isn't Jack lucky, winning twice in a row!
+Isn't Jack lucky, winning twice in a row!
 
 ### Now, let's add in some **Space fields**
 
@@ -212,7 +212,7 @@ to round calculated Fahrenheit numbers to the nearest tenth.
 
 ```
    C← 11 30 60
-   ∆F'The temperature is {"I2" $ C}°C or {"F5.1" $ 32+9×C÷5}°F'
+   ∆F 'The temperature is {"I2" $ C}°C or {"F5.1" $ 32+9×C÷5}°F'
 The temperature is 11°C or 51.8°F
                    30      86.0
                    60     140.0
@@ -221,7 +221,7 @@ The temperature is 11°C or 51.8°F
 Here we place boxes around key **Code fields** in this same example to introduce the shortcut `` `B `` (Box).
 
 ```
-   ∆F'`◇The temperature is {`B "I2" $ C}`◇°C or {`B "F5.1" $ 32+9×C÷5}`◇°F'
+   ∆F '`◇The temperature is {`B "I2" $ C}`◇°C or {`B "F5.1" $ 32+9×C÷5}`◇°F'
                    ┌──┐      ┌─────┐
 The temperature is │11│°C or │ 51.8│°F
                    │30│      │ 86.0│
@@ -234,10 +234,10 @@ The temperature is │11│°C or │ 51.8│°F
 We can just use **Box mode**: `0 0 1 ∆F...`, i.e. where `⍺[2]=1`.
 While we can't place boxes around text (or space) fields using `` `B ``,
 we can place a box around EACH field regardless of type by setting the
-third **∆F** option (⍺[2]) to `1`, i.e. setting the left argument to **∆F** to `0 0 1`:
+third **∆F** option (⍺[2]) to `1`, i.e. setting **∆F**'s left argument to `0 0 1`:
 
 ```
-   0 0 1 ∆F'`◇The temperature is {"I2" $ C}`◇°C or {"F5.1" $ 32+9×C÷5}`◇°F'
+   0 0 1 ∆F '`◇The temperature is {"I2" $ C}`◇°C or {"F5.1" $ 32+9×C÷5}`◇°F'
 ┌───────────────────┬──┬──────┬─────┬──┐
 │                   │11│      │ 51.8│  │
 │The temperature is │30│°C or │ 86.0│°F│
@@ -265,7 +265,7 @@ A bit further below, we discuss bare `` `⍵ ``
 
 ```
    C2F← 32+9×÷∘5
-   ∆F'The temperature is {"I2" $ `⍵1}°C or {"F5.1" $ C2F `⍵1}°F' (11 15 20)
+   ∆F 'The temperature is {"I2" $ `⍵1}°C or {"F5.1" $ C2F `⍵1}°F' (11 15 20)
 The temperature is 11°C or 51.8°F
                    15      59.0
                    20      68.0
@@ -295,8 +295,8 @@ to add appropriate commas to the temperatures!
 
 ```
 ⍝  The temperature of the sun at its core in degrees C.
-   sun_core← 15E6 ⍝ 15000000 is a bit hard to parse!
-   ∆F'The sun''s core is at {"CI10"$sun_ core}°C or {"CI10"$C2F sun\_ core}°F'
+   sun_core← 15E6                   ⍝ 15000000 is a bit hard to parse!
+   ∆F 'The sun''s core is at {"CI10" $ sun_core}°C or {"CI10" $ C2F sun_core}°F'
 The sun's core is at 15,000,000°C or 27,000,032°F
 ```
 
@@ -315,15 +315,15 @@ The `` `C `` shortcut adds commas every 3 digits (from the right) to one or more
 Let's use the `` `C `` shortcut to add the commas to the temperatures!
 
 ```
-   sun_core← 15E6 ⍝ 15000000 is a bit hard to parse!
-   ∆F'The sun''s core is at {`C sun_ core}°C or {`C C2F sun_core}°F.'
+   sun_core← 15E6               ⍝ 15000000 is a bit hard to parse!
+   ∆F 'The sun''s core is at {`C sun_core}°C or {`C C2F sun_core}°F.'
 The sun's core is at 15,000,000°C or 27,000,032°F.
 ```
 
 Cool! OK, not literally.
 
-And for a bit of a twist, let's display either degrees centrigrade
-or fahrenheit under user control (`1` => F, `0` => C). Here, we establish
+And for a bit of a twist, let's display either degrees Centrigrade
+or Fahrenheit under user control (`1` => F, `0` => C). Here, we establish
 the format-string `sunFC` first, then pass it to **∆F** with an additional argument.
 
 ```
@@ -475,7 +475,7 @@ To make it easier to see, here's the same result, but with a box around each fie
 └──────────────────┴──────────┴─┴────┴─┘
 ```
 
-### A cut above the rest. Using `%` (_above_).
+### A cut above the rest: Using the **Above** shortcut `%`.
 
 Here's a useful feature. Let's use the shortcut `%` to display one expression centered above another; it's called **Above** and can also be expressed as `` `A ``. Remember, `` `⍵1 `` designates the **_first_** argument after the f-string itself, and `` `⍵2 `` the **_second_**.
 
@@ -496,7 +496,7 @@ The expression `` `⍵ `` selects the _next_ element of the right argument `⍵`
 `` `⍵ `` refers to the **_next_** argument in sequence, left to right, starting with `` `⍵1 ``, the first, i.e. `(⍵⊃⍨ 1+⎕IO)`. So, from left to right `` `⍵ `` is `` `⍵1 ``, `` `⍵2 ``, and `` `⍵3 ``. _Easy peasy._
 
 ```
-   ∆F'{(⍳2⍴`⍵) % (⍳2⍴`⍵) % (⍳2⍴`⍵)}' 1 2 3
+   ∆F '{(⍳2⍴`⍵) % (⍳2⍴`⍵) % (⍳2⍴`⍵)}' 1 2 3
     0 0
   0 0 0 1
   1 0 1 1
@@ -545,7 +545,7 @@ Let's look at the use of the `` `T `` (Date-Time) shortcut to show the
 current time (now).
 
 ```
-   ∆F'It is now {"t:mm pp" `T ⎕TS}.'
+   ∆F 'It is now {"t:mm pp" `T ⎕TS}.'
 It is now 8:08 am.
 ```
 
@@ -555,7 +555,7 @@ Here's a fancier example (the power is in `1200⌶` and `⎕DT`).
 (We've added the _truncated_ timestamp `2025 01 01` right into the **_f-string_**.)
 
 ```
-   ∆F'{ "D MMM YYYY ''was a'' Dddd."`T 2025 01 01}'
+   ∆F '{ "D MMM YYYY ''was a'' Dddd."`T 2025 01 01}'
 1 JAN 2025 was a Wednesday.
 ```
 
@@ -565,7 +565,7 @@ If it bothers you to use `` `T `` for a date-only expression,
 you can use `` `D ``, which means exactly the same thing.
 
 ```
-∆F'{ "D MMM YYYY ''was a'' Dddd." `D 2025 01 02}'
+   ∆F '{ "D MMM YYYY ''was a'' Dddd." `D 2025 01 02}'
 2 JAN 2025 was a Thursday.
 ```
 
@@ -573,7 +573,7 @@ Here, we'll pass the time stamp via a single omega
 expression (hence it is in parentheses): `` `⍵1 ``.
 
 ```
-   ∆F'{ "D Mmm YYYY ''was a'' Dddd." `T `⍵1}' (2025 1 21)
+   ∆F '{ "D Mmm YYYY ''was a'' Dddd." `T `⍵1}' (2025 1 21)
 21 Jan 2025 was a Tuesday.
 ```
 
@@ -583,13 +583,13 @@ This is equivalent to the _slightly_ verbose
 expression: `` `⍵1 `⍵2 `⍵3 ``.
 
 ```
-   ∆F'{ "D Mmm YYYY ''was a'' Dddd." `T `⍵ `⍵ `⍵}' 2025 1 21
+   ∆F '{ "D Mmm YYYY ''was a'' Dddd." `T `⍵ `⍵ `⍵}' 2025 1 21
 21 Jan 2025 was a Tuesday.
 ```
 
 ### Precomputed F-strings: Performance of `∆F...` vs `1 ∆F ...`
 
-The default returned from **∆F** is always (on success) a character matrix. That can be expressed via `∆F...` or `0 ∆F...`.¹ However, if the initial option (**_DFN_**) is `1`, i.e. the call is `1 ∆F...`, **∆F** returns a dfn that— when called later— will return the same expression.² This is most useful when you are likely to make repeated use an f-string, since the overhead for examining the f-string contents would be amortized over all the calls.
+The default returned from **∆F** is always (on success) a character matrix. That can be expressed via `∆F...` or `0 ∆F...`.¹ However, if the initial option (**_DFN_**) is `1`, i.e. the call is `1 ∆F...`, **∆F** returns a dfn that— when called later— will return the same expression.² This is most useful when you are likely to make repeated use an f-string, since the overhead for examining the f-string contents _once_ would be amortized over all the calls.
 
 <div style="margin-left: 25px;">
 
@@ -604,7 +604,7 @@ Let's explore getting the best performance for a heavily
 used ∆F string. Using the DFN option `(⍺[0]=1)`, we can generate a
 dfn that will display the formatted output, without having to reanalyze
 the f-string each time.
-We will compare the performance of an ∆F-string evaluated on the fly
+We will compare the performance of an ∆F-string evaluated on the fly.
 
 ```
    mx← ∆F '...'
@@ -616,7 +616,7 @@ versus one precomputed and returned as a dfn, using
    dfn← 1 ∆F '...'
 ```
 
-####First, let's get `cmpx`, so we can compare the performance...
+#### First, let's grab `cmpx`, so we can compare the performance...
 
 ```
    'cmpx' ⎕CY 'dfns'
@@ -638,8 +638,8 @@ Now, let's proceed. Here's the code:
 ⍝  Compare the performance of the two formats...
 ⍝  The precomputed version is about 17 times faster, in this run.
    cmpx '∆F t' 'T ⍬'
-∆F t → 1.7E¯4 |  0% ⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕
- T ⍬ → 1.0E¯5 |-94% ⎕⎕
+∆F t → 1.7E¯4 |   0% ⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕
+ T ⍬ → 1.0E¯5 | -94% ⎕⎕
 ```
 
 ### Before we get to syntax and other information...
@@ -652,6 +652,7 @@ not as a variable, but as the first argument to **∆F** (i.e. `` `⍵1` ``).
 ```
    t←'The temperature is {"I2" $ `⍵1}°C or {"F5.1" $ F← 32+9×`⍵1÷5}°F'
    T← 1 ∆F t
+
    ∆F t 35
 The temperature is 35°C or 95.0°F
 
@@ -733,8 +734,8 @@ a small number of escape sequences, beginning with the backtick `` ` ``.
 |         \`{          |          {          |       left brace       |
 |         \`}          |          }          |      right brace       |
 
-Other instances of the backtick character in **Text fields** or **Quoted strings** in **Code fields** will be treated literally without _consuming_ any adjacent characters, _i.e._
-it's just an ordinary backtick character `` ` ``.
+Other instances of the backtick character in **Text fields** or **Quoted strings** in **Code fields** will be treated literally, _i.e._
+sometimes a backtick is just a backtick.
 
 ### Code Field Shortcuts
 
@@ -764,7 +765,7 @@ it's just an ordinary backtick character `` ` ``.
 
 ---
 
-### Omega Shortcut Expressions: Details
+### Omega Shortcut Expressions `` `⍵[𝑑𝑑] `` , `⍹[𝑑𝑑]`: Details
 
 1.  **⍹** is a synonym for **\`⍵**. It is Unicode character `⎕UCS 9081`. Either expression is valid only in **Code** fields and outside **Quoted strings**.
 2.  **\`⍵** or **⍹** uses an "_omega index counter_" (**OIC**) which we'll represent as **Ω**, common across all **Code** fields, which is initially set to zero, `Ω←0`. (Ω is just used for explication; don't actually use this symbol)
@@ -787,12 +788,4 @@ it's just an ordinary backtick character `` ` ``.
 
 </div>
 
-(C) 2025 Sam the Cat Foundation. [20250909T163734]
-
-```
-
-```
-
-```
-
-```
+(C) 2025 Sam the Cat Foundation. [20250909T195649]
