@@ -9,7 +9,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 <!-- . Style stuff related to APL and my random preferences... -->
 ##### Github Published README.md
 
-## ∆F --- Formatted String Literals
+## ∆F — Formatted String Literals
 
 ---
 
@@ -789,4 +789,4 @@ sometimes a backtick is just a backtick.
 
 </div>
 
-(C) 2025 Sam the Cat Foundation. [20250910T130345]
+(C) 2025 Sam the Cat Foundation. [20250910T130638]
