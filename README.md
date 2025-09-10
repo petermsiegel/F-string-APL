@@ -208,24 +208,25 @@ Ted  Templeton 12 High St
 ```
 
 Here's a slightly more interesting code expression, using the shortcut `$` (`⎕FMT`)
-to round calculated Fahrenheit numbers to the nearest tenth.
-(We could have used `1⍕⍪` instead, but we wanted to show off `$` here.)
+to round Centrigade numbers to the nearest whole degree and Fahrenheit numbers to the nearest tenth of a degree.
+(We could have used `0⍕⍪` and `1⍕⍪`, of course.)
 
 ```
-   C← 11 30 60
-   ∆F 'The temperature is {"I2" $ C}°C or {"F5.1" $ 32+9×C÷5}°F'
-The temperature is 11°C or 51.8°F
-                   30      86.0
-                   60     140.0
+   C← 11.3 29.55 59.99
+   ∆F 'The temperature is {"I2" $ C}∘C or {"F5.1"$ 32+9×C÷5}'
+The temperature is 11∘C or  52.3
+                   30       85.2
+                   60      140.0
 ```
 
 Here we place boxes around key **Code fields** in this same example to introduce the shortcut `` `B `` (Box).
 
 ```
+   C← 11.3 29.55 59.99
    ∆F '`◇The temperature is {`B "I2" $ C}`◇°C or {`B "F5.1" $ 32+9×C÷5}`◇°F'
                    ┌──┐      ┌─────┐
-The temperature is │11│°C or │ 51.8│°F
-                   │30│      │ 86.0│
+The temperature is │11│°C or │ 52.3│°F
+                   │30│      │ 85.2│
                    │60│      │140.0│
                    └──┘      └─────┘
 ```
@@ -238,10 +239,11 @@ we can place a box around EACH field regardless of type by setting the
 third **∆F** option (⍺[2]) to `1`, i.e. setting **∆F**'s left argument to `0 0 1`:
 
 ```
+   C← 11.3 29.55 59.99
    0 0 1 ∆F '`◇The temperature is {"I2" $ C}`◇°C or {"F5.1" $ 32+9×C÷5}`◇°F'
 ┌───────────────────┬──┬──────┬─────┬──┐
-│                   │11│      │ 51.8│  │
-│The temperature is │30│°C or │ 86.0│°F│
+│                   │11│      │ 52.3│  │
+│The temperature is │30│°C or │ 85.2│°F│
 │                   │60│      │140.0│  │
 └───────────────────┴──┴──────┴─────┴──┘
 ```
@@ -789,4 +791,4 @@ sometimes a backtick is just a backtick.
 
 </div>
 
-(C) 2025 Sam the Cat Foundation. [20250910T130638]
+(C) 2025 Sam the Cat Foundation. [20250910T132823]
