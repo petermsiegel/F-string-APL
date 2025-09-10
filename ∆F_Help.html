@@ -89,7 +89,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 <hr>
 <h3>∆F In Brief¹</h3>
 <blockquote>
- <p style="padding-left: 15px;padding-bottom: 5px;color: white; background-color: #4f62f0ff;">&nbsp;&nbsp;&nbsp;<b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.<br>&nbsp;&nbsp;&nbsp;<span style="color: pink;">Inspired by Python's <i>&ThinSpace;f-strings</i>,²&ensp;but designed for APL.</span></p>
+<center><p style="padding-left: 15px;padding-right: 5px;padding-bottom: 5px;color: white; background-color: #4f62f0ff;"><b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.<br><span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>,²&ensp;but designed for APL.&nbsp;</span></p></center>
 </blockquote>
 <hr>
 <p><strong>∆F f-strings</strong> can concisely include:</p>
@@ -167,13 +167,13 @@ The temperature is 35∘C or  95∘F.
 <td style="text-align:left">² <strong>∆F</strong> is inspired by Python <em><a href="https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals">f-strings</a></em>, short for “<strong>formatted string literals</strong>”, but designed for APL’s multi-dimensional worldview. <strong>∆F</strong> f-strings and Python’s are not compatible.</td>
 </tr>
 <tr>
-<td style="text-align:left">³ In this document, we use the character <code>◇</code> (<code>⎕UCS 9671</code>) to represent the statement separator <code>◇</code>, since the latter is displayed as a very small symbol in many venues. <strong>∆F</strong> only uses the actual Dyalog APL statement separator (<code>⎕UCS 8900</code>).</td>
+<td style="text-align:left">³ In this document, we use the symbol <code>◇</code> (<code>⎕UCS 9671</code>) to represent the APL statement separator, since the latter is displayed <strong><em>in many venues</em></strong> as a very small symbol. <strong>∆F</strong> only uses the actual Dyalog APL statement separator (<code>⎕UCS 8900</code>).</td>
 </tr>
 <tr>
 <td style="text-align:left">⁴ <strong>∆F Code fields</strong> <em>as input</em> are limited to a single, possibly very long, line.</td>
 </tr>
 <tr>
-<td style="text-align:left">⁵ <strong>Double angle quotation marks</strong> <big><strong>«»</strong></big> (<em>guillemets</em>) are Unicode chars <code>⎕UCS 171 187</code> (on the std Mac keyboard: <em><em>option-backslash</em></em> and <em><em>option-shift-backslash</em></em>). When including literal guillemets in guillemet-bracketed quotations (<span style="color: red;"><em>but why?</em></span> ), opening guillemets <big><strong>«</strong></big> are <em>not</em> doubled, but <em>two</em> closing guillemets are needed for each literal <big><strong>»</strong></big> required.</td>
+<td style="text-align:left">⁵ <strong>Double angle quotation marks</strong> <big><strong>« »</strong></big> (<em>guillemets</em>) are Unicode chars <code>⎕UCS 171 187</code> (on the std Mac keyboard: <em><em>option-backslash</em></em> and <em><em>option-shift-backslash</em></em>). When including literal guillemets in guillemet-bracketed quotations (<span style="color: red;"><em>but why?</em></span> ), opening guillemets <big><strong>«</strong></big> are <em>not</em> doubled, but <em>two</em> closing guillemets are needed for each literal <big><strong>»</strong></big> required.</td>
 </tr>
 <tr>
 <td style="text-align:left">⁶ Details on all the shortcuts are provided later in this document. See <strong><em>Code Field Shortcuts.</em></strong></td>
@@ -887,7 +887,7 @@ sometimes a backtick is just a backtick.</p>
 <li>By default,<code>⍺← ''''</code>, i.e. APL quotes will wrap the array ⍵, row by row, whether character, numeric or otherwise.</li>
 </ol>
 </div>
-<p>© 2025 Sam the Cat Foundation. [20250910T122841]</p>
+<p>© 2025 Sam the Cat Foundation. [20250910T130345]</p>
 
 </body>
 </html>
