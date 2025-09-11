@@ -1,4 +1,4 @@
-<!-- Preview in sep files: cmd-shift-V,
+<!--
 Preview side-by-side: cmd-K, V,
 md->HTML: opt-shift-M
 Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help'
@@ -10,8 +10,6 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 ##### Github Published README.md
 
 ## ∆F — Formatted String Literals
-
----
 
 ### ∆F In Brief
 
@@ -230,7 +228,7 @@ The temperature is 11∘C or  52.3
                    60      140.0
 ```
 
-### The Box Shortcut `` `B ``
+### The Box Shortcut  
 Here we place boxes around key **Code fields** in this same example to introduce the shortcut `` `B `` (Box).
 
 ```
@@ -271,7 +269,7 @@ We said you could place a box around every field, but there's an exception.
 
 In contrast, **Code fields** that return null values (like `{""}` above) _will_ be displayed!
 
-### Omega Shortcuts (Explicit) `` `⍵𝑑𝑑 ``
+### Omega Shortcuts (Explicit)  
 
 >> Referencing **∆F** arguments after the f-string: Omega shortcut expressions like `` `⍵1 ``
 
@@ -290,7 +288,7 @@ The temperature is 11°C or 51.8°F
                    20      68.0
 ```
 
-### Referencing the f-string itself: `` `⍵0 ``
+### Referencing the F-string Itself 
 
 The expression `` `⍵0 `` refers to the f-string itself.¹ Try this yourself:²
 
@@ -307,7 +305,7 @@ The expression `` `⍵0 `` refers to the f-string itself.¹ Try this yourself:²
 
 </div>
 
-### The Format `$` Shortcut
+### The Format Shortcut
 
 > Let's add commas to some very large numbers using the `$` (`⎕FMT`) shortcut.
 
@@ -321,7 +319,7 @@ to add appropriate commas to the temperatures!
 The sun's core is at 15,000,000°C or 27,000,032°F
 ```
 
-### Numeric Commas: The `` `C `` shortcut
+### The Shortcut for Numeric Commas 
 
 The `` `C `` shortcut adds commas every 3 digits (from the right) to one or more numbers or numeric strings.¹ It has an advantage over the `$` (Dyalog's `⎕FMT`) specifier: it doesn't require you to guesstimate field widths.
 
@@ -355,7 +353,7 @@ The sun's core is at 27,000,032°F.
 The sun's core is at 15,000,000°C.
 ```
 
-### The Quote Shortcut `` `Q ``
+### The Quote Shortcut 
 
 > Placing quotes around string elements of an array.
 
@@ -391,9 +389,9 @@ Voila, quotes appear around the character digits, but not the actual numbers!
 1 2 '3' 4 '5'
 ```
 
-### The Wrap Shortcut `` `W ``
+### The Wrap Shortcut <span style="color: red;">(Experimental)</span>
 
-> Wrapping results in left and right decorators<br><span style="color: red;">An Experimental Feature!!!</span>
+> Wrapping results in left and right decorators
 
 <div class="content-with-bar">
 
@@ -502,7 +500,7 @@ To make it easier to see, here's the same result, but with a box around each fie
 └──────────────────┴──────────┴─┴────┴─┘
 ```
 
-### The Above Shortcut `%` 
+### The Above Shortcut  
 
 > A cut above the rest 
 
@@ -515,7 +513,7 @@ John Smith  29
 Mary Jones  23
 ```
 
-### Omega Shortcuts (Implicit) `` `⍵ ``
+### Omega Shortcuts (Implicit)  
 
 > The _next_ best thing: the use of `` `⍵ `` in **Code field** expressions
 
@@ -568,7 +566,7 @@ Here, we display one boxed value above the other.
 
 There are loads of other examples to discover.
 
-### Dates and Times Using the `` `T `` shortcut
+### A Shortcut for Dates and Times  
 
 **∆F** supports a simple **Date-Time** shortcut `` `T `` built from **1200⌶** and **⎕DT**. It takes one or more Dyalog `⎕TS`-format timestamps as the right argument and a date-time specification as the (optional) left argument. Trailing elements of a timestamp may be omitted, if they are not referenced in the specification string.
 
@@ -590,7 +588,7 @@ Here's a fancier example (the power is in `1200⌶` and `⎕DT`).
 1 JAN 2025 was a Wednesday.
 ```
 
-### Dates and Times: `` `D `` is an alias for `` `T ``
+### A Shortcut for Dates and Times (Continued)
 
 If it bothers you to use `` `T `` for a date-only expression,
 you can use `` `D ``, which means exactly the same thing.
@@ -618,7 +616,7 @@ expression: `` `⍵1 `⍵2 `⍵3 ``.
 21 Jan 2025 was a Tuesday.
 ```
 
-### Precomputed F-strings: Performance of `∆F...` vs `1 ∆F ...`
+### Precomputed F-strings with the ***DFN*** Option
 
 The default returned from **∆F** is always (on success) a character matrix. That can be expressed via `∆F...` or `0 ∆F...`.¹ However, if the initial option (**_DFN_**) is `1`, i.e. the call is `1 ∆F...`, **∆F** returns a dfn that— when called later— will return the same expression.² This is most useful when you are likely to make repeated use an f-string, since the overhead for examining the f-string contents _once_ would be amortized over all the calls.
 
@@ -647,7 +645,7 @@ versus one precomputed and returned as a dfn, using
    dfn← 1 ∆F '...'
 ```
 
-#### First, let's grab `cmpx`, so we can compare the performance...
+> First, let's grab `cmpx`, so we can compare the performance...
 
 ```
    'cmpx' ⎕CY 'dfns'
@@ -673,7 +671,7 @@ Now, let's proceed. Here's the code:
  T ⍬ → 1.0E¯5 | -94% ⎕⎕
 ```
 
-#### Before we get to syntax and other information...
+> Before we get to syntax and other information...
 
 Finally, we want to show you that the _dfn_ returned from `1 ∆F...` can retrieve argument(s) passed on the right side of **∆F**. In fact, the f-string text **_originally_** passed when the _dfn_ was generated is stored with the _dfn_ itself as `` `⍵0 ``, available for use.
 
@@ -699,7 +697,7 @@ Below, we summarize key information you've already gleaned from the examples.
 
 ## ∆F Syntax and Other Information
 
-### Call Syntax Overview
+### ∆F Call Syntax Overview
 
 | Call Syntax <div style="width:200px"></div> | Description                                                                                                                                                |
 | :------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -707,32 +705,32 @@ Below, we summarize key information you've already gleaned from the examples.
 | **∆F** _f-string_ _arg1_ [*arg2* ...]       | Display an _f-string_; use the _default_ options. Arguments presented _may_ be referred to in the f-string. Returns a character matrix.                    |
 | _options_ **∆F** _f-string_ [*args*]        | Display an _f-string_; control the result with _options_ specified (see below).                                                                            |
 |                                             | If the initial option (DFN) is **0** or omitted, returns a character matrix.                                                                               |
-|                                             | If the initial option (DFN) is **1**, returns a dfn that will such a matrix (given an identical system state).                                             |
+|                                             | If the initial option (DFN) is **1**, returns a dfn that will display such a matrix (given an identical system state).                                             |
 | 'help' **∆F** ''                            | Display help info and examples for **∆F**. The _f-string_ is not examined.                                                                                 |
 | **∆F**⍨'help'                               | Display help info and examples for **∆F**.                                                                                                                 |
 
-### Call Syntax Details
+### ∆F Call Syntax Details
 
 | Element <div style="width:200px"></div>              | Description                                                                                                                                                                                                                                                                                    |
 | :--------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **_f-string_**                                       | a format string, a single character vector.                                                                                                                                                                                                                                                    |
 | **_args_**                                           | elements of ⍵ after the f-string, each of which can be accessed in the f-string via a **\`⍵** shortcut (or ordinary **⍵** expression)                                                                                                                                                          |
 | **_options_**                                        | [ options← [ 0 [ 0 [ 0 [ 0 ] ] ] ] \| 'help' ]                                                                                                                                                                                                                                                 |
-| &nbsp;&nbsp;options[0] (<small>**_DFN_**</small>)    | If `1`, **∆F** returns a dfn, which (upon execution) produces the same output as the default mode. <br>Default: **∆F** returns a char. matrix.                                                                                                                                                 |
+| &nbsp;&nbsp;options[0] (<small>**_DFN_**</small>)    | If `1`, **∆F** returns a dfn, which (upon execution) produces the same output as the default mode. Default: **∆F** returns a char. matrix.                                                                                                                                                 |
 | &nbsp;&nbsp;options[1] (<small>**_DBG_**</small>)    | If `1`: displays the code that the f-string **_actually_** generates (if **_DFN_** is set to `1`, this will include the embedded f-string _source_ as `` `⍵0 ``).                                                                                                                              |
 | &nbsp;&nbsp;options[2] (<small>**_BOX_**</small>)    | If `1`, each field (except a Null Text field) is boxed separately. If `0`, you may box any **Code fields** you want using the _box_ `` `B `` routine.<br>**BOX** mode can be used both with **DFN** and default output mode.                                                                   |
 | &nbsp;&nbsp;options[3] (<small>**_INLINE_**</small>) | If `1`, a copy of each needed internal support function is included in the result. If `0`, calls are made to the library created when ∆F was loaded.<br>Setting **_INLINE_** to `1` is only useful if the **DFN** option is set. This option is experimental and may simply disappear one day. |
 | &nbsp;&nbsp;'help'                                   | If `'help'` is specified, this amazing documentation is displayed.                                                                                                                                                                                                                             |
 | **_result_**                                         | If `0=⊃options`, the result is always a character matrix. If `1=⊃options`, the result is a dfn that, _when executed in the same environment with the same arguments_, generates that same character matrix. <br>If an error is signalled, no result is returned.                               |
 
-### Options (`⍺`)
+### ∆F Options 
 
 - If the left argument `⍺` is omitted, the options default to `4⍴0`.
 - If the left argument `⍺` is a simple boolean vector or scalar, or an empty numeric vector `⍬`, the options are `4↑⍺`; subsequent elements are ignored;
 - If the left argument `⍺` starts with `'help'` (case ignored), this help information is displayed.
 - Otherwise, an error is signaled.
 
-### Return Value
+### ∆F Return Value
 
 - Unless the **DFN** option is selected, **∆F** always returns a character matrix of at least one row and zero columns, `1 0⍴0`, on success. If the 'help' option is specified, **∆F** displays this information, returning `1 0⍴0`.
 - If the **DFN** option is selected, **∆F** always returns a standard Dyalog dfn on success.
@@ -753,7 +751,7 @@ which contains 3 types of fields: **Text fields**, **Code fields**, and **Space 
 The building blocks of an **f-string** are these defined "fields," catenated left to right,
 each of which will display as a logically separate 2-D (matrix) output space. While **Code fields** can return arrays of any number of dimensions mapped onto 2-D by APL `⎕FMT` rules, **Text fields** and **Space fields** are always simple rectangles (minimally 1 row and zero columns). Between fields, **∆F** adds no automatic spaces; that spacing is under user control.
 
-### Escape Sequences (For Text Fields and Quoted Strings)
+### Escape Sequences For Text Fields and Quoted Strings
 
 **∆F** **Text fields** and **Quoted strings** in **Code fields** may include
 a small number of escape sequences, beginning with the backtick `` ` ``.
@@ -796,7 +794,7 @@ sometimes a backtick is just a backtick.
 
 ---
 
-### Omega Shortcut Expressions `` `⍵[𝑑𝑑] `` , `⍹[𝑑𝑑]`: Details
+### Omega Shortcut Expressions: Details
 
 1.  **⍹** is a synonym for **\`⍵**. It is Unicode character `⎕UCS 9081`. Either expression is valid only in **Code** fields and outside **Quoted strings**.
 2.  **\`⍵** or **⍹** uses an "_omega index counter_" (**OIC**) which we'll represent as **Ω**, common across all **Code** fields, which is initially set to zero, `Ω←0`. (Ω is just used for explication; don't actually use this symbol)
@@ -808,7 +806,7 @@ sometimes a backtick is just a backtick.
 
 <div class="content-with-bar">
 
-### Wrap Shortcut (`` `W ``) Details <span style="color: red;font-size: 80%;">&nbsp;**(EXPERIMENTAL)**</span>
+### Wrap Shortcut: Details <span style="color: red;font-size: 80%;">&nbsp;**(EXPERIMENTAL)**</span>
 
 1. Syntax: `` [⍺←''''] `W ⍵ ``.
 2. Let `L←0⊃2⍴⍺` and `R←1⊃2⍴⍺`.
@@ -819,4 +817,49 @@ sometimes a backtick is just a backtick.
 
 </div>
 
-(C) 2025 Sam the Cat Foundation. [20250910T215430]
+---
+
+**Table of Contents**
+
+<span style="font-size: 70%;">
+
+- [∆F — Formatted String Literals](#f--formatted-string-literals)
+  - [∆F In Brief](#f-in-brief)
+- [∆F **Help** Information](#f-help-information)
+- [Installing **∆F**](#installing-f)
+- [∆F EXAMPLES](#f-examples)
+  - [Code Fields](#code-fields)
+  - [Space Fields](#space-fields)
+  - [Null Space Fields](#null-space-fields)
+  - [Code Fields (Continued)](#code-fields-continued)
+  - [The Box Shortcut](#the-box-shortcut)
+  - [Box Mode](#box-mode)
+  - [Omega Shortcuts (Explicit)](#omega-shortcuts-explicit)
+  - [Referencing the F-string Itself](#referencing-the-f-string-itself)
+  - [The Format Shortcut](#the-format-shortcut)
+  - [The Shortcut for Numeric Commas](#the-shortcut-for-numeric-commas)
+  - [The Quote Shortcut](#the-quote-shortcut)
+  - [The Wrap Shortcut (Experimental)](#the-wrap-shortcut-experimental)
+  - [Self-documenting **Code fields** (SDCFs)](#self-documenting-code-fields-sdcfs)
+  - [The Above Shortcut](#the-above-shortcut)
+  - [Omega Shortcuts (Implicit)](#omega-shortcuts-implicit)
+  - [Shortcuts With Individual Expressions](#shortcuts-with-individual-expressions)
+  - [A Shortcut for Dates and Times](#a-shortcut-for-dates-and-times)
+  - [A Shortcut for Dates and Times (Continued)](#a-shortcut-for-dates-and-times-continued)
+  - [Precomputed F-strings with the ***DFN*** Option](#precomputed-f-strings-with-the-dfn-option)
+- [∆F Syntax and Other Information](#f-syntax-and-other-information)
+  - [∆F Call Syntax Overview](#f-call-syntax-overview)
+  - [∆F Call Syntax Details](#f-call-syntax-details)
+  - [∆F Options](#f-options)
+  - [∆F Return Value](#f-return-value)
+  - [∆F F-string Building Blocks](#f-f-string-building-blocks)
+  - [Escape Sequences For Text Fields and Quoted Strings](#escape-sequences-for-text-fields-and-quoted-strings)
+  - [Code Field Shortcuts](#code-field-shortcuts)
+  - [Omega Shortcut Expressions: Details](#omega-shortcut-expressions-details)
+  - [Wrap Shortcut: Details  **(EXPERIMENTAL)**](#wrap-shortcut-details-experimental)
+
+--- 
+
+</span>
+
+(C) 2025 Sam the Cat Foundation. [20250911T093109]

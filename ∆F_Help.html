@@ -19,7 +19,7 @@
 	</style>
 </head>
 <body>
-	<!-- Preview in sep files: cmd-shift-V,
+	<!--
 Preview side-by-side: cmd-K, V,
 md->HTML: opt-shift-M
 Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help'
@@ -86,7 +86,6 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
   }
 </style>
 <h2>∆F — Formatted String Literals</h2>
-<hr>
 <h3>∆F In Brief</h3>
 <blockquote>
 <center><p style="padding-left: 15px;padding-right: 5px;padding-bottom: 5px;color: white; background-color: #4f62f0ff;"><b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.¹<sup>,</sup>²<br><span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>,³ &ensp;but designed for APL.&nbsp;</span></p></center>
@@ -297,7 +296,7 @@ The temperature is 11∘C or  52.3
                    30       85.2
                    60      140.0
 </code></pre>
-<h3>The Box Shortcut <code>`B</code></h3>
+<h3>The Box Shortcut</h3>
 <p>Here we place boxes around key <strong>Code fields</strong> in this same example to introduce the shortcut <code>`B</code> (Box).</p>
 <pre><code>   C← 11.3 29.55 59.99
    ∆F '`◇The temperature is {`B &quot;I2&quot; $ C}`◇°C or {`B &quot;F5.1&quot; $ 32+9×C÷5}`◇°F'
@@ -326,7 +325,7 @@ third <strong>∆F</strong> option (⍺[2]) to <code>1</code>, i.e. setting <str
 <pre><code>   0 0 1 ∆F 'abc{}def{}{}ghi{&quot;&quot;}jkl{ }mno'
 </code></pre>
 <p>In contrast, <strong>Code fields</strong> that return null values (like <code>{&quot;&quot;}</code> above) <em>will</em> be displayed!</p>
-<h3>Omega Shortcuts (Explicit) <code>`⍵𝑑𝑑</code></h3>
+<h3>Omega Shortcuts (Explicit)</h3>
 <blockquote>
 <blockquote>
 <p>Referencing <strong>∆F</strong> arguments after the f-string: Omega shortcut expressions like <code>`⍵1</code></p>
@@ -343,7 +342,7 @@ The temperature is 11°C or 51.8°F
                    15      59.0
                    20      68.0
 </code></pre>
-<h3>Referencing the f-string itself: <code>`⍵0</code></h3>
+<h3>Referencing the F-string Itself</h3>
 <p>The expression <code>`⍵0</code> refers to the f-string itself.¹ Try this yourself:²</p>
 <pre><code>   ∆F 'Our string {`⍵0↓} is {≢`⍵0} characters'
 </code></pre>
@@ -364,7 +363,7 @@ The temperature is 11°C or 51.8°F
 </tbody>
 </table>
 </div>
-<h3>The Format <code>$</code> Shortcut</h3>
+<h3>The Format Shortcut</h3>
 <blockquote>
 <p>Let’s add commas to some very large numbers using the <code>$</code> (<code>⎕FMT</code>) shortcut.</p>
 </blockquote>
@@ -375,7 +374,7 @@ to add appropriate commas to the temperatures!</p>
    **∆F** 'The sun''s core is at {&quot;CI10&quot; $ sun_core}°C or {&quot;CI10&quot; $ C2F sun_core}°F'
 The sun's core is at 15,000,000°C or 27,000,032°F
 </code></pre>
-<h3>Numeric Commas: The <code>`C</code> shortcut</h3>
+<h3>The Shortcut for Numeric Commas</h3>
 <p>The <code>`C</code> shortcut adds commas every 3 digits (from the right) to one or more numbers or numeric strings.¹ It has an advantage over the <code>$</code> (Dyalog’s <code>⎕FMT</code>) specifier: it doesn’t require you to guesstimate field widths.</p>
 <div style="margin-left: 20px;">
 <table>
@@ -406,7 +405,7 @@ The sun's core is at 27,000,032°F.
    ∆F sunFC 0
 The sun's core is at 15,000,000°C.
 </code></pre>
-<h3>The Quote Shortcut <code>`Q</code></h3>
+<h3>The Quote Shortcut</h3>
 <blockquote>
 <p>Placing quotes around string elements of an array.</p>
 </blockquote>
@@ -431,9 +430,9 @@ Voila, quotes appear around the character digits, but not the actual numbers!</p
 <pre><code>   ∆F '{`Q 1 2 &quot;3&quot; 4 &quot;5&quot;}'
 1 2 '3' 4 '5'
 </code></pre>
-<h3>The Wrap Shortcut <code>`W</code></h3>
+<h3>The Wrap Shortcut <span style="color: red;">(Experimental)</span></h3>
 <blockquote>
-<p>Wrapping results in left and right decorators<br><span style="color: red;">An Experimental Feature!!!</span></p>
+<p>Wrapping results in left and right decorators</p>
 </blockquote>
 <div class="content-with-bar">
 <p>Here we make a quick mention of the <strong><em>experimental</em></strong> shortcut <strong>Wrap</strong>,¹ <code>`W</code>, which is used when you want a <strong><em>decorator</em></strong> string that is placed immediately to the left or right of <strong><em>each</em></strong> row of simple objects in the right argument, <code>⍵</code>.</p>
@@ -529,7 +528,7 @@ Current employee:  name↓     age↓.
 │                  │John Smith│ │ 34 │ │
 └──────────────────┴──────────┴─┴────┴─┘
 </code></pre>
-<h3>The Above Shortcut <code>%</code></h3>
+<h3>The Above Shortcut</h3>
 <blockquote>
 <p>A cut above the rest</p>
 </blockquote>
@@ -539,7 +538,7 @@ Employee    Age
 John Smith  29
 Mary Jones  23
 </code></pre>
-<h3>Omega Shortcuts (Implicit) <code>`⍵</code></h3>
+<h3>Omega Shortcuts (Implicit)</h3>
 <blockquote>
 <p>The <em>next</em> best thing: the use of <code>`⍵</code> in <strong>Code field</strong> expressions</p>
 </blockquote>
@@ -579,7 +578,7 @@ Here, we display one boxed value above the other.</p>
 └───┴───┴───┘
 </code></pre>
 <p>There are loads of other examples to discover.</p>
-<h3>Dates and Times Using the <code>`T</code> shortcut</h3>
+<h3>A Shortcut for Dates and Times</h3>
 <p><strong>∆F</strong> supports a simple <strong>Date-Time</strong> shortcut <code>`T</code> built from <strong>1200⌶</strong> and <strong>⎕DT</strong>. It takes one or more Dyalog <code>⎕TS</code>-format timestamps as the right argument and a date-time specification as the (optional) left argument. Trailing elements of a timestamp may be omitted, if they are not referenced in the specification string.</p>
 <p>Let’s look at the use of the <code>`T</code> (Date-Time) shortcut to show the
 current time (now).</p>
@@ -592,7 +591,7 @@ It is now 8:08 am.
 <pre><code>   ∆F '{ &quot;D MMM YYYY ''was a'' Dddd.&quot;`T 2025 01 01}'
 1 JAN 2025 was a Wednesday.
 </code></pre>
-<h3>Dates and Times: <code>`D</code> is an alias for <code>`T</code></h3>
+<h3>A Shortcut for Dates and Times (Continued)</h3>
 <p>If it bothers you to use <code>`T</code> for a date-only expression,
 you can use <code>`D</code>, which means exactly the same thing.</p>
 <pre><code>   ∆F '{ &quot;D MMM YYYY ''was a'' Dddd.&quot; `D 2025 01 02}'
@@ -610,7 +609,7 @@ expression: <code>`⍵1 `⍵2 `⍵3</code>.</p>
 <pre><code>   ∆F '{ &quot;D Mmm YYYY ''was a'' Dddd.&quot; `T `⍵ `⍵ `⍵}' 2025 1 21
 21 Jan 2025 was a Tuesday.
 </code></pre>
-<h3>Precomputed F-strings: Performance of <code>∆F...</code> vs <code>1 ∆F ...</code></h3>
+<h3>Precomputed F-strings with the <em><strong>DFN</strong></em> Option</h3>
 <p>The default returned from <strong>∆F</strong> is always (on success) a character matrix. That can be expressed via <code>∆F...</code> or <code>0 ∆F...</code>.¹ However, if the initial option (<strong><em>DFN</em></strong>) is <code>1</code>, i.e. the call is <code>1 ∆F...</code>, <strong>∆F</strong> returns a dfn that— when called later— will return the same expression.² This is most useful when you are likely to make repeated use an f-string, since the overhead for examining the f-string contents <em>once</em> would be amortized over all the calls.</p>
 <div style="margin-left: 25px;">
 <table>
@@ -639,7 +638,9 @@ We will compare the performance of an <strong>∆F</strong>-string evaluated on 
 <p>versus one precomputed and returned as a dfn, using</p>
 <pre><code>   dfn← 1 ∆F '...'
 </code></pre>
-<h4>First, let’s grab <code>cmpx</code>, so we can compare the performance…</h4>
+<blockquote>
+<p>First, let’s grab <code>cmpx</code>, so we can compare the performance…</p>
+</blockquote>
 <pre><code>   'cmpx' ⎕CY 'dfns'
 </code></pre>
 <p>Now, let’s proceed. Here’s the code:</p>
@@ -659,7 +660,9 @@ We will compare the performance of an <strong>∆F</strong>-string evaluated on 
 ∆F t → 1.7E¯4 |   0% ⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕
  T ⍬ → 1.0E¯5 | -94% ⎕⎕
 </code></pre>
-<h4>Before we get to syntax and other information…</h4>
+<blockquote>
+<p>Before we get to syntax and other information…</p>
+</blockquote>
 <p>Finally, we want to show you that the <em>dfn</em> returned from <code>1 ∆F...</code> can retrieve argument(s) passed on the right side of <strong>∆F</strong>. In fact, the f-string text <strong><em>originally</em></strong> passed when the <em>dfn</em> was generated is stored with the <em>dfn</em> itself as <code>`⍵0</code>, available for use.</p>
 <p>So, as a variation on the example above, we will pass the centigrade value,
 not as a variable, but as the first argument to <strong>∆F</strong> (i.e. <code>`⍵1`</code>).</p>
@@ -678,7 +681,7 @@ The temperature is 35°C or 95.0°F
 </code></pre>
 <p>Below, we summarize key information you’ve already gleaned from the examples.</p>
 <h2>∆F Syntax and Other Information</h2>
-<h3>Call Syntax Overview</h3>
+<h3>∆F Call Syntax Overview</h3>
 <table>
 <thead>
 <tr>
@@ -705,7 +708,7 @@ The temperature is 35°C or 95.0°F
 </tr>
 <tr>
 <td style="text-align:left"></td>
-<td style="text-align:left">If the initial option (DFN) is <strong>1</strong>, returns a dfn that will such a matrix (given an identical system state).</td>
+<td style="text-align:left">If the initial option (DFN) is <strong>1</strong>, returns a dfn that will display such a matrix (given an identical system state).</td>
 </tr>
 <tr>
 <td style="text-align:left">‘help’ <strong>∆F</strong> ‘’</td>
@@ -717,7 +720,7 @@ The temperature is 35°C or 95.0°F
 </tr>
 </tbody>
 </table>
-<h3>Call Syntax Details</h3>
+<h3>∆F Call Syntax Details</h3>
 <table>
 <thead>
 <tr>
@@ -740,7 +743,7 @@ The temperature is 35°C or 95.0°F
 </tr>
 <tr>
 <td style="text-align:left">  options[0] (<small><strong><em>DFN</em></strong></small>)</td>
-<td style="text-align:left">If <code>1</code>, <strong>∆F</strong> returns a dfn, which (upon execution) produces the same output as the default mode. <br>Default: <strong>∆F</strong> returns a char. matrix.</td>
+<td style="text-align:left">If <code>1</code>, <strong>∆F</strong> returns a dfn, which (upon execution) produces the same output as the default mode. Default: <strong>∆F</strong> returns a char. matrix.</td>
 </tr>
 <tr>
 <td style="text-align:left">  options[1] (<small><strong><em>DBG</em></strong></small>)</td>
@@ -764,14 +767,14 @@ The temperature is 35°C or 95.0°F
 </tr>
 </tbody>
 </table>
-<h3>Options (<code>⍺</code>)</h3>
+<h3>∆F Options</h3>
 <ul>
 <li>If the left argument <code>⍺</code> is omitted, the options default to <code>4⍴0</code>.</li>
 <li>If the left argument <code>⍺</code> is a simple boolean vector or scalar, or an empty numeric vector <code>⍬</code>, the options are <code>4↑⍺</code>; subsequent elements are ignored;</li>
 <li>If the left argument <code>⍺</code> starts with <code>'help'</code> (case ignored), this help information is displayed.</li>
 <li>Otherwise, an error is signaled.</li>
 </ul>
-<h3>Return Value</h3>
+<h3>∆F Return Value</h3>
 <ul>
 <li>Unless the <strong>DFN</strong> option is selected, <strong>∆F</strong> always returns a character matrix of at least one row and zero columns, <code>1 0⍴0</code>, on success. If the ‘help’ option is specified, <strong>∆F</strong> displays this information, returning <code>1 0⍴0</code>.</li>
 <li>If the <strong>DFN</strong> option is selected, <strong>∆F</strong> always returns a standard Dyalog dfn on success.</li>
@@ -794,7 +797,7 @@ simple, unescaped curly braces <code>{}</code>, i.e. those not preceded by a bac
 </ul>
 <p>The building blocks of an <strong>f-string</strong> are these defined “fields,” catenated left to right,
 each of which will display as a logically separate 2-D (matrix) output space. While <strong>Code fields</strong> can return arrays of any number of dimensions mapped onto 2-D by APL <code>⎕FMT</code> rules, <strong>Text fields</strong> and <strong>Space fields</strong> are always simple rectangles (minimally 1 row and zero columns). Between fields, <strong>∆F</strong> adds no automatic spaces; that spacing is under user control.</p>
-<h3>Escape Sequences (For Text Fields and Quoted Strings)</h3>
+<h3>Escape Sequences For Text Fields and Quoted Strings</h3>
 <p><strong>∆F</strong> <strong>Text fields</strong> and <strong>Quoted strings</strong> in <strong>Code fields</strong> may include
 a small number of escape sequences, beginning with the backtick <code>`</code>.</p>
 <table>
@@ -904,7 +907,7 @@ sometimes a backtick is just a backtick.</p>
 </table>
 </div>
 <hr>
-<h3>Omega Shortcut Expressions <code>`⍵[𝑑𝑑]</code> , <code>⍹[𝑑𝑑]</code>: Details</h3>
+<h3>Omega Shortcut Expressions: Details</h3>
 <ol>
 <li><strong>⍹</strong> is a synonym for <strong>`⍵</strong>. It is Unicode character <code>⎕UCS 9081</code>. Either expression is valid only in <strong>Code</strong> fields and outside <strong>Quoted strings</strong>.</li>
 <li><strong>`⍵</strong> or <strong>⍹</strong> uses an “<em>omega index counter</em>” (<strong>OIC</strong>) which we’ll represent as <strong>Ω</strong>, common across all <strong>Code</strong> fields, which is initially set to zero, <code>Ω←0</code>. (Ω is just used for explication; don’t actually use this symbol)</li>
@@ -915,7 +918,7 @@ sometimes a backtick is just a backtick.</p>
 <li>If an element of the dfn’s right argument <strong>⍵</strong> is accessed at runtime via any means, shortcut or traditional, that element <strong><em>must</em></strong> exist.</li>
 </ol>
 <div class="content-with-bar">
-<h3>Wrap Shortcut (<code>`W</code>) Details <span style="color: red;font-size: 80%;"> <strong>(EXPERIMENTAL)</strong></span></h3>
+<h3>Wrap Shortcut: Details <span style="color: red;font-size: 80%;"> <strong>(EXPERIMENTAL)</strong></span></h3>
 <ol>
 <li>Syntax: <code>[⍺←''''] `W ⍵</code>.</li>
 <li>Let <code>L←0⊃2⍴⍺</code> and <code>R←1⊃2⍴⍺</code>.</li>
@@ -925,7 +928,57 @@ sometimes a backtick is just a backtick.</p>
 <li>By default,<code>⍺← ''''</code>, i.e. APL quotes will wrap the array ⍵, row by row, whether character, numeric or otherwise.</li>
 </ol>
 </div>
-<p>© 2025 Sam the Cat Foundation. [20250910T215430]</p>
+<hr>
+<p><strong>Table of Contents</strong></p>
+<span style="font-size: 70%;">
+<ul>
+<li><a href="#f--formatted-string-literals">∆F — Formatted String Literals</a>
+<ul>
+<li><a href="#f-in-brief">∆F In Brief</a></li>
+</ul>
+</li>
+<li><a href="#f-help-information">∆F <strong>Help</strong> Information</a></li>
+<li><a href="#installing-f">Installing <strong>∆F</strong></a></li>
+<li><a href="#f-examples">∆F EXAMPLES</a>
+<ul>
+<li><a href="#code-fields">Code Fields</a></li>
+<li><a href="#space-fields">Space Fields</a></li>
+<li><a href="#null-space-fields">Null Space Fields</a></li>
+<li><a href="#code-fields-continued">Code Fields (Continued)</a></li>
+<li><a href="#the-box-shortcut">The Box Shortcut</a></li>
+<li><a href="#box-mode">Box Mode</a></li>
+<li><a href="#omega-shortcuts-explicit">Omega Shortcuts (Explicit)</a></li>
+<li><a href="#referencing-the-f-string-itself">Referencing the F-string Itself</a></li>
+<li><a href="#the-format-shortcut">The Format Shortcut</a></li>
+<li><a href="#the-shortcut-for-numeric-commas">The Shortcut for Numeric Commas</a></li>
+<li><a href="#the-quote-shortcut">The Quote Shortcut</a></li>
+<li><a href="#the-wrap-shortcut-experimental">The Wrap Shortcut (Experimental)</a></li>
+<li><a href="#self-documenting-code-fields-sdcfs">Self-documenting <strong>Code fields</strong> (SDCFs)</a></li>
+<li><a href="#the-above-shortcut">The Above Shortcut</a></li>
+<li><a href="#omega-shortcuts-implicit">Omega Shortcuts (Implicit)</a></li>
+<li><a href="#shortcuts-with-individual-expressions">Shortcuts With Individual Expressions</a></li>
+<li><a href="#a-shortcut-for-dates-and-times">A Shortcut for Dates and Times</a></li>
+<li><a href="#a-shortcut-for-dates-and-times-continued">A Shortcut for Dates and Times (Continued)</a></li>
+<li><a href="#precomputed-f-strings-with-the-dfn-option">Precomputed F-strings with the <em><strong>DFN</strong></em> Option</a></li>
+</ul>
+</li>
+<li><a href="#f-syntax-and-other-information">∆F Syntax and Other Information</a>
+<ul>
+<li><a href="#f-call-syntax-overview">∆F Call Syntax Overview</a></li>
+<li><a href="#f-call-syntax-details">∆F Call Syntax Details</a></li>
+<li><a href="#f-options">∆F Options</a></li>
+<li><a href="#f-return-value">∆F Return Value</a></li>
+<li><a href="#f-f-string-building-blocks">∆F F-string Building Blocks</a></li>
+<li><a href="#escape-sequences-for-text-fields-and-quoted-strings">Escape Sequences For Text Fields and Quoted Strings</a></li>
+<li><a href="#code-field-shortcuts">Code Field Shortcuts</a></li>
+<li><a href="#omega-shortcut-expressions-details">Omega Shortcut Expressions: Details</a></li>
+<li><a href="#wrap-shortcut-details-experimental">Wrap Shortcut: Details  <strong>(EXPERIMENTAL)</strong></a></li>
+</ul>
+</li>
+</ul>
+<hr>
+</span>
+<p>© 2025 Sam the Cat Foundation. [20250911T093109]</p>
 
 </body>
 </html>
