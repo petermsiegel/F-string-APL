@@ -145,15 +145,15 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 
 ## Installing **∆F**
 
-1. On Github, search for ***"F-string-APL"***. 
+1. On Github, search for `"F-string-APL"`. 
 2. Copy the files **∆Fapl.dyalog** and **∆F_Help.html** into your current working directory (the one shown via `]cd`). 
 3. Then, from your Dyalog session (typically `#` or `⎕SE`), enter:
 
     `]load ∆Fapl [-target=`**_myns_**`]`
 
-    The `]load` will automa<b><i>g</i></b>ically copy **∆F_Help.html** into **⍙Fapl** or note its absence.
+    The `]load` will automa<i>g</i>ically copy **∆F_Help.html** into namespace **⍙Fapl** or note its absence.
 
-> Now, **∆F** is available in the active namespace (or **_myns_**), along with the namespace **⍙Fapl** (containing utilities used by **∆F**). 
+> Now, **∆F** is available in the active namespace (or **_myns_**), along with **⍙Fapl** (which contains utilities used by **∆F**). 
 
 ---
 
@@ -920,4 +920,4 @@ sometimes a backtick is just a backtick.
 
 </span>
 
-(C) 2025 Sam the Cat Foundation. [20250911T093109]
+(C) 2025 Sam the Cat Foundation. [20250911T160655]
