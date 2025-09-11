@@ -13,15 +13,15 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 
 ---
 
-### ∆F In Brief¹
+### ∆F In Brief¹<sup>,</sup>²
 
-> <center><p style="padding-left: 15px;padding-right: 5px;padding-bottom: 5px;color: white; background-color: #4f62f0ff;"><b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.<br><span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>,²&ensp;but designed for APL.&nbsp;</span></p></center>
+> <center><p style="padding-left: 15px;padding-right: 5px;padding-bottom: 5px;color: white; background-color: #4f62f0ff;"><b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.<br><span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>,³ &ensp;but designed for APL.&nbsp;</span></p></center>
 
 ---
 
 **∆F f-strings** can concisely include:
 
-- **Text fields**, expressions that can generate multiline Unicode text, using the sequence `` `◇ `` (**backtick** + **statement separator**³) to generate a newline (<small>**⎕UCS 13**</small>);
+- **Text fields**, expressions that can generate multiline Unicode text, using the sequence `` `◇ `` (**backtick** + **statement separator**) to generate a newline (<small>**⎕UCS&nbsp;13**</small>);
 
 - **Code fields**, allowing users to evaluate and display APL arrays in the user environment, arrays passed as **∆F** arguments, as well as arbitrary APL expressions based on full multi-statement⁴ dfn logic; each **Code field** must return a value, simple or otherwise, which will be aligned and catenated with other fields and returned from **∆F**;
 
@@ -72,8 +72,8 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | ¹ Throughout this documentation, notably in the many examples, an index origin of zero (`⎕IO=0`) is assumed. **Code fields** inherit the index origin and other system variables from the environment (i.e. namespace) in which **∆F** is called; they can be set locally in the code field, as well: `∆F '{ ⎕IO←1 ◇ ⎕A ⍳ "APL" }'` .                                                                                                                               |
-| ² **∆F** is inspired by Python _[f-strings](https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals)_, short for "**formatted string literals**", but designed for APL's multi-dimensional worldview. **∆F** f-strings and Python's are not compatible.                                                                                                                                                                                       |
-| ³ In this document, we use the symbol `◇` (`⎕UCS 9671`) to represent the APL statement separator, since the latter is displayed **_in many venues_** as a very small symbol. **∆F** only uses the actual Dyalog APL statement separator (`⎕UCS 8900`).                                                                                                                                                                                                              |
+| ² In this document, we use the symbol `◇` (`⎕UCS 9671`) to represent the APL statement separator (`⎕UCS 8900`), since the latter is displayed _in some browsers_ as a hard-to-read glyph. **∆F** will recognize `` `◇ `` with _either_ glyph.                                                                                                                                                                                                                       |
+| ³ **∆F** is inspired by Python _[f-strings](https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals)_, short for "**formatted string literals**", but designed for APL's multi-dimensional worldview. **∆F** f-strings and Python's are not compatible.                                                                                                                                                                                       |
 | ⁴ **∆F Code fields** _as input_ are limited to a single, possibly very long, line.                                                                                                                                                                                                                                                                                                                                                                                  |
 | ⁵ **Double angle quotation marks** <big>**«&nbsp;»**</big> (_guillemets_) are Unicode chars `⎕UCS 171 187` (on the std Mac keyboard: _*option-backslash*_ and _*option-shift-backslash*_). When including literal guillemets in guillemet-bracketed quotations (<span style="color: red;">_but why?_</span>&ThinSpace;), opening guillemets <big>**«**</big> are _not_ doubled, but _two_ closing guillemets are needed for each literal <big>**»**</big> required. |
 | ⁶ Details on all the shortcuts are provided later in this document. See **_Code Field Shortcuts._**                                                                                                                                                                                                                                                                                                                                                                 |
@@ -730,12 +730,12 @@ each of which will display as a logically separate 2-D (matrix) output space. Wh
 ∆F-string **Text fields** and **Quoted strings** in **Code fields** may include
 a small number of escape sequences, beginning with the backtick `` ` ``.
 
-| &nbsp;Sequence&nbsp; | &nbsp;Literal&nbsp; |  &nbsp;Meaning&nbsp;   |
-| :------------------: | :-----------------: | :--------------------: |
-|         \`◇          |      (newline)      | &nbsp; (⎕UCS 13)&nbsp; |
-|         \`\`         |          `          |        backtick        |
-|         \`{          |          {          |       left brace       |
-|         \`}          |          }          |      right brace       |
+| &nbsp;Sequence&nbsp; | &nbsp;Literal&nbsp; |     &nbsp;Meaning&nbsp;     |
+| :------------------: | :-----------------: | :-------------------------: |
+|         \`◇          |      (newline)      | &nbsp; (⎕UCS&nbsp;13)&nbsp; |
+|         \`\`         |          `          |          backtick           |
+|         \`{          |          {          |         left brace          |
+|         \`}          |          }          |         right brace         |
 
 Other instances of the backtick character in **Text fields** or **Quoted strings** in **Code fields** will be treated literally, _i.e._
 sometimes a backtick is just a backtick.
@@ -744,17 +744,17 @@ sometimes a backtick is just a backtick.
 
 ∆F-string **Code fields** may contain various shortcuts, intended to be concise and expressive tools for common tasks. **Shortcuts** are valid **only** outside **Quoted strings**. They include:
 
-| Shortcut <div style="width:100px"></div>                              | Name <div style="width:150px"></div> | Meaning                                                                                                                                                                                        |
-| :-------------------------------------------------------------------- | :----------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| $, \`F                                                                | ⎕FMT                                 | `[⍺] ⎕FMT ⍵`. (See APL documentation).                                                                                                                                                         |
-| %, \`A                                                                | Above                                | Centers array `⍺` above array `⍵`. Default `⍺←''`, i.e. a blank line above `⍵`.                                                                                                                |
-| \`B                                                                   | Box                                  | Places `⍵` in a box. `⍵` is any array.                                                                                                                                                         |
-| \`C                                                                   | Commas                               | Adds commas to `⍵` after every 3rd digit of the integer part of `⍵`, right-to-left. `⍵` is a vector of num strings or numbers.                                                                 |
-| \`Q                                                                   | Quote                                | Recursively scans `⍵`, putting char. vectors, scalars, and rows of higher-dimensional strings in APL quotes, leaving other elements as is.                                                     |
-| \`T, \`D                                                              | Date-Time¹                           | Displays timestamp(s) `⍵` according to date-time template `⍺`. `⍵` is one or more APL timestamps `⎕TS`. `⍺` is a date-time template in `1200⌶` format. If omitted, `⍺← 'YYYY-MM-DD hh:mm:ss'`. |
-| \`W <span style="color: red;font-size: 70%;">**EXPERIMENTAL!**</span> | Wrap                                 | Wraps the rows of simple arrays in ⍵ in decorators `0⊃2⍴⍺` (on the left) and `1⊃2⍴⍺` (on the right), with `⍺` defaulting to a single quote. _See details below._                               |
-| \`⍵𝒋, ⍹𝒋                                                              | Omega explicitly indexed             | A shortcut of the form `` `⍵𝒋 `` (or `⍹𝒋`), to access the `𝒋`**th** element of `⍵`, i.e. `(⍵⊃⍨ 𝒋+⎕IO)`. _See details below._                                                                   |
-| \`⍵, ⍹                                                                | Omega implicitly indexed             | A shortcut of the form `` `⍵ `` (or `⍹`), to access the **next** element of `⍵`. _See details below._                                                                                          |
+| Shortcut <div style="width:100px"></div>                              | Name <div style="width:150px"></div> | Meaning                                                                                                                                                                                                       |
+| :-------------------------------------------------------------------- | :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| $, \`F                                                                | ⎕FMT                                 | `[⍺] $ ⍵`. Short for `[⍺] ⎕FMT ⍵`. (See APL documentation).                                                                                                                                                   |
+| %, \`A                                                                | Above                                | `[⍺] % ⍵`. Centers array `⍺` above array `⍵`. Default `⍺←''`, i.e. a blank line above `⍵`.                                                                                                                    |
+| \`B                                                                   | Box                                  | `` `B ⍵ ``. Places `⍵` in a box. `⍵` is any array.                                                                                                                                                            |
+| \`C                                                                   | Commas                               | `` `C ⍵ ``. Adds commas to `⍵` after every 3rd digit of the integer part of `⍵`, right-to-left. `⍵` is a vector of num strings or numbers.                                                                    |
+| \`Q                                                                   | Quote                                | `` [⍺]`Q ⍵ ``. Recursively scans `⍵`, putting char. vectors, scalars, and rows of higher-dimensional strings in APL quotes, leaving other elements as is. If omitted, `⍺←''`.                                 |
+| \`T, \`D                                                              | Date-Time¹                           | `` [⍺]`T ⍵ ``. Displays timestamp(s) `⍵` according to date-time template `⍺`. `⍵` is one or more APL timestamps `⎕TS`. `⍺` is a date-time template in `1200⌶` format. If omitted, `⍺← 'YYYY-MM-DD hh:mm:ss'`. |
+| \`W <span style="color: red;font-size: 70%;">**EXPERIMENTAL!**</span> | Wrap                                 | `` [⍺]`W ⍵ ``. Wraps the rows of simple arrays in ⍵ in decorators `0⊃2⍴⍺` (on the left) and `1⊃2⍴⍺` (on the right), with `⍺` defaulting to a single quote. _See details below._                               |
+| \`⍵𝒋, ⍹𝒋                                                              | Omega explicitly indexed             | A shortcut of the form `` `⍵𝒋 `` (or `⍹𝒋`), to access the `𝒋`**th** element of `⍵`, i.e. `(⍵⊃⍨ 𝒋+⎕IO)`. _See details below._                                                                                  |
+| \`⍵, ⍹                                                                | Omega implicitly indexed             | A shortcut of the form `` `⍵ `` (or `⍹`), to access the **_next_** element of `⍵`. _See details below._                                                                                                       |
 
 ---
 
@@ -791,4 +791,4 @@ sometimes a backtick is just a backtick.
 
 </div>
 
-(C) 2025 Sam the Cat Foundation. [20250910T132823]
+(C) 2025 Sam the Cat Foundation. [20250910T185351]

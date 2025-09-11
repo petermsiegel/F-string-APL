@@ -87,15 +87,15 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 </style>
 <h2>∆F — Formatted String Literals</h2>
 <hr>
-<h3>∆F In Brief¹</h3>
+<h3>∆F In Brief¹<sup>,</sup>²</h3>
 <blockquote>
-<center><p style="padding-left: 15px;padding-right: 5px;padding-bottom: 5px;color: white; background-color: #4f62f0ff;"><b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.<br><span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>,²&ensp;but designed for APL.&nbsp;</span></p></center>
+<center><p style="padding-left: 15px;padding-right: 5px;padding-bottom: 5px;color: white; background-color: #4f62f0ff;"><b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.<br><span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>,³ &ensp;but designed for APL.&nbsp;</span></p></center>
 </blockquote>
 <hr>
 <p><strong>∆F f-strings</strong> can concisely include:</p>
 <ul>
 <li>
-<p><strong>Text fields</strong>, expressions that can generate multiline Unicode text, using the sequence <code>`◇</code> (<strong>backtick</strong> + <strong>statement separator</strong>³) to generate a newline (<small><strong>⎕UCS 13</strong></small>);</p>
+<p><strong>Text fields</strong>, expressions that can generate multiline Unicode text, using the sequence <code>`◇</code> (<strong>backtick</strong> + <strong>statement separator</strong>) to generate a newline (<small><strong>⎕UCS 13</strong></small>);</p>
 </li>
 <li>
 <p><strong>Code fields</strong>, allowing users to evaluate and display APL arrays in the user environment, arrays passed as <strong>∆F</strong> arguments, as well as arbitrary APL expressions based on full multi-statement⁴ dfn logic; each <strong>Code field</strong> must return a value, simple or otherwise, which will be aligned and catenated with other fields and returned from <strong>∆F</strong>;</p>
@@ -164,10 +164,10 @@ The temperature is 35∘C or  95∘F.
 <td style="text-align:left">¹ Throughout this documentation, notably in the many examples, an index origin of zero (<code>⎕IO=0</code>) is assumed. <strong>Code fields</strong> inherit the index origin and other system variables from the environment (i.e. namespace) in which <strong>∆F</strong> is called; they can be set locally in the code field, as well: <code>∆F '{ ⎕IO←1 ◇ ⎕A ⍳ &quot;APL&quot; }'</code> .</td>
 </tr>
 <tr>
-<td style="text-align:left">² <strong>∆F</strong> is inspired by Python <em><a href="https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals">f-strings</a></em>, short for “<strong>formatted string literals</strong>”, but designed for APL’s multi-dimensional worldview. <strong>∆F</strong> f-strings and Python’s are not compatible.</td>
+<td style="text-align:left">² In this document, we use the symbol <code>◇</code> (<code>⎕UCS 9671</code>) to represent the APL statement separator (<code>⎕UCS 8900</code>), since the latter is displayed <em>in some browsers</em> as a hard-to-read glyph. <strong>∆F</strong> will recognize <code>`◇</code> with <em>either</em> glyph.</td>
 </tr>
 <tr>
-<td style="text-align:left">³ In this document, we use the symbol <code>◇</code> (<code>⎕UCS 9671</code>) to represent the APL statement separator, since the latter is displayed <strong><em>in many venues</em></strong> as a very small symbol. <strong>∆F</strong> only uses the actual Dyalog APL statement separator (<code>⎕UCS 8900</code>).</td>
+<td style="text-align:left">³ <strong>∆F</strong> is inspired by Python <em><a href="https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals">f-strings</a></em>, short for “<strong>formatted string literals</strong>”, but designed for APL’s multi-dimensional worldview. <strong>∆F</strong> f-strings and Python’s are not compatible.</td>
 </tr>
 <tr>
 <td style="text-align:left">⁴ <strong>∆F Code fields</strong> <em>as input</em> are limited to a single, possibly very long, line.</td>
@@ -773,7 +773,7 @@ a small number of escape sequences, beginning with the backtick <code>`</code>.<
 <tr>
 <td style="text-align:center">`◇</td>
 <td style="text-align:center">(newline)</td>
-<td style="text-align:center">  (⎕UCS 13) </td>
+<td style="text-align:center">  (⎕UCS 13) </td>
 </tr>
 <tr>
 <td style="text-align:center">``</td>
@@ -808,37 +808,37 @@ sometimes a backtick is just a backtick.</p>
 <tr>
 <td style="text-align:left">$, `F</td>
 <td style="text-align:left">⎕FMT</td>
-<td style="text-align:left"><code>[⍺] ⎕FMT ⍵</code>. (See APL documentation).</td>
+<td style="text-align:left"><code>[⍺] $ ⍵</code>. Short for <code>[⍺] ⎕FMT ⍵</code>. (See APL documentation).</td>
 </tr>
 <tr>
 <td style="text-align:left">%, `A</td>
 <td style="text-align:left">Above</td>
-<td style="text-align:left">Centers array <code>⍺</code> above array <code>⍵</code>. Default <code>⍺←''</code>, i.e. a blank line above <code>⍵</code>.</td>
+<td style="text-align:left"><code>[⍺] % ⍵</code>. Centers array <code>⍺</code> above array <code>⍵</code>. Default <code>⍺←''</code>, i.e. a blank line above <code>⍵</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left">`B</td>
 <td style="text-align:left">Box</td>
-<td style="text-align:left">Places <code>⍵</code> in a box. <code>⍵</code> is any array.</td>
+<td style="text-align:left"><code>`B ⍵</code>. Places <code>⍵</code> in a box. <code>⍵</code> is any array.</td>
 </tr>
 <tr>
 <td style="text-align:left">`C</td>
 <td style="text-align:left">Commas</td>
-<td style="text-align:left">Adds commas to <code>⍵</code> after every 3rd digit of the integer part of <code>⍵</code>, right-to-left. <code>⍵</code> is a vector of num strings or numbers.</td>
+<td style="text-align:left"><code>`C ⍵</code>. Adds commas to <code>⍵</code> after every 3rd digit of the integer part of <code>⍵</code>, right-to-left. <code>⍵</code> is a vector of num strings or numbers.</td>
 </tr>
 <tr>
 <td style="text-align:left">`Q</td>
 <td style="text-align:left">Quote</td>
-<td style="text-align:left">Recursively scans <code>⍵</code>, putting char. vectors, scalars, and rows of higher-dimensional strings in APL quotes, leaving other elements as is.</td>
+<td style="text-align:left"><code>[⍺]`Q ⍵</code>. Recursively scans <code>⍵</code>, putting char. vectors, scalars, and rows of higher-dimensional strings in APL quotes, leaving other elements as is. If omitted, <code>⍺←''</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left">`T, `D</td>
 <td style="text-align:left">Date-Time¹</td>
-<td style="text-align:left">Displays timestamp(s) <code>⍵</code> according to date-time template <code>⍺</code>. <code>⍵</code> is one or more APL timestamps <code>⎕TS</code>. <code>⍺</code> is a date-time template in <code>1200⌶</code> format. If omitted, <code>⍺← 'YYYY-MM-DD hh:mm:ss'</code>.</td>
+<td style="text-align:left"><code>[⍺]`T ⍵</code>. Displays timestamp(s) <code>⍵</code> according to date-time template <code>⍺</code>. <code>⍵</code> is one or more APL timestamps <code>⎕TS</code>. <code>⍺</code> is a date-time template in <code>1200⌶</code> format. If omitted, <code>⍺← 'YYYY-MM-DD hh:mm:ss'</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left">`W <span style="color: red;font-size: 70%;"><strong>EXPERIMENTAL!</strong></span></td>
 <td style="text-align:left">Wrap</td>
-<td style="text-align:left">Wraps the rows of simple arrays in ⍵ in decorators <code>0⊃2⍴⍺</code> (on the left) and <code>1⊃2⍴⍺</code> (on the right), with <code>⍺</code> defaulting to a single quote. <em>See details below.</em></td>
+<td style="text-align:left"><code>[⍺]`W ⍵</code>. Wraps the rows of simple arrays in ⍵ in decorators <code>0⊃2⍴⍺</code> (on the left) and <code>1⊃2⍴⍺</code> (on the right), with <code>⍺</code> defaulting to a single quote. <em>See details below.</em></td>
 </tr>
 <tr>
 <td style="text-align:left">`⍵𝒋, ⍹𝒋</td>
@@ -848,7 +848,7 @@ sometimes a backtick is just a backtick.</p>
 <tr>
 <td style="text-align:left">`⍵, ⍹</td>
 <td style="text-align:left">Omega implicitly indexed</td>
-<td style="text-align:left">A shortcut of the form <code>`⍵</code> (or <code>⍹</code>), to access the <strong>next</strong> element of <code>⍵</code>. <em>See details below.</em></td>
+<td style="text-align:left">A shortcut of the form <code>`⍵</code> (or <code>⍹</code>), to access the <strong><em>next</em></strong> element of <code>⍵</code>. <em>See details below.</em></td>
 </tr>
 </tbody>
 </table>
@@ -889,7 +889,7 @@ sometimes a backtick is just a backtick.</p>
 <li>By default,<code>⍺← ''''</code>, i.e. APL quotes will wrap the array ⍵, row by row, whether character, numeric or otherwise.</li>
 </ol>
 </div>
-<p>© 2025 Sam the Cat Foundation. [20250910T132823]</p>
+<p>© 2025 Sam the Cat Foundation. [20250910T185351]</p>
 
 </body>
 </html>

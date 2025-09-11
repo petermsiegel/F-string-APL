@@ -183,8 +183,11 @@
 ⍝     left- and right-quotes, «like this», where only the right-quote doubling is needed
 ⍝     (i.e. any number of literals « can be in a «» string.)
 ⍝ The use of double angle quotation marks is an amusement. So far, not documented...
-  om← '⍵' ⋄ cr crVis← ⎕UCS 13 9229 
-  dia← '⋄'               ⍝ Sequence esc-dia "`⋄" used in text fields and quoted strings for ⎕UCS 13.
+  om← '⍵' ⋄ cr crVis← ⎕UCS 13 9229
+⍝ Seq. `⋄ OR `◇ map onto ⎕UCS 13.
+⍝ dia2[0]: Dyalog stmt separator
+⍝ dia2[1]: Alternative character that is easier to read in some web browsers. 
+  dia2← ⎕UCS 8900 9671
 ⍝ lDAQ, rDAQ: LEFT- and RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK -- aka guillemets  
   lDAQ rDAQ← '«»'        ⍝ ⎕UCS 171 187 
 ⍝ Order brklist chars roughly by frequency, high to low.       
@@ -228,11 +231,11 @@
 ⍝ TFEsc: nl ∇ fstr, where 
 ⍝    nl: current newline char;  fstr: starts with the char after the escape
 ⍝ Returns: the escape sequence.                        ⍝ *** No side effects ***
-  TFEsc← { 0= ≢⍵: esc ⋄ c← 0⌷⍵ ⋄ c= dia: ⍺ ⋄ c∊ esc_lb_rb: c ⋄ esc, c } 
+  TFEsc← { 0= ≢⍵: esc ⋄ c← 0⌷⍵ ⋄ c∊ dia2: ⍺ ⋄ c∊ esc_lb_rb: c ⋄ esc, c } 
   ⍝ QSEsc: [nl] ∇ fstr, where 
   ⍝         nl is the current newline char, and fstr starts with the char AFTER the escape char.
   ⍝ Returns the escape sequence.                       ⍝ *** No side effects ***
-  QSEsc← { c← ⍵ ⋄ c= dia: ⍺ ⋄ c=esc: c ⋄ esc, c }     
+  QSEsc← { c← ⍵ ⋄ c∊ dia2: ⍺ ⋄ c=esc: c ⋄ esc, c }     
 
 ⍝ OrderFlds
 ⍝ ∘ User flds are effectively executed L-to-R AND displayed in L-to-R order 
@@ -310,11 +313,13 @@
   ⍝ Be sure to handle heterogeneous vectors, ⎕OR objects, and namespaces correctly. 
     ⎕SHADOW 'qCod'
     qCod← {
-        sq←  '(⎕UCS 39)'                               ⍝ A single quote (LOL).
-        _←  '{1<|≡⍵:∇¨⍵⋄'                              ⍝ It's not simple ==> handle.
-        _,←  '(0=⍴⍴⍵)∧1=≡⍵:⍵⋄'                         ⍝ It's an ⎕OR ==> handle.
-        _,←  '(0≠≡⍵)∧326=⎕DR⍵:∇¨⍵⋄'                    ⍝ It's heterogeneous: 1 'x' 2 3.                                              
-        _, sq,'{0=80|⎕DR⍵:⍺,⍺,⍨⍵/⍨ 1+⍺=⍵⋄⍵}⍤1⊢⍵}'     ⍝ If a vector/row is char, put in quotes.
+        _←  '{'
+        _,← ' ⍺←⎕UCS 39⋄'                              ⍝ ⍺ defaults to a single quote.
+        _,← ' 1<|≡⍵:⍺∘∇¨⍵⋄'                            ⍝ It's not simple ==> handle.
+        _,← ' (0=⍴⍴⍵)∧1=≡⍵:⍵⋄'                         ⍝ It's an ⎕OR ==> handle.
+        _,← ' (0≠≡⍵)∧326=⎕DR⍵:⍺∘∇¨⍵⋄'                  ⍝ It's heterogeneous: 1 'x' 2 3.                                              
+        _,← ' ⍺{0=80|⎕DR⍵:⍺,⍺,⍨⍵/⍨ 1+⍺=⍵⋄⍵}⍤1⊢⍵'      ⍝ If a vector/row is char, put in quotes.
+        _,  '}'
     }⍬
     Q← XR scQ2← HT   ' ⎕THIS.Q ' qCod 
   ⍝ `W (Wrap) is experimental... 
