@@ -326,9 +326,7 @@ third <strong>∆F</strong> option (⍺[2]) to <code>1</code>, i.e. setting <str
 <p>In contrast, <strong>Code fields</strong> that return null values (like <code>{&quot;&quot;}</code> above) <em>will</em> be displayed!</p>
 <h3>Omega Shortcuts (Explicit)</h3>
 <blockquote>
-<blockquote>
 <p>Referencing <strong>∆F</strong> arguments after the f-string: Omega shortcut expressions like <code>`⍵1</code></p>
-</blockquote>
 </blockquote>
 <p>The expression <code>`⍵1</code> is equivalent to <code>(⍵⊃⍨ 1+⎕IO)</code>, selecting the first argument after the f-string. Similarly, <code>`⍵99</code> would select <code>(⍵⊃⍨99+⎕IO)</code>.</p>
 <p>We will use <code>`⍵1</code> here, both with shortcuts and an externally defined
@@ -529,7 +527,7 @@ Current employee:  name↓     age↓.
 </code></pre>
 <h3>The Above Shortcut</h3>
 <blockquote>
-<p>A cut above the rest</p>
+<p>A cut above the rest…</p>
 </blockquote>
 <p>Here’s a useful feature. Let’s use the shortcut <code>%</code> to display one expression centered above another; it’s called <strong>Above</strong> and can also be expressed as <code>`A</code>. Remember, <code>`⍵1</code> designates the <strong><em>first</em></strong> argument after the f-string itself, and <code>`⍵2</code> the <strong><em>second</em></strong>.</p>
 <pre><code>   ∆F '{&quot;Employee&quot; % ⍪`⍵1} {&quot;Age&quot; % ⍪`⍵2}' ('John Smith' 'Mary Jones')(29 23)
@@ -539,7 +537,7 @@ Mary Jones  23
 </code></pre>
 <h3>Omega Shortcuts (Implicit)</h3>
 <blockquote>
-<p>The <em>next</em> best thing: the use of <code>`⍵</code> in <strong>Code field</strong> expressions</p>
+<p>The <em>next</em> best thing: the use of <code>`⍵</code> in <strong>Code field</strong> expressions…</p>
 </blockquote>
 <p>We said we’d present the use of omega shortcuts with implicit indices <code>`⍵</code> in <strong>Code fields</strong>.</p>
 <p>The expression <code>`⍵</code> selects the <em>next</em> element of the right argument <code>⍵</code> to <strong>∆F</strong>, defaulting to <code>`⍵1</code> when first encountered, i.e. if there are <strong><em>no</em></strong> <code>`⍵</code> elements to the <strong><em>left</em></strong> in the entire f-string. If there is any such expression (e.g. <code>`⍵5</code>), then <code>`⍵</code> points to the element after that one (here, <code>`⍵6</code>). If the item to the left is <code>`⍵</code>, then we simply increment the index by <code>1</code> from that one.</p>
@@ -977,7 +975,7 @@ sometimes a backtick is just a backtick.</p>
 </ul>
 <hr>
 </span>
-<p>© 2025 Sam the Cat Foundation. [20250911T191856]</p>
+<p>© 2025 Sam the Cat Foundation. [20250911T192911]</p>
 
 </body>
 </html>
