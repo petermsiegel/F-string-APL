@@ -270,7 +270,7 @@ In contrast, **Code fields** that return null values (like `{""}` above) _will_ 
 
 ### Omega Shortcuts (Explicit)  
 
->> Referencing **∆F** arguments after the f-string: Omega shortcut expressions like `` `⍵1 ``
+> Referencing **∆F** arguments after the f-string: Omega shortcut expressions like `` `⍵1 ``
 
 The expression `` `⍵1 `` is equivalent to `(⍵⊃⍨ 1+⎕IO)`, selecting the first argument after the f-string. Similarly, `` `⍵99 `` would select `(⍵⊃⍨99+⎕IO)`.
 
@@ -501,7 +501,7 @@ To make it easier to see, here's the same result, but with a box around each fie
 
 ### The Above Shortcut  
 
-> A cut above the rest 
+> A cut above the rest... 
 
 Here's a useful feature. Let's use the shortcut `%` to display one expression centered above another; it's called **Above** and can also be expressed as `` `A ``. Remember, `` `⍵1 `` designates the **_first_** argument after the f-string itself, and `` `⍵2 `` the **_second_**.
 
@@ -514,7 +514,7 @@ Mary Jones  23
 
 ### Omega Shortcuts (Implicit)  
 
-> The _next_ best thing: the use of `` `⍵ `` in **Code field** expressions
+> The _next_ best thing: the use of `` `⍵ `` in **Code field** expressions...
 
 We said we'd present the use of omega shortcuts with implicit indices `` `⍵ `` in **Code fields**.
 
@@ -861,4 +861,4 @@ sometimes a backtick is just a backtick.
 
 </span>
 
-(C) 2025 Sam the Cat Foundation. [20250911T191856]
+(C) 2025 Sam the Cat Foundation. [20250911T192732]
