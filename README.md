@@ -131,14 +131,13 @@ Customer Jack wins £230!
 
 Isn't Jack lucky, winning twice in a row!
 
-### Space Fields
+### Text Fields and Space Fields
 
-Now, let's add in some **Space fields**.
 Below, we have some multi-line **Text fields** separated by non-null **Space fields**.
 
 - The backtick is our "escape" character.
 - The sequence `◇ generates a new line in the current text field.
-- {&nbsp;} is a **Space Field** indicating _one_ space, since there is one space
+- {&ensp;} is a **Space Field** indicating _one_ space, since there is one space
   within the braces.
 
 A **Space field** is useful here because each multi-line field is built
@@ -829,7 +828,7 @@ sometimes a backtick is just a backtick.
 - [Installing **∆F**](#installing-f)
 - [∆F EXAMPLES](#f-examples)
   - [Code Fields](#code-fields)
-  - [Space Fields](#space-fields)
+  - [Text Fields and Space Fields](#text-fields-and-space-fields)
   - [Null Space Fields](#null-space-fields)
   - [Code Fields (Continued)](#code-fields-continued)
   - [The Box Shortcut](#the-box-shortcut)
@@ -862,4 +861,4 @@ sometimes a backtick is just a backtick.
 
 </span>
 
-(C) 2025 Sam the Cat Foundation. [20250911T160655]
+(C) 2025 Sam the Cat Foundation. [20250911T191856]
