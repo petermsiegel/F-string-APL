@@ -338,9 +338,12 @@
     MapSC←  sc∘⍳ 
     ok← 1 
   ∇
-  ∇ ok← ⍙LoadHelp
+  ∇ ok← ⍙LoadHelp; ⎕PW; e1; e2 
+    ⎕PW←120
     :If 0=≢   {22:: ⍬ ⋄ ⎕THIS.helpHtml← ⊃⎕NGET ⍵} helpHtmlFi
-        ']Load ∆Fapl: Unable to copy in "',helpHtmlFi,'". ∆F help will not be available'
+         e1← 'WARNING: When loading ∆Fapl, the help file "',helpHtmlFi,'" was not found in current directory.'
+         e2← 'WARNING: ∆F help will not be available without user intervention.'
+         e1,(⎕UCS 13),e2
     :EndIf 
     ok← 1 
   ∇

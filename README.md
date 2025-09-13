@@ -21,7 +21,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 
 - **Text fields**, expressions that can generate multiline Unicode text, using the sequence `` `◇ `` (**backtick** + **statement separator**³) to generate a newline (<small>**⎕UCS&nbsp;13**</small>);
 
-- **Code fields**, allowing users to evaluate and display APL arrays in the user environment, arrays passed as **∆F** arguments, as well as arbitrary APL expressions based on full multi-statement⁴ dfn logic; each **Code field** must return a value, simple or otherwise, which will be aligned and catenated with other fields and returned from **∆F**;
+- **Code fields**, allowing users to evaluate and display APL arrays in the user environment, arrays passed as **∆F** arguments, as well as arbitrary APL expressions based on full multi-statement⁴ dfn logic; each **Code field** must return a value, simple or otherwise, which will be catenated with other fields and returned from **∆F**;
 
   **Code fields** also provide a number of concise, convenient extensions, such as:
 
@@ -53,7 +53,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 
 - Multiline (matrix) output built up field-by-field, left-to-right, from values and expressions in the calling environment or arguments to **∆F**;
 
-  - After all fields are generated, they are concatenated (after appropriate vertical conformation) to form a single **_returned_** character matrix. (See the examples below).
+  - After all fields are generated, they are concatenated (after appropriate vertical conformation) to form a single character matrix: ***the return value from*** **∆F**. (See the examples below).
 
 **∆F** is designed⁷ for ease of use, _ad hoc_ debugging, fine-grained formatting and informal user interaction, built using APL's own powerful functions and operators.
 
@@ -85,9 +85,9 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 
     `]load ∆Fapl [-target=`**_myns_**`]`
 
-    The `]load` will automa<i>g</i>ically copy **∆F_Help.html** into namespace **⍙Fapl** or note its absence.
+    Each time it is called, the `]load` will create both function **∆F** and namespace **⍙Fapl** in the active namespace (or **_myns_**). **⍙Fapl** contains utilities used by **∆F**. If  **∆F_Help.html** is available at `]load` time, it will be copied into **⍙Fapl** (or a message will note its absence).
 
-> Now, **∆F** is available in the active namespace (or **_myns_**), along with **⍙Fapl** (which contains utilities used by **∆F**). 
+> Now, **∆F** is available in the active namespace (or **_myns_**), along with **⍙Fapl**.
 
 ---
 
@@ -170,15 +170,16 @@ Mouse    Mickey
 ```
 
 In the above example, we added an extra space after the longest
-animal name, _Elephant_.
+animal name, _Elephant_, so it wouldn't run into the next word, _Dumbo_.
 
 **But wait! There's an easier way!**
 
 Here, you surely want the lefthand field to be guaranteed to have a space
-after _each_ word without fiddling, so a **Space field** with at least
-one space would be way more convenient:
+after _each_ word without fiddling; a **Space field** with at least
+one space will solve the problem:
 
-```
+```apl
+⍝                          ↓↓↓
    ∆F 'Cat`◇Elephant`◇Mouse{ }Felix`◇Dumbo`◇Mickey'
 Cat      Felix
 Elephant Dumbo
@@ -211,10 +212,10 @@ example            Fields
 Here is some multiline data we'll add to our **Code fields**, using APL _mix_ `↑` to generate multiline objects (matrices).
 
 ```
-   fn← 'John' 'Mary' 'Ted'
-   ln← 'Smith' 'Jones' 'Templeton'
+   fnm←  'John' 'Mary' 'Ted'
+   lnm←  'Smith' 'Jones' 'Templeton'
    addr← '24 Mulberry Ln' '22 Smith St' '12 High St'
-   ∆F '{↑fn} {↑ln} {↑addr}'
+   ∆F '{↑fnm} {↑lnm} {↑addr}'
 John Smith     24 Mulberry Ln
 Mary Jones     22 Smith St
 Ted  Templeton 12 High St
@@ -866,4 +867,4 @@ sometimes a backtick is just a backtick.
 
 </span>
 
-(C) 2025 Sam the Cat Foundation. [20250912T085802]
+(C) 2025 Sam the Cat Foundation. [20250913T095129]

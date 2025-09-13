@@ -97,7 +97,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 <p><strong>Text fields</strong>, expressions that can generate multiline Unicode text, using the sequence <code>`◇</code> (<strong>backtick</strong> + <strong>statement separator</strong>³) to generate a newline (<small><strong>⎕UCS 13</strong></small>);</p>
 </li>
 <li>
-<p><strong>Code fields</strong>, allowing users to evaluate and display APL arrays in the user environment, arrays passed as <strong>∆F</strong> arguments, as well as arbitrary APL expressions based on full multi-statement⁴ dfn logic; each <strong>Code field</strong> must return a value, simple or otherwise, which will be aligned and catenated with other fields and returned from <strong>∆F</strong>;</p>
+<p><strong>Code fields</strong>, allowing users to evaluate and display APL arrays in the user environment, arrays passed as <strong>∆F</strong> arguments, as well as arbitrary APL expressions based on full multi-statement⁴ dfn logic; each <strong>Code field</strong> must return a value, simple or otherwise, which will be catenated with other fields and returned from <strong>∆F</strong>;</p>
 <p><strong>Code fields</strong> also provide a number of concise, convenient extensions, such as:</p>
 <ul>
 <li>
@@ -140,7 +140,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 <li>
 <p>Multiline (matrix) output built up field-by-field, left-to-right, from values and expressions in the calling environment or arguments to <strong>∆F</strong>;</p>
 <ul>
-<li>After all fields are generated, they are concatenated (after appropriate vertical conformation) to form a single <strong><em>returned</em></strong> character matrix. (See the examples below).</li>
+<li>After all fields are generated, they are concatenated (after appropriate vertical conformation) to form a single character matrix: <em><strong>the return value from</strong></em> <strong>∆F</strong>. (See the examples below).</li>
 </ul>
 </li>
 </ul>
@@ -193,11 +193,11 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 <li>
 <p>Then, from your Dyalog session (typically <code>#</code> or <code>⎕SE</code>), enter:</p>
 <p><code>]load ∆Fapl [-target=</code><strong><em>myns</em></strong><code>]</code></p>
-<p>The <code>]load</code> will automa<i>g</i>ically copy <strong>∆F_Help.html</strong> into namespace <strong>⍙Fapl</strong> or note its absence.</p>
+<p>Each time it is called, the <code>]load</code> will create both function <strong>∆F</strong> and namespace <strong>⍙Fapl</strong> in the active namespace (or <strong><em>myns</em></strong>). <strong>⍙Fapl</strong> contains utilities used by <strong>∆F</strong>. If  <strong>∆F_Help.html</strong> is available at <code>]load</code> time, it will be copied into <strong>⍙Fapl</strong> (or a message will note its absence).</p>
 </li>
 </ol>
 <blockquote>
-<p>Now, <strong>∆F</strong> is available in the active namespace (or <strong><em>myns</em></strong>), along with <strong>⍙Fapl</strong> (which contains utilities used by <strong>∆F</strong>).</p>
+<p>Now, <strong>∆F</strong> is available in the active namespace (or <strong><em>myns</em></strong>), along with <strong>⍙Fapl</strong>.</p>
 </blockquote>
 <hr>
 <h2>∆F EXAMPLES</h2>
@@ -254,12 +254,13 @@ Elephant Dumbo
 Mouse    Mickey
 </code></pre>
 <p>In the above example, we added an extra space after the longest
-animal name, <em>Elephant</em>.</p>
+animal name, <em>Elephant</em>, so it wouldn’t run into the next word, <em>Dumbo</em>.</p>
 <p><strong>But wait! There’s an easier way!</strong></p>
 <p>Here, you surely want the lefthand field to be guaranteed to have a space
-after <em>each</em> word without fiddling, so a <strong>Space field</strong> with at least
-one space would be way more convenient:</p>
-<pre><code>   ∆F 'Cat`◇Elephant`◇Mouse{ }Felix`◇Dumbo`◇Mickey'
+after <em>each</em> word without fiddling; a <strong>Space field</strong> with at least
+one space will solve the problem:</p>
+<pre><code class="language-apl">⍝                          ↓↓↓
+   ∆F 'Cat`◇Elephant`◇Mouse{ }Felix`◇Dumbo`◇Mickey'
 Cat      Felix
 Elephant Dumbo
 Mouse    Mickey
@@ -281,10 +282,10 @@ an                 Code
 example            Fields
 </code></pre>
 <p>Here is some multiline data we’ll add to our <strong>Code fields</strong>, using APL <em>mix</em> <code>↑</code> to generate multiline objects (matrices).</p>
-<pre><code>   fn← 'John' 'Mary' 'Ted'
-   ln← 'Smith' 'Jones' 'Templeton'
+<pre><code>   fnm←  'John' 'Mary' 'Ted'
+   lnm←  'Smith' 'Jones' 'Templeton'
    addr← '24 Mulberry Ln' '22 Smith St' '12 High St'
-   ∆F '{↑fn} {↑ln} {↑addr}'
+   ∆F '{↑fnm} {↑lnm} {↑addr}'
 John Smith     24 Mulberry Ln
 Mary Jones     22 Smith St
 Ted  Templeton 12 High St
@@ -978,7 +979,7 @@ sometimes a backtick is just a backtick.</p>
 </ul>
 <hr>
 </span>
-<p>© 2025 Sam the Cat Foundation. [20250912T085802]</p>
+<p>© 2025 Sam the Cat Foundation. [20250913T095129]</p>
 
 </body>
 </html>
