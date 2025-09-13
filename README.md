@@ -212,10 +212,10 @@ example            Fields
 Here is some multiline data we'll add to our **Code fields**, using APL _mix_ `↑` to generate multiline objects (matrices).
 
 ```
-   fnm←  'John' 'Mary' 'Ted'
-   lnm←  'Smith' 'Jones' 'Templeton'
+   fNm←  'John' 'Mary' 'Ted'
+   lNm←  'Smith' 'Jones' 'Templeton'
    addr← '24 Mulberry Ln' '22 Smith St' '12 High St'
-   ∆F '{↑fnm} {↑lnm} {↑addr}'
+   ∆F '{↑fNm} {↑lNm} {↑addr}'
 John Smith     24 Mulberry Ln
 Mary Jones     22 Smith St
 Ted  Templeton 12 High St
@@ -249,14 +249,15 @@ The temperature is │11│°C or │ 52.3│°F
 ### Box Mode
 
 What if you want to place a box around every **Code**, **Text**, **_and_** **Space field**?
+We can just use the **Box** mode option!
 
-We can just use **Box mode**: `0 0 1 ∆F...`, i.e. where `⍺[2]=1`.
 While we can't place boxes around text (or space) fields using `` `B ``,
-we can place a box around EACH field regardless of type by setting the
-third **∆F** option (⍺[2]) to `1`, i.e. setting **∆F**'s left argument to `0 0 1`:
+we can place a box around ***each*** field *regardless* of type. by setting **Box** mode (**∆F**'s
+third option) to `1`, *e.g.* setting **∆F**'s left argument to `0 0 1`:
 
 ```
    C← 11.3 29.55 59.99
+⍝      ↓¯¯¯ Box mode
    0 0 1 ∆F '`◇The temperature is {"I2" $ C}`◇°C or {"F5.1" $ 32+9×C÷5}`◇°F'
 ┌───────────────────┬──┬──────┬─────┬──┐
 │                   │11│      │ 52.3│  │
@@ -867,4 +868,4 @@ sometimes a backtick is just a backtick.
 
 </span>
 
-(C) 2025 Sam the Cat Foundation. [20250913T095129]
+(C) 2025 Sam the Cat Foundation. [20250913T100004]

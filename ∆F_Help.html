@@ -282,10 +282,10 @@ an                 Code
 example            Fields
 </code></pre>
 <p>Here is some multiline data we’ll add to our <strong>Code fields</strong>, using APL <em>mix</em> <code>↑</code> to generate multiline objects (matrices).</p>
-<pre><code>   fnm←  'John' 'Mary' 'Ted'
-   lnm←  'Smith' 'Jones' 'Templeton'
+<pre><code>   fNm←  'John' 'Mary' 'Ted'
+   lNm←  'Smith' 'Jones' 'Templeton'
    addr← '24 Mulberry Ln' '22 Smith St' '12 High St'
-   ∆F '{↑fnm} {↑lnm} {↑addr}'
+   ∆F '{↑fNm} {↑lNm} {↑addr}'
 John Smith     24 Mulberry Ln
 Mary Jones     22 Smith St
 Ted  Templeton 12 High St
@@ -310,12 +310,13 @@ The temperature is │11│°C or │ 52.3│°F
                    └──┘      └─────┘
 </code></pre>
 <h3>Box Mode</h3>
-<p>What if you want to place a box around every <strong>Code</strong>, <strong>Text</strong>, <strong><em>and</em></strong> <strong>Space field</strong>?</p>
-<p>We can just use <strong>Box mode</strong>: <code>0 0 1 ∆F...</code>, i.e. where <code>⍺[2]=1</code>.
-While we can’t place boxes around text (or space) fields using <code>`B</code>,
-we can place a box around EACH field regardless of type by setting the
-third <strong>∆F</strong> option (⍺[2]) to <code>1</code>, i.e. setting <strong>∆F</strong>’s left argument to <code>0 0 1</code>:</p>
+<p>What if you want to place a box around every <strong>Code</strong>, <strong>Text</strong>, <strong><em>and</em></strong> <strong>Space field</strong>?
+We can just use the <strong>Box</strong> mode option!</p>
+<p>While we can’t place boxes around text (or space) fields using <code>`B</code>,
+we can place a box around <em><strong>each</strong></em> field <em>regardless</em> of type. by setting <strong>Box</strong> mode (<strong>∆F</strong>’s
+third option) to <code>1</code>, <em>e.g.</em> setting <strong>∆F</strong>’s left argument to <code>0 0 1</code>:</p>
 <pre><code>   C← 11.3 29.55 59.99
+⍝      ↓¯¯¯ Box mode
    0 0 1 ∆F '`◇The temperature is {&quot;I2&quot; $ C}`◇°C or {&quot;F5.1&quot; $ 32+9×C÷5}`◇°F'
 ┌───────────────────┬──┬──────┬─────┬──┐
 │                   │11│      │ 52.3│  │
@@ -979,7 +980,7 @@ sometimes a backtick is just a backtick.</p>
 </ul>
 <hr>
 </span>
-<p>© 2025 Sam the Cat Foundation. [20250913T095129]</p>
+<p>© 2025 Sam the Cat Foundation. [20250913T100004]</p>
 
 </body>
 </html>
