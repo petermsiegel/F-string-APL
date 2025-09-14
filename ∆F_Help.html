@@ -40,7 +40,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
     background-color: #ddfafaff;
     padding: 2px 4px;
     border-radius: 3px;
-    font-family: "APL386 Unicode", APL385, "APL385 Unicode", 
+    font-family: "APL386 Unicode", APL386, "APL385 Unicode", APL385,
        "Courier New", Courier, Lucida Console", "Consolas", monospace;
   }
   /* Code blocks */ 
@@ -52,8 +52,8 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
     padding: 15px;
     border-radius: 5px;
     overflow-x: auto; 
-    font-family: "APL386 Unicode", APL386, "APL385 Unicode", APL385, "Courier New", Courier,
-    "Lucida Console", "Consolas", monospace;
+    font-family: "APL386 Unicode", APL386, "APL385 Unicode", APL385, 
+        "Courier New", Courier, "Lucida Console", "Consolas", monospace;
   }
   table {
     background-color: #eae9ebaa;
@@ -202,8 +202,8 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 <hr>
 <h2>∆F EXAMPLES</h2>
 <p>Before providing information on <strong>∆F</strong> syntax and other details, <em>let’s start with some examples</em>…</p>
-<p>Set some values we’ll need for our examples…</p>
-<pre><code>   ⎕RL ⎕IO ⎕ML←2342342 0 1         ⍝ ⎕RL: Ensure our random #s aren't random!
+<p>First, let’s set some context.</p>
+<pre><code>   ⎕IO ⎕ML← 0 1        
 </code></pre>
 <h3>Code Fields</h3>
 <p>Here are <strong>Code fields</strong> with simple variables.</p>
@@ -221,7 +221,8 @@ The temperature is 35°C or  95°F.
 2 32                
 </code></pre>
 <p>Here, we assign the <em>f-string</em> to an APL variable, then call <strong>∆F</strong> twice!</p>
-<pre><code>   names← 'Mary' 'Jack' 'Tony' ◇ prize← 1000
+<pre><code>   ⎕RL← 2342342                 ⍝ ⎕RL: Ensure our random #s aren't random!
+   names← 'Mary' 'Jack' 'Tony' ◇ prize← 1000
    f← 'Customer {names⊃⍨ ?≢names} wins £{?prize}!'
    ∆F f
 Customer Jack wins £80!
@@ -248,7 +249,8 @@ example
 <p>Two adjacent <strong>Text fields</strong> can be separated by a Null <strong>Space field</strong> <code>{}</code>,
 for example when at least one field contains multiline input that you
 want formatted separately from others, keeping each field in is own rectangular space:</p>
-<pre><code>   ∆F 'Cat`◇Elephant `◇Mouse{}Felix`◇Dumbo`◇Mickey'
+<pre><code>⍝  Extra space here ↓ 
+   ∆F 'Cat`◇Elephant `◇Mouse{}Felix`◇Dumbo`◇Mickey'
 Cat      Felix
 Elephant Dumbo
 Mouse    Mickey
@@ -267,7 +269,7 @@ Mouse    Mickey
 </code></pre>
 <h3>Code Fields (Continued)</h3>
 <p>And this is the same example, but with two <strong>Code fields</strong> separated
-by a <strong>Text field</strong> with a single space.</p>
+by a <strong>Text field</strong> with a single space. (We could have used a <strong>Space field</strong> <code>{ }</code> here as well.)</p>
 <pre><code>   ∆F '{↑&quot;Cat&quot; &quot;Elephant&quot; &quot;Mouse&quot;} {↑&quot;Felix&quot; &quot;Dumbo&quot; &quot;Mickey&quot;}'
 Cat      Felix
 Elephant Dumbo
@@ -980,7 +982,7 @@ sometimes a backtick is just a backtick.</p>
 </ul>
 <hr>
 </span>
-<p>© 2025 Sam the Cat Foundation. [20250913T100004]</p>
+<p>© 2025 Sam the Cat Foundation. [20250913T170504]</p>
 
 </body>
 </html>

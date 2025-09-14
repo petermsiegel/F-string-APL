@@ -95,10 +95,10 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 
 Before providing information on **∆F** syntax and other details, _let's start with some examples_...
 
-Set some values we'll need for our examples...
+First, let's set some context.
 
 ```
-   ⎕RL ⎕IO ⎕ML←2342342 0 1         ⍝ ⎕RL: Ensure our random #s aren't random!
+   ⎕IO ⎕ML← 0 1        
 ```
 
 
@@ -127,6 +127,7 @@ The temperature is 35°C or  95°F.
 
 Here, we assign the *f-string* to an APL variable, then call **∆F** twice!
 ```
+   ⎕RL← 2342342                 ⍝ ⎕RL: Ensure our random #s aren't random!
    names← 'Mary' 'Jack' 'Tony' ◇ prize← 1000
    f← 'Customer {names⊃⍨ ?≢names} wins £{?prize}!'
    ∆F f
@@ -163,6 +164,7 @@ for example when at least one field contains multiline input that you
 want formatted separately from others, keeping each field in is own rectangular space:
 
 ```
+⍝  Extra space here ↓ 
    ∆F 'Cat`◇Elephant `◇Mouse{}Felix`◇Dumbo`◇Mickey'
 Cat      Felix
 Elephant Dumbo
@@ -189,7 +191,7 @@ Mouse    Mickey
 ### Code Fields (Continued)
 
 And this is the same example, but with two **Code fields** separated
-by a **Text field** with a single space.
+by a **Text field** with a single space. (We could have used a **Space field** `{ }` here as well.)
 
 ```
    ∆F '{↑"Cat" "Elephant" "Mouse"} {↑"Felix" "Dumbo" "Mickey"}'
@@ -868,4 +870,4 @@ sometimes a backtick is just a backtick.
 
 </span>
 
-(C) 2025 Sam the Cat Foundation. [20250913T100004]
+(C) 2025 Sam the Cat Foundation. [20250913T170504]
