@@ -731,7 +731,7 @@ The temperature is 35°C or 95.0°F
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Element <div style="width:200px"></div></th>
+<th style="text-align:left">Element <div style="width:130px"></div></th>
 <th style="text-align:left">Description</th>
 </tr>
 </thead>
@@ -742,35 +742,35 @@ The temperature is 35°C or 95.0°F
 </tr>
 <tr>
 <td style="text-align:left"><strong><em>args</em></strong></td>
-<td style="text-align:left">elements of ⍵ after the <em>f-string</em>, each of which can be accessed in the <em>f-string</em> via a <strong>`⍵</strong> shortcut (or ordinary <strong>⍵</strong> expression)</td>
+<td style="text-align:left">elements of ⍵ after the <em>f-string</em>, each of which can be accessed in the <em>f-string</em> via a <code>`⍵</code> shortcut (or an ordinary <code>⍵</code> expression).</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong><em>options</em></strong></td>
-<td style="text-align:left">[ options← [ 0 [ 0 [ 0 [ 0 ] ] ] ] | ‘help’ ]</td>
+<td style="text-align:left"><strong><em>options</em></strong>: <em>mode</em></td>
+<td style="text-align:left">[ <code>options←</code> [ <code>0</code> [ <code>0</code> [ <code>0</code> [ <code>0</code> ] ] ] ] | <code>'help'</code> ]</td>
 </tr>
 <tr>
-<td style="text-align:left">options[0]:<br> <em>DFN output mode</em></td>
-<td style="text-align:left"><em><strong>DFN</strong></em>: If <code>1</code>, <strong>∆F</strong> returns a dfn, which (upon execution) produces the same output as the default mode. Default: <strong>∆F</strong> returns a char. matrix.</td>
+<td style="text-align:left"> options[0]:<br> <em>dfn output mode</em></td>
+<td style="text-align:left"><em><strong>DFN</strong></em>: If <code>1</code>, <strong>∆F</strong> returns a dfn, which (upon execution) produces the same output as the default mode.<BR><strong>Default</strong>: <strong>∆F</strong> returns a char. matrix.</td>
 </tr>
 <tr>
-<td style="text-align:left">options[1]:<br> <em>debug/display code</em></td>
-<td style="text-align:left"><em><strong>DBG</strong></em>: If <code>1</code>: displays the code that the <em>f-string</em> <strong><em>actually</em></strong> generates (if <strong><em>DFN</em></strong> is set to <code>1</code>, this will include the embedded <em>f-string</em> <em>source</em> as <code>`⍵0</code>).</td>
+<td style="text-align:left"> options[1]:<br> <em>debug</em></td>
+<td style="text-align:left"><em><strong>DBG</strong></em>: If <code>1</code>, displays the code that the <em>f-string</em> <strong><em>actually</em></strong> generates; if <strong><em>DFN</em></strong> is also <code>1</code>, this will include the embedded <em>f-string</em> source (accessed as <code>`⍵0</code>). Newline characters are rendered visibly as <code>␍</code>. After displaying the code, it is executed per any other options.</td>
 </tr>
 <tr>
-<td style="text-align:left">options[2]:<br> <em>box fields</em></td>
-<td style="text-align:left"><em><strong>BOX</strong></em>: If <code>1</code>, each field (except a Null Text field) is boxed separately. If <code>0</code>, you may box any <strong>Code fields</strong> you want using the <em>box</em> <code>`B</code> routine. <em><strong>BOX</strong></em> mode can be used both with <em><strong>DFN</strong></em> and default output mode.</td>
+<td style="text-align:left"> options[2]:<br> <em>box fields</em></td>
+<td style="text-align:left"><em><strong>BOX</strong></em>: If <code>1</code>, each field (except a <strong>Null text</strong> field) is boxed separately.<BR><strong>Default</strong>: Nothing is boxed automatically. Any <strong>Code field</strong> expression may be explicitly boxed using the <strong>Box</strong> shortcut, <code>`B</code>.<br><strong>Note</strong>: <em><strong>BOX</strong></em> mode can be used both with <em><strong>DFN</strong></em> and default output mode.</td>
 </tr>
 <tr>
-<td style="text-align:left">options[3]:<br> <em>inline routines</em></td>
-<td style="text-align:left"><em><strong>INLINE</strong></em>: If <code>1</code>, a copy of each needed internal support function is included in the result. Default: calls are made to library  routines in <strong>⍙Fapl</strong>, created when <strong>∆Fapl</strong> and <strong>∆F</strong> was loaded.<br><small>Setting <em><strong><em>INLINE</em></strong></em> to <code>1</code> is only useful if the <em><strong>DFN</strong></em> option is set. This option is experimental and may simply disappear one day.</small></td>
+<td style="text-align:left"> options[3]:<br> <em>inline routines</em></td>
+<td style="text-align:left"><em><strong>INLINE</strong></em>: If <code>1</code>, the code of each internal support function used is included in the result.<BR><strong>Default</strong>: Calls are made to library routines in <strong>⍙Fapl</strong>, created when <strong>∆Fapl</strong> and <strong>∆F</strong> was loaded.<br><strong>Note:</strong> <small>Setting <em><strong><em>INLINE</em></strong></em> to <code>1</code> is only useful if the <em><strong>DFN</strong></em> option is set. This option is experimental and may simply disappear one day.</small></td>
 </tr>
 <tr>
-<td style="text-align:left"><center>‘help’</center></td>
+<td style="text-align:left">‘help’</td>
 <td style="text-align:left">If <code>'help'</code> is specified, this amazing documentation is displayed.</td>
 </tr>
 <tr>
 <td style="text-align:left"><strong><em>result</em></strong></td>
-<td style="text-align:left">If <code>0=⊃options</code>, the result is always a character matrix. If <code>1=⊃options</code>, the result is a dfn that, <em>when executed in the same environment with the same arguments</em>, generates that same character matrix. <br>If an error is signalled, no result is returned.</td>
+<td style="text-align:left">If <code>0=⊃options</code>, the result is always a character matrix.<br>If <code>1=⊃options</code>, the result is a dfn that, <em>when executed in the same environment with the same arguments</em>, generates that same character matrix. <br><strong>Note</strong>: If an error is signalled, no result is returned.</td>
 </tr>
 </tbody>
 </table>
@@ -986,7 +986,7 @@ sometimes a backtick is just a backtick.</p>
 </ul>
 <hr>
 </span>
-<p>© 2025 Sam the Cat Foundation. [20250914T095857]</p>
+<p>© 2025 Sam the Cat Foundation. [20250914T103109]</p>
 
 </body>
 </html>
