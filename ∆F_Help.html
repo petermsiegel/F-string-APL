@@ -29,14 +29,14 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 <style> 
   p {
     font-family: Georgia;
-    font-size:   120%;
+    
     line-height: 1.2;
   }
   li {
   }
   /* Inline code */
   code { 
-    font-size: 110%;
+    
     background-color: #ddfafaff;
     padding: 2px 4px;
     border-radius: 3px;
@@ -47,7 +47,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
   pre { 
     background-color: #ddfafaff;  
     color: #0a0a0aff; 
-    font-size: 110%;
+    
     line-height: 105%;
     padding: 15px;
     border-radius: 5px;
@@ -74,7 +74,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
     vertical-align: top;
   }
   blockquote {
-    font-size: 110%;
+    
     background-color: #f4f5f5ff;  
   }
   .content-with-bar {
@@ -92,7 +92,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 </blockquote>
 <hr>
 <ul>
-<li><a href="#table-of-contents">Table of Contents</a></li>
+<!-- TOC Link Suppressed -->
 </ul>
 <p><strong>∆F</strong> <em>f-strings</em> can concisely include:</p>
 <ul>
@@ -882,7 +882,7 @@ sometimes a backtick is just a backtick.</p>
 <td style="text-align:left"><code>[⍺]`T ⍵</code>. Displays timestamp(s) <code>⍵</code> according to date-time template <code>⍺</code>. <code>⍵</code> is one or more APL timestamps <code>⎕TS</code>. <code>⍺</code> is a date-time template in <code>1200⌶</code> format. If omitted, <code>⍺← 'YYYY-MM-DD hh:mm:ss'</code>.</td>
 </tr>
 <tr>
-<td style="text-align:left">`W <span style="color: red;font-size: 70%;"><strong>EXPERIMENTAL!</strong></span></td>
+<td style="text-align:left">`W <span style="color: red;"><strong>EXPERIMENTAL!</strong></span></td>
 <td style="text-align:left">Wrap</td>
 <td style="text-align:left"><code>[⍺]`W ⍵</code>. Wraps the rows of simple arrays in ⍵ in decorators <code>0⊃2⍴⍺</code> (on the left) and <code>1⊃2⍴⍺</code> (on the right). If omitted, <code>⍺←''''</code>. <em>See details below.</em></td>
 </tr>
@@ -925,7 +925,7 @@ sometimes a backtick is just a backtick.</p>
 <li>If an element of the dfn’s right argument <strong>⍵</strong> is accessed at runtime via any means, shortcut or traditional, that element <strong><em>must</em></strong> exist.</li>
 </ol>
 <div class="content-with-bar">
-<h3>Wrap Shortcut: Details <span style="color: red;font-size: 80%;"> <strong>(EXPERIMENTAL)</strong></span></h3>
+<h3>Wrap Shortcut: Details <span style="color: red;"> <strong>(EXPERIMENTAL)</strong></span></h3>
 <ol>
 <li>Syntax: <code>[⍺←''''] `W ⍵</code>.</li>
 <li>Let <code>L←0⊃2⍴⍺</code> and <code>R←1⊃2⍴⍺</code>.</li>
@@ -937,7 +937,7 @@ sometimes a backtick is just a backtick.</p>
 </div>
 <hr>
 <h3>Table of Contents</h3>
-<span style="font-size: 70%;">
+<span style="">
 <ul>
 <li><a href="#f--formatted-string-literals">∆F — Formatted String Literals</a>
 <ul>
@@ -980,7 +980,7 @@ sometimes a backtick is just a backtick.</p>
 <li><a href="#code-field-shortcuts">Code Field Shortcuts</a></li>
 <li><a href="#omega-shortcut-expressions-details">Omega Shortcut Expressions: Details</a></li>
 <li><a href="#wrap-shortcut-details-experimental">Wrap Shortcut: Details  <strong>(EXPERIMENTAL)</strong></a></li>
-<li><a href="#table-of-contents">Table of Contents</a></li>
+<!-- TOC Link Suppressed -->
 </ul>
 </li>
 </ul>
