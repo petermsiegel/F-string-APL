@@ -10,7 +10,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 <style> 
   p {
     font-family: Georgia;
-    font-size: 110%;   /* 110% */
+    font-size:   120%;
     line-height: 1.2;
   }
   li {
@@ -71,7 +71,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 
 ### ∆F In Brief
 
-> <center><p style="padding-left: 15px;padding-right: 5px;padding-bottom: 5px;color: white; background-color: #4f62f0ff;"><b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.¹<br><span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>,² &ensp;but designed for APL.&nbsp;</span></p></center>
+> <center><p style="padding-left: 15px;padding-right: 5px;padding-top: 5px;padding-bottom: 5px;color: white; background-color: #4f62f0ff;"><b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.¹<br><span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>,² &ensp;but designed for APL.&nbsp;</span></p></center>
 
 ---
 
@@ -932,4 +932,4 @@ sometimes a backtick is just a backtick.
 
 </span>
 
-(C) 2025 Sam the Cat Foundation. [20250914T091515]
+(C) 2025 Sam the Cat Foundation. [20250914T095857]
