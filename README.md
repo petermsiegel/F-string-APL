@@ -17,6 +17,9 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 
 ---
 
+  - [Table of Contents](#table-of-contents)
+
+
 **∆F** *f-strings* can concisely include:
 
 - **Text fields**, expressions that can generate multiline Unicode text, using the sequence `` `◇ `` (**backtick** + **statement separator**³) to generate a newline (<small>**⎕UCS&nbsp;13**</small>);
@@ -727,7 +730,7 @@ Below, we summarize key information you've already gleaned from the examples.
 | options[0]:<br> *DFN output mode*  | ***DFN***: If `1`, **∆F** returns a dfn, which (upon execution) produces the same output as the default mode. Default: **∆F** returns a char. matrix.                                                                                                                                                 |
 | options[1]:<br> *debug/display code*  | ***DBG***: If `1`: displays the code that the *f-string* **_actually_** generates (if **_DFN_** is set to `1`, this will include the embedded *f-string* _source_ as `` `⍵0 ``).                                                                                                                              |
 | options[2]:<br> *box fields* | ***BOX***: If `1`, each field (except a Null Text field) is boxed separately. If `0`, you may box any **Code fields** you want using the _box_ `` `B `` routine. ***BOX*** mode can be used both with ***DFN*** and default output mode.                                                                   |
-| options[3]:<br> *inline routines* | ***INLINE***: If `1`, a copy of each needed internal support function is included in the result. Default: calls are made to library  routines in **⍙Fapl**, created when **∆Fapl** and **∆F** was loaded.<br>Setting ***_INLINE_*** to `1` is only useful if the ***DFN*** option is set. This option is experimental and may simply disappear one day. |
+| options[3]:<br> *inline routines* | ***INLINE***: If `1`, a copy of each needed internal support function is included in the result. Default: calls are made to library  routines in **⍙Fapl**, created when **∆Fapl** and **∆F** was loaded.<br><small>Setting ***_INLINE_*** to `1` is only useful if the ***DFN*** option is set. This option is experimental and may simply disappear one day.</small> |
 | <center>'help'</center>                            | If `'help'` is specified, this amazing documentation is displayed.                                                                                                                                                                                                                             |
 | **_result_**                                         | If `0=⊃options`, the result is always a character matrix. If `1=⊃options`, the result is a dfn that, _when executed in the same environment with the same arguments_, generates that same character matrix. <br>If an error is signalled, no result is returned.                               |
 
@@ -827,7 +830,7 @@ sometimes a backtick is just a backtick.
 
 ---
 
-**Table of Contents**
+### Table of Contents
 
 <span style="font-size: 70%;">
 
@@ -865,9 +868,10 @@ sometimes a backtick is just a backtick.
   - [Code Field Shortcuts](#code-field-shortcuts)
   - [Omega Shortcut Expressions: Details](#omega-shortcut-expressions-details)
   - [Wrap Shortcut: Details  **(EXPERIMENTAL)**](#wrap-shortcut-details-experimental)
+  - [Table of Contents](#table-of-contents)
 
 --- 
 
 </span>
 
-(C) 2025 Sam the Cat Foundation. [20250913T173219]
+(C) 2025 Sam the Cat Foundation. [20250914T091515]
