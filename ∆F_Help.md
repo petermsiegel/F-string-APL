@@ -25,7 +25,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
   pre { 
     background-color: #ddfafaff;  
     color: #0a0a0aff; 
-    font-size: 110%;
+    font-size: 92%;
     line-height: 105%;
     padding: 15px;
     border-radius: 5px;
@@ -361,7 +361,7 @@ The temperature is 11°C or 51.8°F
 
 ### Referencing the F-string Itself 
 
-The expression `` `⍵0 `` refers to the *f-string* itself.¹ Try this yourself:²
+The expression `` `⍵0 `` always refers to the *f-string* itself.¹ Try this yourself:²
 
 ```
    ∆F 'Our string {`⍵0↓} is {≢`⍵0} characters'
@@ -371,7 +371,7 @@ The expression `` `⍵0 `` refers to the *f-string* itself.¹ Try this yourself:
 
 | Notes                                                                                             |
 | :------------------------------------------------------------------------------------------------ |
-| ¹ `` `⍵0 `` refers to the *f-string*, independent of whether there are additional elements in the right argument to **∆F**.             |
+| ¹ `` `⍵0 `` refers to the *f-string* independent of the the number of elements in the right argument  to **∆F** (*effectively*, `⊆⍵`).     |
 | ² We explain the `↓` before the closing brace `}` under **_Self-Documenting Code Fields_** below. |
 
 </div>
@@ -933,5 +933,5 @@ sometimes a backtick is just a backtick.
 </span>
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250915T171336]
+(C) 2025 Sam the Cat Foundation. [20250915T190157]
 </span>

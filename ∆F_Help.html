@@ -44,7 +44,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
   pre { 
     background-color: #ddfafaff;  
     color: #0a0a0aff; 
-    font-size: 110%;
+    font-size: 92%;
     line-height: 105%;
     padding: 15px;
     border-radius: 5px;
@@ -352,7 +352,7 @@ The temperature is 11°C or 51.8°F
                    20      68.0
 </code></pre>
 <h3>Referencing the F-string Itself</h3>
-<p>The expression <code>`⍵0</code> refers to the <em>f-string</em> itself.¹ Try this yourself:²</p>
+<p>The expression <code>`⍵0</code> always refers to the <em>f-string</em> itself.¹ Try this yourself:²</p>
 <pre><code>   ∆F 'Our string {`⍵0↓} is {≢`⍵0} characters'
 </code></pre>
 <div style="margin-left: 20px;">
@@ -364,7 +364,7 @@ The temperature is 11°C or 51.8°F
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">¹ <code>`⍵0</code> refers to the <em>f-string</em>, independent of whether there are additional elements in the right argument to <strong>∆F</strong>.</td>
+<td style="text-align:left">¹ <code>`⍵0</code> refers to the <em>f-string</em> independent of the the number of elements in the right argument  to <strong>∆F</strong> (<em>effectively</em>, <code>⊆⍵</code>).</td>
 </tr>
 <tr>
 <td style="text-align:left">² We explain the <code>↓</code> before the closing brace <code>}</code> under <strong><em>Self-Documenting Code Fields</em></strong> below.</td>
@@ -988,7 +988,7 @@ sometimes a backtick is just a backtick.</p>
 <hr>
 </span>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250915T171336]
+(C) 2025 Sam the Cat Foundation. [20250915T190157]
 </span>
 
 </body>
