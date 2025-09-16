@@ -3,7 +3,7 @@ Preview side-by-side: cmd-K, V,
 md->HTML: opt-shift-M
 Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help'
 -->
-
+ 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown.css">
 
 <!-- . Style stuff related to APL and my random preferences... -->
@@ -528,9 +528,7 @@ Mary Jones  23
 
 > The _next_ best thing: the use of `` `⍵ `` in **Code field** expressions...
 
-We said we'd present the use of omega shortcuts with implicit indices `` `⍵ `` in **Code fields**.
-
-The expression `` `⍵ `` selects the _next_ element of the right argument `⍵` to **∆F**, defaulting to `` `⍵1 `` when first encountered, i.e. if there are **_no_** `` `⍵ `` elements to the **_left_** in the entire *f-string*. If there is any such expression (e.g. `` `⍵5 ``), then `` `⍵ `` points to the element after that one (here, `` `⍵6 ``). If the item to the left is `` `⍵ ``, then we simply increment the index by `1` from that one.
+We said we'd present the use of omega shortcuts with implicit indices `` `⍵ `` in **Code fields**. The expression `` `⍵ `` selects the _next_ element of the right argument `⍵` to **∆F**, defaulting to `` `⍵1 `` when first encountered, i.e. if there are **_no_** `` `⍵ `` elements to the **_left_** in the entire *f-string*. If there is any such expression (*e.g.* `` `⍵5 ``), then `` `⍵ `` points to the element after that one (*e.g.* `` `⍵6 ``). If the item to the left is `` `⍵ ``, then we simply increment the index by `1` from that one.
 
 **Let's try an example.** Here, we display arbitrary 2-dimensional expressions, one above the other.
 `` `⍵ `` refers to the **_next_** argument in sequence, left to right, starting with `` `⍵1 ``, the first, i.e. `(⍵⊃⍨ 1+⎕IO)`. So, from left to right `` `⍵ `` is `` `⍵1 ``, `` `⍵2 ``, and `` `⍵3 ``. _Easy peasy._
@@ -832,7 +830,7 @@ sometimes a backtick is just a backtick.
 
 ### Table of Contents
 
-<span style="font-size: 70%;">
+<span style="font-size: 80%;">
 
 - [∆F — Formatted String Literals](#f--formatted-string-literals)
   - [∆F In Brief](#f-in-brief)
@@ -874,4 +872,6 @@ sometimes a backtick is just a backtick.
 
 </span>
 
-(C) 2025 Sam the Cat Foundation. [20250914T154935]
+<span style="font-family:cursive;" >
+(C) 2025 Sam the Cat Foundation. [20250915T171336]
+</span>
