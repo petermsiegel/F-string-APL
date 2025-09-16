@@ -25,7 +25,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
   pre { 
     background-color: #ddfafaff;  
     color: #0a0a0aff; 
-    font-size: 92%;
+    font-size: 90%;
     line-height: 105%;
     padding: 15px;
     border-radius: 5px;
@@ -933,5 +933,5 @@ sometimes a backtick is just a backtick.
 </span>
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250915T190157]
+(C) 2025 Sam the Cat Foundation. [20250915T190334]
 </span>
