@@ -75,14 +75,33 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
     font-family: Georgia,"Courier New", Courier, "Lucida Console", "Consolas", monospace;
     vertical-align: top;
   }
+  tr:nth-child(odd) {
+    background-color: #ebebebff; /* Light grey for odd rows */
+  }
+  tr:nth-child(even) {
+    background-color: #ffffffff; /* White for even rows */
+  }
   blockquote {
     font-size: 110%;
     background-color: #f4f5f5ff;  
   }
-  .content-with-bar {
+  /*
+  ul, li {
+    font-size: 100%;
+    line-height: 140%;
+  }
+  */
+  .content-with-left-bar {
     border-left: 2px solid #ea2f0eff; /* Adjust color and thickness as needed */
     padding-left: 15px; /* Space between the bar and content */
     margin-left: 0px; /* Optional: Space from the left edge of the page */
+    height: auto; /* Or set a fixed height, e.g., 200px */
+    overflow: hidden; /* Clear floats if internal content uses them */
+  }
+   .content-with-right-bar {
+    border-right: 2px solid #229502ff; /* Adjust color and thickness as needed */
+    padding-right: 15px; /* Space between the bar and content */
+    margin-right: 0px; /* Optional: Space from the left edge of the page */
     height: auto; /* Or set a fixed height, e.g., 200px */
     overflow: hidden; /* Clear floats if internal content uses them */
   }
@@ -206,6 +225,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 </blockquote>
 <hr>
 <h2>∆F EXAMPLES</h2>
+<div class="content-with-right-bar">   
 <p>Before providing information on <strong>∆F</strong> syntax and other details, <em>let’s start with some examples</em>…</p>
 <p>First, let’s set some context.</p>
 <pre><code>   ⎕IO ⎕ML← 0 1        
@@ -401,7 +421,7 @@ The sun's core is at 15,000,000°C or 27,000,032°F
 </div>
 <p>Let’s use the <code>`C</code> shortcut to add the commas to the temperatures!</p>
 <pre><code>   sun_core← 15E6               ⍝ 15000000 is a bit hard to parse!
-   **∆F** 'The sun''s core is at {`C sun_core}°C or {`C C2F sun_core}°F.'
+   ∆F 'The sun''s core is at {`C sun_core}°C or {`C C2F sun_core}°F.'
 The sun's core is at 15,000,000°C or 27,000,032°F.
 </code></pre>
 <p>Cool! OK, not literally.</p>
@@ -424,18 +444,17 @@ placing single quotes around each such element. Non-character data is returned a
 <p>Let’s look at a couple of simple examples:</p>
 <p>First, let’s use the <code>`Q</code> shortcut to place quotes around the simple character
 arrays in its right argument, <code>⍵</code>. This is useful when you want to distinguish between character output that might include numbers and <em>actual</em> numeric output.</p>
-<pre><code>   ∆F '{`Q 1 2 &quot;three&quot; 4 5 (⍪1 &quot;2&quot;) (⍪&quot;cats&quot; &quot;dogs&quot;)}'
+<pre><code>   ∆F '{`Q 1 2 &quot;three&quot; 4 5 (⍪1 &quot;2&quot;) (⍪&quot;cats&quot; &quot;dogs&quot;)}'   
 1 2  'three'  4 5     1    'cats'
                     '2'    'dogs'
 </code></pre>
-<p>And here’s an example with a simple, mixed vector.
-First, we display an object without using the <strong>Quote</strong> shortcut.
-Are you <strong><em>sure</em></strong> which elements are numbers and which are character scalars?</p>
+<p>And here’s an example with a simple, mixed vector (<em>i.e.</em> with character and numeric scalars only). First, we display an object without using the <strong>Quote</strong> shortcut.
+Are you <strong><em>sure</em></strong> which elements are numeric and which character scalars?</p>
 <pre><code>   ∆F '{1 2 &quot;3&quot; 4 &quot;5&quot;}'
 1 2 3 4 5
 </code></pre>
 <p>Now, we show it <strong><em>with</em></strong> the <strong>Quote</strong> shortcut.
-Voila, quotes appear around the character digits, but not the actual numbers!</p>
+Voilà, quotes appear around the character digits, but not the actual numbers!</p>
 <pre><code>   ∆F '{`Q 1 2 &quot;3&quot; 4 &quot;5&quot;}'
 1 2 '3' 4 '5'
 </code></pre>
@@ -443,7 +462,7 @@ Voila, quotes appear around the character digits, but not the actual numbers!</p
 <blockquote>
 <p>Wrapping results in left and right decorators</p>
 </blockquote>
-<div class="content-with-bar">
+<div class="content-with-left-bar">
 <p>Here we make a quick mention of the <strong><em>experimental</em></strong> shortcut <strong>Wrap</strong>,¹ <code>`W</code>, which is used when you want a <strong><em>decorator</em></strong> string that is placed immediately to the left or right of <strong><em>each</em></strong> row of simple objects in the right argument, <code>⍵</code>.</p>
 <ul>
 <li>The decorators are in <code>⍺</code>, the left argument to <strong>Wrap</strong>: the left decorator, <code>0⊃2⍴⍺</code>, and the right decorator, <code>1⊃2⍴⍺</code>, with <code>⍺</code> defaulting to a single quote.</li>
@@ -687,6 +706,7 @@ The temperature is 35°C or 95.0°F
 ∆F t 35 → 1.7E¯4 |   0% ⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕
    T 35 → 8.9E¯6 | -95% ⎕⎕
 </code></pre>
+</div>
 <p>Below, we summarize key information you’ve already gleaned from the examples.</p>
 <h2>∆F Syntax and Other Information</h2>
 <h3>∆F Call Syntax Overview</h3>
@@ -925,7 +945,7 @@ sometimes a backtick is just a backtick.</p>
 <li>You can only access the 0-th element of <strong>⍵</strong>, the <em>f-string</em> itself via an <em>explicitly indexed omega</em> <code>`⍵0</code> or <code>⍹0</code>. The <em>implicitly indexed</em> omega always increments its index <em>before</em> use, so the first index that can be used <strong><em>implicitly</em></strong> is <strong>1</strong>, i.e. <code>`⍵1</code> or <code>⍹1</code>.</li>
 <li>If an element of the dfn’s right argument <strong>⍵</strong> is accessed at runtime via any means, shortcut or traditional, that element <strong><em>must</em></strong> exist.</li>
 </ol>
-<div class="content-with-bar">
+<div class="content-with-left-bar">
 <h3>Wrap Shortcut: Details <span style="color: red;font-size: 80%;"> <strong>(EXPERIMENTAL)</strong></span></h3>
 <ol>
 <li>Syntax: <code>[⍺←''''] `W ⍵</code>.</li>
@@ -988,7 +1008,7 @@ sometimes a backtick is just a backtick.</p>
 <hr>
 </span>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250915T190334]
+(C) 2025 Sam the Cat Foundation. [20250916T151145]
 </span>
 
 </body>

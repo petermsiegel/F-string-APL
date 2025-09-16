@@ -96,6 +96,8 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 
 ## ∆F EXAMPLES
 
+<div class="content-with-right-bar">   
+
 Before providing information on **∆F** syntax and other details, _let's start with some examples_...
 
 First, let's set some context.
@@ -346,7 +348,7 @@ Let's use the `` `C `` shortcut to add the commas to the temperatures!
 
 ```
    sun_core← 15E6               ⍝ 15000000 is a bit hard to parse!
-   **∆F** 'The sun''s core is at {`C sun_core}°C or {`C C2F sun_core}°F.'
+   ∆F 'The sun''s core is at {`C sun_core}°C or {`C C2F sun_core}°F.'
 The sun's core is at 15,000,000°C or 27,000,032°F.
 ```
 
@@ -378,14 +380,13 @@ First, let's use the `` `Q `` shortcut to place quotes around the simple charact
 arrays in its right argument, `⍵`. This is useful when you want to distinguish between character output that might include numbers and _actual_ numeric output.
 
 ```
-   ∆F '{`Q 1 2 "three" 4 5 (⍪1 "2") (⍪"cats" "dogs")}'
+   ∆F '{`Q 1 2 "three" 4 5 (⍪1 "2") (⍪"cats" "dogs")}'   
 1 2  'three'  4 5     1    'cats'
                     '2'    'dogs'
 ```
 
-And here's an example with a simple, mixed vector.
-First, we display an object without using the **Quote** shortcut.
-Are you **_sure_** which elements are numbers and which are character scalars?
+And here's an example with a simple, mixed vector (*i.e.* with character and numeric scalars only). First, we display an object without using the **Quote** shortcut.
+Are you **_sure_** which elements are numeric and which character scalars?
 
 ```
    ∆F '{1 2 "3" 4 "5"}'
@@ -393,7 +394,7 @@ Are you **_sure_** which elements are numbers and which are character scalars?
 ```
 
 Now, we show it **_with_** the **Quote** shortcut.
-Voila, quotes appear around the character digits, but not the actual numbers!
+Voilà, quotes appear around the character digits, but not the actual numbers!
 
 ```
    ∆F '{`Q 1 2 "3" 4 "5"}'
@@ -404,7 +405,7 @@ Voila, quotes appear around the character digits, but not the actual numbers!
 
 > Wrapping results in left and right decorators
 
-<div class="content-with-bar">
+<div class="content-with-left-bar">
 
 Here we make a quick mention of the **_experimental_** shortcut **Wrap**,¹ `` `W ``, which is used when you want a **_decorator_** string that is placed immediately to the left or right of **_each_** row of simple objects in the right argument, `⍵`.
 
@@ -702,6 +703,8 @@ The temperature is 35°C or 95.0°F
    T 35 → 8.9E¯6 | -95% ⎕⎕
 ```
 
+</div>
+
 Below, we summarize key information you've already gleaned from the examples.
 
 ## ∆F Syntax and Other Information
@@ -813,7 +816,7 @@ sometimes a backtick is just a backtick.
 6.  You can only access the 0-th element of **⍵**, the _f-string_ itself via an _explicitly indexed omega_ `` `⍵0 `` or `⍹0`. The _implicitly indexed_ omega always increments its index _before_ use, so the first index that can be used **_implicitly_** is **1**, i.e. `` `⍵1 `` or `⍹1`.
 7.  If an element of the dfn's right argument **⍵** is accessed at runtime via any means, shortcut or traditional, that element **_must_** exist.
 
-<div class="content-with-bar">
+<div class="content-with-left-bar">
 
 ### Wrap Shortcut: Details <span style="color: red;font-size: 80%;">&nbsp;**(EXPERIMENTAL)**</span>
 
@@ -873,5 +876,5 @@ sometimes a backtick is just a backtick.
 </span>
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250915T190334]
+(C) 2025 Sam the Cat Foundation. [20250916T151145]
 </span>
