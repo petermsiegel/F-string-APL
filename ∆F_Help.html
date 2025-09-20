@@ -317,8 +317,8 @@ John Smith     24 Mulberry Ln
 Mary Jones     22 Smith St
 Ted  Templeton 12 High St
 </code></pre>
-<p>Here’s a slightly more interesting code expression, using the shortcut <code>$</code> (<code>⎕FMT</code>)
-to round Centrigade numbers to the nearest whole degree and Fahrenheit numbers to the nearest tenth of a degree.
+<p>Here’s a slightly more interesting code expression, using the shortcut <code>$</code> (<em>i.e.</em> Dyalog’s <code>⎕FMT</code>)
+to round Centigrade numbers to the nearest whole degree and Fahrenheit numbers to the nearest tenth of a degree.
 (We could have used <code>0⍕⍪</code> and <code>1⍕⍪</code>, of course.)</p>
 <pre><code>   C← 11.3 29.55 59.99
    ∆F 'The temperature is {&quot;I2&quot; $ C}°C or {&quot;F5.1&quot;$ 32+9×C÷5}°F'
@@ -400,7 +400,7 @@ The temperature is 11°C or 51.8°F
 to add appropriate commas to the temperatures!</p>
 <pre><code>⍝  The temperature of the sun at its core in degrees C.
    sun_core← 15E6                   ⍝ 15000000 is a bit hard to parse!
-   **∆F** 'The sun''s core is at {&quot;CI10&quot; $ sun_core}°C or {&quot;CI10&quot; $ C2F sun_core}°F'
+   ∆F 'The sun''s core is at {&quot;CI10&quot; $ sun_core}°C or {&quot;CI10&quot; $ C2F sun_core}°F'
 The sun's core is at 15,000,000°C or 27,000,032°F
 </code></pre>
 <h3>The Shortcut for Numeric Commas</h3>
@@ -425,7 +425,7 @@ The sun's core is at 15,000,000°C or 27,000,032°F
 The sun's core is at 15,000,000°C or 27,000,032°F.
 </code></pre>
 <p>Cool! OK, not literally.</p>
-<p>And for a bit of a twist, let’s display either degrees Centrigrade
+<p>And for a bit of a twist, let’s display either degrees Centigrade
 or Fahrenheit under user control (<code>1</code> =&gt; F, <code>0</code> =&gt; C). Here, we establish
 the format-string <code>sunFC</code> first, then pass it to <strong>∆F</strong> with an additional argument.</p>
 <pre><code>   sunFC← 'The sun''s core is at {`C C2F⍣`⍵1⊢ sun_core}°{ `⍵1⊃ &quot;CF&quot;}.'
@@ -1008,7 +1008,7 @@ sometimes a backtick is just a backtick.</p>
 <hr>
 </span>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250916T151145]
+(C) 2025 Sam the Cat Foundation. [20250917T084530]
 </span>
 
 </body>
