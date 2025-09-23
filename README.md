@@ -13,6 +13,11 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 
 ### ∆F In Brief
 
+<div class="fixed-footer">
+<ce>∆F — Formatted String Literals</ce>
+</div>
+
+
 > <center><p style="padding-left: 15px;padding-right: 5px;padding-top: 5px;padding-bottom: 5px;color: white; background-color: #4f62f0ff;"><b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.¹<br><span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>,² &ensp;but designed for APL.&nbsp;</span></p></center>
 
 ---
@@ -40,7 +45,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
     - **format**ting numeric arrays, **\$** (short for **⎕FMT**): `{"F7.5" $ ?0 0}`,
     - putting a **box** around a specific expression, **\`B**: `` {`B ⍳2 2} ``,
     - placing the output of one expression **above** another, **%**: `{"Pi"% ○1}`,
-    - formatting **date** and **time** expressions from APL timestamps (**⎕TS**) using **\`T** ( short for an expression with **1200⌶** and **⎕DT**): `` {"hh:mm:ss" `T ⎕TS} ``
+    - formatting **date** and **time** expressions from APL timestamps (**⎕TS**) using **\`T** (short for an expression with **1200⌶** and **⎕DT**): `` {"hh:mm:ss" `T ⎕TS} ``
     - _and more_;
 
   - Simple mechanisms for concisely formatting and displaying data from
@@ -96,9 +101,9 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 
 ## ∆F EXAMPLES
 
-<div class="content-with-right-bar">   
+<div class="content-with-right-bar">
 
-Before providing information on **∆F** syntax and other details, _let's start with some examples_...
+Before providing information on **∆F** syntax and other details, *let's start with some examples*...
 
 First, let's set some context.
 
@@ -222,6 +227,7 @@ Here is some multiline data we'll add to our **Code fields**, using APL _mix_ `�
    fNm←  'John' 'Mary' 'Ted'
    lNm←  'Smith' 'Jones' 'Templeton'
    addr← '24 Mulberry Ln' '22 Smith St' '12 High St'
+   
    ∆F '{↑fNm} {↑lNm} {↑addr}'
 John Smith     24 Mulberry Ln
 Mary Jones     22 Smith St
@@ -380,7 +386,7 @@ First, let's use the `` `Q `` shortcut to place quotes around the simple charact
 arrays in its right argument, `⍵`. This is useful when you want to distinguish between character output that might include numbers and _actual_ numeric output.
 
 ```
-   ∆F '{`Q 1 2 "three" 4 5 (⍪1 "2") (⍪"cats" "dogs")}'   
+   ∆F '{`Q 1 2 "three" 4 5 (⍪1 "2") (⍪"cats" "dogs")}'   
 1 2  'three'  4 5     1    'cats'
                     '2'    'dogs'
 ```
@@ -474,7 +480,7 @@ All you have to do is place
 
 as the **_last non-space_** in the **Code field**, before the _final_ right brace.
 
-Here's an example of a horizontal SDCF,*i.e.*using `→`:
+Here's an example of a horizontal SDCF, *i.e.* using `→`:
 
 ```
    name←'John Smith' ◇ age← 34
@@ -492,7 +498,7 @@ Here's an example with such spaces: see how the spaces adjacent to the symbol `�
 Current employee: name → John Smith, age→ 34.
 ```
 
-Now, let's look at an example of a vertical SDCF,*i.e.*using `↓`:
+Now, let's look at an example of a vertical SDCF, *i.e.* using `↓`:
 
 ```
    name←'John Smith' ◇ age← 34
@@ -529,10 +535,10 @@ Mary Jones  23
 
 > The _next_ best thing: the use of `` `⍵ `` in **Code field** expressions...
 
-We said we'd present the use of omega shortcuts with implicit indices `` `⍵ `` in **Code fields**. The expression `` `⍵ `` selects the _next_ element of the right argument `⍵` to **∆F**, defaulting to `` `⍵1 `` when first encountered,*i.e.*if there are **_no_** `` `⍵ `` elements to the **_left_** in the entire *f-string*. If there is any such expression (*e.g.* `` `⍵5 ``), then `` `⍵ `` points to the element after that one (*e.g.* `` `⍵6 ``). If the item to the left is `` `⍵ ``, then we simply increment the index by `1` from that one.
+We said we'd present the use of omega shortcuts with implicit indices `` `⍵ `` in **Code fields**. The expression `` `⍵ `` selects the _next_ element of the right argument `⍵` to **∆F**, defaulting to `` `⍵1 `` when first encountered, *i.e.* if there are **_no_** `` `⍵ `` elements to the **_left_** in the entire *f-string*. If there is any such expression (*e.g.* `` `⍵5 ``), then `` `⍵ `` points to the element after that one (*e.g.* `` `⍵6 ``). If the item to the left is `` `⍵ ``, then we simply increment the index by `1` from that one.
 
 **Let's try an example.** Here, we display arbitrary 2-dimensional expressions, one above the other.
-`` `⍵ `` refers to the **_next_** argument in sequence, left to right, starting with `` `⍵1 ``, the first,*i.e.*`(⍵⊃⍨ 1+⎕IO)`. So, from left to right `` `⍵ `` is `` `⍵1 ``, `` `⍵2 ``, and `` `⍵3 ``. _Easy peasy._
+`` `⍵ `` refers to the **_next_** argument in sequence, left to right, starting with `` `⍵1 ``, the first, *i.e.* `(⍵⊃⍨ 1+⎕IO)`. So, from left to right `` `⍵ `` is `` `⍵1 ``, `` `⍵2 ``, and `` `⍵3 ``. _Easy peasy._
 
 ```
    ∆F '{(⍳2⍴`⍵) % (⍳2⍴`⍵) % (⍳2⍴`⍵)}' 1 2 3
@@ -628,7 +634,7 @@ expression: `` `⍵1 `⍵2 `⍵3 ``.
 
 ### Precomputed F-strings with the ***DFN*** Option
 
-The default returned from **∆F** is always (on success) a character matrix. That can be expressed via `∆F...` or `0 ∆F...`.¹ However, if the initial option (**_DFN_**) is `1`,*i.e.*the call is `1 ∆F...`, **∆F** returns a dfn that— when called later— will return the same expression.² This is most useful when you are likely to make repeated use an *f-string*, since the overhead for examining the *f-string* contents _once_ would be amortized over all the calls.
+The default returned from **∆F** is always (on success) a character matrix. That can be expressed via `∆F...` or `0 ∆F...`.¹ However, if the initial option (**_DFN_**) is `1`, *i.e.* the call is `1 ∆F...`, **∆F** returns a dfn that— when called later— will return the same expression.² This is most useful when you are likely to make repeated use an *f-string*, since the overhead for examining the *f-string* contents _once_ would be amortized over all the calls.
 
 <div style="margin-left: 25px;">
 
@@ -756,7 +762,7 @@ which contains 3 types of fields: **Text fields**, **Code fields**, and **Space 
 - **Text fields** consist of simple text, which may include any Unicode characters desired, including newlines. Newlines (actually, carriage returns, `⎕UCS 13`) are normally entered via the sequence `` `◇ ``. Additionally, literal curly braces can be added via `` `{ `` and `` `} ``, so there is no confusion with the simple curly braces used to begin and end **Code fields** and **Space Fields**. Finally, a simple backtick escape can be entered into a **Text field** by simply entering two such characters ` `` `.
 
 - **Code fields** are run-time evaluated expressions enclosed within
-  simple, unescaped curly braces `{}`,*i.e.*those not preceded by a back-tick (see the previous paragraph). **Code fields** are essentially a Dyalog dfn with some extras. For escape sequences, see **Escape Sequences** below.
+  simple, unescaped curly braces `{}`, *i.e.* those not preceded by a back-tick (see the previous paragraph). **Code fields** are essentially a Dyalog dfn with some extras. For escape sequences, see **Escape Sequences** below.
 
 - **Space fields** are essentially a _degenerate_ form of **Code fields**, consisting of a single pair of simple curly braces `{}` with zero or more spaces in between. A **Space Field** with zero spaces is a **Null Space Field**; while it may separate any other fields, its practical use is separating two adjacent **Text Fields**.
 
@@ -785,13 +791,13 @@ sometimes a backtick is just a backtick.
 | Shortcut <div style="width:100px"></div>                              | Name <div style="width:150px"></div> | Meaning                                                                                                                                                                                                       |
 | :-------------------------------------------------------------------- | :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | $, \`F                                                                | ⎕FMT                                 | `[⍺] $ ⍵`. Short for `[⍺] ⎕FMT ⍵`. (See APL documentation).                                                                                                                                                   |
-| %, \`A                                                                | Above                                | `[⍺] % ⍵`. Centers array `⍺` above array `⍵`. If omitted, `⍺←''`,*i.e.*a blank line.                                                                                                                    |
+| %, \`A                                                                | Above                                | `[⍺] % ⍵`. Centers array `⍺` above array `⍵`. If omitted, `⍺←''`, *i.e.* a blank line.                                                                                                                    |
 | \`B                                                                   | Box                                  | `` `B ⍵ ``. Places `⍵` in a box. `⍵` is any array.                                                                                                                                                            |
 | \`C                                                                   | Commas                               | `` `C ⍵ ``. Adds commas to `⍵` after every 3rd digit of the integer part of `⍵`, right-to-left. `⍵` is a vector of num strings or numbers.                                                                    |
 | \`Q                                                                   | Quote                                | `` [⍺]`Q ⍵ ``. Recursively scans `⍵`, putting char. vectors, scalars, and rows of higher-dimensional strings in APL quotes, leaving other elements as is. If omitted, `⍺←''''`.                                 |
 | \`T, \`D                                                              | Date-Time¹                           | `` [⍺]`T ⍵ ``. Displays timestamp(s) `⍵` according to date-time template `⍺`. `⍵` is one or more APL timestamps `⎕TS`. `⍺` is a date-time template in `1200⌶` format. If omitted, `⍺← 'YYYY-MM-DD hh:mm:ss'`. |
 | \`W <span style="color: red;font-size: 70%;">**EXPERIMENTAL!**</span> | Wrap                                 | `` [⍺]`W ⍵ ``. Wraps the rows of simple arrays in ⍵ in decorators `0⊃2⍴⍺` (on the left) and `1⊃2⍴⍺` (on the right). If omitted, `⍺←''''`. _See details below._                               |
-| \`⍵𝑑𝑑, ⍹𝑑𝑑                                                              | Omega Shortcut (explicitly indexed)             | A shortcut of the form `` `⍵𝑑𝑑 `` (or `⍹𝑑𝑑`), to access the `𝑑𝑑`**th** element of `⍵`,*i.e.*`(⍵⊃⍨ 𝑑𝑑+⎕IO)`. _See details below._                                                                                  |
+| \`⍵𝑑𝑑, ⍹𝑑𝑑                                                              | Omega Shortcut (explicitly indexed)             | A shortcut of the form `` `⍵𝑑𝑑 `` (or `⍹𝑑𝑑`), to access the `𝑑𝑑`**th** element of `⍵`, *i.e.* `(⍵⊃⍨ 𝑑𝑑+⎕IO)`. _See details below._                                                                                  |
 | \`⍵, ⍹                                                                | Omega Shortcut (implicitly indexed)             | A shortcut of the form `` `⍵ `` (or `⍹`), to access the **_next_** element of `⍵`. _See details below._                                                                                                       |
 
 ---
@@ -813,7 +819,7 @@ sometimes a backtick is just a backtick.
 3.  All omega shortcut expressions in the *f-string* are evaluated left to right and are ⎕IO-independent.
 4.  **\`⍵𝑑𝑑** or **⍹𝑑𝑑** sets the _OIC_ to 𝑑𝑑, `Ω←𝑑𝑑`, and returns the expression `(⍵⊃⍨Ω+⎕IO)`. Here **𝑑𝑑** must be a _non-negative integer_ with at least 1 digit.
 5.  Bare **\`⍵** or **⍹** (*i.e.* with no digits appended) increments the _OIC_, `Ω+←1`, _before_ using it as the index in the expression `(⍵⊃⍨Ω+⎕IO)`.
-6.  You can only access the 0-th element of **⍵**, the _f-string_ itself via an _explicitly indexed omega_ `` `⍵0 `` or `⍹0`. The _implicitly indexed_ omega always increments its index _before_ use, so the first index that can be used **_implicitly_** is **1**,*i.e.*`` `⍵1 `` or `⍹1`.
+6.  You can only access the 0-th element of **⍵**, the _f-string_ itself via an _explicitly indexed omega_ `` `⍵0 `` or `⍹0`. The _implicitly indexed_ omega always increments its index _before_ use, so the first index that can be used **_implicitly_** is **1**,*i.e.* `` `⍵1 `` or `⍹1`.
 7.  If an element of the dfn's right argument **⍵** is accessed at runtime via any means, shortcut or traditional, that element **_must_** exist.
 
 <div class="content-with-left-bar">
@@ -876,5 +882,5 @@ sometimes a backtick is just a backtick.
 </span>
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250917T085250]
+(C) 2025 Sam the Cat Foundation. [20250923T131624]
 </span>
