@@ -1,10 +1,9 @@
 <!--
 Preview side-by-side: cmd-K, V,
 md->HTML: opt-shift-M
-Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help'
+
+Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 -->
- 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown.css">
 
 <!-- Style stuff related to APL and my random preferences... -->
 <!-- All of this is designed to be used with the Dyalog htmlRender -->
@@ -19,7 +18,6 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 ---
 
   - [Table of Contents](#table-of-contents)
-
 
 **∆F** *f-strings* can concisely include:
 
@@ -713,7 +711,7 @@ Below, we summarize key information you've already gleaned from the examples.
 
 ### ∆F Call Syntax Overview
 
-| Call Syntax <div style="width:200px"></div> | Description                                                                                                                                                |
+| Call Syntax <div style="width:220px"></div> | Description                                                                                                                                                |
 | :------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **∆F** _f-string_                           | Display an _f-string_; use the _default_ options. The string may reference objects in the environment or in the string itself. Returns a character matrix. |
 | **∆F** _f-string_ _arg1_ [*arg2* ...]       | Display an _f-string_; use the _default_ options. Arguments presented _may_ be referred to in the f-string. Returns a character matrix.                    |
@@ -725,7 +723,7 @@ Below, we summarize key information you've already gleaned from the examples.
 
 ### ∆F Call Syntax Details
 
-| Element <div style="width:130px"></div>      | Description                                                                                                                                                                                                                                                                                                                                                                            |
+| Element <div style="width:220px"></div>      | Description                                                                                                                                                                                                                                                                                                                                                                            |
 | :------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **_f-string_**                               | a format string, a single character vector.                                                                                                                                                                                                                                                                                                                                            |
 | **_args_**                                   | elements of ⍵ after the *f-string*, each of which can be accessed in the *f-string* via a `` `⍵ `` shortcut (or an ordinary `⍵` expression).                                                                                                                                                                                                                                           |
@@ -890,7 +888,7 @@ sometimes a backtick is just a backtick.
 
 ## Copyright
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250923T213904]
+(C) 2025 Sam the Cat Foundation. [20250924T090452]
 </span>
 
 &nbsp;
