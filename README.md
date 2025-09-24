@@ -18,9 +18,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 
 ---
 
-<!--
   - [Table of Contents](#table-of-contents)
--->
 
 
 **∆F** *f-strings* can concisely include:
@@ -892,7 +890,7 @@ sometimes a backtick is just a backtick.
 
 ## Copyright
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250923T213643]
+(C) 2025 Sam the Cat Foundation. [20250923T213904]
 </span>
 
 &nbsp;
