@@ -19,7 +19,7 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
   }
   /* Inline code */
   code { 
-    font-size: 100%;
+    font-size: 90%;
     background-color: #ddfafaff;
     padding: 2px 4px;
     border-radius: 3px;
@@ -106,7 +106,7 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 <h2 id="f---formatted-string-literals">∆F - Formatted String
 Literals</h2>
 <h3 id="f-in-brief">∆F In Brief</h3>
-<center><p style="padding-left: 15px;padding-right: 5px;padding-top: 5px;padding-bottom: 5px;color: white; background-color: #4f62f0ff;"><b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.¹<br><span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>,² &ensp;but designed for APL.&nbsp;</span></p></center>
+<center><p style="padding-left: 15px;padding-right: 5px;padding-top: 5px;padding-bottom: 5px;color: white; background-color: #4f62f0ff;"><b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.¹<br><span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>, but designed for APL.²&nbsp;</span></p></center>
 
 <hr />
 <ul>
@@ -199,8 +199,11 @@ using APL's own powerful functions and operators.</p>
 in the many examples, an index origin of zero (<code>⎕IO=0</code>) is
 assumed. <strong>Code fields</strong> inherit the index origin and other
 system variables from the environment (<em>i.e.</em> namespace) in which
-<strong>∆F</strong> is called; they can be set locally in the code
-field, as well: <code>∆F '{ ⎕IO←1 ◇ ⎕A ⍳ "APL" }'</code> .</td>
+<strong>∆F</strong> is called, so your own examples will work as you
+expect. If you wish to modify the <code>⎕IO</code> or any system
+variable temporarily, you may do so right in the <strong>Code
+field</strong>:
+<code>∆F '{⎕IO←1 ◇ 26=⎕A⍳"Z": "Success" ◇ "Failure"}'</code>.</td>
 </tr>
 <tr>
 <td style="text-align: left;">² <strong>∆F</strong> is inspired by
@@ -743,9 +746,10 @@ peasy.</em></p>
 <h3 id="shortcuts-with-individual-expressions">Shortcuts With Individual
 Expressions</h3>
 <p>Shortcuts often make sense with individual expressions, not just
-entire <strong>Code fields</strong>. They can be put in parentheses and
-manipulated like ordinary APL functions. Here, we display one boxed
-value above the other.</p>
+entire <strong>Code fields</strong>. They can be manipulated like
+ordinary APL functions; since they are just that -- ordinary APL
+functions -- under the covers. Here, we display one boxed value above
+the other.</p>
 <pre><code>   ∆F &#39;{(`B ⍳`⍵1) % `B ⍳`⍵2}&#39; (2 2)(3 3)
   ┌───┬───┐
   │0 0│0 1│
@@ -759,7 +763,12 @@ value above the other.</p>
 ├───┼───┼───┤
 │2 0│2 1│2 2│
 └───┴───┴───┘</code></pre>
+<p>While not for the faint of heart, the expression above can be recast
+as this somewhat hard to read alternative:</p>
+<pre><code>   ∆F &#39;{%/ `B∘⍳¨ `⍵1 `⍵2}&#39; (2 2)(3 3)</code></pre>
+<blockquote>
 <p>There are loads of other examples to discover.</p>
+</blockquote>
 <h3 id="a-shortcut-for-dates-and-times">A Shortcut for Dates and
 Times</h3>
 <p><strong>∆F</strong> supports a simple <strong>Date-Time</strong>
@@ -767,14 +776,14 @@ shortcut <code>`T</code> built from <strong>1200⌶</strong> and
 <strong>⎕DT</strong>. It takes one or more Dyalog
 <code>⎕TS</code>-format timestamps as the right argument and a date-time
 specification as the (optional) left argument. Trailing elements of a
-timestamp may be omitted, if they are not referenced in the
-specification string.</p>
-<p>Let's look at the use of the <code>`T</code> (Date-Time) shortcut to
-show the current time (now).</p>
+timestamp may be omitted (they will each be treated as <code>0</code> in
+the specification string).</p>
+<p>Let's look at the use of the <code>`T</code> shortcut to show the
+current time (now).</p>
 <pre><code>   ∆F &#39;It is now {&quot;t:mm pp&quot; `T ⎕TS}.&#39;
 It is now 8:08 am.</code></pre>
-<p>Of course, the time displayed above will be the actual current
-time.</p>
+<p>Of course, the time displayed in practice will be the <em>actual</em>
+current time.</p>
 <p>Here's a fancier example (the power is in <code>1200⌶</code> and
 <code>⎕DT</code>). (We've added the <em>truncated</em> timestamp
 <code>2025 01 01</code> right into the <em>f-string</em>.)</p>
@@ -798,14 +807,14 @@ expressions: <code>`⍵ `⍵ `⍵</code>. This is equivalent to the
 <h3 id="precomputed-f-strings-with-the-dfn-option">Precomputed F-strings
 with the <em><strong>DFN</strong></em> Option</h3>
 <p>The default returned from <strong>∆F</strong> is always (on success)
-a character matrix. That can be expressed via <code>∆F...</code> or
-<code>0 ∆F...</code>.¹ However, if the initial option
-(<strong><em>DFN</em></strong>) is <code>1</code>, <em>i.e.</em> the
-call is <code>1 ∆F...</code>, <strong>∆F</strong> returns a dfn that—
-when called later— will return the same expression.² This is most useful
-when you are likely to make repeated use an <em>f-string</em>, since the
-overhead for examining the <em>f-string</em> contents <em>once</em>
-would be amortized over all the calls.</p>
+a character matrix. That can be expressed via <code>0 ∆F ...</code>.¹
+However, if the initial option (<strong><em>DFN</em></strong>) is
+<code>1</code>, <em>e.g.</em> the call is <code>1 ∆F ...</code>,
+<strong>∆F</strong> returns a dfn that, <em>when called later</em>, will
+return precisely the same expression.² This is most useful when you are
+making repeated use of an <em>f-string</em>, since the overhead for
+examining the <em>f-string</em> contents <em>once</em> would be
+amortized over all the calls.</p>
 <div style="margin-left: 25px;">
 
 <table>
@@ -816,8 +825,10 @@ would be amortized over all the calls.</p>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">¹ We discuss the options to
-<strong>∆F</strong> at the end of this documentation.</td>
+<td style="text-align: left;">¹ <strong>∆F</strong>'s default initial
+option (left argument) is <code>0</code>, so <code>0 ∆F ...</code> and
+<code>∆F ...</code> are equivalent. We discuss all the options to
+<strong>∆F</strong> later in this document.</td>
 </tr>
 <tr>
 <td style="text-align: left;">² This assumes the resulting dfn is called
@@ -828,18 +839,10 @@ state.</td>
 </table>
 </div>
 
-<p>Let's explore getting the best performance for a heavily used
-<strong>∆F</strong> string. Using the DFN option <code>(⍺[0]=1)</code>,
-we can generate a dfn that will display the formatted output, without
-having to reanalyze the <em>f-string</em> each time. We will compare the
-performance of an <strong>∆F</strong>-string evaluated on the fly.</p>
-<pre><code>   mx← ∆F &#39;...&#39;</code></pre>
-<p>versus one precomputed and returned as a dfn, using</p>
-<pre><code>   Dfn← 1 ∆F &#39;...&#39;</code></pre>
-<blockquote>
+<p>Let's explore an example wheregetting the best performance for a
+heavily used <strong>∆F</strong> string is important.</p>
 <p>First, let's grab <code>cmpx</code>, so we can compare the
 performance...</p>
-</blockquote>
 <pre><code>   &#39;cmpx&#39; ⎕CY &#39;dfns&#39;</code></pre>
 <p>Now, let's proceed. Here's the code:</p>
 <pre><code>   C← 11 30 60
@@ -862,13 +865,31 @@ performance...</p>
 </blockquote>
 <p>Finally, we want to show you that the <em>dfn</em> returned from
 <code>1 ∆F...</code> can retrieve argument(s) passed on the right side
-of <strong>∆F</strong>. In fact, the <em>f-string</em> text
-<strong><em>originally</em></strong> passed when the <em>dfn</em> was
-generated is stored with the <em>dfn</em> itself as <code>`⍵0</code>,
-available for use.</p>
-<p>So, as a variation on the example above, we will pass the centigrade
-value, not as a variable, but as the first argument to
-<strong>∆F</strong> (<em>i.e.</em> <code>`⍵1`</code>).</p>
+of <strong>∆F</strong>, using the very same omega shortcut expressions
+(<code>`⍵1</code>, etc.) as described above.¹</p>
+<div style="margin-left: 25px;">
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">¹ In fact, the <em>f-string</em> text
+<em>originally</em> passed when the <em>dfn</em> was generated is stored
+with the "compiled" <em>dfn</em>, available, as expected, as
+<code>`⍵0</code>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>As a variation on the example above, let's share the centigrade
+value, not as a <em>variable</em>, but pass it as the <em>first
+argument</em> to <strong>∆F</strong> (<em>i.e.</em>
+<code>`⍵1`</code>).</p>
 <pre><code>   t←&#39;The temperature is {&quot;I2&quot; $ `⍵1}°C or {&quot;F5.1&quot; $ F← 32+9×`⍵1÷5}°F&#39;
    T← 1 ∆F t
 
@@ -1373,7 +1394,7 @@ Expressions: Details</a></li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250924T090452]
+(C) 2025 Sam the Cat Foundation. [20250924T164635]
 </span>
 
 <p> </p>

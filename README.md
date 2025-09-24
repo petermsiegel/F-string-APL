@@ -13,7 +13,7 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 
 ### ∆F In Brief
 
-<center><p style="padding-left: 15px;padding-right: 5px;padding-top: 5px;padding-bottom: 5px;color: white; background-color: #4f62f0ff;"><b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.¹<br><span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>,² &ensp;but designed for APL.&nbsp;</span></p></center>
+<center><p style="padding-left: 15px;padding-right: 5px;padding-top: 5px;padding-bottom: 5px;color: white; background-color: #4f62f0ff;"><b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.¹<br><span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>, but designed for APL.²&nbsp;</span></p></center>
 
 ---
 
@@ -63,7 +63,7 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 
 | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| ¹ Throughout this documentation, notably in the many examples, an index origin of zero (`⎕IO=0`) is assumed. **Code fields** inherit the index origin and other system variables from the environment (*i.e.* namespace) in which **∆F** is called; they can be set locally in the code field, as well: `∆F '{ ⎕IO←1 ◇ ⎕A ⍳ "APL" }'` .                                                                                                                             |
+| ¹ Throughout this documentation, notably in the many examples, an index origin of zero (`⎕IO=0`) is assumed. **Code fields** inherit the index origin and other system variables from the environment (*i.e.* namespace) in which **∆F** is called, so your own examples will work as you expect. If you wish to modify the `⎕IO` or any system variable temporarily, you may do so right in the **Code field**: `∆F '{⎕IO←1 ◇ 26=⎕A⍳"Z": "Success" ◇ "Failure"}'`.                                                                                                                          |
 | ² **∆F** is inspired by Python _[f-strings](https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals)_, short for "**formatted string literals**", but designed for APL's multi-dimensional worldview. **∆F** *f-strings* and Python's are not compatible.                                                                                                                                                                                     |
 | ³ In this document, we use the symbol `◇` (`⎕UCS 9671`) to represent the APL *statement separator* (`⎕UCS 8900`), since the latter is displayed _in some browsers_ as a hard-to-read glyph. **∆F** will recognize `` `◇ `` with _either_ glyph.                                                                                                                                                                                                                     |
 | ⁴ **∆F Code fields** _as input_ are limited to a single, possibly very long, line.                                                                                                                                                                                                                                                                                                                                                                                  |
@@ -555,7 +555,7 @@ Let's demonstrate here the equivalence of the _implicitly_ and _explicitly_ inde
 
 ### Shortcuts With Individual Expressions
 
-Shortcuts often make sense with individual expressions, not just entire **Code fields**. They can be put in parentheses and manipulated like ordinary APL functions.
+Shortcuts often make sense with individual expressions, not just entire **Code fields**. They can be manipulated like ordinary APL functions; since they are just that -- ordinary APL functions -- under the covers.
 Here, we display one boxed value above the other.
 
 ```
@@ -574,21 +574,26 @@ Here, we display one boxed value above the other.
 └───┴───┴───┘
 ```
 
-There are loads of other examples to discover.
+While not for the faint of heart, the expression above can be recast as this somewhat hard to read alternative: 
+
+``` 
+   ∆F '{%/ `B∘⍳¨ `⍵1 `⍵2}' (2 2)(3 3)
+```
+
+> There are loads of other examples to discover.
 
 ### A Shortcut for Dates and Times  
 
-**∆F** supports a simple **Date-Time** shortcut `` `T `` built from **1200⌶** and **⎕DT**. It takes one or more Dyalog `⎕TS`-format timestamps as the right argument and a date-time specification as the (optional) left argument. Trailing elements of a timestamp may be omitted, if they are not referenced in the specification string.
+**∆F** supports a simple **Date-Time** shortcut `` `T `` built from **1200⌶** and **⎕DT**. It takes one or more Dyalog `⎕TS`-format timestamps as the right argument and a date-time specification as the (optional) left argument. Trailing elements of a timestamp may be omitted (they will each be treated as `0` in the specification string).
 
-Let's look at the use of the `` `T `` (Date-Time) shortcut to show the
-current time (now).
+Let's look at the use of the `` `T `` shortcut to show the current time (now).
 
 ```
    ∆F 'It is now {"t:mm pp" `T ⎕TS}.'
 It is now 8:08 am.
 ```
 
-Of course, the time displayed above will be the actual current time.
+Of course, the time displayed in practice will be the *actual* current time.
 
 Here's a fancier example (the power is in `1200⌶` and `⎕DT`).
 (We've added the _truncated_ timestamp `2025 01 01` right into the *f-string*.)
@@ -628,34 +633,22 @@ expression: `` `⍵1 `⍵2 `⍵3 ``.
 
 ### Precomputed F-strings with the ***DFN*** Option
 
-The default returned from **∆F** is always (on success) a character matrix. That can be expressed via `∆F...` or `0 ∆F...`.¹ However, if the initial option (**_DFN_**) is `1`, *i.e.* the call is `1 ∆F...`, **∆F** returns a dfn that— when called later— will return the same expression.² This is most useful when you are likely to make repeated use an *f-string*, since the overhead for examining the *f-string* contents _once_ would be amortized over all the calls.
+The default returned from **∆F** is always (on success) a character matrix. That can be expressed via `0 ∆F ...`.¹ 
+However, if the initial option (**_DFN_**) is `1`, *e.g.* the call is `1 ∆F ...`, **∆F** returns a dfn that, *when called later*, will return precisely the same expression.² This is most useful when you are making repeated use of an *f-string*, since the overhead for examining the *f-string* contents _once_ would be amortized over all the calls.
 
 <div style="margin-left: 25px;">
 
 | Notes                                                                                                                 |
 | :-------------------------------------------------------------------------------------------------------------------- |
-| ¹ We discuss the options to **∆F** at the end of this documentation.                                                  |
+| ¹ **∆F**'s default initial option (left argument) is `0`, so `0 ∆F ...` and `∆F ...` are equivalent. We discuss all the options to **∆F** later in this document.                                                  |
 | ² This assumes the resulting dfn is called with the same arguments in the same calling environment in the same state. |
 
 </div>
 
-Let's explore getting the best performance for a heavily
-used **∆F** string. Using the DFN option `(⍺[0]=1)`, we can generate a
-dfn that will display the formatted output, without having to reanalyze
-the *f-string* each time.
-We will compare the performance of an **∆F**-string evaluated on the fly.
+Let's explore an example wheregetting the best performance for a heavily
+used **∆F** string is important. 
 
-```
-   mx← ∆F '...'
-```
-
-versus one precomputed and returned as a dfn, using
-
-```
-   Dfn← 1 ∆F '...'
-```
-
-> First, let's grab `cmpx`, so we can compare the performance...
+First, let's grab `cmpx`, so we can compare the performance...
 
 ```
    'cmpx' ⎕CY 'dfns'
@@ -683,10 +676,18 @@ Now, let's proceed. Here's the code:
 
 > Before we get to syntax and other information...
 
-Finally, we want to show you that the _dfn_ returned from `1 ∆F...` can retrieve argument(s) passed on the right side of **∆F**. In fact, the *f-string* text **_originally_** passed when the _dfn_ was generated is stored with the _dfn_ itself as `` `⍵0 ``, available for use.
+Finally, we want to show you that the _dfn_ returned from `1 ∆F...` can retrieve argument(s) passed on the right side of **∆F**, using the very same omega shortcut expressions (`` `⍵1 ``, etc.) as described above.¹  
 
-So, as a variation on the example above, we will pass the centigrade value,
-not as a variable, but as the first argument to **∆F** (*i.e.* `` `⍵1` ``).
+<div style="margin-left: 25px;">
+
+| Note                                                                                                                 |
+| :-------------------------------------------------------------------------------------------------------------------- |
+| ¹ In fact, the *f-string* text *originally* passed when the _dfn_ was generated is stored with the "compiled" _dfn_, available, as expected, as `` `⍵0 ``.                                                |
+
+</div>
+
+As a variation on the example above, let's share the centigrade value,
+not as a *variable*, but pass it as the *first argument* to **∆F** (*i.e.* `` `⍵1` ``).
 
 ```
    t←'The temperature is {"I2" $ `⍵1}°C or {"F5.1" $ F← 32+9×`⍵1÷5}°F'
@@ -888,7 +889,7 @@ sometimes a backtick is just a backtick.
 
 ## Copyright
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250924T090452]
+(C) 2025 Sam the Cat Foundation. [20250924T164635]
 </span>
 
 &nbsp;
