@@ -9,9 +9,6 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 <!-- Style stuff related to APL and my random preferences... -->
 <!-- All of this is designed to be used with the Dyalog htmlRender -->
 ##### Github Published README.md
-<div class="fixed-footer">
-<bold>∆F — Formatted String Literals</bold>
-</div>
 
 ## ∆F — Formatted String Literals
 
@@ -880,6 +877,10 @@ sometimes a backtick is just a backtick.
 
 </span>
 
+<div class="fixed-footer">
+<bold>∆F — Formatted String Literals</bold>
+</div>
+
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250923T194718]
+(C) 2025 Sam the Cat Foundation. [20250923T195614]
 </span>
