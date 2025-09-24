@@ -10,7 +10,7 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 <!-- All of this is designed to be used with the Dyalog htmlRender -->
 ##### Github Published README.md
 
-## ∆F — Formatted String Literals
+## ∆F - Formatted String Literals
 
 ### ∆F In Brief
 
@@ -837,7 +837,7 @@ sometimes a backtick is just a backtick.
 
 <span style="font-size: 80%;">
 
-- [∆F — Formatted String Literals](#f--formatted-string-literals)
+- [∆F - Formatted String Literals](#f---formatted-string-literals)
   - [∆F In Brief](#f-in-brief)
 - [∆F **Help** Information](#f-help-information)
 - [Installing **∆F**](#installing-f)
@@ -878,9 +878,15 @@ sometimes a backtick is just a backtick.
 </span>
 
 <div class="fixed-footer">
-<bold>∆F — Formatted String Literals</bold>
+<a href="#f---formatted-string-literals">Top</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="#table-of-contents">Table of Contents</a> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="#f-examples">Examples</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="#f-syntax-and-other-information">Syntax</a>
 </div>
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250923T195614]
+(C) 2025 Sam the Cat Foundation. [20250923T204143]
 </span>
