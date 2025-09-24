@@ -6,19 +6,17 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
  
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown.css">
 
-<!-- . Style stuff related to APL and my random preferences... -->
+<!-- Style stuff related to APL and my random preferences... -->
+<!-- All of this is designed to be used with the Dyalog htmlRender -->
 ##### Github Published README.md
-
+<div class="fixed-footer">
+<bold>∆F — Formatted String Literals</bold>
+</div>
 ## ∆F — Formatted String Literals
 
 ### ∆F In Brief
 
-<div class="fixed-footer">
-<ce>∆F — Formatted String Literals</ce>
-</div>
-
-
-> <center><p style="padding-left: 15px;padding-right: 5px;padding-top: 5px;padding-bottom: 5px;color: white; background-color: #4f62f0ff;"><b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.¹<br><span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>,² &ensp;but designed for APL.&nbsp;</span></p></center>
+<center><p style="padding-left: 15px;padding-right: 5px;padding-top: 5px;padding-bottom: 5px;color: white; background-color: #4f62f0ff;"><b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.¹<br><span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>,² &ensp;but designed for APL.&nbsp;</span></p></center>
 
 ---
 
@@ -658,7 +656,7 @@ We will compare the performance of an **∆F**-string evaluated on the fly.
 versus one precomputed and returned as a dfn, using
 
 ```
-   dfn← 1 ∆F '...'
+   Dfn← 1 ∆F '...'
 ```
 
 > First, let's grab `cmpx`, so we can compare the performance...
@@ -882,5 +880,5 @@ sometimes a backtick is just a backtick.
 </span>
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250923T131624]
+(C) 2025 Sam the Cat Foundation. [20250923T193131]
 </span>
