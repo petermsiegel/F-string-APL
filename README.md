@@ -18,7 +18,9 @@ Update APL ∆F_Help.html: ⎕SH 'cp index.html ∆F_Help.html' ◇ ∆F⍨'help
 
 ---
 
+<!--
   - [Table of Contents](#table-of-contents)
+-->
 
 
 **∆F** *f-strings* can concisely include:
@@ -833,7 +835,7 @@ sometimes a backtick is just a backtick.
 
 ---
 
-### Table of Contents
+## Table of Contents
 
 <span style="font-size: 80%;">
 
@@ -871,9 +873,8 @@ sometimes a backtick is just a backtick.
   - [Code Field Shortcuts](#code-field-shortcuts)
   - [Omega Shortcut Expressions: Details](#omega-shortcut-expressions-details)
   - [Wrap Shortcut: Details  **(EXPERIMENTAL)**](#wrap-shortcut-details-experimental)
-  - [Table of Contents](#table-of-contents)
-
---- 
+- [Table of Contents](#table-of-contents)
+- [Copyright](#copyright)
 
 </span>
 
@@ -885,8 +886,13 @@ sometimes a backtick is just a backtick.
 <a href="#f-examples">Examples</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="#f-syntax-and-other-information">Syntax</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="#copyright">Copyright</a>
 </div>
 
+## Copyright
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250923T204143]
+(C) 2025 Sam the Cat Foundation. [20250923T213643]
 </span>
+
+&nbsp;
