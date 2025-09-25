@@ -288,7 +288,8 @@
       DEBUG∨ ⍵: ⊢⎕THIS.helpHtml← ⊃⎕NGET helpHtmlFi 
         ⎕THIS.helpHtml  
     } 0= ⎕NC 'helpHtml' 
-    HROpt← ('HTML'  _h) (900 1000,⍨ ⊂'Size') (5 5,⍨ ⊂'Posn') ('Coord' 'ScaledPixel')
+    _c← '∆F Help Information'
+    HROpt← ('HTML'  _h) ('Caption' _c ) (900 1000,⍨ ⊂'Size') (10 10,⍨ ⊂'Posn') ('Coord' 'ScaledPixel')
     _← 'htmlObj' ⎕THIS.⎕WC 'HTMLRenderer',⍥⊆ HROpt           ⍝ Run HTMLRenderer
     1 0⍴⍬
   }  

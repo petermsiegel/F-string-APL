@@ -5,9 +5,13 @@ md->HTML: opt-shift-M
 Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 -->
 
-<!-- Style stuff related to APL and my random preferences... -->
-<!-- All of this is designed to be used with the Dyalog htmlRender -->
+<!-- Style stuff related to APL and my random preferences...  
+     All of this is designed to be used with the Dyalog htmlRender 
+-->
 ##### Github Published README.md
+<div class="header" id="myHeader">
+<center><bold>∆F - Formatted String Literals</bold></center>
+</div>
 
 ## ∆F - Formatted String Literals
 
@@ -83,13 +87,12 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 
 1. On Github, search for `"F-string-APL"`. 
 2. Copy the files **∆Fapl.dyalog** and **∆F_Help.html** into your current working directory (the one shown via `]cd`). 
-3. Then, from your Dyalog session (typically `#` or `⎕SE`), enter:
+3. Then, from your Dyalog session (typically `#` or `⎕SE`), enter:  
+      `]load ∆Fapl [-target=`**_myns_**`]`  
+    a. Each time it is called, the `]load` will create both function **∆F** and namespace **⍙Fapl** in the active namespace (or **_myns_**). **⍙Fapl** contains utilities used by **∆F**.  
+    b. If **∆F_Help.html** is available at `]load` time, it will be copied into **⍙Fapl** (or a message will note its absence).    
 
-    `]load ∆Fapl [-target=`**_myns_**`]`
-
-    Each time it is called, the `]load` will create both function **∆F** and namespace **⍙Fapl** in the active namespace (or **_myns_**). **⍙Fapl** contains utilities used by **∆F**. If  **∆F_Help.html** is available at `]load` time, it will be copied into **⍙Fapl** (or a message will note its absence).
-
-> Now, **∆F** is available in the active namespace (or **_myns_**), along with **⍙Fapl**.
+Now, **∆F** is available in the active namespace (or **_myns_**), along with **⍙Fapl**.
 
 ---
 
@@ -887,9 +890,13 @@ sometimes a backtick is just a backtick.
 <a href="#copyright">Copyright</a>
 </div>
 
+<hr>
+
 ## Copyright
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250924T164635]
+(C) 2025 Sam the Cat Foundation. [20250924T191311]
 </span>
 
-&nbsp;
+<hr><hr>
+
+

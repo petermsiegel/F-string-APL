@@ -5,9 +5,9 @@ md->HTML: opt-shift-M
 Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 -->
 
-<!-- Style stuff related to APL and my random preferences... -->
-
-<!-- All of this is designed to be used with the Dyalog htmlRender -->
+<!-- Style stuff related to APL and my random preferences...  
+     All of this is designed to be used with the Dyalog htmlRender 
+-->
 
 <style> 
   body {
@@ -76,6 +76,15 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
     font-size: 100%;
     line-height: 140%;
   }
+  .header {
+  position: sticky;
+  top: 0;
+  font-size: 90%;
+  font-weight: 900;
+  padding: 5px 0;
+  background-color: #e7e7e7ff;
+  color: black;
+  }
   .fixed-footer {
     position: fixed;
     font-size: 90%;
@@ -85,7 +94,7 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
     background-color: #e7e7e7ff;
     color: black;
     text-align: center;
-    padding: 2px 0;
+    padding: 5px 0;
   }
   .content-with-left-bar { /* Experimental item(s) have left red bar */ 
     border-left: 2px solid #ea2f0eff; /* Adjust color and thickness as needed */
@@ -102,6 +111,10 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
     overflow: hidden; /* Clear floats if internal content uses them */
   }
 </style>
+
+<div class="header" id="myHeader">
+<center><bold>∆F - Formatted String Literals</bold></center>
+</div>
 
 <h2 id="f---formatted-string-literals">∆F - Formatted String
 Literals</h2>
@@ -259,25 +272,24 @@ relatively slow, using an APL recursive scan to analyze the
 </blockquote>
 <h2 id="installing-f">Installing <strong>∆F</strong></h2>
 <ol type="1">
-<li><p>On Github, search for <code>"F-string-APL"</code>.</p></li>
-<li><p>Copy the files <strong>∆Fapl.dyalog</strong> and
+<li>On Github, search for <code>"F-string-APL"</code>.</li>
+<li>Copy the files <strong>∆Fapl.dyalog</strong> and
 <strong>∆F_Help.html</strong> into your current working directory (the
-one shown via <code>]cd</code>).</p></li>
-<li><p>Then, from your Dyalog session (typically <code>#</code> or
-<code>⎕SE</code>), enter:</p>
-<p><code>]load ∆Fapl [-target=</code><strong><em>myns</em></strong><code>]</code></p>
-<p>Each time it is called, the <code>]load</code> will create both
+one shown via <code>]cd</code>).</li>
+<li>Then, from your Dyalog session (typically <code>#</code> or
+<code>⎕SE</code>), enter:<br />
+<code>]load ∆Fapl [-target=</code><strong><em>myns</em></strong><code>]</code><br />
+a. Each time it is called, the <code>]load</code> will create both
 function <strong>∆F</strong> and namespace <strong>⍙Fapl</strong> in the
 active namespace (or <strong><em>myns</em></strong>).
-<strong>⍙Fapl</strong> contains utilities used by <strong>∆F</strong>.
-If <strong>∆F_Help.html</strong> is available at <code>]load</code>
+<strong>⍙Fapl</strong> contains utilities used by
+<strong>∆F</strong>.<br />
+b. If <strong>∆F_Help.html</strong> is available at <code>]load</code>
 time, it will be copied into <strong>⍙Fapl</strong> (or a message will
-note its absence).</p></li>
+note its absence).</li>
 </ol>
-<blockquote>
 <p>Now, <strong>∆F</strong> is available in the active namespace (or
 <strong><em>myns</em></strong>), along with <strong>⍙Fapl</strong>.</p>
-</blockquote>
 <hr />
 <h2 id="f-examples">∆F EXAMPLES</h2>
 <div class="content-with-right-bar">
@@ -1392,9 +1404,11 @@ Expressions: Details</a></li>
 <a href="#copyright">Copyright</a>
 </div>
 
+<hr>
+
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250924T164635]
+(C) 2025 Sam the Cat Foundation. [20250924T205114]
 </span>
 
-<p> </p>
+<hr><hr>
