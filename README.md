@@ -9,9 +9,12 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
      All of this is designed to be used with the Dyalog htmlRender 
 -->
 ##### Github Published README.md
-<div class="header" id="myHeader">
-<center><bold>∆F - Formatted String Literals</bold></center>
-</div>
+<!-- 
+    <div class="header" id="myHeader">
+    <center><bold>∆F - Formatted String Literals</bold></center>
+    </div>
+-->
+<title>∆F - Formatted String Literals</title>
 
 ## ∆F - Formatted String Literals
 
@@ -636,14 +639,14 @@ expression: `` `⍵1 `⍵2 `⍵3 ``.
 
 ### Precomputed F-strings with the ***DFN*** Option
 
-The default returned from **∆F** is always (on success) a character matrix. That can be expressed via `0 ∆F ...`.¹ 
-However, if the initial option (**_DFN_**) is `1`, *e.g.* the call is `1 ∆F ...`, **∆F** returns a dfn that, *when called later*, will return precisely the same expression.² This is most useful when you are making repeated use of an *f-string*, since the overhead for examining the *f-string* contents _once_ would be amortized over all the calls.
+The default returned from **∆F** is always (on success) a character matrix. That can be expressed via `0 ∆F...`.¹ 
+However, if the initial option (**_DFN_**) is `1`, *e.g.* the call is `1 ∆F...`, **∆F** returns a dfn that, *when called later*, will return precisely the same expression.² This is most useful when you are making repeated use of an *f-string*, since the overhead for examining the *f-string* contents _once_ would be amortized over all the calls.
 
 <div style="margin-left: 25px;">
 
 | Notes                                                                                                                 |
 | :-------------------------------------------------------------------------------------------------------------------- |
-| ¹ **∆F**'s default initial option (left argument) is `0`, so `0 ∆F ...` and `∆F ...` are equivalent. We discuss all the options to **∆F** later in this document.                                                  |
+| ¹ **∆F**'s default initial option (left argument) is `0`, so `0 ∆F...` and `∆F...` are equivalent. We discuss all the options to **∆F** later in this document.                                                  |
 | ² This assumes the resulting dfn is called with the same arguments in the same calling environment in the same state. |
 
 </div>
@@ -715,7 +718,7 @@ Below, we summarize key information you've already gleaned from the examples.
 
 ### ∆F Call Syntax Overview
 
-| Call Syntax <div style="width:220px"></div> | Description                                                                                                                                                |
+|Call Syntax<div style="width:220px"></div>|Description                                       |
 | :------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **∆F** _f-string_                           | Display an _f-string_; use the _default_ options. The string may reference objects in the environment or in the string itself. Returns a character matrix. |
 | **∆F** _f-string_ _arg1_ [*arg2* ...]       | Display an _f-string_; use the _default_ options. Arguments presented _may_ be referred to in the f-string. Returns a character matrix.                    |
@@ -727,7 +730,7 @@ Below, we summarize key information you've already gleaned from the examples.
 
 ### ∆F Call Syntax Details
 
-| Element <div style="width:220px"></div>      | Description                                                                                                                                                                                                                                                                                                                                                                            |
+|Element<div style="width:220px"></div>|Description                                                                                                                                                                                                                                                                             |
 | :------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **_f-string_**                               | a format string, a single character vector.                                                                                                                                                                                                                                                                                                                                            |
 | **_args_**                                   | elements of ⍵ after the *f-string*, each of which can be accessed in the *f-string* via a `` `⍵ `` shortcut (or an ordinary `⍵` expression).                                                                                                                                                                                                                                           |
@@ -743,7 +746,7 @@ Below, we summarize key information you've already gleaned from the examples.
 
 - If the left argument `⍺` is omitted, the options default to `4⍴0`.
 - If the left argument `⍺` is a simple boolean vector or scalar, or an empty numeric vector `⍬`, the options are `4↑⍺`; subsequent elements are ignored;
-- If the left argument `⍺` starts with `'help'` (case ignored), this help information is displayed.
+- If the left argument `⍺` starts with `'help'` (case ignored), this help information is displayed. In this case only, the right argument to **∆F** is ignored.
 - Otherwise, an error is signaled.
 
 ### ∆F Return Value
@@ -772,12 +775,12 @@ each of which will display as a logically separate 2-D (matrix) output space. Wh
 **∆F** **Text fields** and **Quoted strings** in **Code fields** may include
 a small number of escape sequences, beginning with the backtick `` ` ``.
 
-| &nbsp;Sequence&nbsp; | &nbsp;Literal&nbsp; |     &nbsp;Meaning&nbsp;     |
+|   Escape Sequence   |   What It Inserts   |       Description       |
 | :------------------: | :-----------------: | :-------------------------: |
-|         \`◇          |      (newline)      | &nbsp; (⎕UCS&nbsp;13)&nbsp; |
-|         \`\`         |          `          |          backtick           |
-|         \`{          |          {          |         left brace          |
-|         \`}          |          }          |         right brace         |
+|         **\`◇**          |      *newline*      |   ⎕UCS 13 |
+|         **\`\`**         |          `          |          backtick           |
+|         **\`{**          |          {          |         left brace          |
+|         **\`}**          |          }          |         right brace         |
 
 Other instances of the backtick character in **Text fields** or **Quoted strings** in **Code fields** will be treated literally, _i.e._
 sometimes a backtick is just a backtick.
@@ -786,7 +789,7 @@ sometimes a backtick is just a backtick.
 
 **∆F** **Code fields** may contain various shortcuts, intended to be concise and expressive tools for common tasks. **Shortcuts** are valid **only** outside **Quoted strings**. They include:
 
-| Shortcut <div style="width:100px"></div>                              | Name <div style="width:150px"></div> | Meaning                                                                                                                                                                                                       |
+|Shortcut<div style="width:100px"></div>|Name<div style="width:150px"></div>|Meaning|
 | :-------------------------------------------------------------------- | :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | $, \`F                                                                | ⎕FMT                                 | `[⍺] $ ⍵`. Short for `[⍺] ⎕FMT ⍵`. (See APL documentation).                                                                                                                                                   |
 | %, \`A                                                                | Above                                | `[⍺] % ⍵`. Centers array `⍺` above array `⍵`. If omitted, `⍺←''`, *i.e.* a blank line.                                                                                                                        |
@@ -817,12 +820,12 @@ sometimes a backtick is just a backtick.
 3.  All omega shortcut expressions in the *f-string* are evaluated left to right and are ⎕IO-independent.
 4.  **\`⍵𝑑𝑑** or **⍹𝑑𝑑** sets the _OIC_ to 𝑑𝑑, `Ω←𝑑𝑑`, and returns the expression `(⍵⊃⍨Ω+⎕IO)`. Here **𝑑𝑑** must be a _non-negative integer_ with at least 1 digit.
 5.  Bare **\`⍵** or **⍹** (*i.e.* with no digits appended) increments the _OIC_, `Ω+←1`, _before_ using it as the index in the expression `(⍵⊃⍨Ω+⎕IO)`.
-6.  You can only access the 0-th element of **⍵**, the _f-string_ itself via an _explicitly indexed omega_ `` `⍵0 `` or `⍹0`. The _implicitly indexed_ omega always increments its index _before_ use, so the first index that can be used **_implicitly_** is **1**,*i.e.* `` `⍵1 `` or `⍹1`.
+6.  You can only access the 0-th element of **⍵**, the _f-string_ itself via an _explicitly indexed omega_ `` `⍵0 `` or `⍹0`. The _implicitly indexed_ omega always increments its index _before_ use, so the first index that can be used **_implicitly_** is **1**, *i.e.* `` `⍵1 `` or `⍹1`.
 7.  If an element of the dfn's right argument **⍵** is accessed at runtime via any means, shortcut or traditional, that element **_must_** exist.
 
 <div class="content-with-left-bar">
 
-### Wrap Shortcut: Details <span style="color: red;font-size: 80%;">&nbsp;**(EXPERIMENTAL)**</span>
+### Wrap Shortcut: Details (Experimental) 
 
 1. Syntax: `` [⍺←''''] `W ⍵ ``.
 2. Let `L←0⊃2⍴⍺` and `R←1⊃2⍴⍺`.
@@ -872,7 +875,7 @@ sometimes a backtick is just a backtick.
   - [Escape Sequences For Text Fields and Quoted Strings](#escape-sequences-for-text-fields-and-quoted-strings)
   - [Code Field Shortcuts](#code-field-shortcuts)
   - [Omega Shortcut Expressions: Details](#omega-shortcut-expressions-details)
-  - [Wrap Shortcut: Details  **(EXPERIMENTAL)**](#wrap-shortcut-details-experimental)
+  - [Wrap Shortcut: Details (Experimental)](#wrap-shortcut-details-experimental)
 - [Table of Contents](#table-of-contents)
 - [Copyright](#copyright)
 
@@ -893,10 +896,10 @@ sometimes a backtick is just a backtick.
 <hr>
 
 ## Copyright
-<span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250924T191311]
-</span>
 
+<span style="font-family:cursive;" >
+(C) 2025 Sam the Cat Foundation. [20250925T153151]
+</span>
 <hr><hr>
 
 

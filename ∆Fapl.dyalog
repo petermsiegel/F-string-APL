@@ -283,16 +283,16 @@
 ⍝ 3. Displays helpHtml.
   Help← { 
     'help'≢ 4↑⎕C⍵: ⎕SIGNAL optÊ 
-     _h← {  
+    _h← {  
       22:: ⎕SIGNAL helpFiÊ 
       DEBUG∨ ⍵: ⊢⎕THIS.helpHtml← ⊃⎕NGET helpHtmlFi 
         ⎕THIS.helpHtml  
     } 0= ⎕NC 'helpHtml' 
     _c← '∆F Help Information'
-    HROpt← ('HTML'  _h) ('Caption' _c ) (900 1000,⍨ ⊂'Size') (10 10,⍨ ⊂'Posn') ('Coord' 'ScaledPixel')
-    _← 'htmlObj' ⎕THIS.⎕WC 'HTMLRenderer',⍥⊆ HROpt           ⍝ Run HTMLRenderer
+    _o← ('HTML'  _h) (900 1000,⍨ ⊂'Size') (10 10,⍨ ⊂'Posn') ('Coord' 'ScaledPixel')
+    _← 'htmlObj' ⎕THIS.⎕WC 'HTMLRenderer',⍥⊆ _o          ⍝ Run HTMLRenderer
     1 0⍴⍬
-  }  
+  } 
 
 ⍝ ===============================   FIX-time Routines   ================================ 
 ⍝ ⍙Promote_∆F: rc← ∇ dest     

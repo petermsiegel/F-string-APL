@@ -112,9 +112,13 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
   }
 </style>
 
-<div class="header" id="myHeader">
-<center><bold>∆F - Formatted String Literals</bold></center>
-</div>
+<!-- 
+    <div class="header" id="myHeader">
+    <center><bold>∆F - Formatted String Literals</bold></center>
+    </div>
+-->
+
+<title>∆F - Formatted String Literals</title>
 
 <h2 id="f---formatted-string-literals">∆F - Formatted String
 Literals</h2>
@@ -819,9 +823,9 @@ expressions: <code>`⍵ `⍵ `⍵</code>. This is equivalent to the
 <h3 id="precomputed-f-strings-with-the-dfn-option">Precomputed F-strings
 with the <em><strong>DFN</strong></em> Option</h3>
 <p>The default returned from <strong>∆F</strong> is always (on success)
-a character matrix. That can be expressed via <code>0 ∆F ...</code>.¹
+a character matrix. That can be expressed via <code>0 ∆F...</code>.¹
 However, if the initial option (<strong><em>DFN</em></strong>) is
-<code>1</code>, <em>e.g.</em> the call is <code>1 ∆F ...</code>,
+<code>1</code>, <em>e.g.</em> the call is <code>1 ∆F...</code>,
 <strong>∆F</strong> returns a dfn that, <em>when called later</em>, will
 return precisely the same expression.² This is most useful when you are
 making repeated use of an <em>f-string</em>, since the overhead for
@@ -838,8 +842,8 @@ amortized over all the calls.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">¹ <strong>∆F</strong>'s default initial
-option (left argument) is <code>0</code>, so <code>0 ∆F ...</code> and
-<code>∆F ...</code> are equivalent. We discuss all the options to
+option (left argument) is <code>0</code>, so <code>0 ∆F...</code> and
+<code>∆F...</code> are equivalent. We discuss all the options to
 <strong>∆F</strong> later in this document.</td>
 </tr>
 <tr>
@@ -924,8 +928,8 @@ Information</h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Call Syntax
-<div style="width:220px"></div></th>
+<th style="text-align: left;">Call
+Syntax<div style="width:220px"></div></th>
 <th style="text-align: left;">Description</th>
 </tr>
 </thead>
@@ -976,8 +980,8 @@ an identical system state).</td>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Element
-<div style="width:220px"></div></th>
+<th
+style="text-align: left;">Element<div style="width:220px"></div></th>
 <th style="text-align: left;">Description</th>
 </tr>
 </thead>
@@ -1068,7 +1072,8 @@ to <code>4⍴0</code>.</li>
 scalar, or an empty numeric vector <code>⍬</code>, the options are
 <code>4↑⍺</code>; subsequent elements are ignored;</li>
 <li>If the left argument <code>⍺</code> starts with <code>'help'</code>
-(case ignored), this help information is displayed.</li>
+(case ignored), this help information is displayed. In this case only,
+the right argument to <strong>∆F</strong> is ignored.</li>
 <li>Otherwise, an error is signaled.</li>
 </ul>
 <h3 id="f-return-value">∆F Return Value</h3>
@@ -1129,29 +1134,29 @@ number of escape sequences, beginning with the backtick
 <table>
 <thead>
 <tr>
-<th style="text-align: center;"> Sequence </th>
-<th style="text-align: center;"> Literal </th>
-<th style="text-align: center;"> Meaning </th>
+<th style="text-align: center;">  Escape Sequence  </th>
+<th style="text-align: center;">  What It Inserts  </th>
+<th style="text-align: center;">  Description  </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: center;">`◇</td>
-<td style="text-align: center;">(newline)</td>
-<td style="text-align: center;">  (⎕UCS 13) </td>
+<td style="text-align: center;"><strong>`◇</strong></td>
+<td style="text-align: center;"><em>newline</em></td>
+<td style="text-align: center;">  ⎕UCS 13</td>
 </tr>
 <tr>
-<td style="text-align: center;">``</td>
+<td style="text-align: center;"><strong>``</strong></td>
 <td style="text-align: center;">`</td>
 <td style="text-align: center;">backtick</td>
 </tr>
 <tr>
-<td style="text-align: center;">`{</td>
+<td style="text-align: center;"><strong>`{</strong></td>
 <td style="text-align: center;">{</td>
 <td style="text-align: center;">left brace</td>
 </tr>
 <tr>
-<td style="text-align: center;">`}</td>
+<td style="text-align: center;"><strong>`}</strong></td>
 <td style="text-align: center;">}</td>
 <td style="text-align: center;">right brace</td>
 </tr>
@@ -1169,9 +1174,9 @@ shortcuts, intended to be concise and expressive tools for common tasks.
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Shortcut
-<div style="width:100px"></div></th>
-<th style="text-align: left;">Name <div style="width:150px"></div></th>
+<th
+style="text-align: left;">Shortcut<div style="width:100px"></div></th>
+<th style="text-align: left;">Name<div style="width:150px"></div></th>
 <th style="text-align: left;">Meaning</th>
 </tr>
 </thead>
@@ -1296,7 +1301,7 @@ no digits appended) increments the <em>OIC</em>, <code>Ω+←1</code>,
 <code>`⍵0</code> or <code>⍹0</code>. The <em>implicitly indexed</em>
 omega always increments its index <em>before</em> use, so the first
 index that can be used <strong><em>implicitly</em></strong> is
-<strong>1</strong>,<em>i.e.</em> <code>`⍵1</code> or
+<strong>1</strong>, <em>i.e.</em> <code>`⍵1</code> or
 <code>⍹1</code>.</li>
 <li>If an element of the dfn's right argument <strong>⍵</strong> is
 accessed at runtime via any means, shortcut or traditional, that element
@@ -1304,8 +1309,8 @@ accessed at runtime via any means, shortcut or traditional, that element
 </ol>
 <div class="content-with-left-bar">
 
-<h3 id="wrap-shortcut-details--experimental">Wrap Shortcut: Details
-<span style="color: red;font-size: 80%;"> <strong>(EXPERIMENTAL)</strong></span></h3>
+<h3 id="wrap-shortcut-details-experimental">Wrap Shortcut: Details
+(Experimental)</h3>
 <ol type="1">
 <li>Syntax: <code>[⍺←''''] `W ⍵</code>.</li>
 <li>Let <code>L←0⊃2⍴⍺</code> and <code>R←1⊃2⍴⍺</code>.</li>
@@ -1385,7 +1390,7 @@ Sequences For Text Fields and Quoted Strings</a></li>
 <li><a href="#omega-shortcut-expressions-details">Omega Shortcut
 Expressions: Details</a></li>
 <li><a href="#wrap-shortcut-details-experimental">Wrap Shortcut: Details
- <strong>(EXPERIMENTAL)</strong></a></li>
+(Experimental)</a></li>
 </ul></li>
 <li><a href="#table-of-contents">Table of Contents</a></li>
 <li><a href="#copyright">Copyright</a></li>
@@ -1408,7 +1413,6 @@ Expressions: Details</a></li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250924T205114]
+(C) 2025 Sam the Cat Foundation. [20250925T153151]
 </span>
-
 <hr><hr>
