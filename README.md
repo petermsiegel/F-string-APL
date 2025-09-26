@@ -1,6 +1,6 @@
-<!--
+<!-- .
 Preview side-by-side: cmd-K, V,
-md->HTML: opt-shift-M
+md->HTML: opt-shift-M 
 
 Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 -->
@@ -900,7 +900,7 @@ sometimes a backtick is just a backtick.
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250925T191858]
+(C) 2025 Sam the Cat Foundation. [20250925T193549]
 </span>
 <hr><hr>
 
