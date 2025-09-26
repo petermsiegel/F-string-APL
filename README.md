@@ -9,18 +9,20 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
      All of this is designed to be used with the Dyalog htmlRender 
 -->
 ##### Github Published README.md
-<!-- 
-    <div class="header" id="myHeader">
-    <center><bold>∆F - Formatted String Literals</bold></center>
-    </div>
--->
-<title>∆F - Formatted String Literals</title>
+<title>∆F — Formatted String Literals</title>  <!-- htmlRenderer "Caption" -->
 
 ## ∆F - Formatted String Literals
 
 ### ∆F In Brief
 
-<center><p style="padding-left: 15px;padding-right: 5px;padding-top: 5px;padding-bottom: 5px;color: white; background-color: #4f62f0ff;"><b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.¹<br><span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>, but designed for APL.²&nbsp;</span></p></center>
+<center>
+<p style="padding-left: 15px;padding-right: 5px;padding-top: 5px;padding-bottom: 5px;color: white; background-color: #4f62f0ff;">
+<b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, 
+a concise, yet powerful way to display multiline Unicode text and complex, often
+multidimensional expressions in an APL-friendly style.¹<br>
+<span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>, but designed for APL.²&nbsp;</span>
+</p>
+</center>
 
 ---
 
@@ -88,7 +90,7 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 
 ## Installing **∆F**
 
-1. On Github, search for `"F-string-APL"`. 
+1. On Github, search for `"f-string-apl"`. 
 2. Copy the files **∆Fapl.dyalog** and **∆F_Help.html** into your current working directory (the one shown via `]cd`). 
 3. Then, from your Dyalog session (typically `#` or `⎕SE`), enter:  
       `]load ∆Fapl [-target=`**_myns_**`]`  
@@ -777,7 +779,7 @@ a small number of escape sequences, beginning with the backtick `` ` ``.
 
 |   Escape Sequence   |   What It Inserts   |       Description       |
 | :------------------: | :-----------------: | :-------------------------: |
-|         **\`◇**          |      *newline*      |   ⎕UCS 13 |
+|         **\`◇**          |      *newline*      |   ⎕UCS 13 |
 |         **\`\`**         |          `          |          backtick           |
 |         **\`{**          |          {          |         left brace          |
 |         **\`}**          |          }          |         right brace         |
@@ -898,7 +900,7 @@ sometimes a backtick is just a backtick.
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250925T153151]
+(C) 2025 Sam the Cat Foundation. [20250925T191858]
 </span>
 <hr><hr>
 
