@@ -26,7 +26,7 @@ multidimensional expressions in an APL-friendly style.¹<br>
 
 ---
 
-  - [Table of Contents](#table-of-contents)
+<span style="font-size: 150%;">👉</span> [Table of Contents](#table-of-contents)
 
 **∆F** *f-strings* can concisely include:
 
@@ -38,10 +38,12 @@ multidimensional expressions in an APL-friendly style.¹<br>
 
   - **Quoted strings** in **Code fields**, with several quote styles:
 
-    - **double-quotes** `{"like this"}` or this `` {"on`◇""three""`◇lines"}``,
-    - **single-quotes**, _distractingly_ `{''shown ''''right'''' here''}'`, _or even_
-    - **double angle quotation marks**,⁵ *i.e.* _guillemets_,  
-      `{«with internal quotes like "this" or ''this''.»}`;
+    - **double-quotes**<br>
+      `∆F '{"like this"}'` or `` ∆F '{"on`◇""three""`◇lines"} ``,
+    - **single-quotes** [sic!]<br> 
+      `∆F '{''shown ''''right'''' here''}'`, or even,
+    - **double angle quotation marks**,⁵<br>
+      `∆F '{«with internal quotes like "this" or ''this''.»}'`;
 
   - Simple shortcuts⁶ for
 
@@ -789,19 +791,21 @@ sometimes a backtick is just a backtick.
 
 ### Code Field Shortcuts
 
-**∆F** **Code fields** may contain various shortcuts, intended to be concise and expressive tools for common tasks. **Shortcuts** are valid **only** outside **Quoted strings**. They include:
+**∆F** **Code fields** may contain various shortcuts, intended to be concise and expressive tools for common tasks. **Shortcuts** are valid in **Code fields** only *outside* **Quoted strings**. 
+
+**Shortcuts** include:
 
 | Shortcut<div style="width:100px"></div>                               | Name<div style="width:150px"></div> | Meaning                                                                                                                                                                                                       |
 | :-------------------------------------------------------------------- | :---------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| $, \`F                                                                | ⎕FMT                                | `[⍺] $ ⍵`. Short for `[⍺] ⎕FMT ⍵`. (See APL documentation).                                                                                                                                                   |
-| %, \`A                                                                | Above                               | `[⍺] % ⍵`. Centers array `⍺` above array `⍵`. If omitted, `⍺←''`, *i.e.* a blank line.                                                                                                                        |
-| \`B                                                                   | Box                                 | `` `B ⍵ ``. Places `⍵` in a box. `⍵` is any array.                                                                                                                                                            |
-| \`C                                                                   | Commas                              | `` `C ⍵ ``. Adds commas to `⍵` after every 3rd digit of the integer part of `⍵`, right-to-left. `⍵` is a vector of num strings or numbers.                                                                    |
-| \`Q                                                                   | Quote                               | `` [⍺]`Q ⍵ ``. Recursively scans `⍵`, putting char. vectors, scalars, and rows of higher-dimensional strings in APL quotes, leaving other elements as is. If omitted, `⍺←''''`.                               |
-| \`T, \`D                                                              | Date-Time¹                          | `` [⍺]`T ⍵ ``. Displays timestamp(s) `⍵` according to date-time template `⍺`. `⍵` is one or more APL timestamps `⎕TS`. `⍺` is a date-time template in `1200⌶` format. If omitted, `⍺← 'YYYY-MM-DD hh:mm:ss'`. |
-| \`W <span style="color: red;font-size: 70%;">**EXPERIMENTAL!**</span> | Wrap                                | `` [⍺]`W ⍵ ``. Wraps the rows of simple arrays in ⍵ in decorators `0⊃2⍴⍺` (on the left) and `1⊃2⍴⍺` (on the right). If omitted, `⍺←''''`. _See details below._                                                |
-| \`⍵𝑑𝑑, ⍹𝑑𝑑                                                            | Omega Shortcut (explicitly indexed) | A shortcut of the form `` `⍵𝑑𝑑 `` (or `⍹𝑑𝑑`), to access the `𝑑𝑑`**th** element of `⍵`, *i.e.* `(⍵⊃⍨ 𝑑𝑑+⎕IO)`. _See details below._                                                                            |
-| \`⍵, ⍹                                                                | Omega Shortcut (implicitly indexed) | A shortcut of the form `` `⍵ `` (or `⍹`), to access the **_next_** element of `⍵`. _See details below._                                                                                                       |
+| **$**, **\`F**                                                                | ⎕FMT                                | `[⍺] $ ⍵`. Short for `[⍺] ⎕FMT ⍵`. (See APL documentation).                                                                                                                                                   |
+| **%**, **\`A**                                                                | Above                               | `[⍺] % ⍵`. Centers array `⍺` above array `⍵`. If omitted, `⍺←''`, *i.e.* a blank line.                                                                                                                        |
+| **\`B**                                                                   | Box                                 | `` `B ⍵ ``. Places `⍵` in a box. `⍵` is any array.                                                                                                                                                            |
+| **\`C**                                                                   | Commas                              | `` `C ⍵ ``. Adds commas to `⍵` after every 3rd digit of the integer part of `⍵`, right-to-left. `⍵` is a vector of num strings or numbers.                                                                    |
+| **\`Q**                                                                   | Quote                               | `` [⍺]`Q ⍵ ``. Recursively scans `⍵`, putting char. vectors, scalars, and rows of higher-dimensional strings in APL quotes, leaving other elements as is. If omitted, `⍺←''''`.                               |
+| **\`T**, **\`D**                                                              | Date-Time¹                          | `` [⍺]`T ⍵ ``. Displays timestamp(s) `⍵` according to date-time template `⍺`. `⍵` is one or more APL timestamps `⎕TS`. `⍺` is a date-time template in `1200⌶` format. If omitted, `⍺← 'YYYY-MM-DD hh:mm:ss'`. |
+| **\`W** <span style="color: red;font-size: 70%;">**EXPERIMENTAL!**</span> | Wrap                                | `` [⍺]`W ⍵ ``. Wraps the rows of simple arrays in ⍵ in decorators `0⊃2⍴⍺` (on the left) and `1⊃2⍴⍺` (on the right). If omitted, `⍺←''''`. _See details below._                                                |
+| **\`⍵𝑑𝑑**, **⍹𝑑𝑑**                                                            | Omega Shortcut (explicitly indexed) | A shortcut of the form `` `⍵𝑑𝑑 `` (or `⍹𝑑𝑑`), to access the `𝑑𝑑`**th** element of `⍵`, *i.e.* `(⍵⊃⍨ 𝑑𝑑+⎕IO)`. _See details below._                                                                            |
+| **\`⍵**, **⍹**                                                                | Omega Shortcut (implicitly indexed) | A shortcut of the form `` `⍵ `` (or `⍹`), to access the **_next_** element of `⍵`. _See details below._                                                                                                       |
 
 ---
 
@@ -900,7 +904,7 @@ sometimes a backtick is just a backtick.
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250925T214134]
+(C) 2025 Sam the Cat Foundation. [20250926T080119]
 </span>
 <hr><hr>
 
