@@ -928,40 +928,43 @@ Information</h2>
 <thead>
 <tr>
 <th style="text-align: left;">Call
-Syntax<div style="width:220px"></div></th>
+Syntax<div style="width:250px"></div></th>
 <th style="text-align: left;">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><strong>∆F</strong> <em>f-string</em></td>
+<td style="text-align: left;"><strong>∆F</strong>
+<em><strong>f-string</strong></em></td>
 <td style="text-align: left;">Display an <em>f-string</em>; use the
 <em>default</em> options. The string may reference objects in the
 environment or in the string itself. Returns a character matrix.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>∆F</strong> <em>f-string</em>
-<em>arg1</em> [<em>arg2</em> ...]</td>
+<td style="text-align: left;"><strong>∆F</strong>
+<em><strong>f-string</strong></em> <strong><em>arg1</em></strong>
+[<em><strong>arg2</strong></em> ...]</td>
 <td style="text-align: left;">Display an <em>f-string</em>; use the
 <em>default</em> options. Arguments presented <em>may</em> be referred
 to in the f-string. Returns a character matrix.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><em>options</em> <strong>∆F</strong>
-<em>f-string</em> [<em>args</em>]</td>
+<td style="text-align: left;"><em><strong>options</strong></em>
+<strong>∆F</strong> <strong><em>f-string</em></strong>
+[<em><strong>args</strong></em>]</td>
 <td style="text-align: left;">Display an <em>f-string</em>; control the
 result with <em>options</em> specified (see below).</td>
 </tr>
 <tr>
 <td style="text-align: left;"></td>
-<td style="text-align: left;">If the initial option (DFN) is
-<strong>0</strong> or omitted, returns a character matrix.</td>
+<td style="text-align: left;">If <em>DFN</em> (see below) is
+<code>0</code> or omitted, returns a character matrix.</td>
 </tr>
 <tr>
 <td style="text-align: left;"></td>
-<td style="text-align: left;">If the initial option (DFN) is
-<strong>1</strong>, returns a dfn that will display such a matrix (given
-an identical system state).</td>
+<td style="text-align: left;">If <em>DFN</em> is <code>1</code>, returns
+a dfn that will display such a matrix (given an identical system
+state).</td>
 </tr>
 <tr>
 <td style="text-align: left;">'help' <strong>∆F</strong> ''</td>
@@ -980,7 +983,7 @@ an identical system state).</td>
 <thead>
 <tr>
 <th
-style="text-align: left;">Element<div style="width:220px"></div></th>
+style="text-align: left;">Element<div style="width:250px"></div></th>
 <th style="text-align: left;">Description</th>
 </tr>
 </thead>
@@ -998,58 +1001,59 @@ each of which can be accessed in the <em>f-string</em> via a
 expression).</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong><em>options</em></strong>:
-<em>mode</em></td>
-<td style="text-align: left;">[ <code>options←</code> [ <code>0</code> [
-<code>0</code> [ <code>0</code> [ <code>0</code> ] ] ] ] |
-<code>'help'</code> ]</td>
+<td
+style="text-align: left;"><em><strong>options</strong></em>: <em>mode</em></td>
+<td style="text-align: left;"><big>[ <code>options←</code> [
+<code>0</code> [ <code>0</code> [ <code>0</code> [ <code>0</code> ] ] ]
+]  | <code>'help'</code> ] </big></td>
 </tr>
 <tr>
-<td style="text-align: left;"> options[0]:<br> <em>dfn output
-mode</em></td>
-<td style="text-align: left;"><em><strong>DFN</strong></em>: If
-<code>1</code>, <strong>∆F</strong> returns a dfn, which (upon
-execution) produces the same output as the default
-mode.<BR><strong>Default</strong>: <strong>∆F</strong> returns a char.
-matrix.</td>
+<td style="text-align: left;"> <em><strong>options[0]</strong></em>:
+<em><strong>DFN</strong></em><br>  <em>dfn output mode</em></td>
+<td style="text-align: left;">If <code>1</code>, <strong>∆F</strong>
+returns a dfn, which (upon execution) produces the same output as the
+default mode.<BR>If <code>0</code> (default): <strong>∆F</strong>
+returns a char. matrix.</td>
 </tr>
 <tr>
-<td style="text-align: left;"> options[1]:<br> <em>debug</em></td>
-<td style="text-align: left;"><em><strong>DBG</strong></em>: If
-<code>1</code>, displays the code that the <em>f-string</em>
-<strong><em>actually</em></strong> generates; if
+<td style="text-align: left;"> <em><strong>options[1]</strong></em>:
+<em><strong>DBG</strong></em><br>  <em>debug mode</em></td>
+<td style="text-align: left;">If <code>1</code>, displays the code that
+the <em>f-string</em> <strong><em>actually</em></strong> generates; if
 <strong><em>DFN</em></strong> is also <code>1</code>, this will include
 the embedded <em>f-string</em> source (accessed as <code>`⍵0</code>).
 Newline characters are rendered visibly as <code>␍</code>. After
 displaying the code, it is executed per any other options.</td>
 </tr>
 <tr>
-<td style="text-align: left;"> options[2]:<br> <em>box fields</em></td>
-<td style="text-align: left;"><em><strong>BOX</strong></em>: If
-<code>1</code>, each field (except a <strong>Null text</strong> field)
-is boxed separately.<BR><strong>Default</strong>: Nothing is boxed
-automatically. Any <strong>Code field</strong> expression may be
-explicitly boxed using the <strong>Box</strong> shortcut,
+<td style="text-align: left;"> <em><strong>options[2]</strong></em>:
+<em><strong>BOX</strong></em><br>  <em>box mode</em></td>
+<td style="text-align: left;">If <code>1</code>, each field (except a
+<strong>Null text</strong> field) is boxed separately.<BR>If
+<code>0</code> (default): Nothing is boxed automatically. Any
+<strong>Code field</strong> expression may be explicitly boxed using the
+<strong>Box</strong> shortcut,
 <code>`B</code>.<br><small><strong>Note</strong>:
 <em><strong>BOX</strong></em> mode can be used both with
 <em><strong>DFN</strong></em> and default output mode.</small></td>
 </tr>
 <tr>
-<td style="text-align: left;"> options[3]:<br> <em>inline
-routines</em></td>
-<td style="text-align: left;"><em><strong>INLINE</strong></em>: If
-<code>1</code> and the <em><strong>DFN</strong></em> option is set, the
-code for each internal support function used is included in the
-<em>dfn</em> result; <em><strong>no</strong></em> reference to
+<td style="text-align: left;"> <em><strong>options[3]</strong></em>:
+<em><strong>INLINE</strong></em><br>  <em>inline routine mode</em></td>
+<td style="text-align: left;">If <code>1</code> and the
+<em><strong>DFN</strong></em> option is set, the code for each internal
+support function used is included in the <em>dfn</em> result;
+<em><strong>no</strong></em> reference to namespace
 <strong>⍙Fapl</strong> will be made during the execution of that
-<em>dfn</em>.<BR><strong>Default</strong>: Whenever <strong>∆F</strong>
-or a <em>dfn</em> generated by it is executed, it makes calls to library
-routines in the namespace <strong>⍙Fapl</strong>, created during the
-<code>]load ∆Fapl</code> process.<br><small><strong>Note:</strong> This
-option is experimental and may simply disappear one day.</small></td>
+<em>dfn</em>.<BR>If <code>0</code> (default): Whenever
+<strong>∆F</strong> or a <em>dfn</em> generated by it is executed, it
+makes calls to library routines in the namespace <strong>⍙Fapl</strong>,
+created during the <code>]load ∆Fapl</code>
+process.<br><small><strong>Note:</strong> This option is experimental
+and may simply disappear one day.</small></td>
 </tr>
 <tr>
-<td style="text-align: left;">'help'</td>
+<td style="text-align: left;"> 'help'</td>
 <td style="text-align: left;">If <code>'help'</code> is specified, this
 amazing documentation is displayed.</td>
 </tr>
@@ -1419,6 +1423,6 @@ Expressions: Details</a></li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250926T123958]
+(C) 2025 Sam the Cat Foundation. [20250926T165708]
 </span>
 <hr><hr>
