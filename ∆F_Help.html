@@ -41,7 +41,7 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
   table {
     background-color: #eae9ebaa;
     line-height: 1.1;
-    font-size: 20px;
+    font-size: 100%; /* 20px */
     vertical-align: top;
     font-family: "APL386 Unicode", APL386, "APL385 Unicode", APL385, 
         "Courier New", Courier, "Lucida Console", "Consolas", monospace;
@@ -51,6 +51,8 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
     font-family:  Georgia,"Courier New", Courier, "Lucida Console", "Consolas", monospace;
     font-weight: 900;
     line-height: 1.1;
+    padding-left: 7px; 
+    padding-right: 5px;
     vertical-align: top;
     background-color: #740000ff;
     color: #f3efef;
@@ -58,7 +60,9 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
   /* Table data */
   td { 
     font-family: Georgia,"Courier New", Courier, "Lucida Console", "Consolas", monospace;
-    font-weight: 200;
+    font-weight: 200; 
+    padding-left: 7px; 
+    padding-right: 5px;
     vertical-align: top;
   }
   tr:nth-child(odd) {
@@ -111,6 +115,7 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
     overflow: hidden; /* Clear floats if internal content uses them */
   }
   .notes {
+    font-size: 90%;
     margin-left: 30px; 
     border-top: 4px solid #740000ff; /* Create a top border as a line */
     border-top-width: 5px;
@@ -308,9 +313,8 @@ note its absence).</li>
 <hr />
 <h2 id="f-examples">∆F EXAMPLES</h2>
 <div class="content-with-right-bar">
+Before providing information on **∆F** syntax and other details, *let's start with some examples*…
 
-<p>Before providing information on <strong>∆F</strong> syntax and other
-details, <em>let's start with some examples</em>…</p>
 <p>First, let's set some context.</p>
 <pre><code>   ⎕IO ⎕ML← 0 1        </code></pre>
 <h3 id="code-fields">Code Fields</h3>
@@ -1438,6 +1442,6 @@ Expressions: Details</a></li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250927T134702]
+(C) 2025 Sam the Cat Foundation. [20250927T141650]
 </span>
 <hr><hr>
