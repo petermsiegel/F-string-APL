@@ -798,11 +798,12 @@ sometimes a backtick is just a backtick.
 | Shortcut<div style="width:100px"></div>                               | Name<div style="width:150px"></div> | Meaning                                                                                                                                                                                                       |
 | :-------------------------------------------------------------------- | :---------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **\`A**, **%**                                                                | Above                               | `[⍺] % ⍵`. Centers array `⍺` above array `⍵`. If omitted, `⍺←''`, *i.e.* a blank line.                                                                                                                        |
-| **\`F**, **$**                                                                 | ⎕FMT                                | `[⍺] $ ⍵`. Short for `[⍺] ⎕FMT ⍵`. (See APL documentation).                                                                                                                                                   |
 | **\`B**                                                                   | Box                                 | `` `B ⍵ ``. Places `⍵` in a box. `⍵` is any array.                                                                                                                                                            |
 | **\`C**                                                                   | Commas                              | `` `C ⍵ ``. Adds commas to `⍵` after every 3rd digit of the integer part of `⍵`, right-to-left. `⍵` is a vector of num strings or numbers.                                                                    |
+| **\`D** | Date-Time¹ | Synonym for **\`T**. |
+| **\`F**, **$**                                                                 | ⎕FMT                                | `[⍺] $ ⍵`. Short for `[⍺] ⎕FMT ⍵`. (See APL documentation).                                                                                                                                                   |
 | **\`Q**                                                                   | Quote                               | `` [⍺]`Q ⍵ ``. Recursively scans `⍵`, putting char. vectors, scalars, and rows of higher-dimensional strings in APL quotes, leaving other elements as is. If omitted, `⍺←''''`.                               |
-| **\`T**, **\`D**                                                              | Date-Time¹                          | `` [⍺]`T ⍵ ``. Displays timestamp(s) `⍵` according to date-time template `⍺`. `⍵` is one or more APL timestamps `⎕TS`. `⍺` is a date-time template in `1200⌶` format. If omitted, `⍺← 'YYYY-MM-DD hh:mm:ss'`. |
+| **\`T**                                                              | Date-Time¹                          | `` [⍺]`T ⍵ ``. Displays timestamp(s) `⍵` according to date-time template `⍺`. `⍵` is one or more APL timestamps `⎕TS`. `⍺` is a date-time template in `1200⌶` format. If omitted, `⍺← 'YYYY-MM-DD hh:mm:ss'`. |
 | **\`W** <span style="color: red;font-size: 70%;">**EXPERIMENTAL!**</span> | Wrap                                | `` [⍺]`W ⍵ ``. Wraps the rows of simple arrays in ⍵ in decorators `0⊃2⍴⍺` (on the left) and `1⊃2⍴⍺` (on the right). If omitted, `⍺←''''`. _See details below._                                                |
 | **\`⍵𝑑𝑑**, **⍹𝑑𝑑**                                                            | Omega Shortcut (<small>EXPLICIT</small>)| A shortcut of the form `` `⍵𝑑𝑑 `` (or `⍹𝑑𝑑`), to access the `𝑑𝑑`**th** element of `⍵`, *i.e.* `(⍵⊃⍨ 𝑑𝑑+⎕IO)`. _See details below._                                                                            |
 | **\`⍵**, **⍹**                                                                | Omega Shortcut (<small>IMPLICIT</small>)  | A shortcut of the form `` `⍵ `` (or `⍹`), to access the **_next_** element of `⍵`. _See details below._                                                                                                       |
@@ -904,7 +905,7 @@ sometimes a backtick is just a backtick.
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250927T093301]
+(C) 2025 Sam the Cat Foundation. [20250927T093901]
 </span>
 <hr><hr>
 
