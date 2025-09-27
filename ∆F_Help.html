@@ -5,7 +5,7 @@ md->HTML: opt-shift-M
 Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 -->
 
-<!-- Style stuff related to APL and my random preferences...  
+<!-- Style stuff related to APL and my random preferences…  
      All of this is designed to be used with the Dyalog htmlRender 
 -->
 
@@ -75,6 +75,7 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
     font-size: 100%;
     line-height: 140%;
   }
+  /* Not currently used */
   .header {
   position: sticky;
   top: 0;
@@ -200,7 +201,7 @@ appropriate vertical conformation) to form a single character matrix:
 <p><strong>∆F</strong> is designed⁷ for ease of use, <em>ad hoc</em>
 debugging, fine-grained formatting and informal user interaction, built
 using APL's own powerful functions and operators.</p>
-<div style="margin-left: 20px;">
+<div style="margin-left: 20px;"><hr>
 
 <table>
 <thead>
@@ -297,7 +298,7 @@ note its absence).</li>
 <div class="content-with-right-bar">
 
 <p>Before providing information on <strong>∆F</strong> syntax and other
-details, <em>let's start with some examples</em>...</p>
+details, <em>let's start with some examples</em>…</p>
 <p>First, let's set some context.</p>
 <pre><code>   ⎕IO ⎕ML← 0 1        </code></pre>
 <h3 id="code-fields">Code Fields</h3>
@@ -343,7 +344,7 @@ is      multi-line Fields
 an
 example</code></pre>
 <h3 id="null-space-fields">Null Space Fields</h3>
-<p>Two adjacent <strong>Text fields</strong> can be separated by a Null
+<p>Two adjacent <strong>Text fields</strong> can be separated by a null
 <strong>Space field</strong> <code>{}</code>, for example when at least
 one field contains multiline input that you want formatted separately
 from others, keeping each field in is own rectangular space:</p>
@@ -432,7 +433,7 @@ argument to <code>0 0 1</code>:</p>
 │                   │60│      │140.0│  │
 └───────────────────┴──┴──────┴─────┴──┘</code></pre>
 <p>We said you could place a box around every field, but there's an
-exception. <strong>Null Space fields</strong> <code>{}</code>,
+exception. Null <strong>Space fields</strong> <code>{}</code>,
 <em>i.e.</em> 0-width <strong>Space fields</strong>, are discarded once
 they've done their work of separating adjacent fields (typically
 <strong>Text fields</strong>), so they won't be placed in boxes. Try
@@ -463,7 +464,7 @@ Itself</h3>
 <p>The expression <code>`⍵0</code> always refers to the
 <em>f-string</em> itself.¹ Try this yourself:²</p>
 <pre><code>   ∆F &#39;Our string {`⍵0↓} is {≢`⍵0} characters&#39;</code></pre>
-<div style="margin-left: 20px;">
+<div style="margin-left: 20px;"><hr>
 
 <table>
 <thead>
@@ -505,7 +506,7 @@ Commas</h3>
 right) to one or more numbers or numeric strings.¹ It has an advantage
 over the <code>$</code> (Dyalog's <code>⎕FMT</code>) specifier: it
 doesn't require you to guesstimate field widths.</p>
-<div style="margin-left: 20px;">
+<div style="margin-left: 20px;"><hr>
 
 <table>
 <thead>
@@ -589,7 +590,7 @@ single quote.</li>
 <li>If you need to omit one or the other decorator, simply make it a
 null string <code>""</code> or a <em>zilde</em> <code>⍬</code>.</li>
 </ul>
-<div style="margin-left: 20px;">
+<div style="margin-left: 20px;"><hr>
 
 <table>
 <thead>
@@ -640,7 +641,7 @@ fields</strong>.</p>
 <p>What's an SDCF? An SDCF¹ allows whatever source code is in a
 <strong>Code Field</strong> to be automatically displayed literally
 along with the result of evaluating that code.</p>
-<div style="margin-left: 25px;">
+<div style="margin-left: 20px;"><hr>
 
 <table>
 <thead>
@@ -709,7 +710,7 @@ around each field (using the <strong>Box</strong> option
 └──────────────────┴──────────┴─┴────┴─┘</code></pre>
 <h3 id="the-above-shortcut">The Above Shortcut</h3>
 <blockquote>
-<p>A cut above the rest...</p>
+<p>A cut above the rest…</p>
 </blockquote>
 <p>Here's a useful feature. Let's use the shortcut <code>%</code> to
 display one expression centered above another; it's called
@@ -724,7 +725,7 @@ Mary Jones  23</code></pre>
 <h3 id="omega-shortcuts-implicit">Omega Shortcuts (Implicit)</h3>
 <blockquote>
 <p>The <em>next</em> best thing: the use of <code>`⍵</code> in
-<strong>Code field</strong> expressions...</p>
+<strong>Code field</strong> expressions…</p>
 </blockquote>
 <p>We said we'd present the use of omega shortcuts with implicit indices
 <code>`⍵</code> in <strong>Code fields</strong>. The expression
@@ -821,15 +822,15 @@ expressions: <code>`⍵ `⍵ `⍵</code>. This is equivalent to the
 <h3 id="precomputed-f-strings-with-the-dfn-option">Precomputed F-strings
 with the <em><strong>DFN</strong></em> Option</h3>
 <p>The default returned from <strong>∆F</strong> is always (on success)
-a character matrix. That can be expressed via <code>0 ∆F...</code>.¹
+a character matrix. That can be expressed via <code>0 ∆F…</code>.¹
 However, if the initial option (<strong><em>DFN</em></strong>) is
-<code>1</code>, <em>e.g.</em> the call is <code>1 ∆F...</code>,
+<code>1</code>, <em>e.g.</em> the call is <code>1 ∆F…</code>,
 <strong>∆F</strong> returns a dfn that, <em>when called later</em>, will
 return precisely the same expression.² This is most useful when you are
 making repeated use of an <em>f-string</em>, since the overhead for
 examining the <em>f-string</em> contents <em>once</em> would be
 amortized over all the calls.</p>
-<div style="margin-left: 25px;">
+<div style="margin-left: 20px;"><hr>
 
 <table>
 <thead>
@@ -840,8 +841,8 @@ amortized over all the calls.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">¹ <strong>∆F</strong>'s default initial
-option (left argument) is <code>0</code>, so <code>0 ∆F...</code> and
-<code>∆F...</code> are equivalent. We discuss all the options to
+option (left argument) is <code>0</code>, so <code>0 ∆F…</code> and
+<code>∆F…</code> are equivalent. We discuss all the options to
 <strong>∆F</strong> later in this document.</td>
 </tr>
 <tr>
@@ -856,7 +857,7 @@ state.</td>
 <p>Let's explore an example wheregetting the best performance for a
 heavily used <strong>∆F</strong> string is important.</p>
 <p>First, let's grab <code>cmpx</code>, so we can compare the
-performance...</p>
+performance…</p>
 <pre><code>   &#39;cmpx&#39; ⎕CY &#39;dfns&#39;</code></pre>
 <p>Now, let's proceed. Here's the code:</p>
 <pre><code>   C← 11 30 60
@@ -869,19 +870,19 @@ performance...</p>
 ⍝  except the external variables or additional arguments needed.
    T←1 ∆F t
 
-⍝  Compare the performance of the two formats...
+⍝  Compare the performance of the two formats…
 ⍝  The precomputed version is about 17 times faster, in this run.
    cmpx &#39;∆F t&#39; &#39;T ⍬&#39;
 ∆F t → 1.7E¯4 |   0% ⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕⎕
  T ⍬ → 1.0E¯5 | -94% ⎕⎕</code></pre>
 <blockquote>
-<p>Before we get to syntax and other information...</p>
+<p>Before we get to syntax and other information…</p>
 </blockquote>
 <p>Finally, we want to show you that the <em>dfn</em> returned from
-<code>1 ∆F...</code> can retrieve argument(s) passed on the right side
-of <strong>∆F</strong>, using the very same omega shortcut expressions
+<code>1 ∆F…</code> can retrieve argument(s) passed on the right side of
+<strong>∆F</strong>, using the very same omega shortcut expressions
 (<code>`⍵1</code>, etc.) as described above.¹</p>
-<div style="margin-left: 25px;">
+<div style="margin-left: 20px;"><hr>
 
 <table>
 <thead>
@@ -891,10 +892,9 @@ of <strong>∆F</strong>, using the very same omega shortcut expressions
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">¹ In fact, the <em>f-string</em> text
-<em>originally</em> passed when the <em>dfn</em> was generated is stored
-with the "compiled" <em>dfn</em>, available, as expected, as
-<code>`⍵0</code>.</td>
+<td style="text-align: left;">¹ The <em>dfn</em> returned from
+<code>0…∆F…</code> includes the original f-string text used to generate
+it. The f-string is available as <code>`⍵0</code>, as expected.</td>
 </tr>
 </tbody>
 </table>
@@ -941,7 +941,7 @@ environment or in the string itself. Returns a character matrix.</td>
 </tr>
 <tr>
 <td
-style="text-align: left;"><strong>∆F</strong> <em><strong>f-string</strong></em> <em><strong>args</strong></em>…</td>
+style="text-align: left;"><strong>∆F</strong> <em><strong>f-string</strong></em> <em><strong>args</strong></em></td>
 <td style="text-align: left;">Display an <em>f-string</em>; use the
 <em>default</em> options. Arguments presented <em>may</em> be referred
 to in the f-string. Returns a character matrix.</td>
@@ -993,16 +993,17 @@ vector.</td>
 <tr>
 <td style="text-align: left;"><strong><em>args</em></strong></td>
 <td style="text-align: left;">elements of ⍵ after the <em>f-string</em>,
-each of which can be accessed in the <em>f-string</em> via a
-<code>`⍵</code> shortcut (or an ordinary <code>⍵</code>
-expression).</td>
+each of which can be accessed in the <em>f-string</em> via an
+<strong>Omega</strong> shortcut (<code>`⍵𝑑𝑑</code>, <em>etc.</em>) or an
+ordinary <em>dfn</em> <code>⍵</code> expression.</td>
 </tr>
 <tr>
 <td
 style="text-align: left;"><em><strong>options</strong></em>: <em>mode</em></td>
-<td style="text-align: left;"><big>[ <code>options←</code> [
-<code>0</code> [ <code>0</code> [ <code>0</code> [ <code>0</code> ] ] ]
-]  | <code>'help'</code> ] </big></td>
+<td style="text-align: left;"><big><code>options←</code>
+<strong>[</strong> [ <code>0</code> [ <code>0</code> [ <code>0</code> [
+<code>0</code> ] ] ] ]  | <code>'help'</code> <strong>]</strong>
+</big></td>
 </tr>
 <tr>
 <td style="text-align: left;"> <em><strong>options[0]</strong></em>:
@@ -1015,18 +1016,19 @@ returns a char. matrix.</td>
 <tr>
 <td style="text-align: left;"> <em><strong>options[1]</strong></em>:
 <em><strong>DBG</strong></em><br>  <em>debug mode</em></td>
-<td style="text-align: left;">If <code>1</code>, displays the code that
-the <em>f-string</em> <strong><em>actually</em></strong> generates; if
-<strong><em>DFN</em></strong> is also <code>1</code>, this will include
-the embedded <em>f-string</em> source (accessed as <code>`⍵0</code>).
-Newline characters are rendered visibly as <code>␍</code>. After
-displaying the code, it is executed per any other options.</td>
+<td style="text-align: left;">If <code>1</code>, displays the source
+code that the <em>f-string</em> <strong><em>actually</em></strong>
+generates; if <strong><em>DFN</em></strong> is also <code>1</code>, this
+will include the embedded <em>f-string</em> source (accessed as
+<code>`⍵0</code>). Newline characters are rendered visibly as
+<code>␍</code>. After the source code is displayed, it is evaluated per
+other options.</td>
 </tr>
 <tr>
 <td style="text-align: left;"> <em><strong>options[2]</strong></em>:
 <em><strong>BOX</strong></em><br>  <em>box mode</em></td>
 <td style="text-align: left;">If <code>1</code>, each field (except a
-<strong>Null text</strong> field) is boxed separately.<BR>If
+null <strong>Text field</strong>) is boxed separately.<BR>If
 <code>0</code> (default): Nothing is boxed automatically. Any
 <strong>Code field</strong> expression may be explicitly boxed using the
 <strong>Box</strong> shortcut,
@@ -1113,10 +1115,10 @@ Sequences</strong> below.</p></li>
 <li><p><strong>Space fields</strong> are essentially a
 <em>degenerate</em> form of <strong>Code fields</strong>, consisting of
 a single pair of simple curly braces <code>{}</code> with zero or more
-spaces in between. A <strong>Space Field</strong> with zero spaces is a
-<strong>Null Space Field</strong>; while it may separate any other
+spaces in between. A <strong>Space field</strong> with zero spaces is a
+null <strong>Space field</strong>; while it may separate any other
 fields, its practical use is separating two adjacent <strong>Text
-Fields</strong>.</p></li>
+fields</strong>.</p></li>
 </ul>
 <p>The building blocks of an <em>f-string</em> are these defined
 "fields," catenated left to right, each of which will display as a
@@ -1184,19 +1186,19 @@ style="text-align: left;">Shortcut<div style="width:100px"></div></th>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><strong>$</strong>,
-<strong>`F</strong></td>
-<td style="text-align: left;">⎕FMT</td>
-<td style="text-align: left;"><code>[⍺] $ ⍵</code>. Short for
-<code>[⍺] ⎕FMT ⍵</code>. (See APL documentation).</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>%</strong>,
-<strong>`A</strong></td>
+<td style="text-align: left;"><strong>`A</strong>,
+<strong>%</strong></td>
 <td style="text-align: left;">Above</td>
 <td style="text-align: left;"><code>[⍺] % ⍵</code>. Centers array
 <code>⍺</code> above array <code>⍵</code>. If omitted,
 <code>⍺←''</code>, <em>i.e.</em> a blank line.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>`F</strong>,
+<strong>$</strong></td>
+<td style="text-align: left;">⎕FMT</td>
+<td style="text-align: left;"><code>[⍺] $ ⍵</code>. Short for
+<code>[⍺] ⎕FMT ⍵</code>. (See APL documentation).</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>`B</strong></td>
@@ -1243,7 +1245,8 @@ simple arrays in ⍵ in decorators <code>0⊃2⍴⍺</code> (on the left) and
 <tr>
 <td style="text-align: left;"><strong>`⍵𝑑𝑑</strong>,
 <strong>⍹𝑑𝑑</strong></td>
-<td style="text-align: left;">Omega Shortcut (explicitly indexed)</td>
+<td style="text-align: left;">Omega Shortcut
+(<small>EXPLICIT</small>)</td>
 <td style="text-align: left;">A shortcut of the form <code>`⍵𝑑𝑑</code>
 (or <code>⍹𝑑𝑑</code>), to access the <code>𝑑𝑑</code><strong>th</strong>
 element of <code>⍵</code>, <em>i.e.</em> <code>(⍵⊃⍨ 𝑑𝑑+⎕IO)</code>.
@@ -1252,7 +1255,8 @@ element of <code>⍵</code>, <em>i.e.</em> <code>(⍵⊃⍨ 𝑑𝑑+⎕IO)</cod
 <tr>
 <td style="text-align: left;"><strong>`⍵</strong>,
 <strong>⍹</strong></td>
-<td style="text-align: left;">Omega Shortcut (implicitly indexed)</td>
+<td style="text-align: left;">Omega Shortcut
+(<small>IMPLICIT</small>)</td>
 <td style="text-align: left;">A shortcut of the form <code>`⍵</code> (or
 <code>⍹</code>), to access the <strong><em>next</em></strong> element of
 <code>⍵</code>. <em>See details below.</em></td>
@@ -1260,7 +1264,7 @@ element of <code>⍵</code>, <em>i.e.</em> <code>(⍵⊃⍨ 𝑑𝑑+⎕IO)</cod
 </tbody>
 </table>
 <hr />
-<div style="margin-left: 20px;">
+<div style="margin-left: 20px;"><hr>
 
 <table>
 <thead>
@@ -1303,13 +1307,11 @@ to 𝑑𝑑, <code>Ω←𝑑𝑑</code>, and returns the expression
 no digits appended) increments the <em>OIC</em>, <code>Ω+←1</code>,
 <em>before</em> using it as the index in the expression
 <code>(⍵⊃⍨Ω+⎕IO)</code>.</li>
-<li>You can only access the 0-th element of <strong>⍵</strong>, the
-<em>f-string</em> itself via an <em>explicitly indexed omega</em>
-<code>`⍵0</code> or <code>⍹0</code>. The <em>implicitly indexed</em>
-omega always increments its index <em>before</em> use, so the first
-index that can be used <strong><em>implicitly</em></strong> is
-<strong>1</strong>, <em>i.e.</em> <code>`⍵1</code> or
-<code>⍹1</code>.</li>
+<li>The <em>f-string</em> itself (the 0-th element of
+<strong>⍵</strong>) is always accessed as <code>`⍵0</code> or
+<code>⍹0</code>. The omega with <em>implicit index</em> always
+increments its index <em>before</em> use, <em>i.e.</em> starting by
+default with <code>`⍵1</code> or <code>⍹1</code>.</li>
 <li>If an element of the dfn's right argument <strong>⍵</strong> is
 accessed at runtime via any means, shortcut or traditional, that element
 <strong><em>must</em></strong> exist.</li>
@@ -1420,6 +1422,6 @@ Expressions: Details</a></li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250926T191328]
+(C) 2025 Sam the Cat Foundation. [20250927T093301]
 </span>
 <hr><hr>
