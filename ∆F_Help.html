@@ -110,6 +110,18 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
     height: auto; /* Or set a fixed height, *e.g.*, 200px */
     overflow: hidden; /* Clear floats if internal content uses them */
   }
+  .notes {
+    margin-left: 30px; 
+    border-top: 4px solid #740000ff; /* Create a top border as a line */
+    border-top-width: 5px;
+    border-bottom: 4px solid #740000ff; /* Create a top border as a line */
+    border-bottom-width: 5px;
+    border-left: 4px solid #740000ff; /* Create a top border as a line */
+    border-left-width: 3px;
+    border-right: 4px solid #740000ff; /* Create a top border as a line */
+    border-right-width: 3px;
+    width: 90%; /* Adjust width as needed */
+  }
 </style>
 
 <title>∆F — Formatted String Literals</title>  <!-- htmlRenderer "Caption" -->
@@ -201,7 +213,7 @@ appropriate vertical conformation) to form a single character matrix:
 <p><strong>∆F</strong> is designed⁷ for ease of use, <em>ad hoc</em>
 debugging, fine-grained formatting and informal user interaction, built
 using APL's own powerful functions and operators.</p>
-<div style="margin-left: 20px;"><hr>
+<div class="notes">
 
 <table>
 <thead>
@@ -464,7 +476,7 @@ Itself</h3>
 <p>The expression <code>`⍵0</code> always refers to the
 <em>f-string</em> itself.¹ Try this yourself:²</p>
 <pre><code>   ∆F &#39;Our string {`⍵0↓} is {≢`⍵0} characters&#39;</code></pre>
-<div style="margin-left: 20px;"><hr>
+<div class="notes">
 
 <table>
 <thead>
@@ -506,7 +518,7 @@ Commas</h3>
 right) to one or more numbers or numeric strings.¹ It has an advantage
 over the <code>$</code> (Dyalog's <code>⎕FMT</code>) specifier: it
 doesn't require you to guesstimate field widths.</p>
-<div style="margin-left: 20px;"><hr>
+<div class="notes">
 
 <table>
 <thead>
@@ -830,7 +842,7 @@ return precisely the same expression.² This is most useful when you are
 making repeated use of an <em>f-string</em>, since the overhead for
 examining the <em>f-string</em> contents <em>once</em> would be
 amortized over all the calls.</p>
-<div style="margin-left: 20px;"><hr>
+<div class="notes">
 
 <table>
 <thead>
@@ -882,7 +894,7 @@ performance…</p>
 <code>1 ∆F…</code> can retrieve argument(s) passed on the right side of
 <strong>∆F</strong>, using the very same omega shortcut expressions
 (<code>`⍵1</code>, etc.) as described above.¹</p>
-<div style="margin-left: 20px;"><hr>
+<div class="notes">
 
 <table>
 <thead>
@@ -1268,7 +1280,7 @@ element of <code>⍵</code>, <em>i.e.</em> <code>(⍵⊃⍨ 𝑑𝑑+⎕IO)</cod
 </tbody>
 </table>
 <hr />
-<div style="margin-left: 20px;"><hr>
+<div class="notes">
 
 <table>
 <thead>
@@ -1426,6 +1438,6 @@ Expressions: Details</a></li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250927T093901]
+(C) 2025 Sam the Cat Foundation. [20250927T134702]
 </span>
 <hr><hr>

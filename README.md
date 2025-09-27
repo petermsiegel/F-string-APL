@@ -70,7 +70,7 @@ multidimensional expressions in an APL-friendly style.¹<br>
 
 **∆F** is designed⁷ for ease of use, _ad hoc_ debugging, fine-grained formatting and informal user interaction, built using APL's own powerful functions and operators.
 
-<div style="margin-left: 20px;"><hr>
+<div class="notes">
 
 | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -319,7 +319,7 @@ The expression `` `⍵0 `` always refers to the *f-string* itself.¹ Try this yo
    ∆F 'Our string {`⍵0↓} is {≢`⍵0} characters'
 ```
 
-<div style="margin-left: 20px;"><hr>
+<div class="notes">
 
 | Notes                                                                                                                                  |
 | :------------------------------------------------------------------------------------------------------------------------------------- |
@@ -346,7 +346,7 @@ The sun's core is at 15,000,000°C or 27,000,032°F
 
 The `` `C `` shortcut adds commas every 3 digits (from the right) to one or more numbers or numeric strings.¹ It has an advantage over the `$` (Dyalog's `⎕FMT`) specifier: it doesn't require you to guesstimate field widths.
 
-<div style="margin-left: 20px;"><hr>
+<div class="notes">
 
 | Note                                                                                                                                                                         |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -646,9 +646,9 @@ expression: `` `⍵1 `⍵2 `⍵3 ``.
 The default returned from **∆F** is always (on success) a character matrix. That can be expressed via `0 ∆F…`.¹ 
 However, if the initial option (**_DFN_**) is `1`, *e.g.* the call is `1 ∆F…`, **∆F** returns a dfn that, *when called later*, will return precisely the same expression.² This is most useful when you are making repeated use of an *f-string*, since the overhead for examining the *f-string* contents _once_ would be amortized over all the calls.
 
-<div style="margin-left: 20px;"><hr>
+<div class="notes">
 
-| Notes                                                                                                                                                           |
+| Notes                                                       |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ¹ **∆F**'s default initial option (left argument) is `0`, so `0 ∆F…` and `∆F…` are equivalent. We discuss all the options to **∆F** later in this document. |
 | ² This assumes the resulting dfn is called with the same arguments in the same calling environment in the same state.                                           |
@@ -688,7 +688,7 @@ Now, let's proceed. Here's the code:
 
 Finally, we want to show you that the _dfn_ returned from `1 ∆F…` can retrieve argument(s) passed on the right side of **∆F**, using the very same omega shortcut expressions (`` `⍵1 ``, etc.) as described above.¹  
 
-<div style="margin-left: 20px;"><hr>
+<div class="notes">
 
 | Note                                                                                                                                                       |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -810,7 +810,7 @@ sometimes a backtick is just a backtick.
 
 ---
 
-<div style="margin-left: 20px;"><hr>
+<div class="notes">
 
 | Note                                                                                                                                                                                                                                                                                   |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -905,7 +905,7 @@ sometimes a backtick is just a backtick.
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250927T093901]
+(C) 2025 Sam the Cat Foundation. [20250927T134702]
 </span>
 <hr><hr>
 
