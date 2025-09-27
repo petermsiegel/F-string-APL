@@ -19,7 +19,7 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
   }
   /* Inline code */
   code { 
-    font-size: 95%;
+    font-size: 88%;
     background-color: #ddfafaff;
     padding: 2px 4px;
     border-radius: 3px;
@@ -41,6 +41,7 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
   table {
     background-color: #eae9ebaa;
     line-height: 1.1;
+    font-size: 20px;
     vertical-align: top;
     font-family: "APL386 Unicode", APL386, "APL385 Unicode", APL385, 
         "Courier New", Courier, "Lucida Console", "Consolas", monospace;
@@ -48,7 +49,6 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
   /* Table header */
   th {  
     font-family:  Georgia,"Courier New", Courier, "Lucida Console", "Consolas", monospace;
-    font-size: 110%;
     font-weight: 900;
     line-height: 1.1;
     vertical-align: top;
@@ -58,7 +58,6 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
   /* Table data */
   td { 
     font-family: Georgia,"Courier New", Courier, "Lucida Console", "Consolas", monospace;
-    font-size: 110%;
     font-weight: 200;
     vertical-align: top;
   }
@@ -218,7 +217,7 @@ system variables from the environment (<em>i.e.</em> namespace) in which
 <strong>∆F</strong> is called, so your own examples will work as you
 expect. If you wish to modify the <code>⎕IO</code> or any system
 variable temporarily, you may do so right in the <strong>Code
-field</strong>:
+field</strong>:<br>  
 <code>∆F '{⎕IO←1 ◇ 26=⎕A⍳"Z": "Success" ◇ "Failure"}'</code>.</td>
 </tr>
 <tr>
@@ -928,30 +927,28 @@ Information</h2>
 <thead>
 <tr>
 <th style="text-align: left;">Call
-Syntax<div style="width:250px"></div></th>
+Syntax<div style="width:290px"></div></th>
 <th style="text-align: left;">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><strong>∆F</strong>
-<em><strong>f-string</strong></em></td>
+<td
+style="text-align: left;"><strong>∆F</strong> <em><strong>f-string</strong></em></td>
 <td style="text-align: left;">Display an <em>f-string</em>; use the
 <em>default</em> options. The string may reference objects in the
 environment or in the string itself. Returns a character matrix.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>∆F</strong>
-<em><strong>f-string</strong></em> <strong><em>arg1</em></strong>
-[<em><strong>arg2</strong></em> ...]</td>
+<td
+style="text-align: left;"><strong>∆F</strong> <em><strong>f-string</strong></em> <em><strong>args</strong></em>…</td>
 <td style="text-align: left;">Display an <em>f-string</em>; use the
 <em>default</em> options. Arguments presented <em>may</em> be referred
 to in the f-string. Returns a character matrix.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><em><strong>options</strong></em>
-<strong>∆F</strong> <strong><em>f-string</em></strong>
-[<em><strong>args</strong></em>]</td>
+<td
+style="text-align: left;"><em><strong>options</strong></em> <strong>∆F</strong> <em><strong>f-string</strong></em> [<em><strong>args</strong></em>]</td>
 <td style="text-align: left;">Display an <em>f-string</em>; control the
 result with <em>options</em> specified (see below).</td>
 </tr>
@@ -967,7 +964,7 @@ a dfn that will display such a matrix (given an identical system
 state).</td>
 </tr>
 <tr>
-<td style="text-align: left;">'help' <strong>∆F</strong> ''</td>
+<td style="text-align: left;">'help' <strong>∆F</strong> ' '</td>
 <td style="text-align: left;">Display help info and examples for
 <strong>∆F</strong>. The <em>f-string</em> is not examined.</td>
 </tr>
@@ -983,7 +980,7 @@ state).</td>
 <thead>
 <tr>
 <th
-style="text-align: left;">Element<div style="width:250px"></div></th>
+style="text-align: left;">Element<div style="width:290px"></div></th>
 <th style="text-align: left;">Description</th>
 </tr>
 </thead>
@@ -1423,6 +1420,6 @@ Expressions: Details</a></li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250926T165708]
+(C) 2025 Sam the Cat Foundation. [20250926T191328]
 </span>
 <hr><hr>

@@ -72,9 +72,9 @@ multidimensional expressions in an APL-friendly style.¹<br>
 
 <div style="margin-left: 20px;">
 
-| Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| ¹ Throughout this documentation, notably in the many examples, an index origin of zero (`⎕IO=0`) is assumed. **Code fields** inherit the index origin and other system variables from the environment (*i.e.* namespace) in which **∆F** is called, so your own examples will work as you expect. If you wish to modify the `⎕IO` or any system variable temporarily, you may do so right in the **Code field**: `∆F '{⎕IO←1 ◇ 26=⎕A⍳"Z": "Success" ◇ "Failure"}'`. |
+| ¹ Throughout this documentation, notably in the many examples, an index origin of zero (`⎕IO=0`) is assumed. **Code fields** inherit the index origin and other system variables from the environment (*i.e.* namespace) in which **∆F** is called, so your own examples will work as you expect. If you wish to modify the `⎕IO` or any system variable temporarily, you may do so right in the **Code field**:<br>&emsp;&emsp; `∆F '{⎕IO←1 ◇ 26=⎕A⍳"Z": "Success" ◇ "Failure"}'`. |
 | ² **∆F** is inspired by Python _[f-strings](https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals)_, short for "**formatted string literals**", but designed for APL's multi-dimensional worldview. **∆F** *f-strings* and Python's are not compatible.                                                                                                                                                                                     |
 | ³ In this document, we use the symbol `◇` (`⎕UCS 9671`) to represent the APL *statement separator* (`⎕UCS 8900`), since the latter is displayed _in some browsers_ as a hard-to-read glyph. **∆F** will recognize `` `◇ `` with _either_ glyph.                                                                                                                                                                                                                     |
 | ⁴ **∆F Code fields** _as input_ are limited to a single, possibly very long, line.                                                                                                                                                                                                                                                                                                                                                                                  |
@@ -722,19 +722,19 @@ Below, we summarize key information you've already gleaned from the examples.
 
 ### ∆F Call Syntax Overview
 
-| Call Syntax<div style="width:250px"></div> | Description                                                                                                                                                |
+| Call Syntax<div style="width:290px"></div> | Description                                                                                                                                                |
 | :----------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **∆F** ***f-string***                          | Display an _f-string_; use the _default_ options. The string may reference objects in the environment or in the string itself. Returns a character matrix. |
-| **∆F** ***f-string*** **_arg1_** [***arg2*** ...]      | Display an _f-string_; use the _default_ options. Arguments presented _may_ be referred to in the f-string. Returns a character matrix.                    |
-| ***options*** **∆F** **_f-string_** [***args***]       | Display an _f-string_; control the result with _options_ specified (see below).                                                                            |
+| **∆F**&ensp;***f-string***                          | Display an _f-string_; use the _default_ options. The string may reference objects in the environment or in the string itself. Returns a character matrix. |
+| **∆F**&ensp;***f-string***&ensp;***args***…     | Display an _f-string_; use the _default_ options. Arguments presented _may_ be referred to in the f-string. Returns a character matrix.                    |
+| ***options***&ensp;**∆F**&ensp;***f-string***&ensp;[***args***]       | Display an _f-string_; control the result with _options_ specified (see below).                                                                            |
 |                                            | If *DFN* (see below) is `0` or omitted, returns a character matrix.                                                                               |
 |                                            | If *DFN* is `1`, returns a dfn that will display such a matrix (given an identical system state).                                     |
-| 'help' **∆F** ''                           | Display help info and examples for **∆F**. The _f-string_ is not examined.                                                                                 |
+| 'help'&ensp;**∆F**&ensp;' '                           | Display help info and examples for **∆F**. The _f-string_ is not examined.                                                                                 |
 | **∆F**⍨'help'                              | Display help info and examples for **∆F**.                                                                                                                 |
 
 ### ∆F Call Syntax Details
 
-| Element<div style="width:250px"></div>       | Description                                                                                                                                                                                                                                                                                                                                                                            |
+| Element<div style="width:290px"></div>       | Description                                                                                                                                                                                                                                                                                                                                                                            |
 | :------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **_f-string_**                               | a format string, a single character vector.                                                                                                                                                                                                                                                                                                                                            |
 | **_args_**                                   | elements of ⍵ after the *f-string*, each of which can be accessed in the *f-string* via a `` `⍵ `` shortcut (or an ordinary `⍵` expression).                                                                                                                                                                                                                                           |
@@ -904,7 +904,7 @@ sometimes a backtick is just a backtick.
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250926T165708]
+(C) 2025 Sam the Cat Foundation. [20250926T191212]
 </span>
 <hr><hr>
 
