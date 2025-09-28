@@ -10,18 +10,18 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 -->
 ##### Github Published README.md
   <!-- htmlRenderer "Caption" -->
-
+    
 ## ∆F - Formatted String Literals
 
 ### ∆F In Brief
 
 <center>
-<p style="padding-left: 15px;padding-right: 5px;padding-top: 5px;padding-bottom: 5px;color: white; background-color: #4f62f0ff;">
+<p style="border: 4px solid #26124cff; padding: 5px 5px 5px 15px; 
+  color: white; background-color: #6677f2ff;">
 <b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, 
 a concise, yet powerful way to display multiline Unicode text and complex, often
 multidimensional expressions in an APL-friendly style.¹<br>
-<span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>, but designed for APL.²&nbsp;</span>
-</p>
+<span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>, but designed for APL.²&nbsp;</span></p>
 </center>
 
 ---
@@ -105,7 +105,9 @@ Now, **∆F** is available in the active namespace (or **_myns_**), along with *
 
 ## ∆F EXAMPLES
 
+<details open>
 <div class="content-with-right-bar">
+
 Before providing information on **∆F** syntax and other details, *let's start with some examples*…
 
 First, let's set some context.
@@ -685,13 +687,13 @@ Now, let's proceed. Here's the code:
 
 > Before we get to syntax and other information…
 
-Finally, we want to show you that the _dfn_ returned from `1 ∆F…` can retrieve argument(s) passed on the right side of **∆F**, using the very same omega shortcut expressions (`` `⍵1 ``, etc.) as described above.¹  
+Finally, we want to show you that the _dfn_ returned from `1…∆F…` can retrieve argument(s) passed on the right side of **∆F**, using the very same omega shortcut expressions (`` `⍵1 ``, etc.) as described above.¹  
 
 <div class="notes">
 
 | Note                                                                                                                                                       |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ¹ The *dfn* returned from `0…∆F…` includes the original f-string text  used to generate it. The f-string is available as `` `⍵0 ``, as expected. |
+| ¹ The *dfn* returned from `1…∆F…` includes the original f-string text used to generate it. The f-string is available as `` `⍵0 ``, as expected. |
 
 </div>
 
@@ -716,6 +718,8 @@ The temperature is 35°C or 95.0°F
 </div>
 
 Below, we summarize key information you've already gleaned from the examples.
+
+</details>
 
 ## ∆F Syntax and Other Information
 
@@ -904,7 +908,7 @@ sometimes a backtick is just a backtick.
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250927T141650]
+(C) 2025 Sam the Cat Foundation. [20250927T185240]
 </span>
 <hr><hr>
 

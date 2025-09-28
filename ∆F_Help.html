@@ -79,8 +79,7 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
     font-size: 100%;
     line-height: 140%;
   }
-  /* Not currently used */
-  .header {
+  .header { /* Not currently used */
   position: sticky;
   top: 0;
   font-size: 90%;
@@ -117,14 +116,8 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
   .notes {
     font-size: 90%;
     margin-left: 30px; 
-    border-top: 4px solid #740000ff; /* Create a top border as a line */
-    border-top-width: 5px;
-    border-bottom: 4px solid #740000ff; /* Create a top border as a line */
-    border-bottom-width: 5px;
-    border-left: 4px solid #740000ff; /* Create a top border as a line */
-    border-left-width: 3px;
-    border-right: 4px solid #740000ff; /* Create a top border as a line */
-    border-right-width: 3px;
+    border: 4px solid #740000ff; / 
+    border-width: 5px;
     width: 90%; /* Adjust width as needed */
   }
 </style>
@@ -135,12 +128,12 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 Literals</h2>
 <h3 id="f-in-brief">∆F In Brief</h3>
 <center>
-<p style="padding-left: 15px;padding-right: 5px;padding-top: 5px;padding-bottom: 5px;color: white; background-color: #4f62f0ff;">
+<p style="border: 4px solid #26124cff; padding: 5px 5px 5px 15px; 
+  color: white; background-color: #6677f2ff;">
 <b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, 
 a concise, yet powerful way to display multiline Unicode text and complex, often
 multidimensional expressions in an APL-friendly style.¹<br>
-<span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>, but designed for APL.²&nbsp;</span>
-</p>
+<span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>, but designed for APL.²&nbsp;</span></p>
 </center>
 
 <hr />
@@ -312,9 +305,11 @@ note its absence).</li>
 <strong><em>myns</em></strong>), along with <strong>⍙Fapl</strong>.</p>
 <hr />
 <h2 id="f-examples">∆F EXAMPLES</h2>
+<details open>
 <div class="content-with-right-bar">
-Before providing information on **∆F** syntax and other details, *let's start with some examples*…
 
+<p>Before providing information on <strong>∆F</strong> syntax and other
+details, <em>let's start with some examples</em>…</p>
 <p>First, let's set some context.</p>
 <pre><code>   ⎕IO ⎕ML← 0 1        </code></pre>
 <h3 id="code-fields">Code Fields</h3>
@@ -895,7 +890,7 @@ performance…</p>
 <p>Before we get to syntax and other information…</p>
 </blockquote>
 <p>Finally, we want to show you that the <em>dfn</em> returned from
-<code>1 ∆F…</code> can retrieve argument(s) passed on the right side of
+<code>1…∆F…</code> can retrieve argument(s) passed on the right side of
 <strong>∆F</strong>, using the very same omega shortcut expressions
 (<code>`⍵1</code>, etc.) as described above.¹</p>
 <div class="notes">
@@ -909,7 +904,7 @@ performance…</p>
 <tbody>
 <tr>
 <td style="text-align: left;">¹ The <em>dfn</em> returned from
-<code>0…∆F…</code> includes the original f-string text used to generate
+<code>1…∆F…</code> includes the original f-string text used to generate
 it. The f-string is available as <code>`⍵0</code>, as expected.</td>
 </tr>
 </tbody>
@@ -936,6 +931,8 @@ The temperature is 35°C or 95.0°F
 
 <p>Below, we summarize key information you've already gleaned from the
 examples.</p>
+</details>
+
 <h2 id="f-syntax-and-other-information">∆F Syntax and Other
 Information</h2>
 <h3 id="f-call-syntax-overview">∆F Call Syntax Overview</h3>
@@ -1442,6 +1439,6 @@ Expressions: Details</a></li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250927T141650]
+(C) 2025 Sam the Cat Foundation. [20250927T185244]
 </span>
 <hr><hr>
