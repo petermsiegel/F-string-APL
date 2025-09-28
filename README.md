@@ -5,11 +5,7 @@ md->HTML: opt-shift-M
 Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 -->
 
-<!-- Style stuff related to APL and my random preferences…  
-     All of this is designed to be used with the Dyalog htmlRender 
--->
 ##### Github Published README.md
-  <!-- htmlRenderer "Caption" -->
     
 ## ∆F - Formatted String Literals
 
@@ -105,7 +101,9 @@ Now, **∆F** is available in the active namespace (or **_myns_**), along with *
 
 ## ∆F EXAMPLES
 
-<details open>
+<details open>            <!-- option: open -->
+<summary>Show/Hide ∆F Examples</summary>
+
 <div class="content-with-right-bar">
 
 Before providing information on **∆F** syntax and other details, *let's start with some examples*…
@@ -908,7 +906,7 @@ sometimes a backtick is just a backtick.
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250927T185240]
+(C) 2025 Sam the Cat Foundation. [20250928T090703]
 </span>
 <hr><hr>
 
