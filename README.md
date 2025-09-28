@@ -103,7 +103,7 @@ Now, **∆F** is available in the active namespace (or **_myns_**), along with *
 
 ## ∆F EXAMPLES
 
-<details open>            <!-- option: open -->
+<details>            <!-- option: open -->
 <summary>Show/Hide ∆F Examples</summary>
 
 <div class="content-with-right-bar">
@@ -734,6 +734,9 @@ Below, we summarize key information you've already gleaned from the examples.
 
 ## ∆F Syntax and Other Information
 
+<details open>            
+<summary>Syntax Info</summary>
+
 ### ∆F Call Syntax Overview
 
 | Call Syntax<div style="width:290px"></div> | Description                                                                                                                                                |
@@ -858,6 +861,7 @@ sometimes a backtick is just a backtick.
 6. By default,`⍺← ''''`,*i.e.* APL quotes will wrap the array ⍵, row by row, whether character, numeric or otherwise.
 
 </div>
+</details>  
 
 ---
 
@@ -921,7 +925,7 @@ sometimes a backtick is just a backtick.
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250928T125928]
+(C) 2025 Sam the Cat Foundation. [20250928T141207]
 </span>
 <hr><hr>
 

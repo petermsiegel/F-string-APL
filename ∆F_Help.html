@@ -128,6 +128,25 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
     }
   </style>
 
+  <script>
+    document.addEventListener('click', function(event) {
+    // Check if the clicked element is an anchor link with a hash
+    if (event.target.tagName === 'A' && event.target.getAttribute('href').startsWith('#')) {
+      const targetId = event.target.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+      
+      if (targetElement) {
+        // Find the nearest parent <details> element
+        const parentDetails = targetElement.closest('details');
+        // If a parent <details> is found and it's not already open, set the 'open' attribute
+        if (parentDetails && !parentDetails.hasAttribute('open')) {
+          parentDetails.setAttribute('open', '');
+        }
+      }
+    }
+  });
+  </script>
+
   <!-- htmlRenderer "Caption" -->
 
   <title> ∆F — Formatted String Literals </title>  
@@ -329,7 +348,7 @@ note its absence).</li>
 <strong><em>myns</em></strong>), along with <strong>⍙Fapl</strong>.</p>
 <hr />
 <h2 id="f-examples">∆F EXAMPLES</h2>
-<details open>            <!-- option: open -->
+<details>            <!-- option: open -->
 <summary>Show/Hide ∆F Examples</summary>
 
 <div class="content-with-right-bar">
@@ -972,6 +991,9 @@ examples.</p>
 
 <h2 id="f-syntax-and-other-information">∆F Syntax and Other
 Information</h2>
+<details open>            
+<summary>Syntax Info</summary>
+
 <h3 id="f-call-syntax-overview">∆F Call Syntax Overview</h3>
 <table>
 <thead>
@@ -1392,6 +1414,7 @@ replicated <em>per (2) above</em>.</li>
 the array ⍵, row by row, whether character, numeric or otherwise.</li>
 </ol>
 </div>
+</details>  
 
 <hr />
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -1478,6 +1501,6 @@ Expressions: Details</a></li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250928T125928]
+(C) 2025 Sam the Cat Foundation. [20250928T141207]
 </span>
 <hr><hr>
