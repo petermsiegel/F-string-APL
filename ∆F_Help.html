@@ -7,137 +7,156 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 
 <!-- __SKIP_IN_README__ -->
 
-<!-- Style stuff related to APL and my random preferences…  
-     All of this is designed to be used with the Dyalog htmlRender 
--->
+  <!-- Style stuff related to APL and my random preferences…  
+       All of this is designed to be used with the Dyalog htmlRender 
+  -->
 
-<style> 
-  body {
-    font-family: Georgia, serif;
-    font-size:   15pt;
-    padding: 1% 4%;
-    margin: 0 auto; /* Centers the body content */
-    max-width: 1200px; /* Sets a maximum width */
-  }
-  /* Inline code */
-  code { 
-    font-size: 88%;
-    background-color: #ddfafaff;
-    padding: 2px 4px;
-    border-radius: 3px;
-    font-family: "APL386 Unicode", APL386, "APL385 Unicode", APL385,
-       "Courier New", Courier, Lucida Console", "Consolas", monospace;
-  }
-  /* Code blocks */ 
-  pre { 
-    background-color: #ddfafaff;  
-    color: #0a0a0aff; 
-    font-size: 13pt;
-    line-height: 110%;
-    padding: 15px;
-    border-radius: 5px;
-    overflow-x: auto; 
-    font-family: "APL386 Unicode", APL386, "APL385 Unicode", APL385, 
-        "Courier New", Courier, "Lucida Console", "Consolas", monospace;
-  }
-  table {
-    background-color: #eae9ebaa;
-    line-height: 1.1;
-    font-size: 100%; /* 20px */
-    vertical-align: top;
-    font-family: "APL386 Unicode", APL386, "APL385 Unicode", APL385, 
-        "Courier New", Courier, "Lucida Console", "Consolas", monospace;
-  }
-  /* Table header */
-  th {  
-    font-family:  Georgia,"Courier New", Courier, "Lucida Console", "Consolas", monospace;
-    font-weight: 900;
-    line-height: 1.1;
-    padding-left: 7px; 
-    padding-right: 5px;
-    vertical-align: top;
-    background-color: #740000ff;
-    color: #f3efef;
-  }
-  /* Table data */
-  td { 
-    font-family: Georgia,"Courier New", Courier, "Lucida Console", "Consolas", monospace;
-    font-weight: 200; 
-    padding-left: 7px; 
-    padding-right: 5px;
-    vertical-align: top;
-  }
-  tr:nth-child(odd) {
-    background-color: #ebebebff; /* Light grey for odd rows */
-  }
-  tr:nth-child(even) {
-    background-color: #ffffffff; /* White for even rows */
-  }
-  blockquote {
-    font-size: 110%;
-    background-color: #f4f5f5ff;  
-  }
-  ul, li {
-    font-size: 100%;
-    line-height: 140%;
-  }
-  .header { /* Not currently used */
-  position: sticky;
-  top: 0;
-  font-size: 90%;
-  font-weight: 900;
-  padding: 5px 0;
-  background-color: #e7e7e7ff;
-  color: black;
-  }
-  .fixed-footer {
-    position: fixed;
+  <style> 
+    body {
+      font-family: Georgia, serif;
+      font-size:   15pt;
+      padding: 1% 4%;
+      margin: 0 auto; /* Centers the body content */
+      max-width: 1200px; /* Sets a maximum width */
+    }
+    /* Inline code */
+    code { 
+      font-size: 88%;
+      background-color: #ddfafaff;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-family: "APL386 Unicode", APL386, "APL385 Unicode", APL385,
+        "Courier New", Courier, Lucida Console", "Consolas", monospace;
+    }
+    /* Code blocks */ 
+    pre { 
+      background-color: #ddfafaff;  
+      color: #0a0a0aff; 
+      font-size: 13pt;
+      line-height: 110%;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto; 
+      font-family: "APL386 Unicode", APL386, "APL385 Unicode", APL385, 
+          "Courier New", Courier, "Lucida Console", "Consolas", monospace;
+    }
+    table {
+      background-color: #ffffffff;
+      line-height: 1.1;
+      font-size: 100%;  
+      border: 2px solid #210074ff; 
+      vertical-align: top;
+      font-family: "APL386 Unicode", APL386, "APL385 Unicode", APL385, 
+          "Courier New", Courier, "Lucida Console", "Consolas", monospace;
+    }
+    /* Table header */
+    th {  
+      font-family:  Georgia,"Courier New", Courier, "Lucida Console", "Consolas", monospace;
+      font-weight: 900;
+      line-height: 1.1;
+      padding-left: 7px; 
+      padding-right: 5px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      vertical-align: top;
+      background-color: #25027eff;
+      color: #ffffffff;
+    }
+    /* Table data */
+    td { 
+      font-family: Georgia,"Courier New", Courier, "Lucida Console", "Consolas", monospace;
+      font-weight: 200; 
+      padding-left: 7px; 
+      padding-right: 5px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      vertical-align: top;
+    }
+    tr:nth-child(even) {
+      background-color: #ebebebff; /* Light grey for odd rows */
+    }
+    tr:nth-child(odd) {
+      background-color: #ffffffff; /* White for even rows */
+    }
+    blockquote {
+      font-size: 110%;
+      background-color: #f4f5f5ff;  
+    }
+    ul, li {
+      font-size: 100%;
+      line-height: 140%;
+    }
+    .header { /* Not currently used */
+    position: sticky;
+    top: 0;
     font-size: 90%;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+    font-weight: 900;
+    padding: 5px 0;
     background-color: #e7e7e7ff;
     color: black;
-    text-align: center;
-    padding: 5px 0;
-  }
-  .content-with-left-bar { /* Experimental item(s) have left red bar */ 
-    border-left: 2px solid #ea2f0eff; /* Adjust color and thickness as needed */
-    padding-left: 15px; /* Space between the bar and content */
-    margin-left: 0px; /* Optional: Space from the left edge of the page */
-    height: auto; /* Or set a fixed height, *e.g.*, 200px */
-    overflow: hidden; /* Clear floats if internal content uses them */
-  }
-  .content-with-right-bar { /* Examples have right green bar */ 
-    border-right: 2px solid #229502ff; /* Adjust color and thickness as needed */
-    padding-right: 15px; /* Space between the bar and content */
-    margin-right: 0px; /* Optional: Space from the left edge of the page */
-    height: auto; /* Or set a fixed height, *e.g.*, 200px */
-    overflow: hidden; /* Clear floats if internal content uses them */
-  }
-  .notes {
-    font-size: 90%;
-    margin-left: 30px; 
-    border: 4px solid #740000ff; / 
-    border-width: 5px;
-    width: 90%; /* Adjust width as needed */
-  }
-</style>
+    }
+    .fixed-footer {
+      position: fixed;
+      font-size: 90%;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: #e7e7e7ff;
+      color: black;
+      text-align: center;
+      padding: 5px 0;
+    }
+    .content-with-left-bar { /* Experimental item(s) have left red bar */ 
+      border-left: 2px solid #ea2f0eff; /* Adjust color and thickness as needed */
+      padding-left: 15px; /* Space between the bar and content */
+      margin-left: 0px; /* Optional: Space from the left edge of the page */
+      height: auto; /* Or set a fixed height, *e.g.*, 200px */
+      overflow: hidden; /* Clear floats if internal content uses them */
+    }
+    .content-with-right-bar { /* Examples have right green bar */ 
+      border-right: 2px solid #229502ff; /* Adjust color and thickness as needed */
+      padding-right: 15px; /* Space between the bar and content */
+      margin-right: 0px; /* Optional: Space from the left edge of the page */
+      height: auto; /* Or set a fixed height, *e.g.*, 200px */
+      overflow: hidden; /* Clear floats if internal content uses them */
+    }
+    .notes {
+      font-size: 90%;
+      margin-left: 30px; 
+   /* border: 4px solid #210074ff; */ 
+      width: 90%; /* Adjust width as needed */
+    }
+  </style>
 
-<title>∆F — Formatted String Literals</title>  <!-- htmlRenderer "Caption" -->
+  <!-- htmlRenderer "Caption" -->
+
+  <title> ∆F — Formatted String Literals </title>  
 <!-- __SKIP_IN_README_END__ -->
 
 <h2 id="f---formatted-string-literals">∆F - Formatted String
 Literals</h2>
 <h3 id="f-in-brief">∆F In Brief</h3>
-<center>
-<p style="border: 4px solid #26124cff; padding: 5px 5px 5px 15px; 
-  color: white; background-color: #6677f2ff;">
-<b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, 
-a concise, yet powerful way to display multiline Unicode text and complex, often
-multidimensional expressions in an APL-friendly style.¹<br>
-<span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>, but designed for APL.²&nbsp;</span></p>
-</center>
+<div class="notes">
+
+<table>
+<thead>
+<tr>
+<th
+style="text-align: center;"><span style="font-size: 110%;"><strong>∆F</strong>
+is a function for Dyalog APL that interprets <em>f-strings</em>, a
+concise, yet powerful way to display multiline Unicode text and complex,
+often multidimensional expressions in an APL-friendly style.¹
+</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Inspired by Python's <em>f-strings</em>,
+but designed for APL.²</td>
+</tr>
+</tbody>
+</table>
+</div>
 
 <hr />
 <p><span style="font-size: 150%;">👉</span> <a
@@ -214,6 +233,8 @@ appropriate vertical conformation) to form a single character matrix:
 <p><strong>∆F</strong> is designed⁷ for ease of use, <em>ad hoc</em>
 debugging, fine-grained formatting and informal user interaction, built
 using APL's own powerful functions and operators.</p>
+<details>            
+<summary>Notes</summary>
 <div class="notes">
 
 <table>
@@ -278,7 +299,7 @@ relatively slow, using an APL recursive scan to analyze the
 </tr>
 </tbody>
 </table>
-</div>
+</div></details>
 
 <hr />
 <h2 id="f-help-information">∆F <strong>Help</strong> Information</h2>
@@ -480,6 +501,8 @@ Itself</h3>
 <p>The expression <code>`⍵0</code> always refers to the
 <em>f-string</em> itself.¹ Try this yourself:²</p>
 <pre><code>   ∆F &#39;Our string {`⍵0↓} is {≢`⍵0} characters&#39;</code></pre>
+<details>            
+<summary>Notes</summary>
 <div class="notes">
 
 <table>
@@ -502,7 +525,7 @@ Fields</em></strong> below.</td>
 </tr>
 </tbody>
 </table>
-</div>
+</div></details>
 
 <h3 id="the-format-shortcut">The Format Shortcut</h3>
 <blockquote>
@@ -522,6 +545,8 @@ Commas</h3>
 right) to one or more numbers or numeric strings.¹ It has an advantage
 over the <code>$</code> (Dyalog's <code>⎕FMT</code>) specifier: it
 doesn't require you to guesstimate field widths.</p>
+<details>            
+<summary>Note</summary>
 <div class="notes">
 
 <table>
@@ -538,7 +563,7 @@ number is presented, only the integer part will have commas added.</td>
 </tr>
 </tbody>
 </table>
-</div>
+</div></details>
 
 <p>Let's use the <code>`C</code> shortcut to add the commas to the
 temperatures!</p>
@@ -606,7 +631,9 @@ single quote.</li>
 <li>If you need to omit one or the other decorator, simply make it a
 null string <code>""</code> or a <em>zilde</em> <code>⍬</code>.</li>
 </ul>
-<div style="margin-left: 20px;"><hr>
+<details>            
+<summary>Note</summary>
+<div class="notes">
 
 <table>
 <thead>
@@ -624,7 +651,7 @@ null string <code>""</code> or a <em>zilde</em> <code>⍬</code>.</li>
 </tr>
 </tbody>
 </table>
-</div>
+</div></details>
 
 <p><strong>Here are two simple examples.</strong></p>
 <p>In the first, we place <code>"°C"</code> after <strong>[a]</strong>
@@ -657,7 +684,9 @@ fields</strong>.</p>
 <p>What's an SDCF? An SDCF¹ allows whatever source code is in a
 <strong>Code Field</strong> to be automatically displayed literally
 along with the result of evaluating that code.</p>
-<div style="margin-left: 20px;"><hr>
+<details>            
+<summary>Note</summary>
+<div class="notes">
 
 <table>
 <thead>
@@ -676,7 +705,7 @@ differently. SDCFs are used <strong><em>only</em></strong> in
 </tr>
 </tbody>
 </table>
-</div>
+</div></details>
 
 <p>You may automatically place the source for a <strong>Code
 field</strong>:</p>
@@ -846,6 +875,7 @@ return precisely the same expression.² This is most useful when you are
 making repeated use of an <em>f-string</em>, since the overhead for
 examining the <em>f-string</em> contents <em>once</em> would be
 amortized over all the calls.</p>
+<details><summary>Notes</summary>
 <div class="notes">
 
 <table>
@@ -868,7 +898,7 @@ state.</td>
 </tr>
 </tbody>
 </table>
-</div>
+</div></details>
 
 <p>Let's explore an example wheregetting the best performance for a
 heavily used <strong>∆F</strong> string is important.</p>
@@ -898,6 +928,8 @@ performance…</p>
 <code>1…∆F…</code> can retrieve argument(s) passed on the right side of
 <strong>∆F</strong>, using the very same omega shortcut expressions
 (<code>`⍵1</code>, etc.) as described above.¹</p>
+<details>            
+<summary>Note</summary>
 <div class="notes">
 
 <table>
@@ -914,7 +946,7 @@ it. The f-string is available as <code>`⍵0</code>, as expected.</td>
 </tr>
 </tbody>
 </table>
-</div>
+</div></details>
 
 <p>As a variation on the example above, let's share the centigrade
 value, not as a <em>variable</em>, but pass it as the <em>first
@@ -1286,6 +1318,8 @@ element of <code>⍵</code>, <em>i.e.</em> <code>(⍵⊃⍨ 𝑑𝑑+⎕IO)</cod
 </tbody>
 </table>
 <hr />
+<details>            
+<summary>Note</summary>
 <div class="notes">
 
 <table>
@@ -1300,11 +1334,11 @@ element of <code>⍵</code>, <em>i.e.</em> <code>(⍵⊃⍨ 𝑑𝑑+⎕IO)</cod
 specifications (left arg) can be found in the Dyalog documentation under
 <b>1200⌶</b>. For the curious, here's the code actually used by the
 Date-Time shortcut:
-<br>    <code>{⍺←'YYYY-MM-DD hh:mm:ss' ◇ ∊⍣(1=≡⍵)⊢ ⍺(1200⌶)⊢ 1⎕DT ⊆⍵}</code>.</td>
+<br>  <code>{⍺←'YYYY-MM-DD hh:mm:ss' ◇ ∊⍣(1=≡⍵)⊢ ⍺(1200⌶)⊢ 1⎕DT ⊆⍵}</code>.</td>
 </tr>
 </tbody>
 </table>
-</div>
+</div></details>
 
 <hr />
 <h3 id="omega-shortcut-expressions-details">Omega Shortcut Expressions:
@@ -1444,6 +1478,6 @@ Expressions: Details</a></li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250928T090703]
+(C) 2025 Sam the Cat Foundation. [20250928T125928]
 </span>
 <hr><hr>

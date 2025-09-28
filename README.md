@@ -11,18 +11,18 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 
 ### ∆F In Brief
 
-<center>
-<p style="border: 4px solid #26124cff; padding: 5px 5px 5px 15px; 
-  color: white; background-color: #6677f2ff;">
-<b>∆F</b> is a function for Dyalog APL that interprets <i>&ThinSpace;f-strings</i>, 
-a concise, yet powerful way to display multiline Unicode text and complex, often
-multidimensional expressions in an APL-friendly style.¹<br>
-<span style="color: pink;margin-top: 10px;display: block;">Inspired by Python's <i>&ThinSpace;f-strings</i>, but designed for APL.²&nbsp;</span></p>
-</center>
+<div class="notes">
+
+|<span style="font-size: 110%;">**∆F** is a function for Dyalog APL that interprets *f-strings*, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.¹ </span>|
+| :------------------------------: |
+| Inspired by Python's *f-strings*, but designed for APL.² |
+
+</div>
 
 ---
 
-<span style="font-size: 150%;">👉</span> [Table of Contents](#table-of-contents)
+<span style="font-size: 150%;">👉</span>
+[Table of Contents](#table-of-contents)
 
 **∆F** *f-strings* can concisely include:
 
@@ -66,6 +66,8 @@ multidimensional expressions in an APL-friendly style.¹<br>
 
 **∆F** is designed⁷ for ease of use, _ad hoc_ debugging, fine-grained formatting and informal user interaction, built using APL's own powerful functions and operators.
 
+<details>            
+<summary>Notes</summary>
 <div class="notes">
 
 | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
@@ -78,7 +80,7 @@ multidimensional expressions in an APL-friendly style.¹<br>
 | ⁶ Details on all the shortcuts are provided later in this document. See **_Code Field Shortcuts._**                                                                                                                                                                                                                                                                                                                                                                 |
 | ⁷ As a prototype, **∆F** is relatively slow, using an APL recursive scan to analyze the **f-string**.                                                                                                                                                                                                                                                                                                                                                               |
 
-</div>
+</div></details>
 
 ---
 
@@ -318,6 +320,8 @@ The expression `` `⍵0 `` always refers to the *f-string* itself.¹ Try this yo
    ∆F 'Our string {`⍵0↓} is {≢`⍵0} characters'
 ```
 
+<details>            
+<summary>Notes</summary>
 <div class="notes">
 
 | Notes                                                                                                                                  |
@@ -325,7 +329,7 @@ The expression `` `⍵0 `` always refers to the *f-string* itself.¹ Try this yo
 | ¹ `` `⍵0 `` refers to the *f-string* independent of the the number of elements in the right argument  to **∆F** (*effectively*, `⊆⍵`). |
 | ² We explain the `↓` before the closing brace `}` under **_Self-Documenting Code Fields_** below.                                      |
 
-</div>
+</div></details>
 
 ### The Format Shortcut
 
@@ -345,13 +349,15 @@ The sun's core is at 15,000,000°C or 27,000,032°F
 
 The `` `C `` shortcut adds commas every 3 digits (from the right) to one or more numbers or numeric strings.¹ It has an advantage over the `$` (Dyalog's `⎕FMT`) specifier: it doesn't require you to guesstimate field widths.
 
+<details>            
+<summary>Note</summary>
 <div class="notes">
 
 | Note                                                                                                                                                                         |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ¹ Typically, each number or numeric string presented to `` `C `` will represent an integer, but if a real number is presented, only the integer part will have commas added. |
 
-</div>
+</div></details>
 
 Let's use the `` `C `` shortcut to add the commas to the temperatures!
 
@@ -421,13 +427,15 @@ Here we make a quick mention of the **_experimental_** shortcut **Wrap**,¹ `` `
 - The decorators are in `⍺`, the left argument to **Wrap**: the left decorator, `0⊃2⍴⍺`, and the right decorator, `1⊃2⍴⍺`, with `⍺` defaulting to a single quote.
 - If you need to omit one or the other decorator, simply make it a null string `""` or a _zilde_ `⍬`.
 
-<div style="margin-left: 20px;"><hr>
+<details>            
+<summary>Note</summary>
+<div class="notes">
 
 | Note                                                                                                                                                                             |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ¹ **Wrap** differs from the **Quote** shortcut `` `Q ``, which puts quotes **_only_** around the character arrays in `⍵`. For more, see **Wrap** (`` `W ``) **Details** _below_. |
 
-</div>
+</div></details>
 
 **Here are two simple examples.**
 
@@ -463,13 +471,15 @@ Now, let's move on to Self-documenting **Code fields**.
 
 What's an SDCF? An SDCF¹ allows whatever source code is in a **Code Field** to be automatically displayed literally along with the result of evaluating that code.
 
-<div style="margin-left: 20px;"><hr>
+<details>            
+<summary>Note</summary>
+<div class="notes">
 
 | Note                                                                                                                                                                                                                                                                                                   |
 | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ¹ Our SDCFs are based on Python's single type of **[self-documenting expressions](https://docs.python.org/3/whatsnew/3.8.html#f-strings-support-for-self-documenting-expressions-and-debugging)** in _f-strings_, but work somewhat differently. SDCFs are used **_only_** in **Code fields** (_duh_). |
 
-</div>
+</div></details>
 
 You may automatically place the source for a **Code field**:
 
@@ -645,6 +655,7 @@ expression: `` `⍵1 `⍵2 `⍵3 ``.
 The default returned from **∆F** is always (on success) a character matrix. That can be expressed via `0 ∆F…`.¹ 
 However, if the initial option (**_DFN_**) is `1`, *e.g.* the call is `1 ∆F…`, **∆F** returns a dfn that, *when called later*, will return precisely the same expression.² This is most useful when you are making repeated use of an *f-string*, since the overhead for examining the *f-string* contents _once_ would be amortized over all the calls.
 
+<details><summary>Notes</summary>
 <div class="notes">
 
 | Notes                                                       |
@@ -652,7 +663,7 @@ However, if the initial option (**_DFN_**) is `1`, *e.g.* the call is `1 ∆F…
 | ¹ **∆F**'s default initial option (left argument) is `0`, so `0 ∆F…` and `∆F…` are equivalent. We discuss all the options to **∆F** later in this document. |
 | ² This assumes the resulting dfn is called with the same arguments in the same calling environment in the same state.                                           |
 
-</div>
+</div></details>
 
 Let's explore an example wheregetting the best performance for a heavily
 used **∆F** string is important. 
@@ -687,13 +698,15 @@ Now, let's proceed. Here's the code:
 
 Finally, we want to show you that the _dfn_ returned from `1…∆F…` can retrieve argument(s) passed on the right side of **∆F**, using the very same omega shortcut expressions (`` `⍵1 ``, etc.) as described above.¹  
 
+<details>            
+<summary>Note</summary>
 <div class="notes">
 
 | Note                                                                                                                                                       |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ¹ The *dfn* returned from `1…∆F…` includes the original f-string text used to generate it. The f-string is available as `` `⍵0 ``, as expected. |
 
-</div>
+</div></details>
 
 As a variation on the example above, let's share the centigrade value,
 not as a *variable*, but pass it as the *first argument* to **∆F** (*i.e.* `` `⍵1` ``).
@@ -811,13 +824,15 @@ sometimes a backtick is just a backtick.
 
 ---
 
+<details>            
+<summary>Note</summary>
 <div class="notes">
 
 | Note                                                                                                                                                                                                                                                                                   |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ¹ The syntax for the Date-Time specifications (left arg) can be found in the Dyalog documentation under <b>1200⌶</b>. For the curious, here's the code actually used by the Date-Time shortcut: <br>&nbsp;&nbsp;&nbsp;&nbsp;`{⍺←'YYYY-MM-DD hh:mm:ss' ◇ ∊⍣(1=≡⍵)⊢ ⍺(1200⌶)⊢ 1⎕DT ⊆⍵}`. |
+| ¹ The syntax for the Date-Time specifications (left arg) can be found in the Dyalog documentation under <b>1200⌶</b>. For the curious, here's the code actually used by the Date-Time shortcut: <br>&emsp;&emsp;`{⍺←'YYYY-MM-DD hh:mm:ss' ◇ ∊⍣(1=≡⍵)⊢ ⍺(1200⌶)⊢ 1⎕DT ⊆⍵}`. |
 
-</div>
+</div></details>
 
 ---
 
@@ -906,8 +921,7 @@ sometimes a backtick is just a backtick.
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250928T090703]
+(C) 2025 Sam the Cat Foundation. [20250928T125928]
 </span>
 <hr><hr>
-
 
