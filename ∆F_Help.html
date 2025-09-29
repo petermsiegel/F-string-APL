@@ -133,9 +133,9 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
   <title> ∆F — Formatted String Literals </title>  
 <!-- __SKIP_IN_README_END__ -->
 
-<h2 id="f---formatted-string-literals">∆F - Formatted String
-Literals</h2>
-<h3 id="f-in-brief">∆F In Brief</h3>
+<h1
+id="f---formatted-string-literals"><center><span style="font-size:75%;">∆F
+- Formatted String Literals</span></center></h1>
 <div class="notes">
 
 <table>
@@ -159,8 +159,78 @@ but designed for APL.²</td>
 </div>
 
 <hr />
-<p><span style="font-size: 150%;">👉</span> <a
-href="#table-of-contents">Table of Contents</a></p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<details>            <!-- option: open -->
+<summary>Table of Contents</summary> 
+<span style="font-size: 90%;">
+
+<ul>
+<li><a href="#f---formatted-string-literals">∆F - Formatted String
+Literals</a>
+<ul>
+<li><a href="#table-of-contents">Table of Contents</a></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#installing-f">Installing <strong>∆F</strong></a></li>
+<li><a href="#displaying-f-help">Displaying ∆F
+<strong>Help</strong></a></li>
+<li><a href="#f-examples">∆F EXAMPLES</a>
+<ul>
+<li><a href="#code-fields">Code Fields</a></li>
+<li><a href="#text-fields-and-space-fields">Text Fields and Space
+Fields</a></li>
+<li><a href="#null-space-fields">Null Space Fields</a></li>
+<li><a href="#code-fields-continued">Code Fields (Continued)</a></li>
+<li><a href="#the-box-shortcut">The Box Shortcut</a></li>
+<li><a href="#box-mode">Box Mode</a></li>
+<li><a href="#omega-shortcuts-explicit">Omega Shortcuts
+(Explicit)</a></li>
+<li><a href="#referencing-the-f-string-itself">Referencing the F-string
+Itself</a></li>
+<li><a href="#the-format-shortcut">The Format Shortcut</a></li>
+<li><a href="#the-shortcut-for-numeric-commas">The Shortcut for Numeric
+Commas</a></li>
+<li><a href="#the-quote-shortcut">The Quote Shortcut</a></li>
+<li><a href="#the-wrap-shortcut-experimental">The Wrap Shortcut
+(Experimental)</a></li>
+<li><a href="#self-documenting-code-fields-sdcfs">Self-documenting
+<strong>Code fields</strong> (SDCFs)</a></li>
+<li><a href="#the-above-shortcut">The Above Shortcut</a></li>
+<li><a href="#omega-shortcuts-implicit">Omega Shortcuts
+(Implicit)</a></li>
+<li><a href="#shortcuts-with-individual-expressions">Shortcuts With
+Individual Expressions</a></li>
+<li><a href="#a-shortcut-for-dates-and-times">A Shortcut for Dates and
+Times</a></li>
+<li><a href="#a-shortcut-for-dates-and-times-continued">A Shortcut for
+Dates and Times (Continued)</a></li>
+<li><a href="#precomputed-f-strings-with-the-dfn-option">Precomputed
+F-strings with the <em><strong>DFN</strong></em> Option</a></li>
+</ul></li>
+<li><a href="#f-syntax-and-other-information">∆F Syntax and Other
+Information</a>
+<ul>
+<li><a href="#f-call-syntax-overview">∆F Call Syntax Overview</a></li>
+<li><a href="#f-call-syntax-details">∆F Call Syntax Details</a></li>
+<li><a href="#f-options">∆F Options</a></li>
+<li><a href="#f-return-value">∆F Return Value</a></li>
+<li><a href="#f-f-string-building-blocks">∆F F-string Building
+Blocks</a></li>
+<li><a
+href="#escape-sequences-for-text-fields-and-quoted-strings">Escape
+Sequences For Text Fields and Quoted Strings</a></li>
+<li><a href="#code-field-shortcuts">Code Field Shortcuts</a></li>
+<li><a href="#omega-shortcut-expressions-details">Omega Shortcut
+Expressions: Details</a></li>
+<li><a href="#wrap-shortcut-details-experimental">Wrap Shortcut: Details
+(Experimental)</a></li>
+</ul></li>
+<li><a href="#copyright">Copyright</a></li>
+</ul></li>
+</ul>
+</span>
+</details>
+
+<h2 id="overview">Overview</h2>
 <p><strong>∆F</strong> <em>f-strings</em> can concisely include:</p>
 <ul>
 <li><p><strong>Text fields</strong>, expressions that can generate
@@ -170,7 +240,7 @@ generate a newline (<small><strong>⎕UCS 13</strong></small>);</p></li>
 <li><p><strong>Code fields</strong>, allowing users to evaluate and
 display APL arrays in the user environment, arrays passed as
 <strong>∆F</strong> arguments, as well as arbitrary APL expressions
-based on full multi-statement⁴ dfn logic; each <strong>Code
+based on full multi-statement dfn logic.⁴ Each <strong>Code
 field</strong> must return a value, simple or otherwise, which will be
 catenated with other fields and returned from <strong>∆F</strong>;</p>
 <p><strong>Code fields</strong> also provide a number of concise,
@@ -230,8 +300,8 @@ appropriate vertical conformation) to form a single character matrix:
 (See the examples below).</li>
 </ul></li>
 </ul>
-<p><strong>∆F</strong> is designed⁷ for ease of use, <em>ad hoc</em>
-debugging, fine-grained formatting and informal user interaction, built
+<p><strong>∆F</strong> is designed for ease of use, <em>ad hoc</em>
+debugging, fine-grained formatting and informal user interaction,⁷ built
 using APL's own powerful functions and operators.</p>
 <details>            
 <summary>Notes</summary>
@@ -302,11 +372,6 @@ relatively slow, using an APL recursive scan to analyze the
 </div></details>
 
 <hr />
-<h2 id="f-help-information">∆F <strong>Help</strong> Information</h2>
-<blockquote>
-<p>To display this <strong>HELP</strong> information, type:
-<code>∆F⍨ 'help'</code>.</p>
-</blockquote>
 <h2 id="installing-f">Installing <strong>∆F</strong></h2>
 <ol type="1">
 <li>On Github, search for <code>"f-string-apl"</code>.</li>
@@ -327,6 +392,11 @@ note its absence).</li>
 </ol>
 <p>Now, <strong>∆F</strong> is available in the active namespace (or
 <strong><em>myns</em></strong>), along with <strong>⍙Fapl</strong>.</p>
+<h2 id="displaying-f-help">Displaying ∆F <strong>Help</strong></h2>
+<blockquote>
+<p>To display this <strong>HELP</strong> information, type:
+<code>∆F⍨ 'help'</code>.</p>
+</blockquote>
 <hr />
 <h2 id="f-examples">∆F EXAMPLES</h2>
 <details>            <!-- option: open -->
@@ -1398,74 +1468,6 @@ the array ⍵, row by row, whether character, numeric or otherwise.</li>
 </details>  
 
 <hr />
-<h2 id="table-of-contents">Table of Contents</h2>
-<span style="font-size: 80%;">
-
-<ul>
-<li><a href="#f---formatted-string-literals">∆F - Formatted String
-Literals</a>
-<ul>
-<li><a href="#f-in-brief">∆F In Brief</a></li>
-</ul></li>
-<li><a href="#f-help-information">∆F <strong>Help</strong>
-Information</a></li>
-<li><a href="#installing-f">Installing <strong>∆F</strong></a></li>
-<li><a href="#f-examples">∆F EXAMPLES</a>
-<ul>
-<li><a href="#code-fields">Code Fields</a></li>
-<li><a href="#text-fields-and-space-fields">Text Fields and Space
-Fields</a></li>
-<li><a href="#null-space-fields">Null Space Fields</a></li>
-<li><a href="#code-fields-continued">Code Fields (Continued)</a></li>
-<li><a href="#the-box-shortcut">The Box Shortcut</a></li>
-<li><a href="#box-mode">Box Mode</a></li>
-<li><a href="#omega-shortcuts-explicit">Omega Shortcuts
-(Explicit)</a></li>
-<li><a href="#referencing-the-f-string-itself">Referencing the F-string
-Itself</a></li>
-<li><a href="#the-format-shortcut">The Format Shortcut</a></li>
-<li><a href="#the-shortcut-for-numeric-commas">The Shortcut for Numeric
-Commas</a></li>
-<li><a href="#the-quote-shortcut">The Quote Shortcut</a></li>
-<li><a href="#the-wrap-shortcut-experimental">The Wrap Shortcut
-(Experimental)</a></li>
-<li><a href="#self-documenting-code-fields-sdcfs">Self-documenting
-<strong>Code fields</strong> (SDCFs)</a></li>
-<li><a href="#the-above-shortcut">The Above Shortcut</a></li>
-<li><a href="#omega-shortcuts-implicit">Omega Shortcuts
-(Implicit)</a></li>
-<li><a href="#shortcuts-with-individual-expressions">Shortcuts With
-Individual Expressions</a></li>
-<li><a href="#a-shortcut-for-dates-and-times">A Shortcut for Dates and
-Times</a></li>
-<li><a href="#a-shortcut-for-dates-and-times-continued">A Shortcut for
-Dates and Times (Continued)</a></li>
-<li><a href="#precomputed-f-strings-with-the-dfn-option">Precomputed
-F-strings with the <em><strong>DFN</strong></em> Option</a></li>
-</ul></li>
-<li><a href="#f-syntax-and-other-information">∆F Syntax and Other
-Information</a>
-<ul>
-<li><a href="#f-call-syntax-overview">∆F Call Syntax Overview</a></li>
-<li><a href="#f-call-syntax-details">∆F Call Syntax Details</a></li>
-<li><a href="#f-options">∆F Options</a></li>
-<li><a href="#f-return-value">∆F Return Value</a></li>
-<li><a href="#f-f-string-building-blocks">∆F F-string Building
-Blocks</a></li>
-<li><a
-href="#escape-sequences-for-text-fields-and-quoted-strings">Escape
-Sequences For Text Fields and Quoted Strings</a></li>
-<li><a href="#code-field-shortcuts">Code Field Shortcuts</a></li>
-<li><a href="#omega-shortcut-expressions-details">Omega Shortcut
-Expressions: Details</a></li>
-<li><a href="#wrap-shortcut-details-experimental">Wrap Shortcut: Details
-(Experimental)</a></li>
-</ul></li>
-<li><a href="#table-of-contents">Table of Contents</a></li>
-<li><a href="#copyright">Copyright</a></li>
-</ul>
-</span>
-
 <div class="fixed-footer">
 <a href="#f---formatted-string-literals">Top</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1478,10 +1480,9 @@ Expressions: Details</a></li>
 <a href="#copyright">Copyright</a>
 </div>
 
-<hr>
-
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250928T191620]
+(C) 2025 Sam the Cat Foundation. [20250928T195719]
 </span>
-<hr><hr>
+<hr> 
+&emsp;

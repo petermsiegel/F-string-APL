@@ -7,9 +7,7 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 
 ##### Github Published README.md
     
-## ∆F - Formatted String Literals
-
-### ∆F In Brief
+# <center><span style="font-size:75%;">∆F - Formatted String Literals</span></center>
 
 <div class="notes">
 
@@ -21,14 +19,59 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 
 ---
 
-<span style="font-size: 150%;">👉</span>
-[Table of Contents](#table-of-contents)
+## Table of Contents
+
+<details>            <!-- option: open -->
+<summary>Table of Contents</summary> 
+<span style="font-size: 90%;">
+
+- [∆F - Formatted String Literals](#f---formatted-string-literals)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Installing **∆F**](#installing-f)
+  - [Displaying ∆F **Help**](#displaying-f-help)
+  - [∆F EXAMPLES](#f-examples)
+    - [Code Fields](#code-fields)
+    - [Text Fields and Space Fields](#text-fields-and-space-fields)
+    - [Null Space Fields](#null-space-fields)
+    - [Code Fields (Continued)](#code-fields-continued)
+    - [The Box Shortcut](#the-box-shortcut)
+    - [Box Mode](#box-mode)
+    - [Omega Shortcuts (Explicit)](#omega-shortcuts-explicit)
+    - [Referencing the F-string Itself](#referencing-the-f-string-itself)
+    - [The Format Shortcut](#the-format-shortcut)
+    - [The Shortcut for Numeric Commas](#the-shortcut-for-numeric-commas)
+    - [The Quote Shortcut](#the-quote-shortcut)
+    - [The Wrap Shortcut (Experimental)](#the-wrap-shortcut-experimental)
+    - [Self-documenting **Code fields** (SDCFs)](#self-documenting-code-fields-sdcfs)
+    - [The Above Shortcut](#the-above-shortcut)
+    - [Omega Shortcuts (Implicit)](#omega-shortcuts-implicit)
+    - [Shortcuts With Individual Expressions](#shortcuts-with-individual-expressions)
+    - [A Shortcut for Dates and Times](#a-shortcut-for-dates-and-times)
+    - [A Shortcut for Dates and Times (Continued)](#a-shortcut-for-dates-and-times-continued)
+    - [Precomputed F-strings with the ***DFN*** Option](#precomputed-f-strings-with-the-dfn-option)
+  - [∆F Syntax and Other Information](#f-syntax-and-other-information)
+    - [∆F Call Syntax Overview](#f-call-syntax-overview)
+    - [∆F Call Syntax Details](#f-call-syntax-details)
+    - [∆F Options](#f-options)
+    - [∆F Return Value](#f-return-value)
+    - [∆F F-string Building Blocks](#f-f-string-building-blocks)
+    - [Escape Sequences For Text Fields and Quoted Strings](#escape-sequences-for-text-fields-and-quoted-strings)
+    - [Code Field Shortcuts](#code-field-shortcuts)
+    - [Omega Shortcut Expressions: Details](#omega-shortcut-expressions-details)
+    - [Wrap Shortcut: Details (Experimental)](#wrap-shortcut-details-experimental)
+  - [Copyright](#copyright)
+
+</span>
+</details>
+
+## Overview
 
 **∆F** *f-strings* can concisely include:
 
 - **Text fields**, expressions that can generate multiline Unicode text, using the sequence `` `◇ `` (**backtick** + **statement separator**³) to generate a newline (<small>**⎕UCS&nbsp;13**</small>);
 
-- **Code fields**, allowing users to evaluate and display APL arrays in the user environment, arrays passed as **∆F** arguments, as well as arbitrary APL expressions based on full multi-statement⁴ dfn logic; each **Code field** must return a value, simple or otherwise, which will be catenated with other fields and returned from **∆F**;
+- **Code fields**, allowing users to evaluate and display APL arrays in the user environment, arrays passed as **∆F** arguments, as well as arbitrary APL expressions based on full multi-statement dfn logic.⁴ Each **Code field** must return a value, simple or otherwise, which will be catenated with other fields and returned from **∆F**;
 
   **Code fields** also provide a number of concise, convenient extensions, such as:
 
@@ -64,7 +107,7 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 
   - After all fields are generated, they are concatenated (after appropriate vertical conformation) to form a single character matrix: ***the return value from*** **∆F**. (See the examples below).
 
-**∆F** is designed⁷ for ease of use, _ad hoc_ debugging, fine-grained formatting and informal user interaction, built using APL's own powerful functions and operators.
+**∆F** is designed for ease of use, _ad hoc_ debugging, fine-grained formatting and informal user interaction,⁷ built using APL's own powerful functions and operators.
 
 <details>            
 <summary>Notes</summary>
@@ -84,10 +127,6 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 
 ---
 
-## ∆F **Help** Information
-
-> To display this **HELP** information, type: `∆F⍨ 'help'`.
-
 ## Installing **∆F**
 
 1. On Github, search for `"f-string-apl"`. 
@@ -98,6 +137,10 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
     b. If **∆F_Help.html** is available at `]load` time, it will be copied into **⍙Fapl** (or a message will note its absence).    
 
 Now, **∆F** is available in the active namespace (or **_myns_**), along with **⍙Fapl**.
+
+## Displaying ∆F **Help** 
+
+> To display this **HELP** information, type: `∆F⍨ 'help'`.
 
 ---
 
@@ -865,49 +908,6 @@ sometimes a backtick is just a backtick.
 
 ---
 
-## Table of Contents
-
-<span style="font-size: 80%;">
-
-- [∆F - Formatted String Literals](#f---formatted-string-literals)
-  - [∆F In Brief](#f-in-brief)
-- [∆F **Help** Information](#f-help-information)
-- [Installing **∆F**](#installing-f)
-- [∆F EXAMPLES](#f-examples)
-  - [Code Fields](#code-fields)
-  - [Text Fields and Space Fields](#text-fields-and-space-fields)
-  - [Null Space Fields](#null-space-fields)
-  - [Code Fields (Continued)](#code-fields-continued)
-  - [The Box Shortcut](#the-box-shortcut)
-  - [Box Mode](#box-mode)
-  - [Omega Shortcuts (Explicit)](#omega-shortcuts-explicit)
-  - [Referencing the F-string Itself](#referencing-the-f-string-itself)
-  - [The Format Shortcut](#the-format-shortcut)
-  - [The Shortcut for Numeric Commas](#the-shortcut-for-numeric-commas)
-  - [The Quote Shortcut](#the-quote-shortcut)
-  - [The Wrap Shortcut (Experimental)](#the-wrap-shortcut-experimental)
-  - [Self-documenting **Code fields** (SDCFs)](#self-documenting-code-fields-sdcfs)
-  - [The Above Shortcut](#the-above-shortcut)
-  - [Omega Shortcuts (Implicit)](#omega-shortcuts-implicit)
-  - [Shortcuts With Individual Expressions](#shortcuts-with-individual-expressions)
-  - [A Shortcut for Dates and Times](#a-shortcut-for-dates-and-times)
-  - [A Shortcut for Dates and Times (Continued)](#a-shortcut-for-dates-and-times-continued)
-  - [Precomputed F-strings with the ***DFN*** Option](#precomputed-f-strings-with-the-dfn-option)
-- [∆F Syntax and Other Information](#f-syntax-and-other-information)
-  - [∆F Call Syntax Overview](#f-call-syntax-overview)
-  - [∆F Call Syntax Details](#f-call-syntax-details)
-  - [∆F Options](#f-options)
-  - [∆F Return Value](#f-return-value)
-  - [∆F F-string Building Blocks](#f-f-string-building-blocks)
-  - [Escape Sequences For Text Fields and Quoted Strings](#escape-sequences-for-text-fields-and-quoted-strings)
-  - [Code Field Shortcuts](#code-field-shortcuts)
-  - [Omega Shortcut Expressions: Details](#omega-shortcut-expressions-details)
-  - [Wrap Shortcut: Details (Experimental)](#wrap-shortcut-details-experimental)
-- [Table of Contents](#table-of-contents)
-- [Copyright](#copyright)
-
-</span>
-
 <div class="fixed-footer">
 <a href="#f---formatted-string-literals">Top</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -920,12 +920,12 @@ sometimes a backtick is just a backtick.
 <a href="#copyright">Copyright</a>
 </div>
 
-<hr>
 
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250928T191620]
+(C) 2025 Sam the Cat Foundation. [20250928T195719]
 </span>
-<hr><hr>
+<hr> 
+&emsp;
 
