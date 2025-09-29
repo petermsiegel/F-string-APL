@@ -1,13 +1,7 @@
-<!--
-Preview side-by-side: cmd-K, V,
-md->HTML: opt-shift-M   
-
-Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
--->
 
 ##### Github Published README.md
-    
-# <center><span style="font-size:75%;">∆F - Formatted String Literals</span></center>
+
+## <span style="font-size: 100%;">∆F — Formatted String Literals </span>
 
 <div class="notes">
 
@@ -25,42 +19,42 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 <summary>Table of Contents</summary> 
 <span style="font-size: 90%;">
 
-- [∆F - Formatted String Literals](#f---formatted-string-literals)
-  - [Table of Contents](#table-of-contents)
-  - [Overview](#overview)
-  - [Installing **∆F**](#installing-f)
-  - [Displaying ∆F **Help**](#displaying-f-help)
-  - [∆F EXAMPLES](#f-examples)
-    - [Code Fields](#code-fields)
-    - [Text Fields and Space Fields](#text-fields-and-space-fields)
-    - [Null Space Fields](#null-space-fields)
-    - [Code Fields (Continued)](#code-fields-continued)
-    - [The Box Shortcut](#the-box-shortcut)
-    - [Box Mode](#box-mode)
-    - [Omega Shortcuts (Explicit)](#omega-shortcuts-explicit)
-    - [Referencing the F-string Itself](#referencing-the-f-string-itself)
-    - [The Format Shortcut](#the-format-shortcut)
-    - [The Shortcut for Numeric Commas](#the-shortcut-for-numeric-commas)
-    - [The Quote Shortcut](#the-quote-shortcut)
-    - [The Wrap Shortcut (Experimental)](#the-wrap-shortcut-experimental)
-    - [Self-documenting **Code fields** (SDCFs)](#self-documenting-code-fields-sdcfs)
-    - [The Above Shortcut](#the-above-shortcut)
-    - [Omega Shortcuts (Implicit)](#omega-shortcuts-implicit)
-    - [Shortcuts With Individual Expressions](#shortcuts-with-individual-expressions)
-    - [A Shortcut for Dates and Times](#a-shortcut-for-dates-and-times)
-    - [A Shortcut for Dates and Times (Continued)](#a-shortcut-for-dates-and-times-continued)
-    - [Precomputed F-strings with the ***DFN*** Option](#precomputed-f-strings-with-the-dfn-option)
-  - [∆F Syntax and Other Information](#f-syntax-and-other-information)
-    - [∆F Call Syntax Overview](#f-call-syntax-overview)
-    - [∆F Call Syntax Details](#f-call-syntax-details)
-    - [∆F Options](#f-options)
-    - [∆F Return Value](#f-return-value)
-    - [∆F F-string Building Blocks](#f-f-string-building-blocks)
-    - [Escape Sequences For Text Fields and Quoted Strings](#escape-sequences-for-text-fields-and-quoted-strings)
-    - [Code Field Shortcuts](#code-field-shortcuts)
-    - [Omega Shortcut Expressions: Details](#omega-shortcut-expressions-details)
-    - [Wrap Shortcut: Details (Experimental)](#wrap-shortcut-details-experimental)
-  - [Copyright](#copyright)
+- [∆F — Formatted String Literals ](#f--formatted-string-literals-)
+- [Table of Contents](#table-of-contents)
+- [Overview](#overview)
+- [Installing **∆F**](#installing-f)
+- [Displaying ∆F **Help**](#displaying-f-help)
+- [∆F EXAMPLES](#f-examples)
+  - [Code Fields](#code-fields)
+  - [Text Fields and Space Fields](#text-fields-and-space-fields)
+  - [Null Space Fields](#null-space-fields)
+  - [Code Fields (Continued)](#code-fields-continued)
+  - [The Box Shortcut](#the-box-shortcut)
+  - [Box Mode](#box-mode)
+  - [Omega Shortcuts (Explicit)](#omega-shortcuts-explicit)
+  - [Referencing the F-string Itself](#referencing-the-f-string-itself)
+  - [The Format Shortcut](#the-format-shortcut)
+  - [The Shortcut for Numeric Commas](#the-shortcut-for-numeric-commas)
+  - [The Quote Shortcut](#the-quote-shortcut)
+  - [The Wrap Shortcut (Experimental)](#the-wrap-shortcut-experimental)
+  - [Self-documenting **Code fields** (SDCFs)](#self-documenting-code-fields-sdcfs)
+  - [The Above Shortcut](#the-above-shortcut)
+  - [Omega Shortcuts (Implicit)](#omega-shortcuts-implicit)
+  - [Shortcuts With Individual Expressions](#shortcuts-with-individual-expressions)
+  - [A Shortcut for Dates and Times](#a-shortcut-for-dates-and-times)
+  - [A Shortcut for Dates and Times (Continued)](#a-shortcut-for-dates-and-times-continued)
+  - [Precomputed F-strings with the ***DFN*** Option](#precomputed-f-strings-with-the-dfn-option)
+- [∆F Syntax and Other Information](#f-syntax-and-other-information)
+  - [∆F Call Syntax Overview](#f-call-syntax-overview)
+  - [∆F Call Syntax Details](#f-call-syntax-details)
+  - [∆F Options](#f-options)
+  - [∆F Return Value](#f-return-value)
+  - [∆F F-string Building Blocks](#f-f-string-building-blocks)
+  - [Escape Sequences For Text Fields and Quoted Strings](#escape-sequences-for-text-fields-and-quoted-strings)
+  - [Code Field Shortcuts](#code-field-shortcuts)
+  - [Omega Shortcut Expressions: Details](#omega-shortcut-expressions-details)
+  - [Wrap Shortcut: Details (Experimental)](#wrap-shortcut-details-experimental)
+- [Copyright](#copyright)
 
 </span>
 </details>
@@ -924,7 +918,7 @@ sometimes a backtick is just a backtick.
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250929T082451]
+(C) 2025 Sam the Cat Foundation. [20250929T131750]
 </span>
 <hr> 
 &emsp;
