@@ -104,7 +104,7 @@ Now, **∆F** is available in the active namespace (or **_myns_**), along with *
 ## ∆F EXAMPLES
 
 <details>            <!-- option: open -->
-<summary>Show/Hide ∆F Examples</summary>
+<summary>Show/Hide ∆F Examples (<i>lots of examples are shown</i>)</summary>
 
 <div class="content-with-right-bar">
 
@@ -925,7 +925,7 @@ sometimes a backtick is just a backtick.
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250928T141207]
+(C) 2025 Sam the Cat Foundation. [20250928T191620]
 </span>
 <hr><hr>
 

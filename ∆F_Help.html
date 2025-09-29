@@ -128,25 +128,6 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
     }
   </style>
 
-  <script>
-    document.addEventListener('click', function(event) {
-    // Check if the clicked element is an anchor link with a hash
-    if (event.target.tagName === 'A' && event.target.getAttribute('href').startsWith('#')) {
-      const targetId = event.target.getAttribute('href');
-      const targetElement = document.querySelector(targetId);
-      
-      if (targetElement) {
-        // Find the nearest parent <details> element
-        const parentDetails = targetElement.closest('details');
-        // If a parent <details> is found and it's not already open, set the 'open' attribute
-        if (parentDetails && !parentDetails.hasAttribute('open')) {
-          parentDetails.setAttribute('open', '');
-        }
-      }
-    }
-  });
-  </script>
-
   <!-- htmlRenderer "Caption" -->
 
   <title> ∆F — Formatted String Literals </title>  
@@ -349,7 +330,7 @@ note its absence).</li>
 <hr />
 <h2 id="f-examples">∆F EXAMPLES</h2>
 <details>            <!-- option: open -->
-<summary>Show/Hide ∆F Examples</summary>
+<summary>Show/Hide ∆F Examples (<i>lots of examples are shown</i>)</summary>
 
 <div class="content-with-right-bar">
 
@@ -1501,6 +1482,6 @@ Expressions: Details</a></li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250928T141207]
+(C) 2025 Sam the Cat Foundation. [20250928T191620]
 </span>
 <hr><hr>
