@@ -54,10 +54,7 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
       font-family:  Georgia,"Courier New", Courier, "Lucida Console", "Consolas", monospace;
       font-weight: 900;
       line-height: 1.1;
-      padding-left: 7px; 
-      padding-right: 5px;
-      padding-top: 5px;
-      padding-bottom: 5px;
+      padding: 5px 7px;
       vertical-align: top;
       background-color: #25027eff;
       color: #ffffffff;
@@ -66,10 +63,7 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
     td { 
       font-family: Georgia,"Courier New", Courier, "Lucida Console", "Consolas", monospace;
       font-weight: 200; 
-      padding-left: 7px; 
-      padding-right: 5px;
-      padding-top: 5px;
-      padding-bottom: 5px;
+      padding: 5px 7px;
       vertical-align: top;
     }
     tr:nth-child(even) {
@@ -123,7 +117,6 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
     .notes {
       font-size: 90%;
       margin-left: 30px; 
-   /* border: 4px solid #210074ff; */ 
       width: 90%; /* Adjust width as needed */
     }
   </style>
@@ -142,7 +135,7 @@ id="f---formatted-string-literals"><center><span style="font-size:75%;">∆F
 <thead>
 <tr>
 <th
-style="text-align: center;"><span style="font-size: 110%;padding: 12px;"><strong>∆F</strong>
+style="text-align: center;"><span style="font-size: 110%;"><strong>∆F</strong>
 is a function for Dyalog APL that interprets <em>f-strings</em>, a
 concise, yet powerful way to display multiline Unicode text and complex,
 often multidimensional expressions in an APL-friendly style.¹
@@ -151,8 +144,10 @@ often multidimensional expressions in an APL-friendly style.¹
 </thead>
 <tbody>
 <tr>
-<td style="text-align: center;"><strong>Inspired by Python's
-<em>f-strings</em>, but designed for APL.²</strong></td>
+<td
+style="text-align: center;"><span style="font-color: #25027eff;"><strong>Inspired
+by Python's <em>f-strings</em>, but designed for
+APL.²</strong></span></td>
 </tr>
 </tbody>
 </table>
@@ -231,12 +226,12 @@ Expressions: Details</a></li>
 </details>
 
 <h2 id="overview">Overview</h2>
-<p><strong>∆F</strong> <em>f-strings</em> can concisely include:</p>
+<p><strong>∆F</strong> <em>f-string</em> capabilities include:</p>
 <ul>
-<li><p><strong>Text fields</strong>, expressions that can generate
-multiline Unicode text, using the sequence <code>`◇</code>
-(<strong>backtick</strong> + <strong>statement separator</strong>³) to
-generate a newline (<small><strong>⎕UCS 13</strong></small>);</p></li>
+<li><p><strong>Text fields</strong>, supporting multiline Unicode text
+within each field, with the sequence <code>`◇</code>
+(<strong>backtick</strong> + <strong>statement separator</strong>³)
+generating a newline (<small><strong>⎕UCS 13</strong></small>);</p></li>
 <li><p><strong>Code fields</strong>, allowing users to evaluate and
 display APL arrays in the user environment, arrays passed as
 <strong>∆F</strong> arguments, as well as arbitrary APL expressions
@@ -273,11 +268,12 @@ and <strong>⎕DT</strong>): <code>{"hh:mm:ss" `T ⎕TS}</code></li>
 <li><p>Simple mechanisms for concisely formatting and displaying data
 from</p>
 <ul>
-<li>user arrays or arbitrary code: <br><code>{tempC}</code> or
-<code>{tempC&lt;100: 32+tempC×9÷5 ◇ "Too hot"}</code>, <br></li>
-<li>arguments to <strong>∆F</strong> that follow the format string:
-<code>{32+`⍵1×9÷5}</code>, where <code>`⍵1</code> is a shortcut for
-<code>(⍵⊃⍨1+⎕IO)</code>;</li>
+<li>user arrays or arbitrary code:
+<br><code>tempC←10 110 40</code><br><code>{tempC}</code> or
+<code>'{ {⍵&lt;100: 32+9×⍵÷5 ◇ "(too hot)"}¨tempC }'</code>, <br></li>
+<li>arguments to <strong>∆F</strong> that follow the format
+string:<br><code>{32+`⍵1×9÷5}</code>, where <code>`⍵1</code> is a
+shortcut for <code>(⍵⊃⍨1+⎕IO)</code>;</li>
 <li><em>and more</em>;</li>
 </ul></li>
 </ul></li>
@@ -1486,7 +1482,7 @@ the array ⍵, row by row, whether character, numeric or otherwise.</li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250928T215005]
+(C) 2025 Sam the Cat Foundation. [20250929T082451]
 </span>
 <hr> 
 &emsp;

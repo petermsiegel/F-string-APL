@@ -11,9 +11,9 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 
 <div class="notes">
 
-|<span style="font-size: 110%;padding: 12px;">**∆F** is a function for Dyalog APL that interprets *f-strings*, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.¹ </span>|
+|<span style="font-size: 110%;">**∆F** is a function for Dyalog APL that interprets *f-strings*, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.¹ </span>|
 | :------------------------------: |
-| **Inspired by Python's *f-strings*, but designed for APL.²** |
+| <span style="font-color: #25027eff;">**Inspired by Python's *f-strings*, but designed for APL.²**</span> |
 
 </div>
 
@@ -67,9 +67,9 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
 
 ## Overview
 
-**∆F** *f-strings* can concisely include:
+**∆F** *f-string* capabilities include:
 
-- **Text fields**, expressions that can generate multiline Unicode text, using the sequence `` `◇ `` (**backtick** + **statement separator**³) to generate a newline (<small>**⎕UCS&nbsp;13**</small>);
+- **Text fields**, supporting multiline Unicode text within each field, with the sequence `` `◇ `` (**backtick** + **statement separator**³) generating a newline (<small>**⎕UCS&nbsp;13**</small>);
 
 - **Code fields**, allowing users to evaluate and display APL arrays in the user environment, arrays passed as **∆F** arguments, as well as arbitrary APL expressions based on full multi-statement dfn logic.⁴ Each **Code field** must return a value, simple or otherwise, which will be catenated with other fields and returned from **∆F**;
 
@@ -93,9 +93,9 @@ Use with: /usr/local/bin/pandoc -f gfm ∆F_Help.md -o ∆F_Help.html
     - _and more_;
 
   - Simple mechanisms for concisely formatting and displaying data from
-    - user arrays or arbitrary code: <br>`{tempC}` or `{tempC<100: 32+tempC×9÷5 ◇ "Too hot"}`,
+    - user arrays or arbitrary code: <br>`tempC←10 110 40`<br>`{tempC}` or `'{ {⍵<100: 32+9×⍵÷5 ⋄ "(too hot)"}¨tempC }'`,
       <br>
-    - arguments to **∆F** that follow the format string: `` {32+`⍵1×9÷5} ``, where `` `⍵1 `` is a shortcut for `(⍵⊃⍨1+⎕IO)`;
+    - arguments to **∆F** that follow the format string:<br>`` {32+`⍵1×9÷5} ``, where `` `⍵1 `` is a shortcut for `(⍵⊃⍨1+⎕IO)`;
     - _and more_;
 
 - **Space fields**, providing a simple mechanism both for separating adjacent **Text fields** and inserting (rectangular) blocks of any number of spaces between any two fields, where needed;
@@ -924,7 +924,7 @@ sometimes a backtick is just a backtick.
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250928T215005]
+(C) 2025 Sam the Cat Foundation. [20250929T082451]
 </span>
 <hr> 
 &emsp;
