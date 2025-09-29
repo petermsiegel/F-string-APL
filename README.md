@@ -1,7 +1,7 @@
 
 ##### Github Published README.md
 
-## <span style="font-size: 100%;">∆F — Formatted String Literals </span>
+## <span style="font-size: 100%;"><center>∆F - Formatted String Literals</center></span>
 
 <div class="notes">
 
@@ -19,7 +19,7 @@
 <summary>Table of Contents</summary> 
 <span style="font-size: 90%;">
 
-- [∆F — Formatted String Literals ](#f--formatted-string-literals-)
+- [∆F - Formatted String Literals](#f---formatted-string-literals)
 - [Table of Contents](#table-of-contents)
 - [Overview](#overview)
 - [Installing **∆F**](#installing-f)
@@ -87,7 +87,7 @@
     - _and more_;
 
   - Simple mechanisms for concisely formatting and displaying data from
-    - user arrays or arbitrary code: <br>`tempC←10 110 40`<br>`{tempC}` or `'{ {⍵<100: 32+9×⍵÷5 ⋄ "(too hot)"}¨tempC }'`,
+    - user arrays or arbitrary code: <br>`tempC←10 110 40`<br>`{tempC}` or `'{ {⍵<100: 32+9×⍵÷5 ◇ "(too hot)"}¨tempC }'`,
       <br>
     - arguments to **∆F** that follow the format string:<br>`` {32+`⍵1×9÷5} ``, where `` `⍵1 `` is a shortcut for `(⍵⊃⍨1+⎕IO)`;
     - _and more_;
@@ -918,7 +918,7 @@ sometimes a backtick is just a backtick.
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250929T131750]
+(C) 2025 Sam the Cat Foundation. [20250929T134459]
 </span>
 <hr> 
 &emsp;
