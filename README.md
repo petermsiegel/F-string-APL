@@ -7,7 +7,6 @@
 
 |<span style="font-size: 110%;">**∆F** is a function for Dyalog APL that interprets *f-strings*, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.¹ </span>|
 | :------------------------------: |
-| <span style="font-color: #25027eff;">**Inspired by Python's *f-strings*, but designed for APL.²**</span> |
 
 </div>
 
@@ -61,11 +60,13 @@
 
 ## Overview
 
-**∆F** *f-string* capabilities include:
+Inspired by Python *f-strings*,² **∆F** includes a variety of capabilities to make it easy to evaluate, format, annotate, and display related multidimensional information. **∆F** *f-strings* include:
 
+- The notion of ***fields***, simple 2-dimensional spaces created by the user, which are aligned and catenated automatically to return/display a single 2-dimensional character array;
+  
 - **Text fields**, supporting multiline Unicode text within each field, with the sequence `` `◇ `` (**backtick** + **statement separator**³) generating a newline (<small>**⎕UCS&nbsp;13**</small>);
 
-- **Code fields**, allowing users to evaluate and display APL arrays in the user environment, arrays passed as **∆F** arguments, as well as arbitrary APL expressions based on full multi-statement dfn logic.⁴ Each **Code field** must return a value, simple or otherwise, which will be catenated with other fields and returned from **∆F**;
+- **Code fields**, allowing users to evaluate and display APL arrays of any dimensionality, depth and type in the user environment, arrays passed as **∆F** arguments, as well as arbitrary APL expressions based on full multi-statement dfn logic.⁴ Each **Code field** must return a value, simple or otherwise, which will be catenated with other fields and returned from **∆F**;
 
   **Code fields** also provide a number of concise, convenient extensions, such as:
 
@@ -73,21 +74,21 @@
 
     - **double-quotes**<br>
       `∆F '{"like this"}'` or `` ∆F '{"on`◇""three""`◇lines"} ``,
-    - **single-quotes** [sic!]<br> 
-      `∆F '{''shown ''''right'''' here''}'`, or even,
     - **double angle quotation marks**,⁵<br>
-      `∆F '{«with internal quotes like "this" or ''this''.»}'`;
+      `∆F '{«with internal quotes like "this" or ''this''.»}'`, not to mention   
+    -  APL's tried-and-true embedded **single-quotes**<br>
+      `∆F '{''shown ''''right'''' here''}'`.
 
   - Simple shortcuts⁶ for
 
     - **format**ting numeric arrays, **\$** (short for **⎕FMT**): `{"F7.5" $ ?0 0}`,
     - putting a **box** around a specific expression, **\`B**: `` {`B ⍳2 2} ``,
     - placing the output of one expression **above** another, **%**: `{"Pi"% ○1}`,
-    - formatting **date** and **time** expressions from APL timestamps (**⎕TS**) using **\`T** (short for an expression with **1200⌶** and **⎕DT**): `` {"hh:mm:ss" `T ⎕TS} ``
+    - formatting **date** and **time** expressions from APL timestamps (**⎕TS**) using **\`T** (combining **1200⌶** and **⎕DT**): `` {"hh:mm:ss" `T ⎕TS} ``
     - _and more_;
 
   - Simple mechanisms for concisely formatting and displaying data from
-    - user arrays or arbitrary code: <br>`tempC←10 110 40`<br>`{tempC}` or `'{ {⍵<100: 32+9×⍵÷5 ◇ "(too hot)"}¨tempC }'`,
+    - user arrays or arbitrary code: <br>`tempC←10 110 40`<br>`{tempC}` or `{ {⍵<100: 32+9×⍵÷5 ◇ "(too hot)"}¨tempC }`,
       <br>
     - arguments to **∆F** that follow the format string:<br>`` {32+`⍵1×9÷5} ``, where `` `⍵1 `` is a shortcut for `(⍵⊃⍨1+⎕IO)`;
     - _and more_;
@@ -99,9 +100,9 @@
 
 - Multiline (matrix) output built up field-by-field, left-to-right, from values and expressions in the calling environment or arguments to **∆F**;
 
-  - After all fields are generated, they are concatenated (after appropriate vertical conformation) to form a single character matrix: ***the return value from*** **∆F**. (See the examples below).
+  - After all fields are generated, they are concatenated (after appropriate vertical alignment) to form a single character matrix: ***the return value from*** **∆F**. (See the examples below).
 
-**∆F** is designed for ease of use, _ad hoc_ debugging, fine-grained formatting and informal user interaction,⁷ built using APL's own powerful functions and operators.
+**∆F** is designed for ease of use, _ad hoc_ debugging, fine-grained formatting and informal user interaction,⁷ built using Dyalog functions and operators.
 
 <details>            
 <summary>Notes</summary>
@@ -110,12 +111,12 @@
 | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | ¹ Throughout this documentation, notably in the many examples, an index origin of zero (`⎕IO=0`) is assumed. **Code fields** inherit the index origin and other system variables from the environment (*i.e.* namespace) in which **∆F** is called, so your own examples will work as you expect. If you wish to modify the `⎕IO` or any system variable temporarily, you may do so right in the **Code field**:<br>&emsp;&emsp; `∆F '{⎕IO←1 ◇ 26=⎕A⍳"Z": "Success" ◇ "Failure"}'`. |
-| ² **∆F** is inspired by Python _[f-strings](https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals)_, short for "**formatted string literals**", but designed for APL's multi-dimensional worldview. **∆F** *f-strings* and Python's are not compatible.                                                                                                                                                                                     |
+| ² **∆F** is inspired by Python _[f-strings](https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals)_, short for "**formatted string literals**", but designed for APL's multi-dimensional worldview.  Python introduced *f-strings* in 2016. **∆F** *f-strings* and Python's are **not** compatible.                                                                                     |
 | ³ In this document, we use the symbol `◇` (`⎕UCS 9671`) to represent the APL *statement separator* (`⎕UCS 8900`), since the latter is displayed _in some browsers_ as a hard-to-read glyph. **∆F** will recognize `` `◇ `` with _either_ glyph.                                                                                                                                                                                                                     |
 | ⁴ **∆F Code fields** _as input_ are limited to a single, possibly very long, line.                                                                                                                                                                                                                                                                                                                                                                                  |
 | ⁵ **Double angle quotation marks** <big>**«&nbsp;»**</big> (_guillemets_) are Unicode chars `⎕UCS 171 187` (on the std Mac keyboard: _*option-backslash*_ and _*option-shift-backslash*_). When including literal guillemets in guillemet-bracketed quotations (<span style="color: red;">_but why?_</span>&ThinSpace;), opening guillemets <big>**«**</big> are _not_ doubled, but _two_ closing guillemets are needed for each literal <big>**»**</big> required. |
 | ⁶ Details on all the shortcuts are provided later in this document. See **_Code Field Shortcuts._**                                                                                                                                                                                                                                                                                                                                                                 |
-| ⁷ As a prototype, **∆F** is relatively slow, using an APL recursive scan to analyze the **f-string**.                                                                                                                                                                                                                                                                                                                                                               |
+| ⁷ As a prototype, **∆F** is relatively slow, using an APL recursive scan to analyze the **f-string**. See the ***DFN*** option (below) for a way to speed up frequently used *f-strings*.                                                                                                                                                                                                                                                                                                                                                              |
 
 </div></details>
 
@@ -918,7 +919,7 @@ sometimes a backtick is just a backtick.
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250929T134459]
+(C) 2025 Sam the Cat Foundation. [20250929T145326]
 </span>
 <hr> 
 &emsp;

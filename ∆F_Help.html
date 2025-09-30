@@ -130,12 +130,6 @@ often multidimensional expressions in an APL-friendly style.¹
 </tr>
 </thead>
 <tbody>
-<tr>
-<td
-style="text-align: center;"><span style="font-color: #25027eff;"><strong>Inspired
-by Python's <em>f-strings</em>, but designed for
-APL.²</strong></span></td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -211,18 +205,26 @@ Expressions: Details</a></li>
 </details>
 
 <h2 id="overview">Overview</h2>
-<p><strong>∆F</strong> <em>f-string</em> capabilities include:</p>
+<p>Inspired by Python <em>f-strings</em>,² <strong>∆F</strong> includes
+a variety of capabilities to make it easy to evaluate, format, annotate,
+and display related multidimensional information. <strong>∆F</strong>
+<em>f-strings</em> include:</p>
 <ul>
+<li><p>The notion of <em><strong>fields</strong></em>, simple
+2-dimensional spaces created by the user, which are aligned and
+catenated automatically to return/display a single 2-dimensional
+character array;</p></li>
 <li><p><strong>Text fields</strong>, supporting multiline Unicode text
 within each field, with the sequence <code>`◇</code>
 (<strong>backtick</strong> + <strong>statement separator</strong>³)
 generating a newline (<small><strong>⎕UCS 13</strong></small>);</p></li>
 <li><p><strong>Code fields</strong>, allowing users to evaluate and
-display APL arrays in the user environment, arrays passed as
-<strong>∆F</strong> arguments, as well as arbitrary APL expressions
-based on full multi-statement dfn logic.⁴ Each <strong>Code
-field</strong> must return a value, simple or otherwise, which will be
-catenated with other fields and returned from <strong>∆F</strong>;</p>
+display APL arrays of any dimensionality, depth and type in the user
+environment, arrays passed as <strong>∆F</strong> arguments, as well as
+arbitrary APL expressions based on full multi-statement dfn logic.⁴ Each
+<strong>Code field</strong> must return a value, simple or otherwise,
+which will be catenated with other fields and returned from
+<strong>∆F</strong>;</p>
 <p><strong>Code fields</strong> also provide a number of concise,
 convenient extensions, such as:</p>
 <ul>
@@ -231,10 +233,11 @@ with several quote styles:</p>
 <ul>
 <li><strong>double-quotes</strong><br> <code>∆F '{"like this"}'</code>
 or <code>∆F '{"on`◇""three""`◇lines"}</code>,</li>
-<li><strong>single-quotes</strong> [sic!]<br>
-<code>∆F '{''shown ''''right'''' here''}'</code>, or even,</li>
 <li><strong>double angle quotation marks</strong>,⁵<br>
-<code>∆F '{«with internal quotes like "this" or ''this''.»}'</code>;</li>
+<code>∆F '{«with internal quotes like "this" or ''this''.»}'</code>, not
+to mention</li>
+<li>APL's tried-and-true embedded <strong>single-quotes</strong><br>
+<code>∆F '{''shown ''''right'''' here''}'</code>.</li>
 </ul></li>
 <li><p>Simple shortcuts⁶ for</p>
 <ul>
@@ -246,8 +249,8 @@ or <code>∆F '{"on`◇""three""`◇lines"}</code>,</li>
 <strong>%</strong>: <code>{"Pi"% ○1}</code>,</li>
 <li>formatting <strong>date</strong> and <strong>time</strong>
 expressions from APL timestamps (<strong>⎕TS</strong>) using
-<strong>`T</strong> (short for an expression with <strong>1200⌶</strong>
-and <strong>⎕DT</strong>): <code>{"hh:mm:ss" `T ⎕TS}</code></li>
+<strong>`T</strong> (combining <strong>1200⌶</strong> and
+<strong>⎕DT</strong>): <code>{"hh:mm:ss" `T ⎕TS}</code></li>
 <li><em>and more</em>;</li>
 </ul></li>
 <li><p>Simple mechanisms for concisely formatting and displaying data
@@ -255,7 +258,7 @@ from</p>
 <ul>
 <li>user arrays or arbitrary code:
 <br><code>tempC←10 110 40</code><br><code>{tempC}</code> or
-<code>'{ {⍵&lt;100: 32+9×⍵÷5 ◇ "(too hot)"}¨tempC }'</code>, <br></li>
+<code>{ {⍵&lt;100: 32+9×⍵÷5 ◇ "(too hot)"}¨tempC }</code>, <br></li>
 <li>arguments to <strong>∆F</strong> that follow the format
 string:<br><code>{32+`⍵1×9÷5}</code>, where <code>`⍵1</code> is a
 shortcut for <code>(⍵⊃⍨1+⎕IO)</code>;</li>
@@ -276,14 +279,14 @@ from values and expressions in the calling environment or arguments to
 <strong>∆F</strong>;</p>
 <ul>
 <li>After all fields are generated, they are concatenated (after
-appropriate vertical conformation) to form a single character matrix:
+appropriate vertical alignment) to form a single character matrix:
 <em><strong>the return value from</strong></em> <strong>∆F</strong>.
 (See the examples below).</li>
 </ul></li>
 </ul>
 <p><strong>∆F</strong> is designed for ease of use, <em>ad hoc</em>
 debugging, fine-grained formatting and informal user interaction,⁷ built
-using APL's own powerful functions and operators.</p>
+using Dyalog functions and operators.</p>
 <details>            
 <summary>Notes</summary>
 <div class="notes">
@@ -311,8 +314,9 @@ field</strong>:<br>  
 Python <em><a
 href="https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals">f-strings</a></em>,
 short for "<strong>formatted string literals</strong>", but designed for
-APL's multi-dimensional worldview. <strong>∆F</strong>
-<em>f-strings</em> and Python's are not compatible.</td>
+APL's multi-dimensional worldview. Python introduced <em>f-strings</em>
+in 2016. <strong>∆F</strong> <em>f-strings</em> and Python's are
+<strong>not</strong> compatible.</td>
 </tr>
 <tr>
 <td style="text-align: left;">³ In this document, we use the symbol
@@ -346,7 +350,8 @@ Shortcuts.</em></strong></td>
 <tr>
 <td style="text-align: left;">⁷ As a prototype, <strong>∆F</strong> is
 relatively slow, using an APL recursive scan to analyze the
-<strong>f-string</strong>.</td>
+<strong>f-string</strong>. See the <em><strong>DFN</strong></em> option
+(below) for a way to speed up frequently used <em>f-strings</em>.</td>
 </tr>
 </tbody>
 </table>
@@ -1467,7 +1472,7 @@ the array ⍵, row by row, whether character, numeric or otherwise.</li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250929T134518]
+(C) 2025 Sam the Cat Foundation. [20250929T145326]
 </span>
 <hr> 
 &emsp;
