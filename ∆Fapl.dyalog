@@ -63,7 +63,7 @@
       p= ≢⍵: TFDone ⍺, ⍵                               ⍝ No special chars in ⍵. Process & return.
         pfx c w← (p↑⍵) (p⌷⍵) (⍵↓⍨ p+1) 
       c= esc: (⍺, pfx, nlG TFEsc w) ∇ 1↓ w             ⍝ char is esc. Process & continue.
-    ⍝ c= cr:  (⍺, pfx, nlG) ∇ w                        ⍝ actual cr => nlG, mirroring esc+⋄ => nlG. 
+      c= cr:  (⍺, pfx, nlG) ∇ w                        ⍝ actual cr => nlG, mirroring esc+⋄ => nlG. 
         CF_SF w⊣ TFDone ⍺, pfx                         ⍝ char is lb. End TF; go to CF_SF.  
     } ⍝ End Text Field Scan 
 
@@ -123,16 +123,18 @@
   ⍝ ∘ For quotes with different starting and ending chars, e.g. « » (⎕UCS 171 187).
   ⍝   If « is the left qt, then the right qt » can be doubled in the APL style, 
   ⍝   and a non-doubled » terminates as expected.
+  ⍝ Note: See note at <c= cr> below. See also function TF.
   ⍝ Returns val← (the string at the start of ⍵) (the rest of ⍵) ⍝  
     CFStr← { 
         qtL w← ⍵ ⋄ qtR← (qtsL⍳ qtL)⌷ qtsR              ⍝ See above.
-        CFSBrk← ⌊/⍳∘(esc qtR)                          ⍝ See above.
+        CFSBrk← ⌊/⍳∘(esc qtR cr)                       ⍝ See note at <c= cr> below.
         lenW← ¯1+ ≢w                                   ⍝ lenW: length of w outside quoted str.
         ⍙Scan← {   ⍝ Recursive CF Quoted-String Scan. lenW converges on true length.
           0= ≢⍵: ⍺ 
             p← CFSBrk ⍵  
           p= ≢⍵: ⎕SIGNAL qtÊ ⋄ c← p⌷⍵
           c= esc: (⍺, (p↑ ⍵), nlG QSEsc ⊃⍵↓⍨ p+1) ∇ ⍵↓⍨ lenW-← p+2 
+          c= cr:  (⍺, nlG) ∇ ⍵↓~ lenW-← 1             ⍝ actual cr  => nlG, mirroring esc+⋄ => nlG.   
         ⍝ Now c= qtR:  Now see if c2, the next char, is a second qtR, 
         ⍝ i.e. an internal, literal qtR. Only qtR can be doubled (e.g. », not «)
             c2← ⊃⍵↓⍨ p+1
@@ -222,7 +224,7 @@
   lDAQ rDAQ← '«»'                                      ⍝ ⎕UCS 171 187 
 ⍝ Order brklist chars roughly by frequency, high to low.       
   cfBrkList← lDAQ,⍨ sp sq dq esc lb rb dol omUs ra da pct← ' ''"`{}$⍹→↓%' 
-  tfBrkList← esc lb                
+  tfBrkList← esc lb cr                 
   lb_rb← lb rb ⋄ om_omUs← om omUs ⋄ sp_sq← sp sq ⋄   esc_lb_rb← esc lb rb  
   qtsL qtsR← lDAQ rDAQ,⍨¨ ⊂dq sq                       ⍝ Expected freq hi to lo: dq sq l/rDAQ
   sdcfCh← ra da pct                                    ⍝ self-doc code field chars
@@ -338,10 +340,13 @@
     B← XR scB2← HT   ' ⎕THIS.B ' '{⍺←0⋄⎕ML←1⋄⍺⎕SE.Dyalog.Utils.disp⊂⍣(1≥≡⍵),⍣(0=≡⍵)⊢⍵}' 
       ⎕SHADOW 'cCod' 
       cCod← {
-          _←  '{⎕FR ⎕PP← 1287 34⋄'
-          _,←   't←''[.Ee].*$'' ''(?<=\d)(?=(\d{3})+([-¯.Ee]|$))''' 
-          _,←   '⎕R''&'' '',&'''
-          _,   '⍕¨⍵⋄1=≢⍵:⊃t⋄t}'
+            _←  '{'
+            _,←    '1<⍴⍴⍵: ∇⍤1⊢ ⍵⋄'
+            _,←    '⎕FR ⎕PP← 1287 34⋄'
+            _,←    't←''[.Ee].*$'' ''(?<=\d)(?=(\d{3})+([-¯.Ee]|$))''⎕R''&'' '',&''⍕¨⍵⋄'
+            _,←    '1=≢⍵:⊃t⋄'
+            _,←    't'
+            _,  '}'
       }⍬
     C← XR scC2← HT   ' ⎕THIS.C ' cCod 
     Ð← XR scÐ2← HT   ' ⎕THIS.Ð ' ' 0∘⎕SE.Dyalog.Utils.disp¯1∘↓'                           

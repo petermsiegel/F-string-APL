@@ -146,8 +146,8 @@ Literals</a></li>
 <li><a href="#table-of-contents">Table of Contents</a></li>
 <li><a href="#overview">Overview</a></li>
 <li><a href="#installing-f">Installing <strong>∆F</strong></a></li>
-<li><a href="#displaying-f-help">Displaying ∆F
-<strong>Help</strong></a></li>
+<li><a href="#displaying-f-help-in-apl">Displaying ∆F
+<strong>Help</strong> in APL</a></li>
 <li><a href="#f-examples">∆F EXAMPLES</a>
 <ul>
 <li><a href="#code-fields">Code Fields</a></li>
@@ -210,9 +210,10 @@ a variety of capabilities to make it easy to evaluate, format, annotate,
 and display related multidimensional information. <strong>∆F</strong>
 <em>f-strings</em> include:</p>
 <ul>
-<li><p>The notion of <em><strong>fields</strong></em>, detailed below,
-that <strong>∆F</strong> aligns and catenates into a single character
-matrix result;</p></li>
+<li><p>The abstraction of 2-dimensional character
+<em><strong>fields</strong></em>, generated one-by-one from the user's
+specifications and data, then aligned and catenated into a single
+overall character matrix result;</p></li>
 <li><p><strong>Text fields</strong>, supporting multiline Unicode text
 within each field, with the sequence <code>`◇</code>
 (<strong>backtick</strong> + <strong>statement separator</strong>³)
@@ -233,7 +234,7 @@ with several quote styles:</p>
 <li><strong>double-quotes</strong><br> <code>∆F '{"like this"}'</code>
 or <code>∆F '{"on`◇""three""`◇lines"}</code>,</li>
 <li><strong>double angle quotation marks</strong>,⁵<br>
-<code>∆F '{«with internal quotes like "this" or ''this''.»}'</code>, not
+<code>∆F '{«with internal quotes like "this" or ''this''»}'</code>, not
 to mention</li>
 <li>APL's tried-and-true embedded <strong>single-quotes</strong>,<br>
 <code>∆F '{''shown ''''right'''' here''}'</code>.</li>
@@ -241,26 +242,28 @@ to mention</li>
 <li><p>Simple shortcuts⁶ for</p>
 <ul>
 <li><strong>format</strong>ting numeric arrays, <strong>$</strong>
-(short for <strong>⎕FMT</strong>): <code>{"F7.5" $ ?0 0}</code>,</li>
+(short for <strong>⎕FMT</strong>):
+<code>∆F '{"F7.5" $ ?0 0}'</code>,</li>
 <li>putting a <strong>box</strong> around a specific expression,
-<strong>`B</strong>: <code>{`B ⍳2 2}</code>,</li>
+<strong>`B</strong>: <code>∆F'{`B ⍳2 2}'</code>,</li>
 <li>placing the output of one expression <strong>above</strong> another,
-<strong>%</strong>: <code>{"Pi"% ○1}</code>,</li>
+<strong>%</strong>: <code>∆F'{"Pi"% ○1}'</code>,</li>
 <li>formatting <strong>date</strong> and <strong>time</strong>
 expressions from APL timestamps (<strong>⎕TS</strong>) using
-<strong>`T</strong> (combining <strong>1200⌶</strong> and
-<strong>⎕DT</strong>): <code>{"hh:mm:ss" `T ⎕TS}</code></li>
+<strong>`T</strong> (combining <strong>1200⌶</strong> and
+<strong>⎕DT</strong>): <code>∆F'{"hh:mm:ss" `T ⎕TS}'</code>,</li>
 <li><em>and more</em>;</li>
 </ul></li>
 <li><p>Simple mechanisms for concisely formatting and displaying data
 from</p>
 <ul>
 <li>user arrays or arbitrary code:
-<br><code>tempC←10 110 40</code><br><code>{tempC}</code> or
-<code>{ {⍵&lt;100: 32+9×⍵÷5 ◇ "(too hot)"}¨tempC }</code>, <br></li>
+<br><code>tempC←10 110 40</code><br><code>∆F'{tempC}'</code> or
+<code>∆F'{ {⍵&lt;100: 32+9×⍵÷5 ◇ "(too hot)"}¨tempC }'</code>, <br></li>
 <li>arguments to <strong>∆F</strong> that follow the format
-string:<br><code>{32+`⍵1×9÷5}</code>, where <code>`⍵1</code> is a
-shortcut for <code>(⍵⊃⍨1+⎕IO)</code>;</li>
+string:<br><code>∆F'{32+`⍵1×9÷5}' (10 110 40)</code>,<br> where
+<code>`⍵1</code> is a shortcut for <code>(⍵⊃⍨1+⎕IO)</code> (here
+<code>10 110 40</code>),</li>
 <li><em>and more</em>;</li>
 </ul></li>
 </ul></li>
@@ -358,6 +361,9 @@ relatively slow, using an APL recursive scan to analyze the
 
 <hr />
 <h2 id="installing-f">Installing <strong>∆F</strong></h2>
+<details>            <!-- option: open -->
+<summary>Installing <bold>∆F</bold> in Dyalog APL</summary>
+
 <ol type="1">
 <li>On Github, search for <code>"f-string-apl"</code>.</li>
 <li>Copy the files <strong>∆Fapl.dyalog</strong> and
@@ -377,11 +383,12 @@ note its absence).</li>
 </ol>
 <p>Now, <strong>∆F</strong> is available in the active namespace (or
 <strong><em>myns</em></strong>), along with <strong>⍙Fapl</strong>.</p>
-<h2 id="displaying-f-help">Displaying ∆F <strong>Help</strong></h2>
-<blockquote>
-<p>To display this <strong>HELP</strong> information, type:
-<code>∆F⍨ 'help'</code>.</p>
-</blockquote>
+</details>
+
+<h2 id="displaying-f-help-in-apl">Displaying ∆F <strong>Help</strong> in
+APL</h2>
+<p><span style="font-size: 130%;">👉 </span>To display this
+<strong>HELP</strong> information, type: <code>∆F⍨ 'help'</code>.</p>
 <hr />
 <h2 id="f-examples">∆F EXAMPLES</h2>
 <details>            <!-- option: open -->
@@ -1204,46 +1211,54 @@ always returns a standard Dyalog dfn on success.</li>
 </ul>
 <h3 id="f-f-string-building-blocks">∆F F-string Building Blocks</h3>
 <p>The first element in the right arg to ∆F is a character vector, an
-<em>f-string</em>, which contains 3 types of fields: <strong>Text
+<em>f-string</em>, which contains one or more <strong>Text
 fields</strong>, <strong>Code fields</strong>, and <strong>Space
-fields</strong>.</p>
+fields</strong> in any combination.</p>
 <ul>
-<li><p><strong>Text fields</strong> consist of simple text, which may
+<li><strong>Text</strong> fields consist of simple text, which may
 include any Unicode characters desired, including newlines. Newlines
 (actually, carriage returns, <code>⎕UCS 13</code>) are normally entered
 via the sequence <code>`◇</code>. Additionally, literal curly braces can
-be added via <code>`{</code> and <code>`}</code>, so there is no
-confusion with the simple curly braces used to begin and end
-<strong>Code fields</strong> and <strong>Space Fields</strong>. Finally,
-a simple backtick escape can be entered into a <strong>Text
-field</strong> by simply entering two such characters
-<code>``</code>.</p></li>
-<li><p><strong>Code fields</strong> are run-time evaluated expressions
+be added via <code>`{</code> and <code>`}</code>, so they are distinct
+from the simple curly braces used to begin and end <strong>Code
+fields</strong> and <strong>Space Fields</strong>. Finally, a single
+backtick escape can be entered into a <strong>Text field</strong> by
+entering two such characters together <code>``</code>.
+<ul>
+<li>If <strong>∆F</strong> is called with an empty string,
+<code>∆F ''</code>, it is interpreted as containing a single 0-length
+<strong>Text</strong> field, returning a matrix of shape
+<code>1 0</code>.</li>
+</ul></li>
+<li><strong>Code</strong> fields are run-time evaluated expressions
 enclosed within simple, unescaped curly braces <code>{}</code>,
 <em>i.e.</em> those not preceded by a back-tick (see the previous
-paragraph). <strong>Code fields</strong> are essentially a Dyalog dfn
+paragraph). <strong>Code</strong> fields are essentially a Dyalog dfn
 with some extras. For escape sequences, see <strong>Escape
-Sequences</strong> below.</p></li>
-<li><p><strong>Space fields</strong> are essentially a
-<em>degenerate</em> form of <strong>Code fields</strong>, consisting of
-a single pair of simple curly braces <code>{}</code> with zero or more
-spaces in between. A <strong>Space field</strong> with zero spaces is a
-null <strong>Space field</strong>; while it may separate any other
-fields, its practical use is separating two adjacent <strong>Text
-fields</strong>.</p></li>
+Sequences</strong> below.</li>
+<li><strong>Space</strong> fields are essentially a <em>degenerate</em>
+form of <strong>Code</strong> fields, consisting of a single pair of
+simple curly braces <code>{}</code> with zero or more spaces in between.
+<ul>
+<li>A <strong>Space</strong> field with zero spaces is a null
+<strong>Space</strong> field; while it may separate any other fields,
+its practical use is separating two adjacent <strong>Text</strong>
+fields.</li>
+</ul></li>
 </ul>
 <p>The building blocks of an <em>f-string</em> are these defined
 "fields," catenated left to right, each of which will display as a
-logically separate 2-D (matrix) output space. While <strong>Code
-fields</strong> can return arrays of any number of dimensions mapped
-onto 2-D by APL <code>⎕FMT</code> rules, <strong>Text fields</strong>
-and <strong>Space fields</strong> are always simple rectangles
-(minimally 1 row and zero columns). Between fields, <strong>∆F</strong>
-adds no automatic spaces; that spacing is under user control.</p>
+logically separate 2-D (matrix) output space. While
+<strong>Code</strong> fields can return arrays of any number of
+dimensions mapped onto 2-D by APL <code>⎕FMT</code> rules,
+<strong>Text</strong> fields and <strong>Space</strong> fields are
+always simple rectangles (minimally 1 row and zero columns). Between
+fields, <strong>∆F</strong> adds no automatic spaces; that spacing is
+under user control.</p>
 <h3 id="escape-sequences-for-text-fields-and-quoted-strings">Escape
 Sequences For Text Fields and Quoted Strings</h3>
-<p><strong>∆F</strong> <strong>Text fields</strong> and <strong>Quoted
-strings</strong> in <strong>Code fields</strong> may include a small
+<p><strong>∆F</strong> <strong>Text</strong> fields and <strong>Quoted
+strings</strong> in <strong>Code</strong> fields may include a small
 number of escape sequences, beginning with the backtick
 <code>`</code>.</p>
 <table>
@@ -1277,14 +1292,14 @@ number of escape sequences, beginning with the backtick
 </tr>
 </tbody>
 </table>
-<p>Other instances of the backtick character in <strong>Text
-fields</strong> or <strong>Quoted strings</strong> in <strong>Code
-fields</strong> will be treated literally, <em>i.e.</em> sometimes a
-backtick is just a backtick.</p>
+<p>Other instances of the backtick character in <strong>Text</strong>
+fields or <strong>Quoted strings</strong> in <strong>Code</strong>
+fields will be treated literally, <em>i.e.</em> sometimes a backtick is
+just a backtick.</p>
 <h3 id="code-field-shortcuts">Code Field Shortcuts</h3>
-<p><strong>∆F</strong> <strong>Code fields</strong> may contain various
+<p><strong>∆F</strong> <strong>Code</strong> fields may contain various
 shortcuts, intended to be concise and expressive tools for common tasks.
-<strong>Shortcuts</strong> are valid in <strong>Code fields</strong>
+<strong>Shortcuts</strong> are valid in <strong>Code</strong> fields
 only <em>outside</em> <strong>Quoted strings</strong>.</p>
 <p><strong>Shortcuts</strong> include:</p>
 <table>
@@ -1471,7 +1486,7 @@ the array ⍵, row by row, whether character, numeric or otherwise.</li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250929T193041]
+(C) 2025 Sam the Cat Foundation. [20250930T170906]
 </span>
 <hr> 
 &emsp;

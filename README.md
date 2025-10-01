@@ -22,7 +22,7 @@
 - [Table of Contents](#table-of-contents)
 - [Overview](#overview)
 - [Installing **∆F**](#installing-f)
-- [Displaying ∆F **Help**](#displaying-f-help)
+- [Displaying ∆F **Help** in APL](#displaying-f-help-in-apl)
 - [∆F EXAMPLES](#f-examples)
   - [Code Fields](#code-fields)
   - [Text Fields and Space Fields](#text-fields-and-space-fields)
@@ -62,7 +62,7 @@
 
 Inspired by Python *f-strings*,² **∆F** includes a variety of capabilities to make it easy to evaluate, format, annotate, and display related multidimensional information. **∆F** *f-strings* include:
 
-- The notion of ***fields***, detailed below, that **∆F** aligns and catenates into a single character matrix result;
+- The abstraction of 2-dimensional character ***fields***, generated one-by-one from the user's specifications and data, then aligned and catenated into a single overall character matrix result;
   
 - **Text fields**, supporting multiline Unicode text within each field, with the sequence `` `◇ `` (**backtick** + **statement separator**³) generating a newline (<small>**⎕UCS&nbsp;13**</small>);
 
@@ -75,22 +75,22 @@ Inspired by Python *f-strings*,² **∆F** includes a variety of capabilities to
     - **double-quotes**<br>
       `∆F '{"like this"}'` or `` ∆F '{"on`◇""three""`◇lines"} ``,
     - **double angle quotation marks**,⁵<br>
-      `∆F '{«with internal quotes like "this" or ''this''.»}'`, not to mention   
+      `∆F '{«with internal quotes like "this" or ''this''»}'`, not to mention   
     -  APL's tried-and-true embedded **single-quotes**,<br>
       `∆F '{''shown ''''right'''' here''}'`.
 
   - Simple shortcuts⁶ for
 
-    - **format**ting numeric arrays, **\$** (short for **⎕FMT**): `{"F7.5" $ ?0 0}`,
-    - putting a **box** around a specific expression, **\`B**: `` {`B ⍳2 2} ``,
-    - placing the output of one expression **above** another, **%**: `{"Pi"% ○1}`,
-    - formatting **date** and **time** expressions from APL timestamps (**⎕TS**) using **\`T** (combining **1200⌶** and **⎕DT**): `` {"hh:mm:ss" `T ⎕TS} ``
+    - **format**ting numeric arrays, **\$** (short for **⎕FMT**): `∆F '{"F7.5" $ ?0 0}'`,
+    - putting a **box** around a specific expression, **\`B**: `` ∆F'{`B ⍳2 2}' ``,
+    - placing the output of one expression **above** another, **%**: `∆F'{"Pi"% ○1}'`,
+    - formatting **date** and **time** expressions from APL timestamps (**⎕TS**) using **\`T** (combining&nbsp;**1200⌶** and **⎕DT**): `` ∆F'{"hh:mm:ss" `T ⎕TS}' ``,
     - _and more_;
 
   - Simple mechanisms for concisely formatting and displaying data from
-    - user arrays or arbitrary code: <br>`tempC←10 110 40`<br>`{tempC}` or `{ {⍵<100: 32+9×⍵÷5 ◇ "(too hot)"}¨tempC }`,
+    - user arrays or arbitrary code: <br>`tempC←10 110 40`<br>`∆F'{tempC}'` or `∆F'{ {⍵<100: 32+9×⍵÷5 ◇ "(too hot)"}¨tempC }'`,
       <br>
-    - arguments to **∆F** that follow the format string:<br>`` {32+`⍵1×9÷5} ``, where `` `⍵1 `` is a shortcut for `(⍵⊃⍨1+⎕IO)`;
+    - arguments to **∆F** that follow the format string:<br>`` ∆F'{32+`⍵1×9÷5}' (10 110 40) ``,<br> where `` `⍵1 `` is a shortcut for `(⍵⊃⍨1+⎕IO)` (here `10 110 40`),
     - _and more_;
 
 - **Space fields**, providing a simple mechanism both for separating adjacent **Text fields** and inserting (rectangular) blocks of any number of spaces between any two fields, where needed;
@@ -124,6 +124,9 @@ Inspired by Python *f-strings*,² **∆F** includes a variety of capabilities to
 
 ## Installing **∆F**
 
+<details>            <!-- option: open -->
+<summary>Installing <bold>∆F</bold> in Dyalog APL</summary>
+
 1. On Github, search for `"f-string-apl"`. 
 2. Copy the files **∆Fapl.dyalog** and **∆F_Help.html** into your current working directory (the one shown via `]cd`). 
 3. Then, from your Dyalog session (typically `#` or `⎕SE`), enter:  
@@ -133,9 +136,11 @@ Inspired by Python *f-strings*,² **∆F** includes a variety of capabilities to
 
 Now, **∆F** is available in the active namespace (or **_myns_**), along with **⍙Fapl**.
 
-## Displaying ∆F **Help** 
+</details>
 
-> To display this **HELP** information, type: `∆F⍨ 'help'`.
+## Displaying ∆F **Help** in APL 
+
+<span style="font-size: 130%;">👉 </span>To display this **HELP** information, type: `∆F⍨ 'help'`.
 
 ---
 
@@ -817,21 +822,21 @@ Below, we summarize key information you've already gleaned from the examples.
 ### ∆F F-string Building Blocks
 
 The first element in the right arg to ∆F is a character vector, an *f-string*,
-which contains 3 types of fields: **Text fields**, **Code fields**, and **Space fields**.
+which contains one or more **Text fields**, **Code fields**, and **Space fields** in any combination.
 
-- **Text fields** consist of simple text, which may include any Unicode characters desired, including newlines. Newlines (actually, carriage returns, `⎕UCS 13`) are normally entered via the sequence `` `◇ ``. Additionally, literal curly braces can be added via `` `{ `` and `` `} ``, so there is no confusion with the simple curly braces used to begin and end **Code fields** and **Space Fields**. Finally, a simple backtick escape can be entered into a **Text field** by simply entering two such characters ` `` `.
-
-- **Code fields** are run-time evaluated expressions enclosed within
-  simple, unescaped curly braces `{}`, *i.e.* those not preceded by a back-tick (see the previous paragraph). **Code fields** are essentially a Dyalog dfn with some extras. For escape sequences, see **Escape Sequences** below.
-
-- **Space fields** are essentially a _degenerate_ form of **Code fields**, consisting of a single pair of simple curly braces `{}` with zero or more spaces in between. A **Space field** with zero spaces is a null **Space field**; while it may separate any other fields, its practical use is separating two adjacent **Text fields**.
+- **Text** fields consist of simple text, which may include any Unicode characters desired, including newlines. Newlines (actually, carriage returns, `⎕UCS 13`) are normally entered via the sequence `` `◇ ``. Additionally, literal curly braces can be added via `` `{ `` and `` `} ``, so they are distinct from the simple curly braces used to begin and end **Code fields** and **Space Fields**. Finally, a single backtick escape can be entered into a **Text field** by entering two such characters together ` `` `.
+  - If **∆F** is called with an empty string, `∆F ''`, it is interpreted as containing a single 0-length **Text** field, returning a matrix of shape `1 0`.
+- **Code** fields are run-time evaluated expressions enclosed within
+  simple, unescaped curly braces `{}`, *i.e.* those not preceded by a back-tick (see the previous paragraph). **Code** fields are essentially a Dyalog dfn with some extras. For escape sequences, see **Escape Sequences** below.
+- **Space** fields are essentially a _degenerate_ form of **Code** fields, consisting of a single pair of simple curly braces `{}` with zero or more spaces in between. 
+  - A **Space** field with zero spaces is a null **Space** field; while it may separate any other fields, its practical use is separating two adjacent **Text** fields.
 
 The building blocks of an *f-string* are these defined "fields," catenated left to right,
-each of which will display as a logically separate 2-D (matrix) output space. While **Code fields** can return arrays of any number of dimensions mapped onto 2-D by APL `⎕FMT` rules, **Text fields** and **Space fields** are always simple rectangles (minimally 1 row and zero columns). Between fields, **∆F** adds no automatic spaces; that spacing is under user control.
+each of which will display as a logically separate 2-D (matrix) output space. While **Code** fields can return arrays of any number of dimensions mapped onto 2-D by APL `⎕FMT` rules, **Text** fields and **Space** fields are always simple rectangles (minimally 1 row and zero columns). Between fields, **∆F** adds no automatic spaces; that spacing is under user control.
 
 ### Escape Sequences For Text Fields and Quoted Strings
 
-**∆F** **Text fields** and **Quoted strings** in **Code fields** may include
+**∆F** **Text** fields and **Quoted strings** in **Code** fields may include
 a small number of escape sequences, beginning with the backtick `` ` ``.
 
 | Escape Sequence | What It Inserts | Description |
@@ -841,12 +846,12 @@ a small number of escape sequences, beginning with the backtick `` ` ``.
 |     **\`{**     |        {        | left brace  |
 |     **\`}**     |        }        | right brace |
 
-Other instances of the backtick character in **Text fields** or **Quoted strings** in **Code fields** will be treated literally, _i.e._
+Other instances of the backtick character in **Text** fields or **Quoted strings** in **Code** fields will be treated literally, _i.e._
 sometimes a backtick is just a backtick.
 
 ### Code Field Shortcuts
 
-**∆F** **Code fields** may contain various shortcuts, intended to be concise and expressive tools for common tasks. **Shortcuts** are valid in **Code fields** only *outside* **Quoted strings**. 
+**∆F** **Code** fields may contain various shortcuts, intended to be concise and expressive tools for common tasks. **Shortcuts** are valid in **Code** fields only *outside* **Quoted strings**. 
 
 **Shortcuts** include:
 
@@ -919,7 +924,7 @@ sometimes a backtick is just a backtick.
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20250929T193041]
+(C) 2025 Sam the Cat Foundation. [20250930T083717]
 </span>
 <hr> 
 &emsp;
