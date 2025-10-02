@@ -23,7 +23,7 @@
 - [Overview](#overview)
 - [Installing **∆F**](#installing-f)
 - [Displaying ∆F **Help** in APL](#displaying-f-help-in-apl)
-- [∆F Tutorial with Examples](#f-tutorial-with-examples)
+- [∆F Primer with Examples](#f-primer-with-examples)
   - [Code Fields](#code-fields)
   - [Text Fields and Space Fields](#text-fields-and-space-fields)
   - [Null Space Fields](#null-space-fields)
@@ -144,10 +144,10 @@ Now, **∆F** is available in the active namespace (or **_myns_**), along with *
 
 ---
 
-## ∆F Tutorial with Examples
+## ∆F Primer with Examples
 
 <details>            <!-- option: open -->
-<summary>Show/Hide ∆F Tutorial with examples</summary>
+<summary>Show/Hide ∆F Primer with examples</summary>
 
 <div class="content-with-right-bar">
 
@@ -924,7 +924,7 @@ sometimes a backtick is just a backtick.
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251001T202519]
+(C) 2025 Sam the Cat Foundation. [20251001T215710]
 </span>
 <hr> 
 &emsp;
