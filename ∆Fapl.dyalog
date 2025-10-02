@@ -32,14 +32,18 @@
           result← ⎕THIS.Help opts 
           :Return          
       :EndIf 
-    ⍝ Modes: 1 => dfn, ¯1 => dfn as string, else => (array mode | error).
-      :Select ⊃opts← 4↑ opts  
-        :Case  1                                                                   
-          result← (⊃⎕RSI)⍎ opts ⎕THIS.FmtScan ,⊃,⊆args
-        :Case ¯1                                         
-          result← (1, 1↓opts) ⎕THIS.FmtScan ,⊃,⊆args            
-        :Else                                          ⍝ array mode   optÊ                        
-          result← opts ((⊃⎕RSI){ ⍺⍺⍎ ⍺ ⎕THIS.FmtScan ,⊃⍵⊣ ⎕EX 'opts' 'args'}) ,⊆args
+    ⍝ Modes: 0 => array mode, 1 => dfn, ¯1 => dfn as string, else => help or error
+      args← ,⊆args
+      :Select ⊃opts← 4↑ opts   
+        :Case  0       ⍝ ⍵: all args (f-string etc.), used by ⍎. FmtScan sees just the f-string.
+          result← opts ((⊃⎕RSI){ ⍺⍺⍎ ⍺ ⎕THIS.FmtScan ,⊃⍵⊣ ⎕EX 'opts' 'args'}) args    
+        :Case  1       ⍝ ,⊃args: just the f-string      ⍝ 1:  returns dfn    
+          ⎕SHADOW '∆F_Dfn'                             ⍝ Give returned dfn a mnemonic name...                                          
+          result← ∆F_dfn← (⊃⎕RSI)⍎ opts ⎕THIS.FmtScan ,⊃args
+        :Case ¯1       ⍝ ,⊃args: ust the f-string      ⍝ ¯1:  returns dfn string (undocumented)                                
+          result← opts ⎕THIS.FmtScan ,⊃args            
+        :Else          ⍝ opts matches 'help'; else error!         
+          result← ⎕THIS.Help opts  
       :EndSelect   
     :Else 
         ⎕SIGNAL ⊂⎕DMX.('EM' 'EN' 'Message' ,⍥⊂¨('∆F ',EM) EN Message)
@@ -59,11 +63,11 @@
     ⍝ Calls: TF (recursively) and CF_SF (which calls TF in return).
     ⍝ Returns: null. Appends APL code strings to fldsG
     TF← {  
-        p← TFBrk ⍵                                     ⍝ esc or lb only. 
+        p← TFBrk ⍵                                     ⍝ esc, lb, or cr only. 
       p= ≢⍵: TFDone ⍺, ⍵                               ⍝ No special chars in ⍵. Process & return.
         pfx c w← (p↑⍵) (p⌷⍵) (⍵↓⍨ p+1) 
       c= esc: (⍺, pfx, nlG TFEsc w) ∇ 1↓ w             ⍝ char is esc. Process & continue.
-      c= cr:  (⍺, pfx, nlG) ∇ w                        ⍝ actual cr => nlG, mirroring esc+⋄ => nlG. 
+    ⍝ c= cr:  (⍺, pfx, nlG) ∇ w                        ⍝ actual cr => nlG, mirroring esc+⋄ => nlG. 
         CF_SF w⊣ TFDone ⍺, pfx                         ⍝ char is lb. End TF; go to CF_SF.  
     } ⍝ End Text Field Scan 
 
@@ -127,14 +131,15 @@
   ⍝ Returns val← (the string at the start of ⍵) (the rest of ⍵) ⍝  
     CFStr← { 
         qtL w← ⍵ ⋄ qtR← (qtsL⍳ qtL)⌷ qtsR              ⍝ See above.
-        CFSBrk← ⌊/⍳∘(esc qtR cr)                       ⍝ See note at <c= cr> below.
+        CFSBrk← ⌊/⍳∘(esc qtR) ⍝  cr)                   ⍝ See note at <c= cr> below.
         lenW← ¯1+ ≢w                                   ⍝ lenW: length of w outside quoted str.
         ⍙Scan← {   ⍝ Recursive CF Quoted-String Scan. lenW converges on true length.
           0= ≢⍵: ⍺ 
             p← CFSBrk ⍵  
           p= ≢⍵: ⎕SIGNAL qtÊ ⋄ c← p⌷⍵
           c= esc: (⍺, (p↑ ⍵), nlG QSEsc ⊃⍵↓⍨ p+1) ∇ ⍵↓⍨ lenW-← p+2 
-          c= cr:  (⍺, nlG) ∇ ⍵↓~ lenW-← 1             ⍝ actual cr  => nlG, mirroring esc+⋄ => nlG.   
+        ⍝ OPTIONAL: actual cr  => nlG, mirroring esc+⋄ => nlG. 
+        ⍝ c= cr:  (⍺, nlG) ∇ ⍵↓~ lenW-← 1              
         ⍝ Now c= qtR:  Now see if c2, the next char, is a second qtR, 
         ⍝ i.e. an internal, literal qtR. Only qtR can be doubled (e.g. », not «)
             c2← ⊃⍵↓⍨ p+1
@@ -173,9 +178,10 @@
 ⍝ ===========================================================================
 ⍝ FmtScan Executive begins here
 ⍝ ===========================================================================  
-  0∊ ⍺∊ 0 1: ⎕SIGNAL optÊ                              ⍝ Invalid options (⍺)!
+⍝   Valid ⍺: ⍺[0]∊ ¯1 0 1, ∧/ ⍺[1 2 3]∊ 0 1
+    0∊ 0 1∊⍨ (|⊃⍺), 1↓⍺: ⎕SIGNAL optÊ                  ⍝ Invalid options (⍺)!
     (dfn dbg box inline) fStr← ⍺ ⍵ 
-    DM← (⎕∘←)⍣dbg                                      ⍝ DM: Debug Msg
+    DM← (⎕∘←)⍣(dbg∧dfn≥0)                              ⍝ DM: Debug Msg
     nlG← dbg⊃ cr crVis                                 ⍝ A newline escape (`⋄) maps onto crVis if debug mode.
   ⍝ User Shortcuts: A, B, C, F, T~D, Q, W.  
   ⍝ Non-user Internal Shortcut Code and dfns: scÐ, Ð;  scM, M.
@@ -196,10 +202,10 @@
   ⍝ Start the scan                                     ⍝ We start with a (possibly null) text field, 
     _← '' TF ⍵                                         ⍝ recursively calling CF_SF and (from CF_SF) SF & TF itself, &
                                                        ⍝ ... setting fields ¨fldsG¨ as we go.
-  0= ≢fldsG: DM '(1 0⍴⍬)', dfn/'⍨'                     ⍝ If there are no flds, return 1 by 0 matrix
+  0= ≢fldsG: DM '(1 0⍴⍬)', '⍨'/⍨ dfn=0                 ⍝ If there are no flds, return 1 by 0 matrix
     fldsG← OrderFlds fldsG                             ⍝ We will evaluate fields L-to-R
     code← '⍵',⍨ lb, rb,⍨ fldsG,⍨ box⊃ scM scÐ
-  ~dfn: DM code                                        ⍝ Not a dfn. Emit code ready to execute
+  0=dfn: DM code                                        ⍝ Not a dfn. Emit code ready to execute
     quoted← ',⍨ ⊂', AplQt fStr                         ⍝ Dfn: add quoted fmt string (`⍵0)
     DM lb, code, quoted, rb                            ⍝ Emit dfn str ready to cvt to dfn in caller
   } ⍝ FmtScan 
@@ -224,7 +230,7 @@
   lDAQ rDAQ← '«»'                                      ⍝ ⎕UCS 171 187 
 ⍝ Order brklist chars roughly by frequency, high to low.       
   cfBrkList← lDAQ,⍨ sp sq dq esc lb rb dol omUs ra da pct← ' ''"`{}$⍹→↓%' 
-  tfBrkList← esc lb cr                 
+  tfBrkList← esc lb   ⍝ cr                 
   lb_rb← lb rb ⋄ om_omUs← om omUs ⋄ sp_sq← sp sq ⋄   esc_lb_rb← esc lb rb  
   qtsL qtsR← lDAQ rDAQ,⍨¨ ⊂dq sq                       ⍝ Expected freq hi to lo: dq sq l/rDAQ
   sdcfCh← ra da pct                                    ⍝ self-doc code field chars
