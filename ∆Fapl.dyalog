@@ -63,11 +63,11 @@
     ⍝ Calls: TF (recursively) and CF_SF (which calls TF in return).
     ⍝ Returns: null. Appends APL code strings to fldsG
     TF← {  
-        p← TFBrk ⍵                                     ⍝ esc, lb, or cr only. 
+        p← TFBrk ⍵                                     ⍝ esc, lb, or nl only. 
       p= ≢⍵: TFDone ⍺, ⍵                               ⍝ No special chars in ⍵. Process & return.
         pfx c w← (p↑⍵) (p⌷⍵) (⍵↓⍨ p+1) 
       c= esc: (⍺, pfx, nlG TFEsc w) ∇ 1↓ w             ⍝ char is esc. Process & continue.
-    ⍝ c= cr:  (⍺, pfx, nlG) ∇ w                        ⍝ actual cr => nlG, mirroring esc+⋄ => nlG. 
+    ⍝ c= nl:  (⍺, pfx, nlG) ∇ w                        ⍝ actual nl (⎕UCS 13) => nlG, mirroring esc+⋄ => nlG. 
         CF_SF w⊣ TFDone ⍺, pfx                         ⍝ char is lb. End TF; go to CF_SF.  
     } ⍝ End Text Field Scan 
 
@@ -127,19 +127,19 @@
   ⍝ ∘ For quotes with different starting and ending chars, e.g. « » (⎕UCS 171 187).
   ⍝   If « is the left qt, then the right qt » can be doubled in the APL style, 
   ⍝   and a non-doubled » terminates as expected.
-  ⍝ Note: See note at <c= cr> below. See also function TF.
+  ⍝ Note: See note at <c= nl> below. See also function TF.
   ⍝ Returns val← (the string at the start of ⍵) (the rest of ⍵) ⍝  
     CFStr← { 
         qtL w← ⍵ ⋄ qtR← (qtsL⍳ qtL)⌷ qtsR              ⍝ See above.
-        CFSBrk← ⌊/⍳∘(esc qtR) ⍝  cr)                   ⍝ See note at <c= cr> below.
+        CFSBrk← ⌊/⍳∘(esc qtR) ⍝  nl)                   ⍝ See note at <c= nl> below.
         lenW← ¯1+ ≢w                                   ⍝ lenW: length of w outside quoted str.
         ⍙Scan← {   ⍝ Recursive CF Quoted-String Scan. lenW converges on true length.
           0= ≢⍵: ⍺ 
             p← CFSBrk ⍵  
           p= ≢⍵: ⎕SIGNAL qtÊ ⋄ c← p⌷⍵
           c= esc: (⍺, (p↑ ⍵), nlG QSEsc ⊃⍵↓⍨ p+1) ∇ ⍵↓⍨ lenW-← p+2 
-        ⍝ OPTIONAL: actual cr  => nlG, mirroring esc+⋄ => nlG. 
-        ⍝ c= cr:  (⍺, nlG) ∇ ⍵↓~ lenW-← 1              
+        ⍝ OPTIONAL: actual nl  => nlG, mirroring esc+⋄ => nlG. 
+        ⍝ c= nl:  (⍺, nlG) ∇ ⍵↓~ lenW-← 1              
         ⍝ Now c= qtR:  Now see if c2, the next char, is a second qtR, 
         ⍝ i.e. an internal, literal qtR. Only qtR can be doubled (e.g. », not «)
             c2← ⊃⍵↓⍨ p+1
@@ -178,11 +178,11 @@
 ⍝ ===========================================================================
 ⍝ FmtScan Executive begins here
 ⍝ ===========================================================================  
-⍝   Valid ⍺: ⍺[0]∊ ¯1 0 1, ∧/ ⍺[1 2 3]∊ 0 1
+⍝   Validate options ⍺: ⍺[0]∊ ¯1 0 1, ∧/ ⍺[1 2 3]∊ 0 1
     0∊ 0 1∊⍨ (|⊃⍺), 1↓⍺: ⎕SIGNAL optÊ                  ⍝ Invalid options (⍺)!
-    (dfn dbg box inline) fStr← ⍺ ⍵ 
-    DM← (⎕∘←)⍣(dbg∧dfn≥0)                              ⍝ DM: Debug Msg
-    nlG← dbg⊃ cr crVis                                 ⍝ A newline escape (`⋄) maps onto crVis if debug mode.
+    (dfn dbg box inline) fStr← ⍺ ⍵                     ⍝ ↓ When dbg=¯1, don't show (⎕←) code str, 
+    DM← (⎕∘←)⍣(dbg∧¯1≠dfn)                             ⍝ ← since we return it verbatim.
+    nlG← dbg⊃ nl nlVis                                 ⍝ A newline escape (`⋄) maps onto nlVis if debug mode.
   ⍝ User Shortcuts: A, B, C, F, T~D, Q, W.  
   ⍝ Non-user Internal Shortcut Code and dfns: scÐ, Ð;  scM, M.
   ⍝ See ⍙LoadShortcuts for shortcut details and associated variables scA, scB, etc.     
@@ -205,10 +205,11 @@
   0= ≢fldsG: DM '(1 0⍴⍬)', '⍨'/⍨ dfn≠0                 ⍝ If there are no flds, return 1 by 0 matrix
     fldsG← OrderFlds fldsG                             ⍝ We will evaluate fields L-to-R
     code← '⍵',⍨ lb, rb,⍨ fldsG,⍨ box⊃ scM scÐ
-  0=dfn: DM code                                        ⍝ Not a dfn. Emit code ready to execute
-    quoted← ',⍨ ⊂', AplQt fStr                         ⍝ Dfn: add quoted fmt string (`⍵0)
+  0=dfn: DM code                                       ⍝ Not dfn. Emit code ready to execute
+    quoted← ',⍨⊂', AplQt fStr                          ⍝ Is dfn (1,¯1): add quoted fmt string (`⍵0)
     DM lb, code, quoted, rb                            ⍝ Emit dfn str ready to cvt to dfn in caller
   } ⍝ FmtScan 
+⍝ === End of FmtScan ========================================================  
 
 ⍝ ===========================================================================  
 ⍝                            ***   CONSTANTS ***
@@ -221,7 +222,7 @@
 ⍝     (i.e. any number of literals « can be in a «» string.)
 ⍝ The use of double angle quotation marks is an amusement. No good use AFAIK.
   om← '⍵'                                          ⍝ ⍵ not in cfBrklist, since not special. (See `⍵).
-  cr crVis← ⎕UCS 13 9229               
+  nl nlVis← ⎕UCS 13 9252                           ⍝ 9252 (␤), 9229 (␍)               
 ⍝ Seq. `⋄ OR `◇ map onto ⎕UCS 13.
 ⍝ dia2[0]: Dyalog stmt separator
 ⍝ dia2[1]: Alternative character that is easier to read in some web browsers. 
@@ -230,12 +231,12 @@
   lDAQ rDAQ← '«»'                                      ⍝ ⎕UCS 171 187 
 ⍝ Order brklist chars roughly by frequency, high to low.       
   cfBrkList← lDAQ,⍨ sp sq dq esc lb rb dol omUs ra da pct← ' ''"`{}$⍹→↓%' 
-  tfBrkList← esc lb   ⍝ cr                 
+  tfBrkList← esc lb   ⍝ nl                 
   lb_rb← lb rb ⋄ om_omUs← om omUs ⋄ sp_sq← sp sq ⋄   esc_lb_rb← esc lb rb  
   qtsL qtsR← lDAQ rDAQ,⍨¨ ⊂dq sq                       ⍝ Expected freq hi to lo: dq sq l/rDAQ
   sdcfCh← ra da pct                                    ⍝ self-doc code field chars
 
-⍝ Error constants / fns  
+⍝ Error constants and fns  
     Ê← { ⍺←11 ⋄ ⊂'EN' ⍺,⍥⊂ 'Message' ⍵ }
   brÊ←         Ê 'Unpaired brace "{"'
   qtÊ←         Ê 'Unpaired quote (''"'' or "''") in code field' 
@@ -245,8 +246,8 @@
   EscÊ←        Ê {'Sequence "`',⍵,'" is not valid in code outside strings. Did you mean "',⍵,'"?'}
   helpFiÊ←  22 Ê 'Help file "',helpHtmlFi,'" not found in current directory'
 
-⍝ Other fns/ops for FmtScan above (no side effects). 
 ⍝ =========================================================================
+⍝ Utilities (fns/ops) for FmtScan above.
 ⍝ These have NO side effects, so need not be in the scope of FmtScan. 
 ⍝ =========================================================================
 ⍝ See also CFSBrk

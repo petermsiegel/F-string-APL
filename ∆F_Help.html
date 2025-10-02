@@ -1160,15 +1160,18 @@ returns a char. matrix.</td>
 <td
 style="text-align: left;"> <em><strong>options[1]</strong></em>:<br>  
 <em><strong>DBG</strong></em> <em>(debug) mode</em></td>
-<td style="text-align: left;">If <code>1</code>: Displays the source
-code that the <em>f-string</em> <strong><em>actually</em></strong>
-generates; if <strong><em>DFN</em></strong> is also <code>1</code>, this
-will include the embedded <em>f-string</em> source (accessed as
-<code>`⍵0</code>). Newline characters are rendered visibly as
-<code>␍</code>. After the source code is displayed, it is evaluated per
-other options.<br>If <code>0</code> (default): Does not display source
-code; newline characters are rendered normally as carriage returns,
-<code>⎕UCS 13</code>.</td>
+<td style="text-align: left;">If <code>1</code>: Renders newline
+characters from <code>`◇</code> as the visible <code>␤</code> character.
+Displays the source code that the <em>f-string</em>
+<strong><em>actually</em></strong> generates; if
+<strong><em>DFN</em></strong> is also <code>1</code>, this will include
+the embedded <em>f-string</em> source (accessed as <code>`⍵0</code>).
+After the source code is displayed, it will be executed or converted to
+a <em>dfn</em> and returned (see the <em><strong>DFN</strong></em>
+option above).<br>If <code>0</code> (default): Newline characters from
+<code>`◇</code> are rendered normally as carriage returns,
+<code>⎕UCS 13</code>; the <em><strong>DFN</strong></em> source code is
+not displayed.</td>
 </tr>
 <tr>
 <td
@@ -1505,7 +1508,11 @@ the array ⍵, row by row, whether character, numeric or otherwise.</li>
 <li>If <code>options[0]</code> is <code>¯1</code>, then
 <strong>∆F</strong> returns a character vector that contains the source
 code for the <em>dfn</em> that would have been returned via the
-<em><strong>DFN</strong></em> option, <code>options[0]←1</code>.</li>
+<em><strong>DFN</strong></em> option, <code>options[0]=1</code>. If
+<em><strong>DBG</strong></em> is also set, newlines from <code>`◇</code>
+are shown as visible <code>␤</code>. However, since this option returns
+the code string <em>verbatim</em>, the <em><strong>DBG</strong></em>
+option won't <em>display</em> the code string redundantly.</li>
 </ol>
 <hr />
 <div class="fixed-footer">
@@ -1522,7 +1529,7 @@ code for the <em>dfn</em> that would have been returned via the
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251001T231615]
+(C) 2025 Sam the Cat Foundation. [20251002T092256]
 </span>
 <hr> 
 &emsp;
