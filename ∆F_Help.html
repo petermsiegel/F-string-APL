@@ -647,11 +647,31 @@ The sun&#39;s core is at 15,000,000°C.</code></pre>
 <p>Placing quotes around string elements of an array.</p>
 </blockquote>
 <p>The <strong>Quote</strong> shortcut <code>`Q</code> recursively scans
-its right argument, looking for character scalars, vectors, and rows of
-character arrays, doubling internal single quotes and placing single
-quotes around each such element. Non-character data is returned as is.
-This is useful, for example, when you wish to clearly distinguish
-character from numeric data.</p>
+its right argument, matching rows of character arrays, character
+vectors, and character scalars, doubling internal single quotes and
+placing single quotes around the items found.¹ Non-character data is
+returned as is. This is useful, for example, when you wish to clearly
+distinguish character from numeric data.</p>
+<details>            
+<summary>Note</summary>
+<div class="notes">
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">¹ If a higher character array is found,
+its rows are quoted; if a character vector, it is quoted <em>in
+toto</em>; else, each character scalar is quoted in isolation.</td>
+</tr>
+</tbody>
+</table>
+</div></details>
+
 <p>Let's look at a couple of simple examples:</p>
 <p>First, let's use the <code>`Q</code> shortcut to place quotes around
 the simple character arrays in its right argument, <code>⍵</code>. This
@@ -1494,7 +1514,7 @@ the array ⍵, row by row, whether character, numeric or otherwise.</li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251001T215710]
+(C) 2025 Sam the Cat Foundation. [20251001T222511]
 </span>
 <hr> 
 &emsp;

@@ -428,9 +428,18 @@ The sun's core is at 15,000,000°C.
 
 > Placing quotes around string elements of an array.
 
-The **Quote** shortcut `` `Q `` recursively scans its right argument, looking for character
-scalars, vectors, and rows of character arrays, doubling internal single quotes and
-placing single quotes around each such element. Non-character data is returned as is. This is useful, for example, when you wish to clearly distinguish character from numeric data.
+The **Quote** shortcut `` `Q `` recursively scans its right argument, matching rows of character arrays, character vectors, and character scalars, doubling internal single quotes and
+placing single quotes around the items found.¹ Non-character data is returned as is. This is useful, for example, when you wish to clearly distinguish character from numeric data.
+
+<details>            
+<summary>Note</summary>
+<div class="notes">
+
+| Note                                                                                                                                                                             |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ¹ If a higher character array is found, its rows are quoted; if a character vector, it is quoted *in toto*; else, each character scalar is quoted in isolation. |
+
+</div></details>
 
 Let's look at a couple of simple examples:
 
@@ -924,7 +933,7 @@ sometimes a backtick is just a backtick.
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251001T215710]
+(C) 2025 Sam the Cat Foundation. [20251001T222511]
 </span>
 <hr> 
 &emsp;
