@@ -23,7 +23,7 @@
 - [Overview](#overview)
 - [Installing **∆F**](#installing-f)
 - [Displaying ∆F **Help** in APL](#displaying-f-help-in-apl)
-- [∆F EXAMPLES](#f-examples)
+- [∆F Tutorial with Examples](#f-tutorial-with-examples)
   - [Code Fields](#code-fields)
   - [Text Fields and Space Fields](#text-fields-and-space-fields)
   - [Null Space Fields](#null-space-fields)
@@ -144,10 +144,10 @@ Now, **∆F** is available in the active namespace (or **_myns_**), along with *
 
 ---
 
-## ∆F EXAMPLES
+## ∆F Tutorial with Examples
 
 <details>            <!-- option: open -->
-<summary>Show/Hide ∆F Examples (<i>lots of examples are shown</i>)</summary>
+<summary>Show/Hide ∆F Tutorial with examples</summary>
 
 <div class="content-with-right-bar">
 
@@ -591,7 +591,7 @@ Mary Jones  23
 
 > The _next_ best thing: the use of `` `⍵ `` in **Code field** expressions…
 
-We said we'd present the use of omega shortcuts with implicit indices `` `⍵ `` in **Code fields**. The expression `` `⍵ `` selects the _next_ element of the right argument `⍵` to **∆F**, defaulting to `` `⍵1 `` when first encountered, *i.e.* if there are **_no_** `` `⍵ `` elements to the **_left_** in the entire *f-string*. If there is any such expression (*e.g.* `` `⍵5 ``), then `` `⍵ `` points to the element after that one (*e.g.* `` `⍵6 ``). If the item to the left is `` `⍵ ``, then we simply increment the index by `1` from that one.
+We said we'd present the use of omega shortcuts with implicit indices `` `⍵ `` in **Code fields**. The expression `` `⍵ `` selects the _next_ element of the right argument `⍵` to **∆F**, defaulting to `` `⍵1 `` when first encountered, *i.e.* if there are **_no_** `` `⍵ `` elements (*explicit* or *implicit*) to the **_left_** in the entire *f-string*. If there is any such expression (*e.g.* `` `⍵5 ``), then `` `⍵ `` points to the element after that one (*e.g.* `` `⍵6 ``). If the item to the left is `` `⍵ ``, then we simply increment the index by `1` from that one.
 
 **Let's try an example.** Here, we display arbitrary 2-dimensional expressions, one above the other.
 `` `⍵ `` refers to the **_next_** argument in sequence, left to right, starting with `` `⍵1 ``, the first, *i.e.* `(⍵⊃⍨ 1+⎕IO)`. So, from left to right `` `⍵ `` is `` `⍵1 ``, `` `⍵2 ``, and `` `⍵3 ``. _Easy peasy._
@@ -924,7 +924,7 @@ sometimes a backtick is just a backtick.
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251001T201420]
+(C) 2025 Sam the Cat Foundation. [20251001T202519]
 </span>
 <hr> 
 &emsp;

@@ -148,7 +148,7 @@ Literals</a></li>
 <li><a href="#installing-f">Installing <strong>∆F</strong></a></li>
 <li><a href="#displaying-f-help-in-apl">Displaying ∆F
 <strong>Help</strong> in APL</a></li>
-<li><a href="#f-examples">∆F EXAMPLES</a>
+<li><a href="#f-tutorial-with-examples">∆F Tutorial with Examples</a>
 <ul>
 <li><a href="#code-fields">Code Fields</a></li>
 <li><a href="#text-fields-and-space-fields">Text Fields and Space
@@ -390,9 +390,9 @@ APL</h2>
 <p><span style="font-size: 130%;">👉 </span>To display this
 <strong>HELP</strong> information, type: <code>∆F⍨ 'help'</code>.</p>
 <hr />
-<h2 id="f-examples">∆F EXAMPLES</h2>
+<h2 id="f-tutorial-with-examples">∆F Tutorial with Examples</h2>
 <details>            <!-- option: open -->
-<summary>Show/Hide ∆F Examples (<i>lots of examples are shown</i>)</summary>
+<summary>Show/Hide ∆F Tutorial with examples</summary>
 
 <div class="content-with-right-bar">
 
@@ -839,12 +839,13 @@ Mary Jones  23</code></pre>
 <code>`⍵</code> selects the <em>next</em> element of the right argument
 <code>⍵</code> to <strong>∆F</strong>, defaulting to <code>`⍵1</code>
 when first encountered, <em>i.e.</em> if there are
-<strong><em>no</em></strong> <code>`⍵</code> elements to the
-<strong><em>left</em></strong> in the entire <em>f-string</em>. If there
-is any such expression (<em>e.g.</em> <code>`⍵5</code>), then
-<code>`⍵</code> points to the element after that one (<em>e.g.</em>
-<code>`⍵6</code>). If the item to the left is <code>`⍵</code>, then we
-simply increment the index by <code>1</code> from that one.</p>
+<strong><em>no</em></strong> <code>`⍵</code> elements (<em>explicit</em>
+or <em>implicit</em>) to the <strong><em>left</em></strong> in the
+entire <em>f-string</em>. If there is any such expression (<em>e.g.</em>
+<code>`⍵5</code>), then <code>`⍵</code> points to the element after that
+one (<em>e.g.</em> <code>`⍵6</code>). If the item to the left is
+<code>`⍵</code>, then we simply increment the index by <code>1</code>
+from that one.</p>
 <p><strong>Let's try an example.</strong> Here, we display arbitrary
 2-dimensional expressions, one above the other. <code>`⍵</code> refers
 to the <strong><em>next</em></strong> argument in sequence, left to
@@ -1493,7 +1494,7 @@ the array ⍵, row by row, whether character, numeric or otherwise.</li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251001T201420]
+(C) 2025 Sam the Cat Foundation. [20251001T202519]
 </span>
 <hr> 
 &emsp;
