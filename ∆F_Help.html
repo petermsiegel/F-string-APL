@@ -198,6 +198,7 @@ Sequences For Text Fields and Quoted Strings</a></li>
 Expressions: Details</a></li>
 <li><a href="#wrap-shortcut-details-experimental">Wrap Shortcut: Details
 (Experimental)</a></li>
+<li><a href="#undocumented-options">Undocumented Options</a></li>
 </ul></li>
 <li><a href="#copyright">Copyright</a></li>
 </ul>
@@ -1150,7 +1151,7 @@ style="text-align: left;"><em><strong>options</strong></em>: <em>mode</em></td>
 <td
 style="text-align: left;"> <em><strong>options[0]</strong></em>:<br>  
 <em><strong>DFN</strong></em> <em>output mode</em></td>
-<td style="text-align: left;">If <code>1</code>, <strong>∆F</strong>
+<td style="text-align: left;">If <code>1</code>: <strong>∆F</strong>
 returns a dfn, which (upon execution) produces the same output as the
 default mode.<br>If <code>0</code> (default): <strong>∆F</strong>
 returns a char. matrix.</td>
@@ -1159,7 +1160,7 @@ returns a char. matrix.</td>
 <td
 style="text-align: left;"> <em><strong>options[1]</strong></em>:<br>  
 <em><strong>DBG</strong></em> <em>(debug) mode</em></td>
-<td style="text-align: left;">If <code>1</code>, displays the source
+<td style="text-align: left;">If <code>1</code>: Displays the source
 code that the <em>f-string</em> <strong><em>actually</em></strong>
 generates; if <strong><em>DFN</em></strong> is also <code>1</code>, this
 will include the embedded <em>f-string</em> source (accessed as
@@ -1173,7 +1174,7 @@ code; newline characters are rendered normally as carriage returns,
 <td
 style="text-align: left;"> <em><strong>options[2]</strong></em>:<br>  
 <em><strong>BOX</strong></em> <em>mode</em></td>
-<td style="text-align: left;">If <code>1</code>, each field (except a
+<td style="text-align: left;">If <code>1</code>: Each field (except a
 null <strong>Text field</strong>) is boxed separately.<br>If
 <code>0</code> (default): Nothing is boxed automatically. Any
 <strong>Code field</strong> expression may be explicitly boxed using the
@@ -1187,7 +1188,7 @@ null <strong>Text field</strong>) is boxed separately.<br>If
 style="text-align: left;"> <em><strong>options[3]</strong></em>:<br>  <em><strong>INLINE</strong></em>
 <em>mode</em></td>
 <td style="text-align: left;">If <code>1</code> and the
-<em><strong>DFN</strong></em> option is set, the code for each internal
+<em><strong>DFN</strong></em> option is set: The code for each internal
 support function used is included in the <em>dfn</em> result;
 <em><strong>no</strong></em> reference to namespace
 <strong>⍙Fapl</strong> will be made during the execution of that
@@ -1499,6 +1500,13 @@ the array ⍵, row by row, whether character, numeric or otherwise.</li>
 </div>
 </details>  
 
+<h3 id="undocumented-options">Undocumented Options</h3>
+<ol type="1">
+<li>If <code>options[0]</code> is <code>¯1</code>, then
+<strong>∆F</strong> returns a character vector that contains the source
+code for the <em>dfn</em> that would have been returned via the
+<em><strong>DFN</strong></em> option, <code>options[0]←1</code>.</li>
+</ol>
 <hr />
 <div class="fixed-footer">
 <a href="#f---formatted-string-literals">Top</a>
@@ -1514,7 +1522,7 @@ the array ⍵, row by row, whether character, numeric or otherwise.</li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251001T222511]
+(C) 2025 Sam the Cat Foundation. [20251001T231615]
 </span>
 <hr> 
 &emsp;

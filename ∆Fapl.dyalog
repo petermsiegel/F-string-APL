@@ -38,7 +38,7 @@
         :Case  0       ⍝ ⍵: all args (f-string etc.), used by ⍎. FmtScan sees just the f-string.
           result← opts ((⊃⎕RSI){ ⍺⍺⍎ ⍺ ⎕THIS.FmtScan ,⊃⍵⊣ ⎕EX 'opts' 'args'}) args    
         :Case  1       ⍝ ,⊃args: just the f-string      ⍝ 1:  returns dfn    
-          ⎕SHADOW '∆F_Dfn'                             ⍝ Give returned dfn a mnemonic name...                                          
+          ⎕EX '∆F_Dfn'⊣ ⎕SHADOW '∆F_Dfn'               ⍝ Give returned dfn a mnemonic name...                                          
           result← ∆F_dfn← (⊃⎕RSI)⍎ opts ⎕THIS.FmtScan ,⊃args
         :Case ¯1       ⍝ ,⊃args: ust the f-string      ⍝ ¯1:  returns dfn string (undocumented)                                
           result← opts ⎕THIS.FmtScan ,⊃args            
@@ -202,7 +202,7 @@
   ⍝ Start the scan                                     ⍝ We start with a (possibly null) text field, 
     _← '' TF ⍵                                         ⍝ recursively calling CF_SF and (from CF_SF) SF & TF itself, &
                                                        ⍝ ... setting fields ¨fldsG¨ as we go.
-  0= ≢fldsG: DM '(1 0⍴⍬)', '⍨'/⍨ dfn=0                 ⍝ If there are no flds, return 1 by 0 matrix
+  0= ≢fldsG: DM '(1 0⍴⍬)', '⍨'/⍨ dfn≠0                 ⍝ If there are no flds, return 1 by 0 matrix
     fldsG← OrderFlds fldsG                             ⍝ We will evaluate fields L-to-R
     code← '⍵',⍨ lb, rb,⍨ fldsG,⍨ box⊃ scM scÐ
   0=dfn: DM code                                        ⍝ Not a dfn. Emit code ready to execute
