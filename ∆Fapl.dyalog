@@ -1,4 +1,4 @@
-:Namespace ⍙Fapl
+:Namespace ⍙Fapl 
   ⎕IO  ⎕ML←0 1                 ⍝ Namespace scope. User code is executed in caller space (⊃⎕RSI)  
   DEBUG← 0                     ⍝ DEBUG←1 turns off top-level error trapping...
   helpHtmlFi← '∆F_Help.html'   ⍝ Called from 'help' option. Globally set here
