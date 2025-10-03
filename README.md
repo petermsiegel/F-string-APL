@@ -847,12 +847,14 @@ each of which will display as a logically separate 2-D (matrix) output space. Wh
 **∆F** **Text** fields and **Quoted strings** in **Code** fields may include
 a small number of escape sequences, beginning with the backtick `` ` ``.
 
+
 | Escape Sequence | What It Inserts | Description |
 | :-------------: | :-------------: | :---------: |
 |     **\`◇**     |    *newline*    |   ⎕UCS 13   |
 |    **\`\`**     |        `        |  backtick   |
 |     **\`{**     |        {        | left brace  |
 |     **\`}**     |        }        | right brace |
+
 
 Other instances of the backtick character in **Text** fields or **Quoted strings** in **Code** fields will be treated literally, _i.e._
 sometimes a backtick is just a backtick.
@@ -911,13 +913,14 @@ sometimes a backtick is just a backtick.
 5. If there is one scalar or enclosed vector `⍺`, it is replicated _per (2) above_.
 6. By default,`⍺← ''''`,*i.e.* APL quotes will wrap the array ⍵, row by row, whether character, numeric or otherwise.
 
-</div>
-</details>  
+</div> 
 
 ### Undocumented Options
 
 1. If `options[0]` is `¯1`, then **∆F** returns a character vector that contains the source code for the *dfn* that would have been returned via the ***DFN*** option, `options[0]=1`. 
 If ***DBG*** is also set, newlines from `` `⋄ `` are shown as visible `␤`. However, since this option returns the code string *verbatim*, the ***DBG*** option won't *display* the code string redundantly. 
+ 
+ </details> 
  
 ---
 
@@ -926,7 +929,7 @@ If ***DBG*** is also set, newlines from `` `⋄ `` are shown as visible `␤`. H
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="#table-of-contents">Table of Contents</a> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="#f-examples">Examples</a>
+<a href="#f-primer-with-examples">Examples</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="#f-syntax-and-other-information">Syntax</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -937,7 +940,7 @@ If ***DBG*** is also set, newlines from `` `⋄ `` are shown as visible `␤`. H
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251002T203407]
+(C) 2025 Sam the Cat Foundation. [20251002T223220]
 </span>
 <hr> 
 &emsp;
