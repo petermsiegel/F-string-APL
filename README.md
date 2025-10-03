@@ -3,7 +3,7 @@
 
 <div class="notes">
 
-| <span style="font-size: 110%;">**∆F** is a function for Dyalog APL that interprets *f-strings*, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.¹ </span> |
+| <span style="font-size: 110%;">**∆F** is a function for Dyalog APL that interprets *f-strings*, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional, expressions in an APL-friendly style.¹ </span> |
 | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 
 </div>
@@ -785,7 +785,7 @@ Below, we summarize key information you've already gleaned from the examples.
 
 ## ∆F Syntax and Other Information
 
-<details open>            
+<details>        <!-- option: open -->       
 <summary>Syntax Info</summary>
 
 ### ∆F Call Syntax Overview
@@ -808,7 +808,7 @@ Below, we summarize key information you've already gleaned from the examples.
 | **_args_**                                                       | elements of ⍵ after the *f-string*, each of which can be accessed in the *f-string* via an **Omega** shortcut (`` `⍵𝑑𝑑 ``, *etc.*) or an ordinary *dfn* `⍵` expression.                                                                                                                                                                                                                                                                                                                              |
 | ***options***:&nbsp;*mode*                                       | `options←` <span style="color: red;">[</span> <span style="color: red;">[</span> `0` <span style="color: red;">[</span> `0` <span style="color: red;">[</span> `0` <span style="color: red;">[</span> `0` <span style="color: red;">]</span>     <span style="color: red;">]</span>     <span style="color: red;">]</span>     <span style="color: red;">]</span>     &nbsp;<span style="color: red;">**\|**</span> `'help'` <span style="color: red;">]</span>                                                                                                                                                                                                                                    |
 | &emsp;***options[0]***:<br>&emsp;&emsp;  ***DFN*** *output mode* | If `1`: **∆F** returns a dfn, which (upon execution) produces the same output as the default mode.<br>If `0` (default): **∆F** returns a char. matrix.                                                                                                                                                                                                                                                                                                                                               |
-| &emsp;***options[1]***:<br>&emsp;&emsp; ***DBG*** *(debug) mode* | If `1`: Renders newline characters from `` `⋄ `` as the visible `␤` character. Displays the source code that the *f-string* **_actually_** generates; if **_DFN_** is also `1`, this will include the embedded *f-string* source (accessed as `` `⍵0 ``).  After the source code is displayed, it will be executed or converted to a *dfn* and returned (see the ***DFN*** option above).<br>If `0` (default): Newline characters from `` `⋄ `` are rendered normally as carriage returns, `⎕UCS 13`; the ***DFN*** source code is not displayed.      |
+| &emsp;***options[1]***:<br>&emsp;&emsp; ***DBG*** *(debug) mode* | If `1`: Renders newline characters from `` `◇ `` as the visible `␤` character. Displays the source code that the *f-string* **_actually_** generates; if **_DFN_** is also `1`, this will include the embedded *f-string* source (accessed as `` `⍵0 ``).  After the source code is displayed, it will be executed or converted to a *dfn* and returned (see the ***DFN*** option above).<br>If `0` (default): Newline characters from `` `◇ `` are rendered normally as carriage returns, `⎕UCS 13`; the ***DFN*** source code is not displayed.      |
 | &emsp;***options[2]***:<br>&emsp;&emsp; ***BOX*** *mode*         | If `1`: Each field (except a null **Text field**) is boxed separately.<br>If `0` (default): Nothing is boxed automatically. Any **Code field** expression may be explicitly boxed using the **Box** shortcut, `` `B ``.<br><small>**Note**: ***BOX*** mode can be used both with ***DFN*** and default output mode.</small>                                                                                                                                                                          |
 | &emsp;***options[3]***:<br>&emsp;&emsp;***INLINE*** *mode*       | If `1` and the ***DFN*** option is set: The code for each internal support function used is included in the *dfn* result; ***no*** reference to namespace **⍙Fapl** will be made during the execution of that *dfn*.<br>If `0` (default): Whenever **∆F** or a *dfn* generated by it is executed, it makes calls to library routines in the namespace **⍙Fapl**, created during the `]load ∆Fapl` process.<br><small>**Note:** This option is experimental and may simply disappear one day.</small> |
 | &emsp;'help'                                                     | If `'help'` is specified, this amazing documentation is displayed.                                                                                                                                                                                                                                                                                                                                                                                                                                   |
@@ -918,7 +918,7 @@ sometimes a backtick is just a backtick.
 ### Undocumented Options
 
 1. If `options[0]` is `¯1`, then **∆F** returns a character vector that contains the source code for the *dfn* that would have been returned via the ***DFN*** option, `options[0]=1`. 
-If ***DBG*** is also set, newlines from `` `⋄ `` are shown as visible `␤`. However, since this option returns the code string *verbatim*, the ***DBG*** option won't *display* the code string redundantly. 
+If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. However, since this option returns the code string *verbatim*, the ***DBG*** option won't *display* the code string redundantly. 
  
  </details> 
  
@@ -940,7 +940,7 @@ If ***DBG*** is also set, newlines from `` `⋄ `` are shown as visible `␤`. H
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251002T223220]
+(C) 2025 Sam the Cat Foundation. [20251003T091154]
 </span>
 <hr> 
 &emsp;
