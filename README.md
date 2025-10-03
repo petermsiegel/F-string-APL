@@ -1591,7 +1591,7 @@ option won't <em>display</em> the code string redundantly.</li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251002T200143]
+(C) 2025 Sam the Cat Foundation. [20251002T200251]
 </span>
 <hr> 
 &emsp;
