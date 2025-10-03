@@ -1,4 +1,3 @@
-<title>∆F — Formatted String Literals</title>
 
 ## <span style="font-size: 100%;"><center>∆F - Formatted String Literals</center></span>
 
@@ -938,7 +937,7 @@ If ***DBG*** is also set, newlines from `` `⋄ `` are shown as visible `␤`. H
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251002T201303]
+(C) 2025 Sam the Cat Foundation. [20251002T201443]
 </span>
 <hr> 
 &emsp;
