@@ -337,7 +337,7 @@ In contrast, **Code fields** that return null values (like `{""}` above) _will_ 
 
 ### Omega Shortcuts (Explicit)  
 
-> Referencing **∆F** arguments after the *f-string*: Omega shortcut expressions like `` `⍵1 ``.
+> Referencing **∆F** arguments after the *f-string*: **Omega** shortcut expressions like `` `⍵1 ``.
 
 The expression `` `⍵1 `` is equivalent to `(⍵⊃⍨ 1+⎕IO)`, selecting the first argument after the *f-string*. Similarly, `` `⍵99 `` would select `(⍵⊃⍨99+⎕IO)`.
 
@@ -375,9 +375,9 @@ The expression `` `⍵0 `` always refers to the *f-string* itself.¹ Try this yo
 
 ### The Format Shortcut
 
-> Let's add commas to some very large numbers using the `$` (`⎕FMT`) shortcut.
+> Let's add commas to some very large numbers using the **⎕FMT** shortcut `$`.
 
-We can use Dyalog's built-in formatting specifier "C" with shortcut `$` (`⎕FMT`)
+We can use Dyalog's built-in formatting specifier "C" with shortcut `$` 
 to add appropriate commas to the temperatures!
 
 ```
@@ -389,7 +389,7 @@ The sun's core is at 15,000,000°C or 27,000,032°F
 
 ### The Shortcut for Numeric Commas 
 
-The `` `C `` shortcut adds commas every 3 digits (from the right) to one or more numbers or numeric strings.¹ It has an advantage over the `$` (Dyalog's `⎕FMT`) specifier: it doesn't require you to guesstimate field widths.
+The [**Numeric**] **Commas** shortcut `` `C `` adds commas every 3 digits (from the right) to one or more numbers or numeric strings.¹ It has an advantage over the `$` (Dyalog's `⎕FMT`) specifier: it doesn't require you to guesstimate field widths.
 
 <details>            
 <summary>Note</summary>
@@ -473,7 +473,7 @@ Voilà, quotes appear around the character digits, but not the actual numbers!
 
 <div class="content-with-left-bar">
 
-Here we make a quick mention of the **_experimental_** shortcut **Wrap**,¹ `` `W ``, which is used when you want a **_decorator_** string that is placed immediately to the left or right of **_each_** row of simple objects in the right argument, `⍵`.
+Here we make a quick mention of the **_experimental_** shortcut **Wrap**¹ `` `W `` which is used when you want a **_decorator_** string that is placed immediately to the left or right of **_each_** row of simple objects in the right argument, `⍵`.
 
 - The decorators are in `⍺`, the left argument to **Wrap**: the left decorator, `0⊃2⍴⍺`, and the right decorator, `1⊃2⍴⍺`, with `⍺` defaulting to a single quote.
 - If you need to omit one or the other decorator, simply make it a null string `""` or a _zilde_ `⍬`.
@@ -599,7 +599,7 @@ Mary Jones  23
 
 > The _next_ best thing: the use of `` `⍵ `` in **Code field** expressions…
 
-We said we'd present the use of omega shortcuts with implicit indices `` `⍵ `` in **Code fields**. The expression `` `⍵ `` selects the _next_ element of the right argument `⍵` to **∆F**, defaulting to `` `⍵1 `` when first encountered, *i.e.* if there are **_no_** `` `⍵ `` elements (*explicit* or *implicit*) to the **_left_** in the entire *f-string*. If there is any such expression (*e.g.* `` `⍵5 ``), then `` `⍵ `` points to the element after that one (*e.g.* `` `⍵6 ``). If the item to the left is `` `⍵ ``, then we simply increment the index by `1` from that one.
+We said we'd present the use of **Omega** shortcuts with implicit indices `` `⍵ `` in **Code fields**. The expression `` `⍵ `` selects the _next_ element of the right argument `⍵` to **∆F**, defaulting to `` `⍵1 `` when first encountered, *i.e.* if there are **_no_** `` `⍵ `` elements (*explicit* or *implicit*) to the **_left_** in the entire *f-string*. If there is any such expression (*e.g.* `` `⍵5 ``), then `` `⍵ `` points to the element after that one (*e.g.* `` `⍵6 ``). If the item to the left is `` `⍵ ``, then we simply increment the index by `1` from that one.
 
 **Let's try an example.** Here, we display arbitrary 2-dimensional expressions, one above the other.
 `` `⍵ `` refers to the **_next_** argument in sequence, left to right, starting with `` `⍵1 ``, the first, *i.e.* `(⍵⊃⍨ 1+⎕IO)`. So, from left to right `` `⍵ `` is `` `⍵1 ``, `` `⍵2 ``, and `` `⍵3 ``. _Easy peasy._
@@ -896,7 +896,7 @@ sometimes a backtick is just a backtick.
 
 1.  **⍹** is a synonym for **\`⍵**. It is Unicode character `⎕UCS 9081`. Either expression is valid only in **Code** fields and outside **Quoted strings**.
 2.  **\`⍵** or **⍹** uses an "_omega index counter_" (**OIC**) which we'll represent as **Ω**, common across all **Code** fields, which is initially set to zero, `Ω←0`. (Ω is just used for explication; don't actually use this symbol)
-3.  All omega shortcut expressions in the *f-string* are evaluated left to right and are ⎕IO-independent.
+3.  All **Omega** shortcut expressions in the *f-string* are evaluated left to right and are ⎕IO-independent.
 4.  **\`⍵𝑑𝑑** or **⍹𝑑𝑑** sets the _OIC_ to 𝑑𝑑, `Ω←𝑑𝑑`, and returns the expression `(⍵⊃⍨Ω+⎕IO)`. Here **𝑑𝑑** must be a _non-negative integer_ with at least 1 digit.
 5.  Bare **\`⍵** or **⍹** (*i.e.* with no digits appended) increments the _OIC_, `Ω+←1`, _before_ using it as the index in the expression `(⍵⊃⍨Ω+⎕IO)`.
 6.  The _f-string_ itself (the 0-th element of **⍵**) is always accessed as `` `⍵0 `` or `⍹0`. The omega with _implicit index_ always increments its index _before_ use, *i.e.*  starting by default with `` `⍵1 `` or `⍹1`.
@@ -940,7 +940,7 @@ If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. H
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251004T090507]
+(C) 2025 Sam the Cat Foundation. [20251004T091755]
 </span>
 <hr> 
 &emsp;

@@ -572,7 +572,8 @@ this expression on your own:</p>
 <h3 id="omega-shortcuts-explicit">Omega Shortcuts (Explicit)</h3>
 <blockquote>
 <p>Referencing <strong>∆F</strong> arguments after the
-<em>f-string</em>: Omega shortcut expressions like <code>`⍵1</code>.</p>
+<em>f-string</em>: <strong>Omega</strong> shortcut expressions like
+<code>`⍵1</code>.</p>
 </blockquote>
 <p>The expression <code>`⍵1</code> is equivalent to
 <code>(⍵⊃⍨ 1+⎕IO)</code>, selecting the first argument after the
@@ -620,22 +621,22 @@ Fields</em></strong> below.</td>
 
 <h3 id="the-format-shortcut">The Format Shortcut</h3>
 <blockquote>
-<p>Let's add commas to some very large numbers using the <code>$</code>
-(<code>⎕FMT</code>) shortcut.</p>
+<p>Let's add commas to some very large numbers using the
+<strong>⎕FMT</strong> shortcut <code>$</code>.</p>
 </blockquote>
 <p>We can use Dyalog's built-in formatting specifier "C" with shortcut
-<code>$</code> (<code>⎕FMT</code>) to add appropriate commas to the
-temperatures!</p>
+<code>$</code> to add appropriate commas to the temperatures!</p>
 <pre><code>⍝  The temperature of the sun at its core in degrees C.
    sun_core← 15E6                   ⍝ 15000000 is a bit hard to parse!
    ∆F &#39;The sun&#39;&#39;s core is at {&quot;CI10&quot; $ sun_core}°C or {&quot;CI10&quot; $ C2F sun_core}°F&#39;
 The sun&#39;s core is at 15,000,000°C or 27,000,032°F</code></pre>
 <h3 id="the-shortcut-for-numeric-commas">The Shortcut for Numeric
 Commas</h3>
-<p>The <code>`C</code> shortcut adds commas every 3 digits (from the
-right) to one or more numbers or numeric strings.¹ It has an advantage
-over the <code>$</code> (Dyalog's <code>⎕FMT</code>) specifier: it
-doesn't require you to guesstimate field widths.</p>
+<p>The [<strong>Numeric</strong>] <strong>Commas</strong> shortcut
+<code>`C</code> adds commas every 3 digits (from the right) to one or
+more numbers or numeric strings.¹ It has an advantage over the
+<code>$</code> (Dyalog's <code>⎕FMT</code>) specifier: it doesn't
+require you to guesstimate field widths.</p>
 <details>            
 <summary>Note</summary>
 <div class="notes">
@@ -729,8 +730,8 @@ character digits, but not the actual numbers!</p>
 <div class="content-with-left-bar">
 
 <p>Here we make a quick mention of the
-<strong><em>experimental</em></strong> shortcut <strong>Wrap</strong>,¹
-<code>`W</code>, which is used when you want a
+<strong><em>experimental</em></strong> shortcut <strong>Wrap</strong>¹
+<code>`W</code> which is used when you want a
 <strong><em>decorator</em></strong> string that is placed immediately to
 the left or right of <strong><em>each</em></strong> row of simple
 objects in the right argument, <code>⍵</code>.</p>
@@ -883,11 +884,11 @@ Mary Jones  23</code></pre>
 <p>The <em>next</em> best thing: the use of <code>`⍵</code> in
 <strong>Code field</strong> expressions…</p>
 </blockquote>
-<p>We said we'd present the use of omega shortcuts with implicit indices
-<code>`⍵</code> in <strong>Code fields</strong>. The expression
-<code>`⍵</code> selects the <em>next</em> element of the right argument
-<code>⍵</code> to <strong>∆F</strong>, defaulting to <code>`⍵1</code>
-when first encountered, <em>i.e.</em> if there are
+<p>We said we'd present the use of <strong>Omega</strong> shortcuts with
+implicit indices <code>`⍵</code> in <strong>Code fields</strong>. The
+expression <code>`⍵</code> selects the <em>next</em> element of the
+right argument <code>⍵</code> to <strong>∆F</strong>, defaulting to
+<code>`⍵1</code> when first encountered, <em>i.e.</em> if there are
 <strong><em>no</em></strong> <code>`⍵</code> elements (<em>explicit</em>
 or <em>implicit</em>) to the <strong><em>left</em></strong> in the
 entire <em>f-string</em>. If there is any such expression (<em>e.g.</em>
@@ -1490,8 +1491,9 @@ counter</em>" (<strong>OIC</strong>) which we'll represent as
 <strong>Ω</strong>, common across all <strong>Code</strong> fields,
 which is initially set to zero, <code>Ω←0</code>. (Ω is just used for
 explication; don't actually use this symbol)</li>
-<li>All omega shortcut expressions in the <em>f-string</em> are
-evaluated left to right and are ⎕IO-independent.</li>
+<li>All <strong>Omega</strong> shortcut expressions in the
+<em>f-string</em> are evaluated left to right and are
+⎕IO-independent.</li>
 <li><strong>`⍵𝑑𝑑</strong> or <strong>⍹𝑑𝑑</strong> sets the <em>OIC</em>
 to 𝑑𝑑, <code>Ω←𝑑𝑑</code>, and returns the expression
 <code>(⍵⊃⍨Ω+⎕IO)</code>. Here <strong>𝑑𝑑</strong> must be a
@@ -1558,7 +1560,7 @@ option won't <em>display</em> the code string redundantly.</li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251004T090507]
+(C) 2025 Sam the Cat Foundation. [20251004T091755]
 </span>
 <hr> 
 &emsp;
