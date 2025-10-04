@@ -874,9 +874,10 @@ sometimes a backtick is just a backtick.
 | **\`F**, **$**                                                            | ⎕FMT                                     | `[⍺] $ ⍵`. Short for `[⍺] ⎕FMT ⍵`. (See APL documentation).                                                                                                                                                   |
 | **\`Q**                                                                   | Quote                                    | `` [⍺]`Q ⍵ ``. Recursively scans `⍵`, putting char. vectors, scalars, and rows of higher-dimensional strings in APL quotes, leaving other elements as is. If omitted, `⍺←''''`.                               |
 | **\`T**                                                                   | Date-Time¹                               | `` [⍺]`T ⍵ ``. Displays timestamp(s) `⍵` according to date-time template `⍺`. `⍵` is one or more APL timestamps `⎕TS`. `⍺` is a date-time template in `1200⌶` format. If omitted, `⍺← 'YYYY-MM-DD hh:mm:ss'`. |
-| **\`W** <span style="color: red;"><small>**EXPERIMENTAL!**</small></span> | Wrap                                     | `` [⍺]`W ⍵ ``. Wraps the rows of simple arrays in ⍵ in decorators `0⊃2⍴⍺` (on the left) and `1⊃2⍴⍺` (on the right). If omitted, `⍺←''''`. _See details below._                                                |
+| **\`W** | Wrap <span style="color: red;"><small>**EXPERIMENTAL!**</small></span>    | `` [⍺]`W ⍵ ``. Wraps the rows of simple arrays in ⍵ in decorators `0⊃2⍴⍺` (on the left) and `1⊃2⍴⍺` (on the right). If omitted, `⍺←''''`. _See details below._                                                |
 | **\`⍵𝑑𝑑**, **⍹𝑑𝑑**                                                        | Omega Shortcut (<small>EXPLICIT</small>) | A shortcut of the form `` `⍵𝑑𝑑 `` (or `⍹𝑑𝑑`), to access the `𝑑𝑑`**th** element of `⍵`, *i.e.* `(⍵⊃⍨ 𝑑𝑑+⎕IO)`. _See details below._                                                                            |
 | **\`⍵**, **⍹**                                                            | Omega Shortcut (<small>IMPLICIT</small>) | A shortcut of the form `` `⍵ `` (or `⍹`), to access the **_next_** element of `⍵`. _See details below._                                                                                                       |
+| **→**, **↓**, **%** | Self-Defining Code Fields <small>(SDCFs)</small>| If the last ***non-blank*** character before the field's closing brace, `→` signals a horizontal SDCF, and `↓` (or its synonym, `%`), a vertical SDCF. Surrounding blanks are significant. *See the Examples (above) for details.*|
 
 ---
 
@@ -940,7 +941,7 @@ If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. H
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251004T091755]
+(C) 2025 Sam the Cat Foundation. [20251004T093846]
 </span>
 <hr> 
 &emsp;

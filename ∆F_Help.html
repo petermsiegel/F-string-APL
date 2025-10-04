@@ -1426,9 +1426,9 @@ timestamp(s) <code>⍵</code> according to date-time template
 <code>⍺← 'YYYY-MM-DD hh:mm:ss'</code>.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>`W</strong>
+<td style="text-align: left;"><strong>`W</strong></td>
+<td style="text-align: left;">Wrap
 <span style="color: red;"><small><strong>EXPERIMENTAL!</strong></small></span></td>
-<td style="text-align: left;">Wrap</td>
 <td style="text-align: left;"><code>[⍺]`W ⍵</code>. Wraps the rows of
 simple arrays in ⍵ in decorators <code>0⊃2⍴⍺</code> (on the left) and
 <code>1⊃2⍴⍺</code> (on the right). If omitted, <code>⍺←''''</code>.
@@ -1452,6 +1452,17 @@ element of <code>⍵</code>, <em>i.e.</em> <code>(⍵⊃⍨ 𝑑𝑑+⎕IO)</cod
 <td style="text-align: left;">A shortcut of the form <code>`⍵</code> (or
 <code>⍹</code>), to access the <strong><em>next</em></strong> element of
 <code>⍵</code>. <em>See details below.</em></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>→</strong>, <strong>↓</strong>,
+<strong>%</strong></td>
+<td style="text-align: left;">Self-Defining Code Fields
+<small>(SDCFs)</small></td>
+<td style="text-align: left;">If the last
+<em><strong>non-blank</strong></em> character before the field's closing
+brace, <code>→</code> signals a horizontal SDCF, and <code>↓</code> (or
+its synonym, <code>%</code>), a vertical SDCF. Surrounding blanks are
+significant. <em>See the Examples (above) for details.</em></td>
 </tr>
 </tbody>
 </table>
@@ -1560,7 +1571,7 @@ option won't <em>display</em> the code string redundantly.</li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251004T091755]
+(C) 2025 Sam the Cat Foundation. [20251004T093846]
 </span>
 <hr> 
 &emsp;
