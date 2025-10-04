@@ -3,7 +3,7 @@
 
 <div class="notes">
 
-| <span style="font-size: 110%;">**∆F** is a function for Dyalog APL that interprets *f-strings*, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional, expressions in an APL-friendly style.¹ </span> |
+|<span style="font-size: 110%;">**∆F** is a function for Dyalog APL that interprets *f-strings*, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional, expressions in an APL-friendly style.¹ </span> |
 | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 
 </div>
@@ -12,7 +12,7 @@
 
 ## Table of Contents
 
-<details>            <!-- option: open -->
+<details>     <!-- option: open -->
 <summary>Table of Contents</summary> 
 <span style="font-size: 90%;">
 
@@ -63,7 +63,7 @@ Inspired by Python *f-strings*,² **∆F** includes a variety of capabilities to
 
 - The abstraction of 2-dimensional character ***fields***, generated one-by-one from the user's specifications and data, then aligned and catenated into a single overall character matrix result;
   
-- **Text fields**, supporting multiline Unicode text within each field, with the sequence `` `⋄ `` (**backtick** + **statement separator**³) generating a newline (<small>**⎕UCS&nbsp;13**</small>);
+- **Text fields**, supporting multiline Unicode text within each field, with the sequence `` `◇ `` (**backtick** + **statement separator**³) generating a newline (<small>**⎕UCS&nbsp;13**</small>);
 
 - **Code fields**, allowing users to evaluate and display APL arrays of any dimensionality, depth and type in the user environment, arrays passed as **∆F** arguments, as well as arbitrary APL expressions based on full multi-statement dfn logic.⁴ Each **Code field** must return a value, simple or otherwise, which will be catenated with other fields and returned from **∆F**;
 
@@ -72,7 +72,7 @@ Inspired by Python *f-strings*,² **∆F** includes a variety of capabilities to
   - **Quoted strings** in **Code fields**, with several quote styles:
 
     - **double-quotes**<br>
-      `∆F '{"like this"}'` or `` ∆F '{"on`⋄""three""`⋄lines"} ``,
+      `∆F '{"like this"}'` or `` ∆F '{"on`◇""three""`◇lines"} ``,
     - **double angle quotation marks**,⁵<br>
       `∆F '{«with internal quotes like "this" or ''this''»}'`, not to mention   
     -  APL's tried-and-true embedded **single-quotes**,<br>
@@ -87,7 +87,7 @@ Inspired by Python *f-strings*,² **∆F** includes a variety of capabilities to
     - _and more_;
 
   - Simple mechanisms for concisely formatting and displaying data from
-    - user arrays or arbitrary code: <br>`tempC←10 110 40`<br>`∆F'{tempC}'` or `∆F'{ {⍵<100: 32+9×⍵÷5 ⋄ "(too hot)"}¨tempC }'`,
+    - user arrays or arbitrary code: <br>`tempC←10 110 40`<br>`∆F'{tempC}'` or `∆F'{ {⍵<100: 32+9×⍵÷5 ◇ "(too hot)"}¨tempC }'`,
       <br>
     - arguments to **∆F** that follow the format string:<br>`` ∆F'{32+`⍵1×9÷5}' (10 110 40) ``,<br> where `` `⍵1 `` is a shortcut for `(⍵⊃⍨1+⎕IO)` (here `10 110 40`),
     - _and more_;
@@ -109,9 +109,9 @@ Inspired by Python *f-strings*,² **∆F** includes a variety of capabilities to
 
 | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ¹ Throughout this documentation, notably in the many examples, an index origin of zero (`⎕IO=0`) is assumed. **Code fields** inherit the index origin and other system variables from the environment (*i.e.* namespace) in which **∆F** is called, so your own examples will work as you expect. If you wish to modify the `⎕IO` or any system variable temporarily, you may do so right in the **Code field**:<br>&emsp;&emsp; `∆F '{⎕IO←1 ⋄ 26=⎕A⍳"Z": "Success" ⋄ "Failure"}'`. |
+| ¹ Throughout this documentation, notably in the many examples, an index origin of zero (`⎕IO=0`) is assumed. **Code fields** inherit the index origin and other system variables from the environment (*i.e.* namespace) in which **∆F** is called, so your own examples will work as you expect. If you wish to modify the `⎕IO` or any system variable temporarily, you may do so right in the **Code field**:<br>&emsp;&emsp; `∆F '{⎕IO←1 ◇ 26=⎕A⍳"Z": "Success" ◇ "Failure"}'`. |
 | ² **∆F** is inspired by Python _[f-strings](https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals)_, short for "**formatted string literals**", but designed for APL's multi-dimensional worldview.  Python introduced *f-strings* in 2016. **∆F** *f-strings* and Python's are **not** compatible.                                                                                                                                                         |
-| ³ In this document, we use the symbol `⋄` (`⎕UCS 9671`) to represent the APL *statement separator* (`⎕UCS 8900`), since the latter is displayed _in some browsers_ as a hard-to-read glyph. **∆F** will recognize `` `⋄ `` with _either_ glyph.                                                                                                                                                                                                                                     |
+| ³ In this document, we use the symbol `◇` (`⎕UCS 9671`) to represent the APL *statement separator* (`⎕UCS 8900`), since the latter is displayed _in some browsers_ as a hard-to-read glyph. **∆F** will recognize `` `◇ `` with _either_ glyph.                                                                                                                                                                                                                                     |
 | ⁴ **∆F Code fields** _as input_ are limited to a single, possibly very long, line.                                                                                                                                                                                                                                                                                                                                                                                                  |
 | ⁵ **Double angle quotation marks** <big>**«&nbsp;»**</big> (_guillemets_) are Unicode chars `⎕UCS 171 187` (on the std Mac keyboard: _*option-backslash*_ and _*option-shift-backslash*_). When including literal guillemets in guillemet-bracketed quotations (<span style="color: red;">_but why?_</span>&ThinSpace;), opening guillemets <big>**«**</big> are _not_ doubled, but _two_ closing guillemets are needed for each literal <big>**»**</big> required.                 |
 | ⁶ Details on all the shortcuts are provided later in this document. See **_Code Field Shortcuts._**                                                                                                                                                                                                                                                                                                                                                                                 |
@@ -164,7 +164,7 @@ First, let's set some context.
 Here are **Code fields** with simple variables.
 
 ```
-   name← 'Fred' ⋄ age← 43
+   name← 'Fred' ◇ age← 43
    ∆F 'The patient''s name is {name}. {name} is {age} years old.'
 The patient's name is Fred. Fred is 43 years old.
 ```
@@ -185,7 +185,7 @@ The temperature is 35°C or  95°F.
 Here, we assign the *f-string* to an APL variable, then call **∆F** twice!
 ```
    ⎕RL← 2342342                 ⍝ ⎕RL: Ensure our random #s aren't random!
-   names← 'Mary' 'Jack' 'Tony' ⋄ prize← 1000
+   names← 'Mary' 'Jack' 'Tony' ◇ prize← 1000
    f← 'Customer {names⊃⍨ ?≢names} wins £{?prize}!'
    ∆F f
 Customer Jack wins £80!
@@ -200,14 +200,14 @@ Isn't Jack lucky, winning twice in a row!
 Below, we have some multi-line **Text fields** separated by non-null **Space fields**.
 
 - The backtick is our "escape" character.
-- The sequence `⋄ generates a new line in the current text field.
+- The sequence `◇ generates a new line in the current text field.
 - Each **Space field** `{ }` in the next example contains one space within its braces. It produces a matrix a _single_ space wide with as many rows as required to catenate it with adjacent fields.
 
 A **Space field** is useful here because each multi-line field is built
 in its own rectangular space.
 
 ```
-   ∆F 'This`⋄is`⋄an`⋄example{ }Of`⋄multi-line{ }Text`⋄Fields'
+   ∆F 'This`◇is`◇an`◇example{ }Of`◇multi-line{ }Text`◇Fields'
 This    Of         Text
 is      multi-line Fields
 an
@@ -222,7 +222,7 @@ want formatted separately from others, keeping each field in is own rectangular 
 
 ```
 ⍝  Extra space here ↓ 
-   ∆F 'Cat`⋄Elephant `⋄Mouse{}Felix`⋄Dumbo`⋄Mickey'
+   ∆F 'Cat`◇Elephant `◇Mouse{}Felix`◇Dumbo`◇Mickey'
 Cat      Felix
 Elephant Dumbo
 Mouse    Mickey
@@ -239,7 +239,7 @@ one space will solve the problem:
 
 ```apl
 ⍝                          ↓↓↓
-   ∆F 'Cat`⋄Elephant`⋄Mouse{ }Felix`⋄Dumbo`⋄Mickey'
+   ∆F 'Cat`◇Elephant`◇Mouse{ }Felix`◇Dumbo`◇Mickey'
 Cat      Felix
 Elephant Dumbo
 Mouse    Mickey
@@ -258,10 +258,10 @@ Mouse    Mickey
 ```
 
 Here's a similar example with double quote-delimited strings in **Code fields** with
-the newline sequence, `` `⋄ ``:
+the newline sequence, `` `◇ ``:
 
 ```
-   ∆F '{"This`⋄is`⋄an`⋄example"} {"Of`⋄Multi-line"} {"Strings`⋄in`⋄Code`⋄Fields"}'
+   ∆F '{"This`◇is`◇an`◇example"} {"Of`◇Multi-line"} {"Strings`◇in`◇Code`◇Fields"}'
 This    Of         Strings
 is      Multi-line in
 an                 Code
@@ -298,7 +298,7 @@ Here we place boxes around key **Code fields** in this same example to introduce
 
 ```
    C← 11.3 29.55 59.99
-   ∆F '`⋄The temperature is {`B "I2" $ C}`⋄°C or {`B "F5.1" $ 32+9×C÷5}`⋄°F'
+   ∆F '`◇The temperature is {`B "I2" $ C}`◇°C or {`B "F5.1" $ 32+9×C÷5}`◇°F'
                    ┌──┐      ┌─────┐
 The temperature is │11│°C or │ 52.3│°F
                    │30│      │ 85.2│
@@ -318,7 +318,7 @@ third option) to `1`, *e.g.* setting **∆F**'s left argument to `0 0 1`:
 ```
    C← 11.3 29.55 59.99
 ⍝      ↓¯¯¯ Box mode
-   0 0 1 ∆F '`⋄The temperature is {"I2" $ C}`⋄°C or {"F5.1" $ 32+9×C÷5}`⋄°F'
+   0 0 1 ∆F '`◇The temperature is {"I2" $ C}`◇°C or {"F5.1" $ 32+9×C÷5}`◇°F'
 ┌───────────────────┬──┬──────┬─────┬──┐
 │                   │11│      │ 52.3│  │
 │The temperature is │30│°C or │ 85.2│°F│
@@ -547,7 +547,7 @@ as the **_last non-space_** in the **Code field**, before the _final_ right brac
 Here's an example of a horizontal SDCF, *i.e.* using `→`:
 
 ```
-   name←'John Smith' ⋄ age← 34
+   name←'John Smith' ◇ age← 34
    ∆F 'Current employee: {name→}, {age→}.'
 Current employee: name→John Smith, age→34.
 ```
@@ -557,7 +557,7 @@ As a useful formatting feature, whatever spaces are just **_before_** or **_afte
 Here's an example with such spaces: see how the spaces adjacent to the symbol `→` are mirrored in the output!
 
 ```
-   name←'John Smith' ⋄ age← 34
+   name←'John Smith' ◇ age← 34
    ∆F 'Current employee: {name → }, {age→ }.'
 Current employee: name → John Smith, age→ 34.
 ```
@@ -565,7 +565,7 @@ Current employee: name → John Smith, age→ 34.
 Now, let's look at an example of a vertical SDCF, *i.e.* using `↓`:
 
 ```
-   name←'John Smith' ⋄ age← 34
+   name←'John Smith' ◇ age← 34
    ∆F 'Current employee: {name↓} {age↓}.'
 Current employee:  name↓     age↓.
                   John Smith  34
@@ -808,7 +808,7 @@ Below, we summarize key information you've already gleaned from the examples.
 | **_args_**                                                       | elements of ⍵ after the *f-string*, each of which can be accessed in the *f-string* via an **Omega** shortcut (`` `⍵𝑑𝑑 ``, *etc.*) or an ordinary *dfn* `⍵` expression.                                                                                                                                                                                                                                                                                                                              |
 | ***options***:&nbsp;*mode*                                       | `options←` <span style="color: red;">[</span> <span style="color: red;">[</span> `0` <span style="color: red;">[</span> `0` <span style="color: red;">[</span> `0` <span style="color: red;">[</span> `0` <span style="color: red;">]</span>     <span style="color: red;">]</span>     <span style="color: red;">]</span>     <span style="color: red;">]</span>     &nbsp;<span style="color: red;">**\|**</span> `'help'` <span style="color: red;">]</span>                                                                                                                                                                                                                                    |
 | &emsp;***options[0]***:<br>&emsp;&emsp;  ***DFN*** *output mode* | If `1`: **∆F** returns a dfn, which (upon execution) produces the same output as the default mode.<br>If `0` (default): **∆F** returns a char. matrix.                                                                                                                                                                                                                                                                                                                                               |
-| &emsp;***options[1]***:<br>&emsp;&emsp; ***DBG*** *(debug) mode* | If `1`: Renders newline characters from `` `⋄ `` as the visible `␤` character. Displays the source code that the *f-string* **_actually_** generates; if **_DFN_** is also `1`, this will include the embedded *f-string* source (accessed as `` `⍵0 ``).  After the source code is displayed, it will be executed or converted to a *dfn* and returned (see the ***DFN*** option above).<br>If `0` (default): Newline characters from `` `⋄ `` are rendered normally as carriage returns, `⎕UCS 13`; the ***DFN*** source code is not displayed.      |
+| &emsp;***options[1]***:<br>&emsp;&emsp; ***DBG*** *(debug) mode* | If `1`: Renders newline characters from `` `◇ `` as the visible `␤` character. Displays the source code that the *f-string* **_actually_** generates; if **_DFN_** is also `1`, this will include the embedded *f-string* source (accessed as `` `⍵0 ``).  After the source code is displayed, it will be executed or converted to a *dfn* and returned (see the ***DFN*** option above).<br>If `0` (default): Newline characters from `` `◇ `` are rendered normally as carriage returns, `⎕UCS 13`; the ***DFN*** source code is not displayed.      |
 | &emsp;***options[2]***:<br>&emsp;&emsp; ***BOX*** *mode*         | If `1`: Each field (except a null **Text field**) is boxed separately.<br>If `0` (default): Nothing is boxed automatically. Any **Code field** expression may be explicitly boxed using the **Box** shortcut, `` `B ``.<br><small>**Note**: ***BOX*** mode can be used both with ***DFN*** and default output mode.</small>                                                                                                                                                                          |
 | &emsp;***options[3]***:<br>&emsp;&emsp;***INLINE*** *mode*       | If `1` and the ***DFN*** option is set: The code for each internal support function used is included in the *dfn* result; ***no*** reference to namespace **⍙Fapl** will be made during the execution of that *dfn*.<br>If `0` (default): Whenever **∆F** or a *dfn* generated by it is executed, it makes calls to library routines in the namespace **⍙Fapl**, created during the `]load ∆Fapl` process.<br><small>**Note:** This option is experimental and may simply disappear one day.</small> |
 | &emsp;'help'                                                     | If `'help'` is specified, this amazing documentation is displayed.                                                                                                                                                                                                                                                                                                                                                                                                                                   |
@@ -832,7 +832,7 @@ Below, we summarize key information you've already gleaned from the examples.
 The first element in the right arg to ∆F is a character vector, an *f-string*,
 which contains one or more **Text fields**, **Code fields**, and **Space fields** in any combination.
 
-- **Text** fields consist of simple text, which may include any Unicode characters desired, including newlines. Newlines (actually, carriage returns, `⎕UCS 13`) are normally entered via the sequence `` `⋄ ``. Additionally, literal curly braces can be added via `` `{ `` and `` `} ``, so they are distinct from the simple curly braces used to begin and end **Code fields** and **Space Fields**. Finally, a single backtick escape can be entered into a **Text field** by entering two such characters together ` `` `.
+- **Text** fields consist of simple text, which may include any Unicode characters desired, including newlines. Newlines (actually, carriage returns, `⎕UCS 13`) are normally entered via the sequence `` `◇ ``. Additionally, literal curly braces can be added via `` `{ `` and `` `} ``, so they are distinct from the simple curly braces used to begin and end **Code fields** and **Space Fields**. Finally, a single backtick escape can be entered into a **Text field** by entering two such characters together ` `` `.
   - If **∆F** is called with an empty string, `∆F ''`, it is interpreted as containing a single 0-length **Text** field, returning a matrix of shape `1 0`.
 - **Code** fields are run-time evaluated expressions enclosed within
   simple, unescaped curly braces `{}`, *i.e.* those not preceded by a back-tick (see the previous paragraph). **Code** fields are essentially a Dyalog dfn with some extras. For escape sequences, see **Escape Sequences** below.
@@ -850,7 +850,7 @@ a small number of escape sequences, beginning with the backtick `` ` ``.
 
 | Escape Sequence | What It Inserts | Description |
 | :-------------: | :-------------: | :---------: |
-|     **\`⋄**     |    *newline*    |   ⎕UCS 13   |
+|     **\`◇**     |    *newline*    |   ⎕UCS 13   |
 |    **\`\`**     |        `        |  backtick   |
 |     **\`{**     |        {        | left brace  |
 |     **\`}**     |        }        | right brace |
@@ -886,7 +886,7 @@ sometimes a backtick is just a backtick.
 
 | Note                                                                                                                                                                                                                                                                       |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ¹ The syntax for the Date-Time specifications (left arg) can be found in the Dyalog documentation under <b>1200⌶</b>. For the curious, here's the code actually used by the Date-Time shortcut: <br>&emsp;&emsp;`{⍺←'YYYY-MM-DD hh:mm:ss' ⋄ ∊⍣(1=≡⍵)⊢ ⍺(1200⌶)⊢ 1⎕DT ⊆⍵}`. |
+| ¹ The syntax for the Date-Time specifications (left arg) can be found in the Dyalog documentation under <b>1200⌶</b>. For the curious, here's the code actually used by the Date-Time shortcut: <br>&emsp;&emsp;`{⍺←'YYYY-MM-DD hh:mm:ss' ◇ ∊⍣(1=≡⍵)⊢ ⍺(1200⌶)⊢ 1⎕DT ⊆⍵}`. |
 
 </div></details>
 
@@ -918,7 +918,7 @@ sometimes a backtick is just a backtick.
 ### Undocumented Options
 
 1. If `options[0]` is `¯1`, then **∆F** returns a character vector that contains the source code for the *dfn* that would have been returned via the ***DFN*** option, `options[0]=1`. 
-If ***DBG*** is also set, newlines from `` `⋄ `` are shown as visible `␤`. However, since this option returns the code string *verbatim*, the ***DBG*** option won't *display* the code string redundantly. 
+If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. However, since this option returns the code string *verbatim*, the ***DBG*** option won't *display* the code string redundantly. 
  
  </details> 
  
@@ -940,7 +940,7 @@ If ***DBG*** is also set, newlines from `` `⋄ `` are shown as visible `␤`. H
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251003T134402]
+(C) 2025 Sam the Cat Foundation. [20251004T084028]
 </span>
 <hr> 
 &emsp;

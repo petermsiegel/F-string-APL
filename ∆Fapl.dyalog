@@ -4,7 +4,7 @@
   helpHtmlFi← '∆F_Help.html'   ⍝ Called from 'help' option. Globally set here
 
 ⍝ ============================   ∆F User Function   ============================= ⍝
-⍝ ∆F:  
+⍝ ∆F: 
 ⍝    result← {opts←⍬} ∇ f-string [args]
 ⍝ This function must be independent of ⎕IO, ⎕ML, etc., since it will be promoted out of ⍙Fapl.
 ⍝ ¨⎕THIS¨ will be hardwired as ∆F is promoted out of ⍙Fapl.

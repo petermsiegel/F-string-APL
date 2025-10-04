@@ -162,7 +162,7 @@ often multidimensional, expressions in an APL-friendly style.¹
 
 <hr />
 <h2 id="table-of-contents">Table of Contents</h2>
-<details>            <!-- option: open -->
+<details>     <!-- option: open -->
 <summary>Table of Contents</summary> 
 <span style="font-size: 90%;">
 
@@ -242,7 +242,7 @@ and display related multidimensional information. <strong>∆F</strong>
 specifications and data, then aligned and catenated into a single
 overall character matrix result;</p></li>
 <li><p><strong>Text fields</strong>, supporting multiline Unicode text
-within each field, with the sequence <code>`⋄</code>
+within each field, with the sequence <code>`◇</code>
 (<strong>backtick</strong> + <strong>statement separator</strong>³)
 generating a newline (<small><strong>⎕UCS 13</strong></small>);</p></li>
 <li><p><strong>Code fields</strong>, allowing users to evaluate and
@@ -259,7 +259,7 @@ convenient extensions, such as:</p>
 with several quote styles:</p>
 <ul>
 <li><strong>double-quotes</strong><br> <code>∆F '{"like this"}'</code>
-or <code>∆F '{"on`⋄""three""`⋄lines"}</code>,</li>
+or <code>∆F '{"on`◇""three""`◇lines"}</code>,</li>
 <li><strong>double angle quotation marks</strong>,⁵<br>
 <code>∆F '{«with internal quotes like "this" or ''this''»}'</code>, not
 to mention</li>
@@ -286,7 +286,7 @@ from</p>
 <ul>
 <li>user arrays or arbitrary code:
 <br><code>tempC←10 110 40</code><br><code>∆F'{tempC}'</code> or
-<code>∆F'{ {⍵&lt;100: 32+9×⍵÷5 ⋄ "(too hot)"}¨tempC }'</code>, <br></li>
+<code>∆F'{ {⍵&lt;100: 32+9×⍵÷5 ◇ "(too hot)"}¨tempC }'</code>, <br></li>
 <li>arguments to <strong>∆F</strong> that follow the format
 string:<br><code>∆F'{32+`⍵1×9÷5}' (10 110 40)</code>,<br> where
 <code>`⍵1</code> is a shortcut for <code>(⍵⊃⍨1+⎕IO)</code> (here
@@ -336,7 +336,7 @@ system variables from the environment (<em>i.e.</em> namespace) in which
 expect. If you wish to modify the <code>⎕IO</code> or any system
 variable temporarily, you may do so right in the <strong>Code
 field</strong>:<br>  
-<code>∆F '{⎕IO←1 ⋄ 26=⎕A⍳"Z": "Success" ⋄ "Failure"}'</code>.</td>
+<code>∆F '{⎕IO←1 ◇ 26=⎕A⍳"Z": "Success" ◇ "Failure"}'</code>.</td>
 </tr>
 <tr>
 <td style="text-align: left;">² <strong>∆F</strong> is inspired by
@@ -349,10 +349,10 @@ in 2016. <strong>∆F</strong> <em>f-strings</em> and Python's are
 </tr>
 <tr>
 <td style="text-align: left;">³ In this document, we use the symbol
-<code>⋄</code> (<code>⎕UCS 9671</code>) to represent the APL
+<code>◇</code> (<code>⎕UCS 9671</code>) to represent the APL
 <em>statement separator</em> (<code>⎕UCS 8900</code>), since the latter
 is displayed <em>in some browsers</em> as a hard-to-read glyph.
-<strong>∆F</strong> will recognize <code>`⋄</code> with <em>either</em>
+<strong>∆F</strong> will recognize <code>`◇</code> with <em>either</em>
 glyph.</td>
 </tr>
 <tr>
@@ -429,7 +429,7 @@ details, <em>let's start with some examples</em>…</p>
 <pre><code>   ⎕IO ⎕ML← 0 1        </code></pre>
 <h3 id="code-fields">Code Fields</h3>
 <p>Here are <strong>Code fields</strong> with simple variables.</p>
-<pre><code>   name← &#39;Fred&#39; ⋄ age← 43
+<pre><code>   name← &#39;Fred&#39; ◇ age← 43
    ∆F &#39;The patient&#39;&#39;s name is {name}. {name} is {age} years old.&#39;
 The patient&#39;s name is Fred. Fred is 43 years old.</code></pre>
 <p><strong>Code fields</strong> can contain arbitrary expressions. With
@@ -444,7 +444,7 @@ The temperature is 35°C or  95°F.
 <p>Here, we assign the <em>f-string</em> to an APL variable, then call
 <strong>∆F</strong> twice!</p>
 <pre><code>   ⎕RL← 2342342                 ⍝ ⎕RL: Ensure our random #s aren&#39;t random!
-   names← &#39;Mary&#39; &#39;Jack&#39; &#39;Tony&#39; ⋄ prize← 1000
+   names← &#39;Mary&#39; &#39;Jack&#39; &#39;Tony&#39; ◇ prize← 1000
    f← &#39;Customer {names⊃⍨ ?≢names} wins £{?prize}!&#39;
    ∆F f
 Customer Jack wins £80!
@@ -456,7 +456,7 @@ Customer Jack wins £230!</code></pre>
 by non-null <strong>Space fields</strong>.</p>
 <ul>
 <li>The backtick is our "escape" character.</li>
-<li>The sequence `⋄ generates a new line in the current text field.</li>
+<li>The sequence `◇ generates a new line in the current text field.</li>
 <li>Each <strong>Space field</strong> <code>{ }</code> in the next
 example contains one space within its braces. It produces a matrix a
 <em>single</em> space wide with as many rows as required to catenate it
@@ -464,7 +464,7 @@ with adjacent fields.</li>
 </ul>
 <p>A <strong>Space field</strong> is useful here because each multi-line
 field is built in its own rectangular space.</p>
-<pre><code>   ∆F &#39;This`⋄is`⋄an`⋄example{ }Of`⋄multi-line{ }Text`⋄Fields&#39;
+<pre><code>   ∆F &#39;This`◇is`◇an`◇example{ }Of`◇multi-line{ }Text`◇Fields&#39;
 This    Of         Text
 is      multi-line Fields
 an
@@ -475,7 +475,7 @@ example</code></pre>
 one field contains multiline input that you want formatted separately
 from others, keeping each field in is own rectangular space:</p>
 <pre><code>⍝  Extra space here ↓ 
-   ∆F &#39;Cat`⋄Elephant `⋄Mouse{}Felix`⋄Dumbo`⋄Mickey&#39;
+   ∆F &#39;Cat`◇Elephant `◇Mouse{}Felix`◇Dumbo`◇Mickey&#39;
 Cat      Felix
 Elephant Dumbo
 Mouse    Mickey</code></pre>
@@ -487,7 +487,7 @@ animal name, <em>Elephant</em>, so it wouldn't run into the next word,
 space after <em>each</em> word without fiddling; a <strong>Space
 field</strong> with at least one space will solve the problem:</p>
 <pre class="apl"><code>⍝                          ↓↓↓
-   ∆F &#39;Cat`⋄Elephant`⋄Mouse{ }Felix`⋄Dumbo`⋄Mickey&#39;
+   ∆F &#39;Cat`◇Elephant`◇Mouse{ }Felix`◇Dumbo`◇Mickey&#39;
 Cat      Felix
 Elephant Dumbo
 Mouse    Mickey</code></pre>
@@ -502,8 +502,8 @@ Elephant Dumbo
 Mouse    Mickey</code></pre>
 <p>Here's a similar example with double quote-delimited strings in
 <strong>Code fields</strong> with the newline sequence,
-<code>`⋄</code>:</p>
-<pre><code>   ∆F &#39;{&quot;This`⋄is`⋄an`⋄example&quot;} {&quot;Of`⋄Multi-line&quot;} {&quot;Strings`⋄in`⋄Code`⋄Fields&quot;}&#39;
+<code>`◇</code>:</p>
+<pre><code>   ∆F &#39;{&quot;This`◇is`◇an`◇example&quot;} {&quot;Of`◇Multi-line&quot;} {&quot;Strings`◇in`◇Code`◇Fields&quot;}&#39;
 This    Of         Strings
 is      Multi-line in
 an                 Code
@@ -533,7 +533,7 @@ The temperature is 11°C or  52.3°F
 <p>Here we place boxes around key <strong>Code fields</strong> in this
 same example to introduce the shortcut <code>`B</code> (Box).</p>
 <pre><code>   C← 11.3 29.55 59.99
-   ∆F &#39;`⋄The temperature is {`B &quot;I2&quot; $ C}`⋄°C or {`B &quot;F5.1&quot; $ 32+9×C÷5}`⋄°F&#39;
+   ∆F &#39;`◇The temperature is {`B &quot;I2&quot; $ C}`◇°C or {`B &quot;F5.1&quot; $ 32+9×C÷5}`◇°F&#39;
                    ┌──┐      ┌─────┐
 The temperature is │11│°C or │ 52.3│°F
                    │30│      │ 85.2│
@@ -552,7 +552,7 @@ to <code>1</code>, <em>e.g.</em> setting <strong>∆F</strong>'s left
 argument to <code>0 0 1</code>:</p>
 <pre><code>   C← 11.3 29.55 59.99
 ⍝      ↓¯¯¯ Box mode
-   0 0 1 ∆F &#39;`⋄The temperature is {&quot;I2&quot; $ C}`⋄°C or {&quot;F5.1&quot; $ 32+9×C÷5}`⋄°F&#39;
+   0 0 1 ∆F &#39;`◇The temperature is {&quot;I2&quot; $ C}`◇°C or {&quot;F5.1&quot; $ 32+9×C÷5}`◇°F&#39;
 ┌───────────────────┬──┬──────┬─────┬──┐
 │                   │11│      │ 52.3│  │
 │The temperature is │30│°C or │ 85.2│°F│
@@ -835,7 +835,7 @@ SDCF,</li>
 field</strong>, before the <em>final</em> right brace.</p>
 <p>Here's an example of a horizontal SDCF, <em>i.e.</em> using
 <code>→</code>:</p>
-<pre><code>   name←&#39;John Smith&#39; ⋄ age← 34
+<pre><code>   name←&#39;John Smith&#39; ◇ age← 34
    ∆F &#39;Current employee: {name→}, {age→}.&#39;
 Current employee: name→John Smith, age→34.</code></pre>
 <p>As a useful formatting feature, whatever spaces are just
@@ -844,12 +844,12 @@ symbol <strong>→</strong> or <strong>↓</strong> are preserved
 <strong><em>verbatim</em></strong> in the output.</p>
 <p>Here's an example with such spaces: see how the spaces adjacent to
 the symbol <code>→</code> are mirrored in the output!</p>
-<pre><code>   name←&#39;John Smith&#39; ⋄ age← 34
+<pre><code>   name←&#39;John Smith&#39; ◇ age← 34
    ∆F &#39;Current employee: {name → }, {age→ }.&#39;
 Current employee: name → John Smith, age→ 34.</code></pre>
 <p>Now, let's look at an example of a vertical SDCF, <em>i.e.</em> using
 <code>↓</code>:</p>
-<pre><code>   name←&#39;John Smith&#39; ⋄ age← 34
+<pre><code>   name←&#39;John Smith&#39; ◇ age← 34
    ∆F &#39;Current employee: {name↓} {age↓}.&#39;
 Current employee:  name↓     age↓.
                   John Smith  34</code></pre>
@@ -1187,7 +1187,7 @@ returns a char. matrix.</td>
 style="text-align: left;"> <em><strong>options[1]</strong></em>:<br>  
 <em><strong>DBG</strong></em> <em>(debug) mode</em></td>
 <td style="text-align: left;">If <code>1</code>: Renders newline
-characters from <code>`⋄</code> as the visible <code>␤</code> character.
+characters from <code>`◇</code> as the visible <code>␤</code> character.
 Displays the source code that the <em>f-string</em>
 <strong><em>actually</em></strong> generates; if
 <strong><em>DFN</em></strong> is also <code>1</code>, this will include
@@ -1195,7 +1195,7 @@ the embedded <em>f-string</em> source (accessed as <code>`⍵0</code>).
 After the source code is displayed, it will be executed or converted to
 a <em>dfn</em> and returned (see the <em><strong>DFN</strong></em>
 option above).<br>If <code>0</code> (default): Newline characters from
-<code>`⋄</code> are rendered normally as carriage returns,
+<code>`◇</code> are rendered normally as carriage returns,
 <code>⎕UCS 13</code>; the <em><strong>DFN</strong></em> source code is
 not displayed.</td>
 </tr>
@@ -1276,7 +1276,7 @@ fields</strong> in any combination.</p>
 <li><strong>Text</strong> fields consist of simple text, which may
 include any Unicode characters desired, including newlines. Newlines
 (actually, carriage returns, <code>⎕UCS 13</code>) are normally entered
-via the sequence <code>`⋄</code>. Additionally, literal curly braces can
+via the sequence <code>`◇</code>. Additionally, literal curly braces can
 be added via <code>`{</code> and <code>`}</code>, so they are distinct
 from the simple curly braces used to begin and end <strong>Code
 fields</strong> and <strong>Space Fields</strong>. Finally, a single
@@ -1329,7 +1329,7 @@ number of escape sequences, beginning with the backtick
 </thead>
 <tbody>
 <tr>
-<td style="text-align: center;"><strong>`⋄</strong></td>
+<td style="text-align: center;"><strong>`◇</strong></td>
 <td style="text-align: center;"><em>newline</em></td>
 <td style="text-align: center;">⎕UCS 13</td>
 </tr>
@@ -1469,7 +1469,7 @@ element of <code>⍵</code>, <em>i.e.</em> <code>(⍵⊃⍨ 𝑑𝑑+⎕IO)</cod
 specifications (left arg) can be found in the Dyalog documentation under
 <b>1200⌶</b>. For the curious, here's the code actually used by the
 Date-Time shortcut:
-<br>  <code>{⍺←'YYYY-MM-DD hh:mm:ss' ⋄ ∊⍣(1=≡⍵)⊢ ⍺(1200⌶)⊢ 1⎕DT ⊆⍵}</code>.</td>
+<br>  <code>{⍺←'YYYY-MM-DD hh:mm:ss' ◇ ∊⍣(1=≡⍵)⊢ ⍺(1200⌶)⊢ 1⎕DT ⊆⍵}</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -1534,7 +1534,7 @@ the array ⍵, row by row, whether character, numeric or otherwise.</li>
 <strong>∆F</strong> returns a character vector that contains the source
 code for the <em>dfn</em> that would have been returned via the
 <em><strong>DFN</strong></em> option, <code>options[0]=1</code>. If
-<em><strong>DBG</strong></em> is also set, newlines from <code>`⋄</code>
+<em><strong>DBG</strong></em> is also set, newlines from <code>`◇</code>
 are shown as visible <code>␤</code>. However, since this option returns
 the code string <em>verbatim</em>, the <em><strong>DBG</strong></em>
 option won't <em>display</em> the code string redundantly.</li>
@@ -1556,7 +1556,7 @@ option won't <em>display</em> the code string redundantly.</li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251003T134402]
+(C) 2025 Sam the Cat Foundation. [20251004T084028]
 </span>
 <hr> 
 &emsp;
