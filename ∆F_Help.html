@@ -163,7 +163,7 @@ often multidimensional, expressions in an APL-friendly style.¹
 <hr />
 <h2 id="table-of-contents">Table of Contents</h2>
 <details>     <!-- option: open -->
-<summary>Table of Contents</summary> 
+<summary>Show/Hide Table of Contents</summary> 
 <span style="font-size: 90%;">
 
 <ul>
@@ -174,7 +174,7 @@ Literals</a></li>
 <li><a href="#installing-f">Installing <strong>∆F</strong></a></li>
 <li><a href="#displaying-f-help-in-apl">Displaying ∆F
 <strong>Help</strong> in APL</a></li>
-<li><a href="#f-primer-with-examples">∆F Primer with Examples</a>
+<li><a href="#f-examples-a-primer">∆F Examples: A Primer</a>
 <ul>
 <li><a href="#code-fields">Code Fields</a></li>
 <li><a href="#text-fields-and-space-fields">Text Fields and Space
@@ -389,7 +389,7 @@ relatively slow, using an APL recursive scan to analyze the
 <hr />
 <h2 id="installing-f">Installing <strong>∆F</strong></h2>
 <details>            <!-- option: open -->
-<summary>Installing <bold>∆F</bold> in Dyalog APL</summary>
+<summary>Show/Hide Installation of <bold>∆F</bold> in Dyalog APL</summary>
 
 <ol type="1">
 <li>On Github, search for <code>"f-string-apl"</code>.</li>
@@ -417,15 +417,16 @@ APL</h2>
 <p><span style="font-size: 130%;">👉 </span>To display this
 <strong>HELP</strong> information, type: <code>∆F⍨ 'help'</code>.</p>
 <hr />
-<h2 id="f-primer-with-examples">∆F Primer with Examples</h2>
+<h2 id="f-examples-a-primer">∆F Examples: A Primer</h2>
 <details>            <!-- option: open -->
-<summary>Show/Hide ∆F Primer with examples</summary>
+<summary>Show/Hide Examples</summary>
 
 <div class="content-with-right-bar">
 
 <p>Before providing information on <strong>∆F</strong> syntax and other
 details, <em>let's start with some examples</em>…</p>
-<p>First, let's set some context.</p>
+<p>First, let's set some context for the examples. (You can set these
+however you want.)</p>
 <pre><code>   ⎕IO ⎕ML← 0 1        </code></pre>
 <h3 id="code-fields">Code Fields</h3>
 <p>Here are <strong>Code fields</strong> with simple variables.</p>
@@ -531,7 +532,8 @@ The temperature is 11°C or  52.3°F
                    60      140.0</code></pre>
 <h3 id="the-box-shortcut">The Box Shortcut</h3>
 <p>Here we place boxes around key <strong>Code fields</strong> in this
-same example to introduce the shortcut <code>`B</code> (Box).</p>
+same example to introduce the <strong>Box</strong> shortcut
+<code>`B</code>.</p>
 <pre><code>   C← 11.3 29.55 59.99
    ∆F &#39;`◇The temperature is {`B &quot;I2&quot; $ C}`◇°C or {`B &quot;F5.1&quot; $ 32+9×C÷5}`◇°F&#39;
                    ┌──┐      ┌─────┐
@@ -1083,7 +1085,7 @@ examples.</p>
 <h2 id="f-syntax-and-other-information">∆F Syntax and Other
 Information</h2>
 <details>        <!-- option: open -->       
-<summary>Syntax Info</summary>
+<summary>Show/Hide Syntax Info</summary>
 
 <h3 id="f-call-syntax-overview">∆F Call Syntax Overview</h3>
 <table>
@@ -1556,7 +1558,7 @@ option won't <em>display</em> the code string redundantly.</li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251004T084028]
+(C) 2025 Sam the Cat Foundation. [20251004T090507]
 </span>
 <hr> 
 &emsp;

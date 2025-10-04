@@ -13,7 +13,7 @@
 ## Table of Contents
 
 <details>     <!-- option: open -->
-<summary>Table of Contents</summary> 
+<summary>Show/Hide Table of Contents</summary> 
 <span style="font-size: 90%;">
 
 - [∆F - Formatted String Literals](#f---formatted-string-literals)
@@ -21,7 +21,7 @@
 - [Overview](#overview)
 - [Installing **∆F**](#installing-f)
 - [Displaying ∆F **Help** in APL](#displaying-f-help-in-apl)
-- [∆F Primer with Examples](#f-primer-with-examples)
+- [∆F Examples: A Primer](#f-examples-a-primer)
   - [Code Fields](#code-fields)
   - [Text Fields and Space Fields](#text-fields-and-space-fields)
   - [Null Space Fields](#null-space-fields)
@@ -124,7 +124,7 @@ Inspired by Python *f-strings*,² **∆F** includes a variety of capabilities to
 ## Installing **∆F**
 
 <details>            <!-- option: open -->
-<summary>Installing <bold>∆F</bold> in Dyalog APL</summary>
+<summary>Show/Hide Installation of <bold>∆F</bold> in Dyalog APL</summary>
 
 1. On Github, search for `"f-string-apl"`. 
 2. Copy the files **∆Fapl.dyalog** and **∆F_Help.html** into your current working directory (the one shown via `]cd`). 
@@ -143,16 +143,16 @@ Now, **∆F** is available in the active namespace (or **_myns_**), along with *
 
 ---
 
-## ∆F Primer with Examples
+## ∆F Examples: A Primer
 
 <details>            <!-- option: open -->
-<summary>Show/Hide ∆F Primer with examples</summary>
+<summary>Show/Hide Examples</summary>
 
 <div class="content-with-right-bar">
 
 Before providing information on **∆F** syntax and other details, *let's start with some examples*…
 
-First, let's set some context.
+First, let's set some context for the examples. (You can set these however you want.)  
 
 ```
    ⎕IO ⎕ML← 0 1        
@@ -294,7 +294,7 @@ The temperature is 11°C or  52.3°F
 ```
 
 ### The Box Shortcut  
-Here we place boxes around key **Code fields** in this same example to introduce the shortcut `` `B `` (Box).
+Here we place boxes around key **Code fields** in this same example to introduce the **Box** shortcut `` `B ``.
 
 ```
    C← 11.3 29.55 59.99
@@ -786,7 +786,7 @@ Below, we summarize key information you've already gleaned from the examples.
 ## ∆F Syntax and Other Information
 
 <details>        <!-- option: open -->       
-<summary>Syntax Info</summary>
+<summary>Show/Hide Syntax Info</summary>
 
 ### ∆F Call Syntax Overview
 
@@ -940,7 +940,7 @@ If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. H
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251004T084028]
+(C) 2025 Sam the Cat Foundation. [20251004T090507]
 </span>
 <hr> 
 &emsp;
