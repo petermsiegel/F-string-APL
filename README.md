@@ -32,14 +32,14 @@
   - [Referencing the F-string Itself](#referencing-the-f-string-itself)
   - [The Format Shortcut](#the-format-shortcut)
   - [The Shortcut for Numeric Commas](#the-shortcut-for-numeric-commas)
-  - [The Quote Shortcut](#the-quote-shortcut)
-  - [The Wrap Shortcut (Experimental)](#the-wrap-shortcut-experimental)
   - [Self-documenting **Code fields** (SDCFs)](#self-documenting-code-fields-sdcfs)
   - [The Above Shortcut](#the-above-shortcut)
   - [Omega Shortcuts (Implicit)](#omega-shortcuts-implicit)
   - [Shortcuts With Individual Expressions](#shortcuts-with-individual-expressions)
-  - [A Shortcut for Dates and Times](#a-shortcut-for-dates-and-times)
-  - [A Shortcut for Dates and Times (Continued)](#a-shortcut-for-dates-and-times-continued)
+  - [A Shortcut for Dates and Times (Part I)](#a-shortcut-for-dates-and-times-part-i)
+  - [A Shortcut for Dates and Times (Part II)](#a-shortcut-for-dates-and-times-part-ii)
+  - [The Quote Shortcut](#the-quote-shortcut)
+  - [The Wrap Shortcut (Experimental)](#the-wrap-shortcut-experimental)
   - [Precomputed F-strings with the ***DFN*** Option](#precomputed-f-strings-with-the-dfn-option)
 - [∆F Syntax and Other Information](#f-syntax-and-other-information)
   - [∆F Call Syntax Overview](#f-call-syntax-overview)
@@ -423,97 +423,6 @@ The sun's core is at 27,000,032°F.
 The sun's core is at 15,000,000°C.
 ```
 
-### The Quote Shortcut 
-
-> Placing quotes around string elements of an array.
-
-The **Quote** shortcut `` `Q `` recursively scans its right argument, matching rows of character arrays, character vectors, and character scalars, doubling internal single quotes and
-placing single quotes around the items found.¹ Non-character data is returned as is. This is useful, for example, when you wish to clearly distinguish character from numeric data.
-
-<details>            
-<summary>Note</summary>
-<div class="notes">
-
-| Note                                                                                                                                                                             |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ¹ If a higher character array is found, its rows are quoted; if a character vector, it is quoted *in toto*; else, each character scalar is quoted in isolation. |
-
-</div></details>
-
-Let's look at a couple of simple examples:
-
-First, let's use the `` `Q `` shortcut to place quotes around the simple character
-arrays in its right argument, `⍵`. This is useful when you want to distinguish between character output that might include numbers and _actual_ numeric output.
-
-```
-   ∆F '{`Q 1 2 "three" 4 5 (⍪1 "2") (⍪"cats" "dogs")}'   
-1 2  'three'  4 5     1    'cats'
-                    '2'    'dogs'
-```
-
-And here's an example with a simple, mixed vector (*i.e.* with character and numeric scalars only). First, we display an object without using the **Quote** shortcut.
-Are you **_sure_** which elements are numeric and which character scalars?
-
-```
-   ∆F '{1 2 "3" 4 "5"}'
-1 2 3 4 5
-```
-
-Now, we show it **_with_** the **Quote** shortcut.
-Voilà, quotes appear around the character digits, but not the actual numbers!
-
-```
-   ∆F '{`Q 1 2 "3" 4 "5"}'
-1 2 '3' 4 '5'
-```
-
-### The Wrap Shortcut <span style="color: red;">(Experimental)</span>
-
-> Wrapping results in left and right decorators
-
-<div class="content-with-left-bar">
-
-Here we make a quick mention of the **_experimental_** shortcut **Wrap**¹ `` `W `` which is used when you want a **_decorator_** string that is placed immediately to the left or right of **_each_** row of simple objects in the right argument, `⍵`.
-
-- The decorators are in `⍺`, the left argument to **Wrap**: the left decorator, `0⊃2⍴⍺`, and the right decorator, `1⊃2⍴⍺`, with `⍺` defaulting to a single quote.
-- If you need to omit one or the other decorator, simply make it a null string `""` or a _zilde_ `⍬`.
-
-<details>            
-<summary>Note</summary>
-<div class="notes">
-
-| Note                                                                                                                                                                             |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ¹ **Wrap** differs from the **Quote** shortcut `` `Q ``, which puts quotes **_only_** around the character arrays in `⍵`. For more, see **Wrap** (`` `W ``) **Details** _below_. |
-
-</div></details>
-
-**Here are two simple examples.**
-
-In the first, we place `"°C"` after **[a]** each row of a table `` ⍪`⍵2 ``, or **[b]** after each simple vector in `` ,¨`⍵2 ``. We indicate that is no _left_ decorator here
-using `""` or `⍬`, as here.
-
-```
-⍝         ... [a] ...       .... [b] ....
-    ∆F '{ `⍵1 `W ⍪`⍵2 } ...{ `⍵1 `W ,¨`⍵2 }' (⍬ '°C')(18 22 33)
-18°C ... 18°C 22°C 33°C
-22°C
-33°C
-```
-
-In this next example, we place brackets around the lines of each simple array in a complex array.
-
-```
-   ∆F '{"[]" `W ("cats")(⍳2 2 1)(2 2⍴⍳4)(3 3⍴⎕A) }'
-[cats] [0 0 0] [0 1] [ABC]
-       [0 1 0] [2 3] [DEF]
-                     [GHI]
-       [1 0 0]
-       [1 1 0]
-```
-
-</div>
-
 Now, let's move on to Self-documenting **Code fields**.
 
 ### Self-documenting **Code fields** (SDCFs)
@@ -535,7 +444,7 @@ What's an SDCF? An SDCF¹ allows whatever source code is in a **Code Field** to 
 You may automatically place the source for a **Code field**:
 
 - `→` to the left of the result of evaluating that code; or,
-- `↓` centered above the result of evaluating that code.
+- `↓` centered above the result of evaluating that code.<br>`%` is an alias for `↓`. *(See [the next section](##the-above-shortcut)).*
 
 All you have to do is place
 
@@ -652,7 +561,7 @@ While not for the faint of heart, the expression above can be recast as this som
 
 > There are loads of other examples to discover.
 
-### A Shortcut for Dates and Times  
+### A Shortcut for Dates and Times (Part I)  
 
 **∆F** supports a simple **Date-Time** shortcut `` `T `` built from **1200⌶** and **⎕DT**. It takes one or more Dyalog `⎕TS`-format timestamps as the right argument and a date-time specification as the (optional) left argument. Trailing elements of a timestamp may be omitted (they will each be treated as `0` in the specification string).
 
@@ -673,7 +582,7 @@ Here's a fancier example (the power is in `1200⌶` and `⎕DT`).
 1 JAN 2025 was a Wednesday.
 ```
 
-### A Shortcut for Dates and Times (Continued)
+### A Shortcut for Dates and Times (Part II)
 
 If it bothers you to use `` `T `` for a date-only expression,
 you can use `` `D ``, which means exactly the same thing.
@@ -700,11 +609,108 @@ expression: `` `⍵1 `⍵2 `⍵3 ``.
    ∆F '{ "D Mmm YYYY ''was a'' Dddd." `T `⍵ `⍵ `⍵}' 2025 1 21
 21 Jan 2025 was a Tuesday.
 ```
+### The Quote Shortcut 
+
+> Placing quotes around string elements of an array.
+
+The **Quote** shortcut `` `Q `` recursively scans its right argument, matching rows of character arrays, character vectors, and character scalars, doubling internal single quotes and
+placing single quotes around the items found.¹ Non-character data is returned as is. This is useful, for example, when you wish to clearly distinguish character from numeric data.
+
+<details>            
+<summary>Note</summary>
+<div class="notes">
+
+| Note                                                                                                                                                                             |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ¹ If a higher character array is found, its rows are quoted; if a character vector, it is quoted *in toto*; else, each character scalar is quoted in isolation. |
+
+</div></details>
+
+Let's look at a couple of simple examples:
+
+First, let's use the `` `Q `` shortcut to place quotes around the simple character
+arrays in its right argument, `⍵`. This is useful when you want to distinguish between character output that might include numbers and _actual_ numeric output.
+
+```
+   ∆F '{`Q 1 2 "three" 4 5 (⍪1 "2") (⍪"cats" "dogs")}'   
+1 2  'three'  4 5     1    'cats'
+                    '2'    'dogs'
+```
+
+And here's an example with a simple, mixed vector (*i.e.* with character and numeric scalars only). First, we display an object without using the **Quote** shortcut.
+Are you **_sure_** which elements are numeric and which character scalars?
+
+```
+   ∆F '{1 2 "3" 4 "5"}'
+1 2 3 4 5
+```
+
+Now, we show it **_with_** the **Quote** shortcut.
+Voilà, quotes appear around the character digits, but not the actual numbers!
+
+```
+   ∆F '{`Q 1 2 "3" 4 "5"}'
+1 2 '3' 4 '5'
+```
+
+### The Wrap Shortcut <span style="color: red;">(Experimental)</span>
+
+> Wrapping results in left and right decorators
+
+<div class="content-with-left-bar">
+
+Here we make a quick mention of the **_experimental_** shortcut **Wrap**¹ `` `W `` which is used when you want a **_decorator_** string that is placed immediately to the left or right of **_each_** row of simple objects in the right argument, `⍵`.
+
+- The decorators are in `⍺`, the left argument to **Wrap**: the left decorator, `0⊃2⍴⍺`, and the right decorator, `1⊃2⍴⍺`, with `⍺` defaulting to a single quote.
+- If you need to omit one or the other decorator, simply make it a null string `""` or a _zilde_ `⍬`.
+
+<details>            
+<summary>Note</summary>
+<div class="notes">
+
+| Note                                                                                                                                                                             |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ¹ **Wrap** differs from the **Quote** shortcut `` `Q ``, which puts quotes **_only_** around the character arrays in `⍵`. For more, see **Wrap** (`` `W ``) **Details** _below_. |
+
+</div></details>
+
+**Here are two simple examples.**
+
+In the first, we place `"°C"` after **[a]** each row of a table `` ⍪`⍵2 ``, or **[b]** after each simple vector in `` ,¨`⍵2 ``. We indicate that is no _left_ decorator here
+using `""` or `⍬`, as here.
+
+```
+⍝         ... [a] ...       .... [b] ....
+    ∆F '{ `⍵1 `W ⍪`⍵2 } ...{ `⍵1 `W ,¨`⍵2 }' (⍬ '°C')(18 22 33)
+18°C ... 18°C 22°C 33°C
+22°C
+33°C
+```
+
+In this next example, we place brackets around the lines of each simple array in a complex array.
+
+```
+   ∆F '{"[]" `W ("cats")(⍳2 2 1)(2 2⍴⍳4)(3 3⍴⎕A) }'
+[cats] [0 0 0] [0 1] [ABC]
+       [0 1 0] [2 3] [DEF]
+                     [GHI]
+       [1 0 0]
+       [1 1 0]
+```
+
+</div>
 
 ### Precomputed F-strings with the ***DFN*** Option
 
-The default returned from **∆F** is always (on success) a character matrix. That can be expressed via `0 ∆F…`.¹ 
-However, if the initial option (**_DFN_**) is `1`, *e.g.* the call is `1 ∆F…`, **∆F** returns a dfn that, *when called later*, will return precisely the same expression.² This is most useful when you are making repeated use of an *f-string*, since the overhead for examining the *f-string* contents _once_ would be amortized over all the calls.
+The default returned from **∆F** is always (on success) a character matrix. That can be expressed schematically via expression *(a),* shown here¹: 
+
+    (a) 0 ∆F… 
+
+However, if the initial option (**_DFN_**) is `1`, as in *(b),*
+
+    (b) 1 ∆F… 
+    
+then **∆F** returns a **dfn** that, *when called later*, will return precisely the same character expression as for *(a)*.² This is most useful when you are making repeated use of an *f-string*, since the overhead for analyzing the *f-string* contents _once_ will be amortized over all the calls.
 
 <details><summary>Notes</summary>
 <div class="notes">
@@ -877,7 +883,7 @@ sometimes a backtick is just a backtick.
 | **\`W** | Wrap <span style="color: red;"><small>**EXPERIMENTAL!**</small></span>    | `` [⍺]`W ⍵ ``. Wraps the rows of simple arrays in ⍵ in decorators `0⊃2⍴⍺` (on the left) and `1⊃2⍴⍺` (on the right). If omitted, `⍺←''''`. _See details below._                                                |
 | **\`⍵𝑑𝑑**, **⍹𝑑𝑑**                                                        | Omega Shortcut (<small>EXPLICIT</small>) | A shortcut of the form `` `⍵𝑑𝑑 `` (or `⍹𝑑𝑑`), to access the `𝑑𝑑`**th** element of `⍵`, *i.e.* `(⍵⊃⍨ 𝑑𝑑+⎕IO)`. _See details below._                                                                            |
 | **\`⍵**, **⍹**                                                            | Omega Shortcut (<small>IMPLICIT</small>) | A shortcut of the form `` `⍵ `` (or `⍹`), to access the **_next_** element of `⍵`. _See details below._                                                                                                       |
-| **→**, **↓**, **%** | Self-Defining Code Fields <small>(SDCFs)</small>| If the last ***non-blank*** character before the field's closing brace, `→` signals a horizontal SDCF, and `↓` (or its synonym, `%`), a vertical SDCF. Surrounding blanks are significant. *See the Examples (above) for details.*|
+| **→**, **↓**, **%** | Self-documenting **Code** Fields <small>(SDCFs)</small>| `→`/`↓` (synonym: `%`) signal that the source code for the **Code** field appears before/above its value. Surrounding blanks are significant. *See [SDCFs](#self-documenting-code-fields-sdcfs) in __Examples__ for details.* |
 
 ---
 
@@ -941,7 +947,7 @@ If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. H
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251004T093846]
+(C) 2025 Sam the Cat Foundation. [20251004T153112]
 </span>
 <hr> 
 &emsp;
