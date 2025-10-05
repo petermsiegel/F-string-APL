@@ -948,7 +948,7 @@ If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. H
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251004T171958]
+(C) 2025 Sam the Cat Foundation. [20251004T191933]
 </span>
 <hr> 
 &emsp;
