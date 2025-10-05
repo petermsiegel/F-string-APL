@@ -369,7 +369,7 @@ The expression `` `⍵0 `` always refers to the *f-string* itself.¹ Try this yo
 | Notes                                                                                                                                  |
 | :------------------------------------------------------------------------------------------------------------------------------------- |
 | ¹ `` `⍵0 `` refers to the *f-string* independent of the the number of elements in the right argument  to **∆F** (*effectively*, `⊆⍵`). |
-| ² We explain the `↓` before the closing brace `}` under **_Self-Documenting Code Fields_** below.                                      |
+| ² We explain the `↓` before the closing brace `}` under [Self-documenting Code fields](#self-documenting-code-fields-sdcfs) below.                                      |
 
 </div></details>
 
@@ -623,7 +623,7 @@ placing single quotes around the items found.¹ Non-character data is returned a
 
 | Note                                                                                                                                                                             |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ¹ If a higher character array is found, its rows are quoted; if a character vector, it is quoted *in toto*; else, each character scalar is quoted in isolation. |
+| ¹ If a multidimensional character array is found, its rows are quoted; if a character vector, it is quoted *in toto*; else, each character scalar is quoted in isolation. |
 
 </div></details>
 
@@ -948,7 +948,7 @@ If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. H
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251004T191933]
+(C) 2025 Sam the Cat Foundation. [20251004T193655]
 </span>
 <hr> 
 &emsp;
