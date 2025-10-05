@@ -428,7 +428,7 @@ Now, let's move on to Self-documenting **Code fields**.
 
 What's an SDCF? An SDCF¹ allows whatever source code is in a **Code Field** to be automatically displayed literally along with the result of evaluating that code.
 
-The source code for a **Code field** can automatically be shown in **∆F**'s output:
+The source code for a **Code field** can automatically be shown in **∆F**'s output—
 
 - to the *left* of the result of evaluating that code; or,
 - centered *above* the result of evaluating that code. 
@@ -438,7 +438,7 @@ All you need do is enter
 - a right arrow <big>`→`</big> for a **horizontal** SDCF, or
 - a down arrow <big>`↓`</big> (or <big>`%`</big>²) for a **vertical** SDCF,
 
-as the **_last non-space_** in the **Code field**, before the _final_ right brace.
+as the **_last non-space_** character in the **Code field**, before the _final_ right brace.
 
 <details>            
 <summary>Notes</summary>
@@ -447,7 +447,7 @@ as the **_last non-space_** in the **Code field**, before the _final_ right brac
 | Notes   |
 | :------ |
 | ¹ Our SDCFs are based on Python's single type of **[self-documenting expressions](https://docs.python.org/3/whatsnew/3.8.html#f-strings-support-for-self-documenting-expressions-and-debugging)** in _f-strings_, but work somewhat differently. SDCFs are used **_only_** in **Code fields** (_duh_). |
-| ² `%` is the same glyph as for the **Above** shortcut, `%` or `` `A ``, discussed in [the next section](#the-above-shortcut).* |
+| ² `%` is the same glyph as for the **Above** shortcut, `%` or `` `A ``, discussed in [the next section](#the-above-shortcut). |
 
 </div></details>
 
@@ -881,7 +881,7 @@ sometimes a backtick is just a backtick.
 | **\`W** | Wrap <span style="color: red;"><small>**EXPERIMENTAL!**</small></span>    | `` [⍺]`W ⍵ ``. Wraps the rows of simple arrays in ⍵ in decorators `0⊃2⍴⍺` (on the left) and `1⊃2⍴⍺` (on the right). If omitted, `⍺←''''`. _See details below._                                                |
 | **\`⍵𝑑𝑑**, **⍹𝑑𝑑**                                                        | Omega Shortcut (<small>EXPLICIT</small>) | A shortcut of the form `` `⍵𝑑𝑑 `` (or `⍹𝑑𝑑`), to access the `𝑑𝑑`**th** element of `⍵`, *i.e.* `(⍵⊃⍨ 𝑑𝑑+⎕IO)`. _See details below._                                                                            |
 | **\`⍵**, **⍹**                                                            | Omega Shortcut (<small>IMPLICIT</small>) | A shortcut of the form `` `⍵ `` (or `⍹`), to access the **_next_** element of `⍵`. _See details below._                                                                                                       |
-| **→**, **↓**, **%** | Self-documenting **Code** Fields <small>(SDCFs)</small>| `→`/`↓` (synonym: `%`) signal that the source code for the **Code** field appears before/above its value. Surrounding blanks are significant. *See [SDCFs](#self-documenting-code-fields-sdcfs) in __Examples__ for details.* |
+| **→**<br>**↓** *or* **%** | Self-documenting **Code** Fields <small>(SDCFs)</small>| `→`/`↓` (synonym: `%`) signal that the source code for the **Code** field appears before/above its value. Surrounding blanks are significant. *See [SDCFs](#self-documenting-code-fields-sdcfs) in __Examples__ for details.* |
 
 ---
 
@@ -945,7 +945,7 @@ If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. H
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251005T131828]
+(C) 2025 Sam the Cat Foundation. [20251005T144441]
 </span>
 <hr> 
 &emsp;
