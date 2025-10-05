@@ -720,7 +720,7 @@ then **∆F** returns a **dfn** that, *when called later*, will return precisely
 
 </div></details>
 
-Let's explore an example wheregetting the best performance for a heavily
+Let's explore an example where getting the best performance for a heavily
 used **∆F** string is important. 
 
 First, let's grab `cmpx`, so we can compare the performance…
@@ -738,8 +738,8 @@ Now, let's proceed. Here's the code:
    t←'The temperature is {"I2" $ C}°C or {"F5.1" $ F← 32+9×C÷5}°F'
 
 ⍝  Let's precompute a dfn T, given ∆F String t.
-⍝  It has everything needed to generate the output,
-⍝  except the external variables or additional arguments needed.
+⍝  It has everything needed to generate the output
+⍝  (except any external variables or additional arguments referenced).
    T←1 ∆F t
 
 ⍝  Compare the performance of the two formats…
@@ -821,7 +821,7 @@ Below, we summarize key information you've already gleaned from the examples.
 ### ∆F Options 
 
 - If the left argument `⍺` is omitted, the options default to `4⍴0`.
-- If the left argument `⍺` is a simple boolean vector or scalar, or an empty numeric vector `⍬`, the options are `4↑⍺`; subsequent elements are ignored;
+- If the left argument `⍺` is a simple integer vector or scalar, or an empty numeric vector `⍬`, the options are `4↑⍺`; subsequent elements are ignored;
 - If the left argument `⍺` starts with `'help'` (case ignored), this help information is displayed. In this case only, the right argument to **∆F** is ignored.
 - Otherwise, an error is signaled.
 
@@ -945,7 +945,7 @@ If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. H
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251005T102054]
+(C) 2025 Sam the Cat Foundation. [20251005T103826]
 </span>
 <hr> 
 &emsp;

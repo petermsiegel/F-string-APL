@@ -1011,7 +1011,7 @@ state.</td>
 </table>
 </div></details>
 
-<p>Let's explore an example wheregetting the best performance for a
+<p>Let's explore an example where getting the best performance for a
 heavily used <strong>∆F</strong> string is important.</p>
 <p>First, let's grab <code>cmpx</code>, so we can compare the
 performance…</p>
@@ -1023,8 +1023,8 @@ performance…</p>
    t←&#39;The temperature is {&quot;I2&quot; $ C}°C or {&quot;F5.1&quot; $ F← 32+9×C÷5}°F&#39;
 
 ⍝  Let&#39;s precompute a dfn T, given ∆F String t.
-⍝  It has everything needed to generate the output,
-⍝  except the external variables or additional arguments needed.
+⍝  It has everything needed to generate the output
+⍝  (except any external variables or additional arguments referenced).
    T←1 ∆F t
 
 ⍝  Compare the performance of the two formats…
@@ -1249,7 +1249,7 @@ returned.</small></td>
 <ul>
 <li>If the left argument <code>⍺</code> is omitted, the options default
 to <code>4⍴0</code>.</li>
-<li>If the left argument <code>⍺</code> is a simple boolean vector or
+<li>If the left argument <code>⍺</code> is a simple integer vector or
 scalar, or an empty numeric vector <code>⍬</code>, the options are
 <code>4↑⍺</code>; subsequent elements are ignored;</li>
 <li>If the left argument <code>⍺</code> starts with <code>'help'</code>
@@ -1570,7 +1570,7 @@ option won't <em>display</em> the code string redundantly.</li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251005T102054]
+(C) 2025 Sam the Cat Foundation. [20251005T103826]
 </span>
 <hr> 
 &emsp;
