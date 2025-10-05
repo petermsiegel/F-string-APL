@@ -1,6 +1,4 @@
 
-## <span style="font-size: 100%;"><center>∆F - Formatted String Literals</center></span>
-
 <div class="notes">
 
 |<span style="font-size: 110%;">**∆F** is a function for Dyalog APL that interprets *f-strings*, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional, expressions in an APL-friendly style.¹ </span> |
@@ -16,7 +14,6 @@
 <summary>Show/Hide Table of Contents</summary> 
 <span style="font-size: 90%;">
 
-- [∆F - Formatted String Literals](#f---formatted-string-literals)
 - [Table of Contents](#table-of-contents)
 - [Overview](#overview)
 - [Installing **∆F**](#installing-f)
@@ -933,7 +930,7 @@ If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. H
 ---
 
 <div class="fixed-footer">
-<a href="#f---formatted-string-literals">Top</a>
+<a href="#top">Top</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="#table-of-contents">Table of Contents</a> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -948,7 +945,7 @@ If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. H
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251004T193655]
+(C) 2025 Sam the Cat Foundation. [20251005T092306]
 </span>
 <hr> 
 &emsp;
