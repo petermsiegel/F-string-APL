@@ -431,28 +431,28 @@ Now, let's move on to Self-documenting **Code fields**.
 
 What's an SDCF? An SDCF¹ allows whatever source code is in a **Code Field** to be automatically displayed literally along with the result of evaluating that code.
 
-You may automatically place the source for a **Code field**:
+The source code for a **Code field** can automatically be shown in **∆F**'s output:
 
-- `→` to the left of the result of evaluating that code; or,
-- `↓` (or `%`²) centered above the result of evaluating that code.
+- to the *left* of the result of evaluating that code; or,
+- centered *above* the result of evaluating that code. 
+
+All you need do is enter
+
+- a right arrow <big>`→`</big> for a **horizontal** SDCF, or
+- a down arrow <big>`↓`</big> (or <big>`%`</big>²) for a **vertical** SDCF,
+
+as the **_last non-space_** in the **Code field**, before the _final_ right brace.
 
 <details>            
 <summary>Notes</summary>
 <div class="notes">
 
-| Notes                                                                                                                                                                                                                                                                                                   |
-| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Notes   |
+| :------ |
 | ¹ Our SDCFs are based on Python's single type of **[self-documenting expressions](https://docs.python.org/3/whatsnew/3.8.html#f-strings-support-for-self-documenting-expressions-and-debugging)** in _f-strings_, but work somewhat differently. SDCFs are used **_only_** in **Code fields** (_duh_). |
 | ² `%` is the same glyph as for the **Above** shortcut, `%` or `` `A ``, discussed in [the next section](#the-above-shortcut).* |
 
 </div></details>
-
-All you have to do is place
-
-- the right arrow `→` for a **horizontal** SDCF, or
-- the down arrow `↓` for a **vertical** SDCF,
-
-as the **_last non-space_** in the **Code field**, before the _final_ right brace.
 
 Here's an example of a horizontal SDCF, *i.e.* using `→`:
 
@@ -948,7 +948,7 @@ If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. H
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251004T170509]
+(C) 2025 Sam the Cat Foundation. [20251004T171958]
 </span>
 <hr> 
 &emsp;
