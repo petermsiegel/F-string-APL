@@ -1,7 +1,7 @@
 
 <div class="notes">
 
-|<span style="font-size: 110%;">**∆F** Formatted String Literals<hr>**∆F** is a function for Dyalog APL that interprets *f-strings*, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional, expressions in an APL-friendly style.¹ </span>|
+|<span style="font-size: 110%;">**∆F** is a function for Dyalog APL that interprets *f-strings*, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional, expressions in an APL-friendly style. </span>|
 | :-----------: |
 
 </div>
@@ -15,7 +15,7 @@
 <span style="font-size: 90%;">
 
 - [Table of Contents](#table-of-contents)
-- [Overview](#overview)
+- [Overview¹](#overview)
 - [Installing **∆F**](#installing-f)
 - [Displaying ∆F **Help** in APL](#displaying-f-help-in-apl)
 - [∆F Examples: A Primer](#f-examples-a-primer)
@@ -54,7 +54,7 @@
 </span>
 </details>
 
-## Overview
+## Overview¹
 
 Inspired by Python *f-strings*,² **∆F** includes a variety of capabilities to make it easy to evaluate, format, annotate, and display related multidimensional information. **∆F** *f-strings* include:
 
@@ -945,7 +945,7 @@ If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. H
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251005T103826]
+(C) 2025 Sam the Cat Foundation. [20251005T131828]
 </span>
 <hr> 
 &emsp;
