@@ -81,10 +81,10 @@
       padding: 5px 7px;
       vertical-align: top;
     }
-    tr:nth-child(even) {
+    tr:nth-child(odd) {
       background-color: #ebebebff; /* Light grey for odd rows */
     }
-    tr:nth-child(odd) {
+    tr:nth-child(even) {
       background-color: #ffffffff; /* White for even rows */
     }
     blockquote {
@@ -113,13 +113,6 @@
       border-left: 2px solid #ea2f0eff; /* Adjust color and thickness as needed */
       padding-left: 15px; /* Space between the bar and content */
       margin-left: 0px; /* Optional: Space from the left edge of the page */
-      height: auto; /* Or set a fixed height, *e.g.*, 200px */
-      overflow: hidden; /* Clear floats if internal content uses them */
-    }
-    .content-with-right-bar { /* Examples have right green bar */
-      border-right: 2px solid #229502ff; /* Adjust color and thickness as needed */
-      padding-right: 15px; /* Space between the bar and content */
-      margin-right: 0px; /* Optional: Space from the left edge of the page */
       height: auto; /* Or set a fixed height, *e.g.*, 200px */
       overflow: hidden; /* Clear floats if internal content uses them */
     }
@@ -209,6 +202,8 @@ Blocks</a></li>
 <li><a
 href="#escape-sequences-for-text-fields-and-quoted-strings">Escape
 Sequences For Text Fields and Quoted Strings</a></li>
+<li><a href="#quoted-strings-in-code-fields-usage">Quoted Strings in
+Code Fields: Usage</a></li>
 <li><a href="#code-field-shortcuts">Code Field Shortcuts</a></li>
 <li><a href="#omega-shortcut-expressions-details">Omega Shortcut
 Expressions: Details</a></li>
@@ -306,16 +301,9 @@ appropriate vertical alignment) to form a single character matrix:
 <p><strong>∆F</strong> is designed for ease of use, <em>ad hoc</em>
 debugging, fine-grained formatting and informal user interaction,⁷ built
 using Dyalog functions and operators.</p>
-<details>            
-<summary>Notes</summary>
-<div class="notes">
+<details><summary><span style="margin: 20px;">Notes</span></summary><div class="notes">
 
 <table>
-<thead>
-<tr>
-<th style="text-align: left;">Notes</th>
-</tr>
-</thead>
 <tbody>
 <tr>
 <td style="text-align: left;">¹ Throughout this documentation, notably
@@ -409,9 +397,7 @@ APL</h2>
 <hr />
 <h2 id="f-examples-a-primer">∆F Examples: A Primer</h2>
 <details>            <!-- option: open -->
-<summary>Show/Hide Examples</summary>
-
-<div class="content-with-right-bar">
+<summary>Show/Hide Examples: A Primer</summary>
 
 <p>Before providing information on <strong>∆F</strong> syntax and other
 details, <em>let's start with some examples</em>…</p>
@@ -583,16 +569,9 @@ Itself</h3>
 <p>The expression <code>`⍵0</code> always refers to the
 <em>f-string</em> itself.¹ Try this yourself:²</p>
 <pre><code>   ∆F &#39;Our string {`⍵0↓} is {≢`⍵0} characters&#39;</code></pre>
-<details>            
-<summary>Notes</summary>
-<div class="notes">
+<details><summary><span style="margin: 20px;">Notes</span></summary><div class="notes">
 
 <table>
-<thead>
-<tr>
-<th style="text-align: left;">Notes</th>
-</tr>
-</thead>
 <tbody>
 <tr>
 <td style="text-align: left;">¹ <code>`⍵0</code> refers to the
@@ -628,16 +607,9 @@ Commas</h3>
 more numbers or numeric strings.¹ It has an advantage over the
 <code>$</code> (Dyalog's <code>⎕FMT</code>) specifier: it doesn't
 require you to guesstimate field widths.</p>
-<details>            
-<summary>Note</summary>
-<div class="notes">
+<details><summary><span style="margin: 20px;">Note</span></summary><div class="notes">
 
 <table>
-<thead>
-<tr>
-<th style="text-align: left;">Note</th>
-</tr>
-</thead>
 <tbody>
 <tr>
 <td style="text-align: left;">¹ Typically, each number or numeric string
@@ -688,16 +660,9 @@ be shown in <strong>∆F</strong>'s output—</p>
 </ul>
 <p>as the <strong><em>last non-space</em></strong> character in the
 <strong>Code field</strong>, before the <em>final</em> right brace.</p>
-<details>            
-<summary>Notes</summary>
-<div class="notes">
+<details><summary><span style="margin: 20px;">Notes</span></summary><div class="notes">
 
 <table>
-<thead>
-<tr>
-<th style="text-align: left;">Notes</th>
-</tr>
-</thead>
 <tbody>
 <tr>
 <td style="text-align: left;">¹ Our SDCFs are based on Python's single
@@ -867,16 +832,9 @@ vectors, and character scalars, doubling internal single quotes and
 placing single quotes around the items found.¹ Non-character data is
 returned as is. This is useful, for example, when you wish to clearly
 distinguish character from numeric data.</p>
-<details>            
-<summary>Note</summary>
-<div class="notes">
+<details><summary><span style="margin: 20px;">Note</span></summary><div class="notes">
 
 <table>
-<thead>
-<tr>
-<th style="text-align: left;">Note</th>
-</tr>
-</thead>
 <tbody>
 <tr>
 <td style="text-align: left;">¹ If a multidimensional character array is
@@ -928,16 +886,9 @@ single quote.</li>
 <li>If you need to omit one or the other decorator, simply make it a
 null string <code>""</code> or a <em>zilde</em> <code>⍬</code>.</li>
 </ul>
-<details>            
-<summary>Note</summary>
-<div class="notes">
+<details><summary><span style="margin: 20px;">Note</span></summary><div class="notes">
 
 <table>
-<thead>
-<tr>
-<th style="text-align: left;">Note</th>
-</tr>
-</thead>
 <tbody>
 <tr>
 <td style="text-align: left;">¹ <strong>Wrap</strong> differs from the
@@ -969,8 +920,6 @@ simple array in a complex array.</p>
                      [GHI]
        [1 0 0]
        [1 1 0]</code></pre>
-</div>
-
 <h3 id="precomputed-f-strings-with-the-dfn-option">Precomputed F-strings
 with the <em><strong>DFN</strong></em> Option</h3>
 <p>The default returned from <strong>∆F</strong> is always (on success)
@@ -986,15 +935,9 @@ expression as for <em>(a)</em>.² This is most useful when you are making
 repeated use of an <em>f-string</em>, since the overhead for analyzing
 the <em>f-string</em> contents <em>once</em> will be amortized over all
 the calls.</p>
-<details><summary>Notes</summary>
-<div class="notes">
+<details><summary><span style="margin: 20px;">Notes</span></summary><div class="notes">
 
 <table>
-<thead>
-<tr>
-<th style="text-align: left;">Notes</th>
-</tr>
-</thead>
 <tbody>
 <tr>
 <td style="text-align: left;">¹ <strong>∆F</strong>'s default initial
@@ -1039,16 +982,9 @@ performance…</p>
 <code>1…∆F…</code> can retrieve argument(s) passed on the right side of
 <strong>∆F</strong>, using the very same omega shortcut expressions
 (<code>`⍵1</code>, etc.) as described above.¹</p>
-<details>            
-<summary>Note</summary>
-<div class="notes">
+<details><summary><span style="margin: 20px;">Note</span></summary><div class="notes">
 
 <table>
-<thead>
-<tr>
-<th style="text-align: left;">Note</th>
-</tr>
-</thead>
 <tbody>
 <tr>
 <td style="text-align: left;">¹ The <em>dfn</em> returned from
@@ -1361,23 +1297,66 @@ strings:</p>
 <p>Other instances of the backtick character in <strong>Text</strong>
 fields or <strong>Quoted strings</strong> in <strong>Code</strong>
 fields will be treated literally, <em>i.e.</em> sometimes a backtick is
-just a backtick.¹</p>
-<details>            
-<summary>Note</summary>
-<div class="notes">
-
+just a backtick.</p>
+<h3 id="quoted-strings-in-code-fields-usage">Quoted Strings in Code
+Fields: Usage</h3>
+<p>As mentioned in the introduction, <strong>Quoted strings</strong> in
+<strong>Code</strong> fields allow several delimiting quote styles:</p>
+<ul>
+<li><strong>double-quotes</strong><br>
+<code>∆F '{"like «this» one"}'</code> or
+<code>∆F '{"like ''this'' one."}'</code>,</li>
+<li><strong>double angle quotation marks</strong>,<br>
+<code>∆F '{«like "this" or ''this''.»}'</code>,<br />
+as well as</li>
+<li>APL's tried-and-true embedded <strong>single-quotes</strong>,<br>
+<code>∆F '{''shown like ''''this'''', "this" or «this».''}'</code>.</li>
+</ul>
+<p>If you wish to include a traditional delimiting quote (<code>'</code>
+or <code>"</code>) or the closing quote of a quote pair
+(<code>«</code> <code>»</code>) within the <strong>Quoted
+string</strong>, you must double it. You may <em>not</em> use an escape
+sequence (e.g. <code>`"</code>) for this purpose.¹</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Note</th>
+<th style="text-align: center;">Closing Quote</th>
+<th style="text-align: left;">Example</th>
+<th style="text-align: left;">Result</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">¹ Note that <code>`"</code> cannot be used
-to "escape" the current quote char; use the APL protocol of doubling the
-(closing) quote to get a single internal quote
-char.<br>  Error: <span style="color: red;">∆F '{"abc`"def"}'</span>  Good: <code>∆F '{"abc""def"}'</code>.</td>
+<td style="text-align: center;"><code>"</code></td>
+<td
+style="text-align: left;"><code>∆F '{"like ""this"" example"}'</code></td>
+<td style="text-align: left;"><code>like "this" example</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>»</code></td>
+<td style="text-align: left;"><code>∆F '{«or «this»» one»}'</code></td>
+<td style="text-align: left;"><code>or «this» one</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>'</code></td>
+<td
+style="text-align: left;"><code>∆F '{''or ''''this'''' one''}'</code></td>
+<td style="text-align: left;"><code>or 'this' one</code></td>
+</tr>
+</tbody>
+</table>
+<p>Note that the opening quote <code>«</code> is treated as an ordinary
+character within the string. The clumsiness of the standard single quote
+<code>'</code> examples is due to the fact that the single quote is the
+required delimiter for the outermost (APL-level) string.</p>
+<details><summary><span style="margin: 20px;">Note</span></summary><div class="notes">
+
+<table>
+<tbody>
+<tr>
+<td style="text-align: left;">¹ Compare
+ <strong>Error:</strong> <span style="color: red;">∆F '{"abc`"def"}'</span>
+and <strong>Good:</strong> <code>∆F '{"abc""def"}'</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -1494,16 +1473,9 @@ href="#self-documenting-code-fields-sdcfs">SDCFs</a> in
 </tbody>
 </table>
 <hr />
-<details>            
-<summary>Note</summary>
-<div class="notes">
+<details><summary><span style="margin: 20px;">Note</span></summary><div class="notes">
 
 <table>
-<thead>
-<tr>
-<th style="text-align: left;">Note</th>
-</tr>
-</thead>
 <tbody>
 <tr>
 <td style="text-align: left;">¹ The syntax for the Date-Time
@@ -1598,7 +1570,7 @@ option won't <em>display</em> the code string redundantly.</li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251006T093535]
+(C) 2025 Sam the Cat Foundation. [20251006T161141]
 </span>
 <hr> 
 &emsp;
