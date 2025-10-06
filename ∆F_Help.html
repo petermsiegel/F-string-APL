@@ -1292,17 +1292,18 @@ entering two such characters together <code>``</code>.
 <li><strong>Code</strong> fields are run-time evaluated expressions
 enclosed within simple, unescaped curly braces <code>{}</code>,
 <em>i.e.</em> those not preceded by a back-tick (see the previous
-paragraph). <strong>Code</strong> fields are essentially a Dyalog dfn
-with some extras. For escape sequences, see <strong>Escape
+paragraph). <strong>Code</strong> fields are, under the covers, Dyalog
+<em>dfns</em> with some extras. For escape sequences, see <strong>Escape
 Sequences</strong> below.</li>
-<li><strong>Space</strong> fields are essentially a <em>degenerate</em>
-form of <strong>Code</strong> fields, consisting of a single pair of
-simple curly braces <code>{}</code> with zero or more spaces in between.
+<li><strong>Space</strong> fields appear to be a special,
+<em>degenerate</em>, form of <strong>Code</strong> fields, consisting of
+a single pair of simple (unescaped) curly braces <code>{}</code> with
+zero or more spaces in between.
 <ul>
-<li>A <strong>Space</strong> field with zero spaces is a null
-<strong>Space</strong> field; while it may separate any other fields,
-its practical use is separating two adjacent <strong>Text</strong>
-fields.</li>
+<li>A <strong>Space</strong> field with zero spaces is a
+<em><strong>null</strong></em> <strong>Space</strong> field; while it
+may separate any other fields, its typical use is to separate two
+adjacent <strong>Text</strong> fields.</li>
 </ul></li>
 </ul>
 <p>The building blocks of an <em>f-string</em> are these defined
@@ -1318,14 +1319,16 @@ under user control.</p>
 Sequences For Text Fields and Quoted Strings</h3>
 <p><strong>∆F</strong> <strong>Text</strong> fields and <strong>Quoted
 strings</strong> in <strong>Code</strong> fields may include a small
-number of escape sequences, beginning with the backtick
-<code>`</code>.</p>
+number of escape sequences, beginning with the backtick <code>`</code>.
+Some sequences are valid in Text fields <em>only</em>, but not in Quoted
+strings:</p>
 <table>
 <thead>
 <tr>
 <th style="text-align: center;">Escape Sequence</th>
 <th style="text-align: center;">What It Inserts</th>
 <th style="text-align: center;">Description</th>
+<th style="text-align: center;">Where Valid</th>
 </tr>
 </thead>
 <tbody>
@@ -1333,28 +1336,53 @@ number of escape sequences, beginning with the backtick
 <td style="text-align: center;"><strong>`◇</strong></td>
 <td style="text-align: center;"><em>newline</em></td>
 <td style="text-align: center;">⎕UCS 13</td>
+<td style="text-align: center;">Both</td>
 </tr>
 <tr>
 <td style="text-align: center;"><strong>``</strong></td>
 <td style="text-align: center;">`</td>
 <td style="text-align: center;">backtick</td>
+<td style="text-align: center;">Both</td>
 </tr>
 <tr>
 <td style="text-align: center;"><strong>`{</strong></td>
 <td style="text-align: center;">{</td>
 <td style="text-align: center;">left brace</td>
+<td style="text-align: center;">Text fields only</td>
 </tr>
 <tr>
 <td style="text-align: center;"><strong>`}</strong></td>
 <td style="text-align: center;">}</td>
 <td style="text-align: center;">right brace</td>
+<td style="text-align: center;">Text fields only</td>
 </tr>
 </tbody>
 </table>
 <p>Other instances of the backtick character in <strong>Text</strong>
 fields or <strong>Quoted strings</strong> in <strong>Code</strong>
 fields will be treated literally, <em>i.e.</em> sometimes a backtick is
-just a backtick.</p>
+just a backtick.¹</p>
+<details>            
+<summary>Note</summary>
+<div class="notes">
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">¹ Note that <code>`"</code> cannot be used
+to "escape" the current quote char; use the APL protocol of doubling the
+(closing) quote to get a single internal quote
+char.<br>  Error: <span style="color: red;">∆F '{"abc`"def"}'</span>  Good: <code>∆F '{"abc""def"}'</code>.</td>
+</tr>
+</tbody>
+</table>
+</div></details>
+
 <h3 id="code-field-shortcuts">Code Field Shortcuts</h3>
 <p><strong>∆F</strong> <strong>Code</strong> fields may contain various
 shortcuts, intended to be concise and expressive tools for common tasks.
@@ -1570,7 +1598,7 @@ option won't <em>display</em> the code string redundantly.</li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251005T204047]
+(C) 2025 Sam the Cat Foundation. [20251006T093535]
 </span>
 <hr> 
 &emsp;

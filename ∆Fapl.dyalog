@@ -67,7 +67,7 @@
       p= ≢⍵: TFDone ⍺, ⍵                               ⍝ No special chars in ⍵. Process & return.
         pfx c w← (p↑⍵) (p⌷⍵) (⍵↓⍨ p+1) 
       c= esc: (⍺, pfx, nlG TFEsc w) ∇ 1↓ w             ⍝ char is esc. Process & continue.
-    ⍝ c= nl:  (⍺, pfx, nlG) ∇ w                        ⍝ actual nl (⎕UCS 13) => nlG, mirroring esc+⋄ => nlG. 
+      ⍝ SKIP: c= nl:  (⍺, pfx, nlG) ∇ w                ⍝ actual nl (⎕UCS 13) => nlG, mirroring esc+⋄ => nlG. 
         CF_SF w⊣ TFDone ⍺, pfx                         ⍝ char is lb. End TF; go to CF_SF.  
     } ⍝ End Text Field Scan 
 
@@ -131,18 +131,21 @@
   ⍝ Returns val← (the string at the start of ⍵) (the rest of ⍵) ⍝  
     CFStr← { 
         qtL w← ⍵ ⋄ qtR← (qtsL⍳ qtL)⌷ qtsR              ⍝ See above.
-        CFSBrk← ⌊/⍳∘(esc qtR) ⍝  nl)                   ⍝ See note at <c= nl> below.
+        CFSBrk← ⌊/⍳∘(esc qtR)   ⍝ SKIP: nl)            ⍝ See note at <c= nl> below.
         lenW← ¯1+ ≢w                                   ⍝ lenW: length of w outside quoted str.
         ⍙Scan← {   ⍝ Recursive CF Quoted-String Scan. lenW converges on true length.
           0= ≢⍵: ⍺ 
             p← CFSBrk ⍵  
-          p= ≢⍵: ⎕SIGNAL qtÊ ⋄ c← p⌷⍵
-          c= esc: (⍺, (p↑ ⍵), nlG QSEsc ⊃⍵↓⍨ p+1) ∇ ⍵↓⍨ lenW-← p+2 
-        ⍝ OPTIONAL: actual nl  => nlG, mirroring esc+⋄ => nlG. 
-        ⍝ c= nl:  (⍺, nlG) ∇ ⍵↓~ lenW-← 1              
-        ⍝ Now c= qtR:  Now see if c2, the next char, is a second qtR, 
-        ⍝ i.e. an internal, literal qtR. Only qtR can be doubled (e.g. », not «)
-            c2← ⊃⍵↓⍨ p+1
+          p= ≢⍵: ⎕SIGNAL qtÊ 
+            c c2← 2↑ p↓ ⍵ 
+        ⍝ See QSEsc for handling of esc+qtR as esc char plus closing quote (see below)
+          c= esc: (⍺, (p↑ ⍵), map) ∇ ⍵↓⍨ lenW-← p+ skip ⊣ map skip← nlG QSEsc c2 qtR 
+          ⍝ SKIP: OPTIONAL: actual nl  => nlG, mirroring esc+⋄ => nlG. 
+          ⍝ SKIP: c= nl:  (⍺, nlG) ∇ ⍵↓~ lenW-← 1              
+        ⍝ Closing Quote: 
+        ⍝ We know if we got here that c= qtR:  
+        ⍝   Now see if c2, the next char, is a second qtR, 
+        ⍝    i.e. a string-internal qtR. Only qtR can be doubled (e.g. », not «)
           c2= qtR:  (⍺, ⍵↑⍨ p+1) ∇ ⍵↓⍨ lenW-← p+2      ⍝ Use APL rules for doubled ', ", or »
             ⍺, ⍵↑⍨ lenW-← p                            ⍝ Done... Return
         }
@@ -231,7 +234,7 @@
   lDAQ rDAQ← '«»'                                      ⍝ ⎕UCS 171 187 
 ⍝ Order brklist chars roughly by frequency, high to low.       
   cfBrkList← lDAQ,⍨ sp sq dq esc lb rb dol omUs ra da pct← ' ''"`{}$⍹→↓%' 
-  tfBrkList← esc lb   ⍝ nl                 
+  tfBrkList← esc lb   ⍝ SKIP: nl                 
   lb_rb← lb rb ⋄ om_omUs← om omUs ⋄ sp_sq← sp sq ⋄   esc_lb_rb← esc lb rb  
   qtsL qtsR← lDAQ rDAQ,⍨¨ ⊂dq sq                       ⍝ Expected freq hi to lo: dq sq l/rDAQ
   sdcfCh← ra da pct                                    ⍝ self-doc code field chars
@@ -239,7 +242,7 @@
 ⍝ Error constants and fns  
     Ê← { ⍺←11 ⋄ ⊂'EN' ⍺,⍥⊂ 'Message' ⍵ }
   brÊ←         Ê 'Unpaired brace "{"'
-  qtÊ←         Ê 'Unpaired quote (''"'' or "''") in code field' 
+  qtÊ←         Ê 'Unpaired quote in code field' 
   cfLogicÊ←    Ê 'A logic error has occurred processing a code field'
   optÊ←        Ê 'Invalid option(s) in left argument. For help: ∆F⍨''help'''
   ShortcutÊ←   Ê {'Sequence "`',⍵,'" does not represent a valid shortcut.'}
@@ -272,10 +275,17 @@
 ⍝    nl: current newline char;  fstr: starts with the char after the escape
 ⍝ Returns: the escape sequence.                        ⍝ *** No side effects ***
   TFEsc← { 0= ≢⍵: esc ⋄ c← 0⌷⍵ ⋄ c∊ dia2: ⍺ ⋄ c∊ esc_lb_rb: c ⋄ esc, c } 
-  ⍝ QSEsc: [nl] ∇ fstr, where 
-  ⍝         nl is the current newline char, and fstr starts with the char AFTER the escape char.
-  ⍝ Returns the escape sequence.                       ⍝ *** No side effects ***
-  QSEsc← { c← ⍵ ⋄ c∊ dia2: ⍺ ⋄ c=esc: c ⋄ esc, c }     
+  ⍝ QSEsc: [nl] ∇ c2 qtR, where 
+  ⍝         nl is the current newline char;
+  ⍝         c2 is the char AFTER the escape char,
+  ⍝         qtR  is the current right quote char.
+  ⍝ c2= qt: esc+qtR is treated as escape followed by end of quote str, i.e. APL rules.
+  ⍝        esc+qtR is NOT treated as qtR+qtR, as if C-language (etc.) rules.
+  ⍝ Returns map and len, where
+  ⍝         map is whatever the escape seq or char maps onto (possibly itself), and
+  ⍝        len is 1 if it used JUST the escape, and 2 if it used c2.
+  ⍝ *** No side effects in caller ***
+  QSEsc← { nl← ⍺ ⋄ c2 qtR← ⍵ ⋄ c2∊ dia2: nl 2 ⋄ c2= qtR: esc 1 ⋄ c2= esc: c2 2 ⋄ (esc, c2) 2 }     
 
 ⍝ OrderFlds
 ⍝ ∘ User flds are effectively executed L-to-R AND displayed in L-to-R order 

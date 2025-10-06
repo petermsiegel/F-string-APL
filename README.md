@@ -839,9 +839,9 @@ which contains one or more **Text fields**, **Code fields**, and **Space fields*
 - **Text** fields consist of simple text, which may include any Unicode characters desired, including newlines. Newlines (actually, carriage returns, `⎕UCS 13`) are normally entered via the sequence `` `◇ ``. Additionally, literal curly braces can be added via `` `{ `` and `` `} ``, so they are distinct from the simple curly braces used to begin and end **Code fields** and **Space Fields**. Finally, a single backtick escape can be entered into a **Text field** by entering two such characters together ` `` `.
   - If **∆F** is called with an empty string, `∆F ''`, it is interpreted as containing a single 0-length **Text** field, returning a matrix of shape `1 0`.
 - **Code** fields are run-time evaluated expressions enclosed within
-  simple, unescaped curly braces `{}`, *i.e.* those not preceded by a back-tick (see the previous paragraph). **Code** fields are essentially a Dyalog dfn with some extras. For escape sequences, see **Escape Sequences** below.
-- **Space** fields are essentially a _degenerate_ form of **Code** fields, consisting of a single pair of simple curly braces `{}` with zero or more spaces in between. 
-  - A **Space** field with zero spaces is a null **Space** field; while it may separate any other fields, its practical use is separating two adjacent **Text** fields.
+  simple, unescaped curly braces `{}`, *i.e.* those not preceded by a back-tick (see the previous paragraph). **Code** fields are, under the covers, Dyalog *dfns* with some extras. For escape sequences, see **Escape Sequences** below.
+- **Space** fields appear to be a special, _degenerate_, form of **Code** fields, consisting of a single pair of simple (unescaped) curly braces `{}` with zero or more spaces in between. 
+  - A **Space** field with zero spaces is a ***null*** **Space** field; while it may separate any other fields, its typical use is to separate two adjacent **Text** fields.
 
 The building blocks of an *f-string* are these defined "fields," catenated left to right,
 each of which will display as a logically separate 2-D (matrix) output space. While **Code** fields can return arrays of any number of dimensions mapped onto 2-D by APL `⎕FMT` rules, **Text** fields and **Space** fields are always simple rectangles (minimally 1 row and zero columns). Between fields, **∆F** adds no automatic spaces; that spacing is under user control.
@@ -849,19 +849,30 @@ each of which will display as a logically separate 2-D (matrix) output space. Wh
 ### Escape Sequences For Text Fields and Quoted Strings
 
 **∆F** **Text** fields and **Quoted strings** in **Code** fields may include
-a small number of escape sequences, beginning with the backtick `` ` ``.
+a small number of escape sequences, beginning with the backtick `` ` ``. Some sequences are
+valid in Text fields *only*, but not in Quoted strings:
 
 
-| Escape Sequence | What It Inserts | Description |
-| :-------------: | :-------------: | :---------: |
-|     **\`◇**     |    *newline*    |   ⎕UCS 13   |
-|    **\`\`**     |        `        |  backtick   |
-|     **\`{**     |        {        | left brace  |
-|     **\`}**     |        }        | right brace |
+| Escape Sequence | What It Inserts | Description | Where Valid |
+| :-------------: | :-------------: | :---------: | :----:  | 
+|     **\`◇**     |    *newline*    |   ⎕UCS 13   | Both|
+|    **\`\`**     |        `        |  backtick   | Both|
+|     **\`{**     |        {        | left brace  | Text fields only |
+|     **\`}**     |        }        | right brace | Text fields only |
 
 
 Other instances of the backtick character in **Text** fields or **Quoted strings** in **Code** fields will be treated literally, _i.e._
-sometimes a backtick is just a backtick.
+sometimes a backtick is just a backtick.¹ 
+
+<details>            
+<summary>Note</summary>
+<div class="notes">
+
+| Note                                                                                                                                                                         |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ¹ Note that `` `" `` cannot be used to "escape" the current quote char; use the APL protocol of doubling the (closing) quote to get a single internal quote char.<br>&emsp;&emsp;Error:&ensp;<span style="color: red;">∆F&ensp;'{"abc\`"def"}'</span>&emsp;&emsp;Good:&ensp;`` ∆F '{"abc""def"}' ``.|
+
+</div></details>
 
 ### Code Field Shortcuts
 
@@ -945,7 +956,7 @@ If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. H
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251005T204047]
+(C) 2025 Sam the Cat Foundation. [20251006T093535]
 </span>
 <hr> 
 &emsp;
