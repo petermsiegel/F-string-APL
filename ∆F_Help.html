@@ -136,7 +136,7 @@
 style="text-align: center;"><span style="font-size: 110%;"><strong>∆F</strong>
 is a function for Dyalog APL that interprets <em>f-strings</em>, a
 concise, yet powerful way to display multiline Unicode text and complex,
-often multidimensional, expressions in an APL-friendly style.
+often multidimensional, expressions in an APL-friendly style.¹
 </span></th>
 </tr>
 </thead>
@@ -153,7 +153,7 @@ often multidimensional, expressions in an APL-friendly style.
 
 <ul>
 <li><a href="#table-of-contents">Table of Contents</a></li>
-<li><a href="#overview">Overview¹</a></li>
+<li><a href="#overview">Overview</a></li>
 <li><a href="#installing-f">Installing <strong>∆F</strong></a></li>
 <li><a href="#displaying-f-help-in-apl">Displaying ∆F
 <strong>Help</strong> in APL</a></li>
@@ -199,12 +199,12 @@ Information</a>
 <li><a href="#f-return-value">∆F Return Value</a></li>
 <li><a href="#f-f-string-building-blocks">∆F F-string Building
 Blocks</a></li>
+<li><a href="#code-field-shortcuts">Code Field Shortcuts</a></li>
 <li><a
 href="#escape-sequences-for-text-fields-and-quoted-strings">Escape
 Sequences For Text Fields and Quoted Strings</a></li>
-<li><a href="#quoted-strings-in-code-fields-usage">Quoted Strings in
-Code Fields: Usage</a></li>
-<li><a href="#code-field-shortcuts">Code Field Shortcuts</a></li>
+<li><a href="#quoted-strings-in-code-fields">Quoted Strings in Code
+Fields</a></li>
 <li><a href="#omega-shortcut-expressions-details">Omega Shortcut
 Expressions: Details</a></li>
 <li><a href="#wrap-shortcut-details-experimental">Wrap Shortcut: Details
@@ -216,7 +216,7 @@ Expressions: Details</a></li>
 </span>
 </details>
 
-<h2 id="overview¹">Overview¹</h2>
+<h2 id="overview">Overview</h2>
 <p>Inspired by Python <em>f-strings</em>,² <strong>∆F</strong> includes
 a variety of capabilities to make it easy to evaluate, format, annotate,
 and display related multidimensional information. <strong>∆F</strong>
@@ -920,6 +920,8 @@ simple array in a complex array.</p>
                      [GHI]
        [1 0 0]
        [1 1 0]</code></pre>
+</div>
+
 <h3 id="precomputed-f-strings-with-the-dfn-option">Precomputed F-strings
 with the <em><strong>DFN</strong></em> Option</h3>
 <p>The default returned from <strong>∆F</strong> is always (on success)
@@ -1251,117 +1253,6 @@ dimensions mapped onto 2-D by APL <code>⎕FMT</code> rules,
 always simple rectangles (minimally 1 row and zero columns). Between
 fields, <strong>∆F</strong> adds no automatic spaces; that spacing is
 under user control.</p>
-<h3 id="escape-sequences-for-text-fields-and-quoted-strings">Escape
-Sequences For Text Fields and Quoted Strings</h3>
-<p><strong>∆F</strong> <strong>Text</strong> fields and <strong>Quoted
-strings</strong> in <strong>Code</strong> fields may include a small
-number of escape sequences, beginning with the backtick <code>`</code>.
-Some sequences are valid in Text fields <em>only</em>, but not in Quoted
-strings:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">Escape Sequence</th>
-<th style="text-align: center;">What It Inserts</th>
-<th style="text-align: center;">Description</th>
-<th style="text-align: center;">Where Valid</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;"><strong>`◇</strong></td>
-<td style="text-align: center;"><em>newline</em></td>
-<td style="text-align: center;">⎕UCS 13</td>
-<td style="text-align: center;">Both</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>``</strong></td>
-<td style="text-align: center;">`</td>
-<td style="text-align: center;">backtick</td>
-<td style="text-align: center;">Both</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>`{</strong></td>
-<td style="text-align: center;">{</td>
-<td style="text-align: center;">left brace</td>
-<td style="text-align: center;">Text fields only</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>`}</strong></td>
-<td style="text-align: center;">}</td>
-<td style="text-align: center;">right brace</td>
-<td style="text-align: center;">Text fields only</td>
-</tr>
-</tbody>
-</table>
-<p>Other instances of the backtick character in <strong>Text</strong>
-fields or <strong>Quoted strings</strong> in <strong>Code</strong>
-fields will be treated literally, <em>i.e.</em> sometimes a backtick is
-just a backtick.</p>
-<h3 id="quoted-strings-in-code-fields-usage">Quoted Strings in Code
-Fields: Usage</h3>
-<p>As mentioned in the introduction, <strong>Quoted strings</strong> in
-<strong>Code</strong> fields allow several delimiting quote styles:</p>
-<ul>
-<li><strong>double-quotes</strong><br>
-<code>∆F '{"like «this» one"}'</code> or
-<code>∆F '{"like ''this'' one."}'</code>,</li>
-<li><strong>double angle quotation marks</strong>,<br>
-<code>∆F '{«like "this" or ''this''.»}'</code>,<br />
-as well as</li>
-<li>APL's tried-and-true embedded <strong>single-quotes</strong>,<br>
-<code>∆F '{''shown like ''''this'''', "this" or «this».''}'</code>.</li>
-</ul>
-<p>If you wish to include a traditional delimiting quote (<code>'</code>
-or <code>"</code>) or the closing quote of a quote pair
-(<code>«</code> <code>»</code>) within the <strong>Quoted
-string</strong>, you must double it. You may <em>not</em> use an escape
-sequence (e.g. <code>`"</code>) for this purpose.¹</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">Closing Quote</th>
-<th style="text-align: left;">Example</th>
-<th style="text-align: left;">Result</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;"><code>"</code></td>
-<td
-style="text-align: left;"><code>∆F '{"like ""this"" example"}'</code></td>
-<td style="text-align: left;"><code>like "this" example</code></td>
-</tr>
-<tr>
-<td style="text-align: center;"><code>»</code></td>
-<td style="text-align: left;"><code>∆F '{«or «this»» one»}'</code></td>
-<td style="text-align: left;"><code>or «this» one</code></td>
-</tr>
-<tr>
-<td style="text-align: center;"><code>'</code></td>
-<td
-style="text-align: left;"><code>∆F '{''or ''''this'''' one''}'</code></td>
-<td style="text-align: left;"><code>or 'this' one</code></td>
-</tr>
-</tbody>
-</table>
-<p>Note that the opening quote <code>«</code> is treated as an ordinary
-character within the string. The clumsiness of the standard single quote
-<code>'</code> examples is due to the fact that the single quote is the
-required delimiter for the outermost (APL-level) string.</p>
-<details><summary><span style="margin: 20px;">Note</span></summary><div class="notes">
-
-<table>
-<tbody>
-<tr>
-<td style="text-align: left;">¹ Compare
- <strong>Error:</strong> <span style="color: red;">∆F '{"abc`"def"}'</span>
-and <strong>Good:</strong> <code>∆F '{"abc""def"}'</code>.</td>
-</tr>
-</tbody>
-</table>
-</div></details>
-
 <h3 id="code-field-shortcuts">Code Field Shortcuts</h3>
 <p><strong>∆F</strong> <strong>Code</strong> fields may contain various
 shortcuts, intended to be concise and expressive tools for common tasks.
@@ -1472,7 +1363,6 @@ href="#self-documenting-code-fields-sdcfs">SDCFs</a> in
 </tr>
 </tbody>
 </table>
-<hr />
 <details><summary><span style="margin: 20px;">Note</span></summary><div class="notes">
 
 <table>
@@ -1488,7 +1378,116 @@ Date-Time shortcut:
 </table>
 </div></details>
 
-<hr />
+<h3 id="escape-sequences-for-text-fields-and-quoted-strings">Escape
+Sequences For Text Fields and Quoted Strings</h3>
+<p><strong>∆F</strong> <strong>Text</strong> fields and <strong>Quoted
+strings</strong> in <strong>Code</strong> fields may include a small
+number of escape sequences, beginning with the backtick <code>`</code>.
+Some sequences are valid in <strong>Text</strong> fields <em>only</em>,
+but not in Quoted strings:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Escape Sequence</th>
+<th style="text-align: center;">What It Inserts</th>
+<th style="text-align: center;">Description</th>
+<th style="text-align: center;">Where Valid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>`◇</strong></td>
+<td style="text-align: center;"><em>newline</em></td>
+<td style="text-align: center;">⎕UCS 13</td>
+<td style="text-align: center;">Both</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>``</strong></td>
+<td style="text-align: center;">`</td>
+<td style="text-align: center;">backtick</td>
+<td style="text-align: center;">Both</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>`{</strong></td>
+<td style="text-align: center;">{</td>
+<td style="text-align: center;">left brace</td>
+<td style="text-align: center;">Text fields only</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>`}</strong></td>
+<td style="text-align: center;">}</td>
+<td style="text-align: center;">right brace</td>
+<td style="text-align: center;">Text fields only</td>
+</tr>
+</tbody>
+</table>
+<p>Other instances of the backtick character in <strong>Text</strong>
+fields or <strong>Quoted strings</strong> in <strong>Code</strong>
+fields will be treated literally, <em>i.e.</em> sometimes a backtick is
+just a backtick.</p>
+<h3 id="quoted-strings-in-code-fields">Quoted Strings in Code
+Fields</h3>
+<p>As mentioned in the introduction, <strong>Quoted strings</strong> in
+<strong>Code</strong> fields allow several delimiting quote styles:</p>
+<ul>
+<li><strong>double-quotes</strong><br>
+<code>∆F '{"like «this» one"}'</code> or
+<code>∆F '{"like ''this'' one."}'</code>,</li>
+<li><strong>double angle quotation marks</strong>,<br>
+<code>∆F '{«like "this" or ''this''.»}'</code>,<br />
+as well as</li>
+<li>APL's tried-and-true embedded <strong>single-quotes</strong>,<br>
+<code>∆F '{''shown like ''''this'''', "this" or «this».''}'</code>.</li>
+</ul>
+<p>If you wish to include a traditional delimiting quote (<code>'</code>
+or <code>"</code>) or the closing quote of a quote pair
+(<code>«</code> <code>»</code>) within the <strong>Quoted
+string</strong>, you must double it. You may <em>not</em> use an escape
+sequence (e.g. <code>`"</code>) for this purpose.¹</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Closing Quote</th>
+<th style="text-align: left;">Example</th>
+<th style="text-align: left;">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>"</code></td>
+<td
+style="text-align: left;"><code>∆F '{"like ""this"" example"}'</code></td>
+<td style="text-align: left;"><code>like "this" example</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>»</code></td>
+<td style="text-align: left;"><code>∆F '{«or «this»» one»}'</code></td>
+<td style="text-align: left;"><code>or «this» one</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>'</code></td>
+<td
+style="text-align: left;"><code>∆F '{''or ''''this'''' one''}'</code></td>
+<td style="text-align: left;"><code>or 'this' one</code></td>
+</tr>
+</tbody>
+</table>
+<p>Note that the opening quote <code>«</code> is treated as an ordinary
+character within the string. The clumsiness of the standard single quote
+<code>'</code> examples is due to the fact that the single quote is the
+required delimiter for the outermost (APL-level) string.</p>
+<details><summary><span style="margin: 20px;">Note</span></summary><div class="notes">
+
+<table>
+<tbody>
+<tr>
+<td style="text-align: left;">¹ Compare these
+examples:<br> <strong>Invalid:</strong> <span style="color: red;">∆F '{"abc`"def"}'</span> <strong>Valid:</strong> <code>∆F '{"abc""def"}'</code></td>
+</tr>
+</tbody>
+</table>
+</div></details>
+
 <h3 id="omega-shortcut-expressions-details">Omega Shortcut Expressions:
 Details</h3>
 <ol type="1">
@@ -1570,7 +1569,7 @@ option won't <em>display</em> the code string redundantly.</li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251006T161141]
+(C) 2025 Sam the Cat Foundation. [20251006T184846]
 </span>
 <hr> 
 &emsp;
