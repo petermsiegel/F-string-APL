@@ -25,7 +25,9 @@
     }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
-  <!-- PMS Style and title header -->
+  <!-- ∆F Help function Header
+   PMS Style, Html, Javascript 
+  -->
   <style>
     body {
       font-family: Georgia, serif;
@@ -34,8 +36,7 @@
       margin: 0  auto;   /* Centers the body content */
       max-width: 1200px; /* Sets a maximum width */
     }
-    /* Inline code */
-    code {
+    code { /* Inline code */
       font-size: 88%;
       background-color: #ddfafaff;
       padding: 2px 4px;
@@ -43,7 +44,7 @@
       font-family: "APL386 Unicode", APL386, "APL385 Unicode", APL385,
         "Courier New", Courier, Lucida Console", "Consolas", monospace;
     }
-    pre {   /* Code blocks */
+    pre { /* Code blocks */
       background-color: #ddfafaff;
       color: #0a0a0aff;
       font-size: 13pt;
@@ -63,7 +64,7 @@
       font-family: "APL386 Unicode", APL386, "APL385 Unicode", APL385,
           "Courier New", Courier, "Lucida Console", "Consolas", monospace;
     }
-    th {   /* Table header */
+    th { /* Table header */
       font-family:  Georgia,"Courier New", Courier, "Lucida Console", "Consolas", monospace;
       font-weight: 900;
       line-height: 1.1;
@@ -72,7 +73,7 @@
       background-color: #25027eff;
       color: #ffffffff;
     }
-    td {   /* Table data */
+    td { /* Table data */
       font-family: Georgia,"Courier New", Courier, "Lucida Console", "Consolas", monospace;
       font-weight: 200;
       padding: 5px 7px;
@@ -92,17 +93,17 @@
       font-size: 100%;
       line-height: 140%;
     }
-    h1 {  
-    font-size: 1.5em;   /* Same size as default h2 */
+    h1 { /* # headers: same size as h2 ## */ 
+    font-size: 1.5em;   
      }
-    .content-with-left-bar { /* Experimental item(s) have left red bar */
+    .content-with-left-bar { /* Left red bar for experimental items */
       border-left: 2px solid #ea2f0eff; /* Adjust color and thickness as needed */
       padding-left: 15px; /* Space between the bar and content */
       margin-left: 0px; /* Optional: Space from the left edge of the page */
       height: auto; /* Or set a fixed height, *e.g.*, 200px */
       overflow: hidden; /* Clear floats if internal content uses them */
     }
-    .doc-footer {
+    .doc-footer { /* For the fixed navigation footer */
       position: fixed;
       font-size: 90%;
       left: 0;
@@ -113,18 +114,57 @@
       text-align: center;
       padding: 5px 0;
     }
+    .happybutton { /* Fixed size button */
+      width: 175px;
+      font-size: 90%;
+      color: white;
+      background-color: rgb(43, 122, 61);
+    }
+    .warnbutton { /* Fixed size white on red button */
+      width: 175px;
+      font-size: 90%;
+      color: white; 
+      background-color: red;
+    }
   </style>
   <script>
-  function expandAll() {
-    document.querySelectorAll('details').forEach(details => {
-      details.setAttribute('open', true);
+  //  Handle Expand/Collapse button at bottom of Help page 
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleButton = document.getElementById('toggleDetails');
+    
+    toggleButton.addEventListener('click', () => {
+      // Select all <details> elements that do NOT have the "no-toggle" class
+      const detailsToToggle = document.querySelectorAll('details:not(.pmsnote)');
+      
+      // Check if the button should expand or collapse
+      // This example toggles based on the current text of the button
+      const isExpanding = toggleButton.textContent.includes('Expand');
+      
+      detailsToToggle.forEach(detail => {
+        if (isExpanding) {
+          // Expand the details element by adding the 'open' attribute
+          detail.setAttribute('open', '');
+        } else {
+          // Collapse the details element by removing the 'open' attribute
+          detail.removeAttribute('open');
+        }
+      });
+      // Update the button text
+      if (isExpanding) {
+        toggleButton.textContent = 'Collapse All Sections';
+      } else {
+        toggleButton.textContent = 'Expand   All Sections';
+      }
     });
+  });
+  // Two options for closing the Help window...
+  function closeWindowNow() {
+    window.close();
   }
-
-  function collapseAll() {
-    document.querySelectorAll('details').forEach(details => {
-      details.removeAttribute('open');
-    });
+  function closeWindowWithConfirm() {
+    if (confirm("Are you sure?")) {
+      window.close();
+    }
   }
   </script>
 </head>
@@ -132,8 +172,6 @@
 <header id="title-block-header">
 <h1 class="title">∆F Formatted String Literals</h1>
 </header>
-<div class="notes">
-
 <table>
 <thead>
 <tr>
@@ -142,15 +180,12 @@ style="text-align: center;"><span style="font-size: 110%;padding: 10px;"><strong
 is a function for Dyalog APL that interpret <em>f-strings</em>, a
 concise, yet powerful way to display multiline Unicode text and complex,
 often multidimensional, expressions in an APL-friendly
-style.¹</span></th>
+style.</span></th>
 </tr>
 </thead>
 <tbody>
 </tbody>
 </table>
-</div>
-
-<hr />
 <h2 id="table-of-contents">Table of Contents</h2>
 <details>     <!-- option: open -->
 <summary>Show/Hide Table of Contents</summary> 
@@ -222,9 +257,11 @@ Expressions: Details</a></li>
 </details>
 
 <h2 id="overview">Overview</h2>
-<p>Inspired by Python <em>f-strings</em>,² <strong>∆F</strong> includes
+<details open><summary>Show/Hide Overview</span></summary> 
+
+<p>Inspired by Python <em>f-strings</em>,¹ <strong>∆F</strong> includes
 a variety of capabilities to make it easy to evaluate, format, annotate,
-and display related multidimensional information. <strong>∆F</strong>
+and display related multidimensional information.² <strong>∆F</strong>
 <em>f-strings</em> include:</p>
 <ul>
 <li><p>The abstraction of 2-dimensional character
@@ -306,67 +343,67 @@ appropriate vertical alignment) to form a single character matrix:
 <p><strong>∆F</strong> is designed for ease of use, <em>ad hoc</em>
 debugging, fine-grained formatting and informal user interaction,⁷ built
 using Dyalog functions and operators.</p>
+</details> 
+
 <details>     <!-- option: open -->
 <summary>Summary of Field Types</summary> <br>
 
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Field Type</th>
-<th style="text-align: left;">Syntax</th>
-<th style="text-align: left;">Examples</th>
-<th style="text-align: left;">Displaying</th>
+<th style="text-align: center;">Field Type</th>
+<th style="text-align: center;">Syntax</th>
+<th style="text-align: center;">Examples</th>
+<th style="text-align: center;">Displaying</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><strong>Text</strong></td>
-<td style="text-align: left;"><em>Unicode text</em></td>
-<td style="text-align: left;"><code>abc`◇def</code></td>
-<td style="text-align: left;">2-D Text</td>
+<td style="text-align: center;"><strong>Text</strong></td>
+<td style="text-align: center;"><em>Unicode text</em></td>
+<td style="text-align: center;"><code>abc`◇def</code></td>
+<td style="text-align: center;">2-D Text</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Code</strong></td>
-<td style="text-align: left;"><code>{</code><em>dfn code
+<td style="text-align: center;"><strong>Code</strong></td>
+<td style="text-align: center;"><code>{</code><em>dfn code
 plus</em><code>}</code></td>
-<td style="text-align: left;"><code>{(32+9×÷∘5)degC}</code><br>
+<td style="text-align: center;"><code>{(32+9×÷∘5)degC}</code><br>
 <code>{↑"one" "two"}</code></td>
-<td style="text-align: left;">Arbitrary APL<br>expressions via dfns</td>
+<td style="text-align: center;">Arbitrary APL<br>expressions via
+dfns</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Space</strong></td>
-<td style="text-align: left;"><code>{</code> <code>}</code></td>
-<td style="text-align: left;"><code>{  }</code> <code>{}</code></td>
-<td style="text-align: left;">Spacing &amp; separation</td>
+<td style="text-align: center;"><strong>Space</strong></td>
+<td style="text-align: center;"><code>{</code>␠ ␠ ␠<code>}</code></td>
+<td style="text-align: center;"><code>{  }</code> <code>{}</code></td>
+<td style="text-align: center;">Spacing &amp; separation</td>
 </tr>
 </tbody>
 </table>
-<br>
 </details>
 
-<details><summary><span style="margin: 20px;">Notes</span></summary><div class="notes">
+<br>
+
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Notes</span></summary><div class="notes">
 
 <table>
 <tbody>
 <tr>
-<td style="text-align: left;">¹ Throughout this documentation,
-especially in the examples, an index origin of zero (<code>⎕IO=0</code>)
-is assumed. <strong>Code fields</strong> inherit the index origin and
-other system variables from the environment (<em>i.e.</em> namespace) in
-which <strong>∆F</strong> is called, so your own examples will work as
-you expect. If you wish to modify the <code>⎕IO</code> or any system
-variable temporarily, you may do so right in the <strong>Code
-field</strong>:<br>  
-<code>∆F '{⎕IO←1 ◇ 26=⎕A⍳"Z": "Success" ◇ "Failure"}'</code>.</td>
-</tr>
-<tr>
-<td style="text-align: left;">² <strong>∆F</strong> is inspired by
+<td style="text-align: left;">¹ <strong>∆F</strong> is inspired by
 Python <em><a
 href="https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals">f-strings</a></em>,
 short for "<strong>formatted string literals</strong>", but designed for
 APL's multi-dimensional worldview. Python introduced <em>f-strings</em>
 in 2016. <strong>∆F</strong> <em>f-strings</em> and Python's are
 <strong>not</strong> compatible.</td>
+</tr>
+<tr>
+<td style="text-align: left;">² Throughout this documentation,
+especially in the examples, an index origin of zero (<code>⎕IO=0</code>)
+is assumed. <strong>Code fields</strong> inherit the index origin and
+other system variables from the environment in which <strong>∆F</strong>
+is called, so your own examples will work as you expect.</td>
 </tr>
 <tr>
 <td style="text-align: left;">³ In this document, we use the symbol
@@ -607,7 +644,7 @@ Itself</h3>
 <p>The expression <code>`⍵0</code> always refers to the
 <em>f-string</em> itself.¹ Try this yourself:²</p>
 <pre><code>   ∆F &#39;Our string {`⍵0↓} is {≢`⍵0} characters&#39;</code></pre>
-<details><summary><span style="margin: 20px;">Notes</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Notes</span></summary><div class="notes">
 
 <table>
 <tbody>
@@ -645,7 +682,7 @@ Commas</h3>
 more numbers or numeric strings.¹ It has an advantage over the
 <code>$</code> (Dyalog's <code>⎕FMT</code>) specifier: it doesn't
 require you to guesstimate field widths.</p>
-<details><summary><span style="margin: 20px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
 
 <table>
 <tbody>
@@ -698,7 +735,7 @@ be shown in <strong>∆F</strong>'s output—</p>
 </ul>
 <p>as the <strong><em>last non-space</em></strong> character in the
 <strong>Code field</strong>, before the <em>final</em> right brace.</p>
-<details><summary><span style="margin: 20px;">Notes</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Notes</span></summary><div class="notes">
 
 <table>
 <tbody>
@@ -870,7 +907,7 @@ vectors, and character scalars, doubling internal single quotes and
 placing single quotes around the items found.¹ Non-character data is
 returned as is. This is useful, for example, when you wish to clearly
 distinguish character from numeric data.</p>
-<details><summary><span style="margin: 20px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
 
 <table>
 <tbody>
@@ -924,7 +961,7 @@ single quote.</li>
 <li>If you need to omit one or the other decorator, simply make it a
 null string <code>""</code> or a <em>zilde</em> <code>⍬</code>.</li>
 </ul>
-<details><summary><span style="margin: 20px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
 
 <table>
 <tbody>
@@ -975,7 +1012,7 @@ expression as for <em>(a)</em>.² This is most useful when you are making
 repeated use of an <em>f-string</em>, since the overhead for analyzing
 the <em>f-string</em> contents <em>once</em> will be amortized over all
 the calls.</p>
-<details><summary><span style="margin: 20px;">Notes</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Notes</span></summary><div class="notes">
 
 <table>
 <tbody>
@@ -1022,7 +1059,7 @@ performance…</p>
 <code>1…∆F…</code> can retrieve argument(s) passed on the right side of
 <strong>∆F</strong>, using the very same omega shortcut expressions
 (<code>`⍵1</code>, etc.) as described above.¹</p>
-<details><summary><span style="margin: 20px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
 
 <table>
 <tbody>
@@ -1115,6 +1152,8 @@ state).</td>
 </tr>
 </tbody>
 </table>
+<br>
+
 <h3 id="f-call-syntax-details">∆F Call Syntax Details</h3>
 <table>
 <thead>
@@ -1221,6 +1260,8 @@ returned.</small></td>
 </tr>
 </tbody>
 </table>
+<br>
+
 <h3 id="f-options">∆F Options</h3>
 <ul>
 <li>If the left argument <code>⍺</code> is omitted, the options default
@@ -1280,17 +1321,10 @@ zero or more spaces in between.
 <em><strong>null</strong></em> <strong>Space</strong> field; while it
 may separate any other fields, its typical use is to separate two
 adjacent <strong>Text</strong> fields.</li>
+<li>Between fields, <strong>∆F</strong> adds no automatic spaces; that
+spacing is under user control.</li>
 </ul></li>
 </ul>
-<p>The building blocks of an <em>f-string</em> are these defined
-"fields," catenated left to right, each of which will display as a
-logically separate 2-D (matrix) output space. While
-<strong>Code</strong> fields can return arrays of any number of
-dimensions mapped onto 2-D by APL <code>⎕FMT</code> rules,
-<strong>Text</strong> fields and <strong>Space</strong> fields are
-always simple rectangles (minimally 1 row and zero columns). Between
-fields, <strong>∆F</strong> adds no automatic spaces; that spacing is
-under user control.</p>
 <h3 id="code-field-shortcuts">Code Field Shortcuts</h3>
 <p><strong>∆F</strong> <strong>Code</strong> fields may contain various
 shortcuts, intended to be concise and expressive tools for common tasks.
@@ -1401,7 +1435,9 @@ href="#self-documenting-code-fields-sdcfs">SDCFs</a> in
 </tr>
 </tbody>
 </table>
-<details><summary><span style="margin: 20px;">Note</span></summary><div class="notes">
+<br>
+
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
 
 <table>
 <tbody>
@@ -1514,7 +1550,7 @@ style="text-align: left;"><code>∆F '{''or ''''this'''' one''}'</code></td>
 character within the string. The clumsiness of the standard single quote
 <code>'</code> examples is due to the fact that the single quote is the
 required delimiter for the outermost (APL-level) string.</p>
-<details><summary><span style="margin: 20px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
 
 <table>
 <tbody>
@@ -1593,8 +1629,11 @@ option won't <em>display</em> the code string redundantly.</li>
  </details> 
 
 <hr />
+<!-- Put a set of navigation tools at a fixed position at the bottom of the Help screen
+-->
+
 <div class="doc-footer">
-<button onclick="expandAll()">Expand All</button>&emsp;
+<button id="toggleDetails" class="button happybutton">Expand All Sections</button>&emsp;
 <a href="#top">Top</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="#table-of-contents">Table of Contents</a> 
@@ -1604,12 +1643,13 @@ option won't <em>display</em> the code string redundantly.</li>
 <a href="#f-syntax-and-other-information">Syntax</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="#copyright">Copyright</a>
-&emsp;<button onclick="collapseAll()">Collapse All</button>
+&emsp;<button onclick="closeWindowNow()" class="button warnbutton">Close Window</span></button>
+
 </div>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251007T213120]
+(C) 2025 Sam the Cat Foundation. [20251008T123910]
 </span>
 <hr> 
 &emsp;

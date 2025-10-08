@@ -1,12 +1,7 @@
 
-<div class="notes">
-
-|<span style="font-size: 110%;padding: 10px;">**∆F** is a function for Dyalog APL that interpret *f-strings*, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional, expressions in an APL-friendly style.¹</span>|
+|<span style="font-size: 110%;padding: 10px;">**∆F** is a function for Dyalog APL that interpret *f-strings*, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional, expressions in an APL-friendly style.</span>|
 | :----------: |
 
-</div>
-
----
 
 ## Table of Contents
 
@@ -55,9 +50,11 @@
 </span>
 </details>
 
-## Overview 
+## Overview  
 
-Inspired by Python *f-strings*,² **∆F** includes a variety of capabilities to make it easy to evaluate, format, annotate, and display related multidimensional information. **∆F** *f-strings* include:
+<details open><summary>Show/Hide Overview</span></summary> 
+
+Inspired by Python *f-strings*,¹ **∆F** includes a variety of capabilities to make it easy to evaluate, format, annotate, and display related multidimensional information.² **∆F** *f-strings* include:
 
 - The abstraction of 2-dimensional character ***fields***, generated one-by-one from the user's specifications and data, then aligned and catenated into a single overall character matrix result;
   
@@ -101,24 +98,28 @@ Inspired by Python *f-strings*,² **∆F** includes a variety of capabilities to
 
 **∆F** is designed for ease of use, _ad hoc_ debugging, fine-grained formatting and informal user interaction,⁷ built using Dyalog functions and operators.
 
+</details> 
+
+
 <details>     <!-- option: open -->
 <summary>Summary of Field Types</summary> <br>
 
    | Field Type | Syntax | Examples | Displaying |
-   |:------------|:--------|:---------|:---------|
+   |:------------:|:--------:|:---------:|:---------:|
    | **Text** | *Unicode text* | `` abc`◇def `` | 2-D Text  |
    | **Code** | `{`*dfn code plus*`}` | `{(32+9×÷∘5)degC}`<br> `{↑"one" "two"}` | Arbitrary APL<br>expressions via dfns |
-   | **Space** | `{`&emsp;`}` | `{  }` `{}`| Spacing & separation |
+   | **Space** | `{`␠ ␠ ␠`}` | `{  }` `{}`| Spacing & separation |
 
-<br>
 </details>
 
-<details><summary><span style="margin: 20px;">Notes</span></summary><div class="notes">
+<br>
+
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Notes</span></summary><div class="notes">
 
 |        |
 | :----- |
-| ¹ Throughout this documentation, especially in the examples, an index origin of zero (`⎕IO=0`) is assumed. **Code fields** inherit the index origin and other system variables from the environment (*i.e.* namespace) in which **∆F** is called, so your own examples will work as you expect. If you wish to modify the `⎕IO` or any system variable temporarily, you may do so right in the **Code field**:<br>&emsp;&emsp; `∆F '{⎕IO←1 ◇ 26=⎕A⍳"Z": "Success" ◇ "Failure"}'`. |
-| ² **∆F** is inspired by Python _[f-strings](https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals)_, short for "**formatted string literals**", but designed for APL's multi-dimensional worldview.  Python introduced *f-strings* in 2016. **∆F** *f-strings* and Python's are **not** compatible. |
+| ¹ **∆F** is inspired by Python _[f-strings](https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals)_, short for "**formatted string literals**", but designed for APL's multi-dimensional worldview.  Python introduced *f-strings* in 2016. **∆F** *f-strings* and Python's are **not** compatible. |
+| ² Throughout this documentation, especially in the examples, an index origin of zero (`⎕IO=0`) is assumed. **Code fields** inherit the index origin and other system variables from the environment in which **∆F** is called, so your own examples will work as you expect.|
 | ³ In this document, we use the symbol `◇` (`⎕UCS 9671`) to represent the APL *statement separator* (`⎕UCS 8900`), since the latter is displayed _in some browsers_ as a hard-to-read glyph. **∆F** will recognize `` `◇ `` with _either_ glyph. |
 | ⁴ **∆F Code fields** _as input_ are limited to a single, possibly very long, line.     |
 | ⁵ **Double angle quotation marks** <big>**«&nbsp;»**</big> (_guillemets_) are Unicode chars `⎕UCS 171 187` (on the std Mac keyboard: _*option-backslash*_ and _*option-shift-backslash*_). |
@@ -369,7 +370,7 @@ The expression `` `⍵0 `` always refers to the *f-string* itself.¹ Try this yo
    ∆F 'Our string {`⍵0↓} is {≢`⍵0} characters'
 ```
 
-<details><summary><span style="margin: 20px;">Notes</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Notes</span></summary><div class="notes">
 
 |      |
 | :--- |
@@ -396,7 +397,7 @@ The sun's core is at 15,000,000°C or 27,000,032°F
 
 The [**Numeric**] **Commas** shortcut `` `C `` adds commas every 3 digits (from the right) to one or more numbers or numeric strings.¹ It has an advantage over the `$` (Dyalog's `⎕FMT`) specifier: it doesn't require you to guesstimate field widths.
 
-<details><summary><span style="margin: 20px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
 
 | |
 | :---------- |
@@ -446,7 +447,7 @@ All you need do is enter
 
 as the **_last non-space_** character in the **Code field**, before the _final_ right brace.
 
-<details><summary><span style="margin: 20px;">Notes</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Notes</span></summary><div class="notes">
 
 |         |
 | :----- |
@@ -618,7 +619,7 @@ expression: `` `⍵1 `⍵2 `⍵3 ``.
 The **Quote** shortcut `` `Q `` recursively scans its right argument, matching rows of character arrays, character vectors, and character scalars, doubling internal single quotes and
 placing single quotes around the items found.¹ Non-character data is returned as is. This is useful, for example, when you wish to clearly distinguish character from numeric data.
 
-<details><summary><span style="margin: 20px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
 
 |       |
 | :---  |
@@ -664,7 +665,7 @@ Here we make a quick mention of the **_experimental_** shortcut **Wrap**¹ `` `W
 - The decorators are in `⍺`, the left argument to **Wrap**: the left decorator, `0⊃2⍴⍺`, and the right decorator, `1⊃2⍴⍺`, with `⍺` defaulting to a single quote.
 - If you need to omit one or the other decorator, simply make it a null string `""` or a _zilde_ `⍬`.
 
-<details><summary><span style="margin: 20px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
 
 |        |
 | :----- |
@@ -709,7 +710,7 @@ However, if the initial option (**_DFN_**) is `1`, as in *(b),*
     
 then **∆F** returns a **dfn** that, *when called later*, will return precisely the same character expression as for *(a)*.² This is most useful when you are making repeated use of an *f-string*, since the overhead for analyzing the *f-string* contents _once_ will be amortized over all the calls.
 
-<details><summary><span style="margin: 20px;">Notes</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Notes</span></summary><div class="notes">
 
 |   |
 | :----- |
@@ -751,7 +752,7 @@ Now, let's proceed. Here's the code:
 
 Finally, we want to show you that the _dfn_ returned from `1…∆F…` can retrieve argument(s) passed on the right side of **∆F**, using the very same omega shortcut expressions (`` `⍵1 ``, etc.) as described above.¹  
 
-<details><summary><span style="margin: 20px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
 
 |        |
 | :----- |
@@ -800,6 +801,8 @@ Below, we summarize key information you've already gleaned from the examples.
 | 'help'&ensp;**∆F**&ensp;' ' | Display help info and examples for **∆F**. The _f-string_ is not examined. |
 | **∆F**⍨'help' | Display help info and examples for **∆F**. |
 
+<br>
+
 ### ∆F Call Syntax Details
 
 | Element<div style="width:290px"></div> | Description |
@@ -813,6 +816,8 @@ Below, we summarize key information you've already gleaned from the examples.
 | &emsp;***options[3]***:<br>&emsp;&emsp;***INLINE*** *mode*       | If `1` and the ***DFN*** option is set: The code for each internal support function used is included in the *dfn* result; ***no*** reference to namespace **⍙Fapl** will be made during the execution of that *dfn*.<br>If `0` (default): Whenever **∆F** or a *dfn* generated by it is executed, it makes calls to library routines in the namespace **⍙Fapl**, created during the `]load ∆Fapl` process.<br><small>**Note:** This option is experimental and may simply disappear one day.</small> |
 | &emsp;'help' | If `'help'` is specified, this amazing documentation is displayed. |
 | **_result_** | If `0=⊃options`, the result is always a character matrix.<br>If `1=⊃options`, the result is a dfn that, _when executed in the same environment with the same arguments_, generates that same character matrix. <br><small>**Note**: If an error is signalled, no result is returned.</small> |
+
+<br>
 
 ### ∆F Options 
 
@@ -838,9 +843,7 @@ which contains one or more **Text fields**, **Code fields**, and **Space fields*
   simple, unescaped curly braces `{}`, *i.e.* those not preceded by a back-tick (see the previous paragraph). **Code** fields are, under the covers, Dyalog *dfns* with some extras. For escape sequences, see **Escape Sequences** below.
 - **Space** fields appear to be a special, _degenerate_, form of **Code** fields, consisting of a single pair of simple (unescaped) curly braces `{}` with zero or more spaces in between. 
   - A **Space** field with zero spaces is a ***null*** **Space** field; while it may separate any other fields, its typical use is to separate two adjacent **Text** fields.
-
-The building blocks of an *f-string* are these defined "fields," catenated left to right,
-each of which will display as a logically separate 2-D (matrix) output space. While **Code** fields can return arrays of any number of dimensions mapped onto 2-D by APL `⎕FMT` rules, **Text** fields and **Space** fields are always simple rectangles (minimally 1 row and zero columns). Between fields, **∆F** adds no automatic spaces; that spacing is under user control.
+  - Between fields, **∆F** adds no automatic spaces; that spacing is under user control.
 
 ### Code Field Shortcuts
 
@@ -863,7 +866,9 @@ each of which will display as a logically separate 2-D (matrix) output space. Wh
 | **→**<br>**↓** *or* **%** | Self-documenting **Code** Fields <small>(SDCFs)</small>| `→`/`↓` (synonym: `%`) signal that the source code for the **Code** field appears before/above its value. Surrounding blanks are significant. *See [SDCFs](#self-documenting-code-fields-sdcfs) in __Examples__ for details.* |
 
 
-<details><summary><span style="margin: 20px;">Note</span></summary><div class="notes">
+<br>
+
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
 
 |        |
 | :----- |
@@ -911,7 +916,7 @@ You may *not* use an escape sequence (e.g. `` `" ``) for this purpose.¹
 
 Note that the opening quote ` « ` is treated as an ordinary character within the string. The clumsiness of the standard single quote ` ' ` examples is due to the fact that the single quote is the required delimiter for the outermost (APL-level) string. 
 
-<details><summary><span style="margin: 20px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
 
 |        |
 | :----- |
@@ -952,8 +957,10 @@ If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. H
  
 ---
 
+<!-- Put a set of navigation tools at a fixed position at the bottom of the Help screen
+-->
 <div class="doc-footer">
-<button onclick="expandAll()">Expand All</button>&emsp;
+<button id="toggleDetails" class="button happybutton">Expand All Sections</button>&emsp;
 <a href="#top">Top</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="#table-of-contents">Table of Contents</a> 
@@ -963,14 +970,15 @@ If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. H
 <a href="#f-syntax-and-other-information">Syntax</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="#copyright">Copyright</a>
-&emsp;<button onclick="collapseAll()">Collapse All</button>
+&emsp;<button onclick="closeWindowNow()" class="button warnbutton">Close Window</span></button>
+
 </div>
 
 
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251007T213120]
+(C) 2025 Sam the Cat Foundation. [20251008T123910]
 </span>
 <hr> 
 &emsp;
