@@ -126,6 +126,12 @@
       color: white; 
       background-color: red;
     }
+    .aside {
+      color: grey;
+    }
+    details summary::marker {
+    color: grey; /* Change marker color to a deep red */
+    }
   </style>
   <script>
   //  Handle Expand/Collapse button at bottom of Help page 
@@ -188,7 +194,7 @@ style.</span></th>
 </table>
 <h2 id="table-of-contents">Table of Contents</h2>
 <details>     <!-- option: open -->
-<summary>Show/Hide Table of Contents</summary> 
+<summary class="aside">Show/Hide Table of Contents</summary> 
 <span style="font-size: 90%;">
 
 <ul>
@@ -257,7 +263,7 @@ Expressions: Details</a></li>
 </details>
 
 <h2 id="overview">Overview</h2>
-<details open><summary>Show/Hide Overview</span></summary> 
+<details open><summary class="aside">Show/Hide Overview</summary> 
 
 <p>Inspired by Python <em>f-strings</em>,¹ <strong>∆F</strong> includes
 a variety of capabilities to make it easy to evaluate, format, annotate,
@@ -346,7 +352,7 @@ using Dyalog functions and operators.</p>
 </details> 
 
 <details>     <!-- option: open -->
-<summary>Summary of Field Types</summary> <br>
+<summary>Summary of Field Types</summary> <br> <!-- Not a class="aside" -->
 
 <table>
 <thead>
@@ -385,7 +391,7 @@ dfns</td>
 
 <br>
 
-<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Notes</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;color: gray;">Notes</span></summary><div class="notes">
 
 <table>
 <tbody>
@@ -442,7 +448,7 @@ relatively slow, using an APL recursive scan to analyze the
 <hr />
 <h2 id="installing-f">Installing <strong>∆F</strong></h2>
 <details>            <!-- option: open -->
-<summary>Show/Hide Installation of <bold>∆F</bold> in Dyalog APL</summary>
+<summary class="aside">Show/Hide Installation of <bold>∆F</bold> in Dyalog APL</summary>
 
 <ol type="1">
 <li>On Github, search for <code>"f-string-apl"</code>.</li>
@@ -472,7 +478,7 @@ APL</h2>
 <hr />
 <h2 id="f-examples-a-primer">∆F Examples: A Primer</h2>
 <details>            <!-- option: open -->
-<summary>Show/Hide Examples: A Primer</summary>
+<summary class="aside">Show/Hide Examples: A Primer</summary>
 
 <p>Before providing information on <strong>∆F</strong> syntax and other
 details, <em>let's start with some examples</em>…</p>
@@ -644,7 +650,7 @@ Itself</h3>
 <p>The expression <code>`⍵0</code> always refers to the
 <em>f-string</em> itself.¹ Try this yourself:²</p>
 <pre><code>   ∆F &#39;Our string {`⍵0↓} is {≢`⍵0} characters&#39;</code></pre>
-<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Notes</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;color: gray;">Notes</span></summary><div class="notes">
 
 <table>
 <tbody>
@@ -682,7 +688,7 @@ Commas</h3>
 more numbers or numeric strings.¹ It has an advantage over the
 <code>$</code> (Dyalog's <code>⎕FMT</code>) specifier: it doesn't
 require you to guesstimate field widths.</p>
-<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;color: gray;">Note</span></summary><div class="notes">
 
 <table>
 <tbody>
@@ -735,7 +741,7 @@ be shown in <strong>∆F</strong>'s output—</p>
 </ul>
 <p>as the <strong><em>last non-space</em></strong> character in the
 <strong>Code field</strong>, before the <em>final</em> right brace.</p>
-<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Notes</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;color: gray;">Notes</span></summary><div class="notes">
 
 <table>
 <tbody>
@@ -907,7 +913,7 @@ vectors, and character scalars, doubling internal single quotes and
 placing single quotes around the items found.¹ Non-character data is
 returned as is. This is useful, for example, when you wish to clearly
 distinguish character from numeric data.</p>
-<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;color: gray;">Note</span></summary><div class="notes">
 
 <table>
 <tbody>
@@ -961,7 +967,7 @@ single quote.</li>
 <li>If you need to omit one or the other decorator, simply make it a
 null string <code>""</code> or a <em>zilde</em> <code>⍬</code>.</li>
 </ul>
-<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;color: gray;">Note</span></summary><div class="notes">
 
 <table>
 <tbody>
@@ -1012,7 +1018,7 @@ expression as for <em>(a)</em>.² This is most useful when you are making
 repeated use of an <em>f-string</em>, since the overhead for analyzing
 the <em>f-string</em> contents <em>once</em> will be amortized over all
 the calls.</p>
-<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Notes</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;color: gray;">Notes</span></summary><div class="notes">
 
 <table>
 <tbody>
@@ -1059,7 +1065,7 @@ performance…</p>
 <code>1…∆F…</code> can retrieve argument(s) passed on the right side of
 <strong>∆F</strong>, using the very same omega shortcut expressions
 (<code>`⍵1</code>, etc.) as described above.¹</p>
-<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;color: gray;">Note</span></summary><div class="notes">
 
 <table>
 <tbody>
@@ -1097,7 +1103,7 @@ examples.</p>
 <h2 id="f-syntax-and-other-information">∆F Syntax and Other
 Information</h2>
 <details>        <!-- option: open -->       
-<summary>Show/Hide Syntax Info</summary>
+<summary class="aside">Show/Hide Syntax Info</summary>
 
 <h3 id="f-call-syntax-overview">∆F Call Syntax Overview</h3>
 <table>
@@ -1437,7 +1443,7 @@ href="#self-documenting-code-fields-sdcfs">SDCFs</a> in
 </table>
 <br>
 
-<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;color: gray;">Note</span></summary><div class="notes">
 
 <table>
 <tbody>
@@ -1550,7 +1556,7 @@ style="text-align: left;"><code>∆F '{''or ''''this'''' one''}'</code></td>
 character within the string. The clumsiness of the standard single quote
 <code>'</code> examples is due to the fact that the single quote is the
 required delimiter for the outermost (APL-level) string.</p>
-<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;color: gray;">Note</span></summary><div class="notes">
 
 <table>
 <tbody>
@@ -1649,7 +1655,7 @@ option won't <em>display</em> the code string redundantly.</li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251008T123910]
+(C) 2025 Sam the Cat Foundation. [20251008T142743]
 </span>
 <hr> 
 &emsp;

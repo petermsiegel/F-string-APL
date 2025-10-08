@@ -6,7 +6,7 @@
 ## Table of Contents
 
 <details>     <!-- option: open -->
-<summary>Show/Hide Table of Contents</summary> 
+<summary class="aside">Show/Hide Table of Contents</summary> 
 <span style="font-size: 90%;">
 
 - [Table of Contents](#table-of-contents)
@@ -52,7 +52,7 @@
 
 ## Overview  
 
-<details open><summary>Show/Hide Overview</span></summary> 
+<details open><summary class="aside">Show/Hide Overview</summary> 
 
 Inspired by Python *f-strings*,¹ **∆F** includes a variety of capabilities to make it easy to evaluate, format, annotate, and display related multidimensional information.² **∆F** *f-strings* include:
 
@@ -102,7 +102,7 @@ Inspired by Python *f-strings*,¹ **∆F** includes a variety of capabilities to
 
 
 <details>     <!-- option: open -->
-<summary>Summary of Field Types</summary> <br>
+<summary>Summary of Field Types</summary> <br> <!-- Not a class="aside" -->
 
    | Field Type | Syntax | Examples | Displaying |
    |:------------:|:--------:|:---------:|:---------:|
@@ -114,7 +114,7 @@ Inspired by Python *f-strings*,¹ **∆F** includes a variety of capabilities to
 
 <br>
 
-<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Notes</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;color: gray;">Notes</span></summary><div class="notes">
 
 |        |
 | :----- |
@@ -133,7 +133,7 @@ Inspired by Python *f-strings*,¹ **∆F** includes a variety of capabilities to
 ## Installing **∆F**
 
 <details>            <!-- option: open -->
-<summary>Show/Hide Installation of <bold>∆F</bold> in Dyalog APL</summary>
+<summary class="aside">Show/Hide Installation of <bold>∆F</bold> in Dyalog APL</summary>
 
 1. On Github, search for `"f-string-apl"`. 
 2. Copy the files **∆Fapl.dyalog** and **∆F_Help.html** into your current working directory (the one shown via `]cd`). 
@@ -155,7 +155,7 @@ Now, **∆F** is available in the active namespace (or **_myns_**), along with *
 ## ∆F Examples: A Primer
 
 <details>            <!-- option: open -->
-<summary>Show/Hide Examples: A Primer</summary>
+<summary class="aside">Show/Hide Examples: A Primer</summary>
 
 
 Before providing information on **∆F** syntax and other details, *let's start with some examples*…
@@ -370,7 +370,7 @@ The expression `` `⍵0 `` always refers to the *f-string* itself.¹ Try this yo
    ∆F 'Our string {`⍵0↓} is {≢`⍵0} characters'
 ```
 
-<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Notes</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;color: gray;">Notes</span></summary><div class="notes">
 
 |      |
 | :--- |
@@ -397,7 +397,7 @@ The sun's core is at 15,000,000°C or 27,000,032°F
 
 The [**Numeric**] **Commas** shortcut `` `C `` adds commas every 3 digits (from the right) to one or more numbers or numeric strings.¹ It has an advantage over the `$` (Dyalog's `⎕FMT`) specifier: it doesn't require you to guesstimate field widths.
 
-<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;color: gray;">Note</span></summary><div class="notes">
 
 | |
 | :---------- |
@@ -447,7 +447,7 @@ All you need do is enter
 
 as the **_last non-space_** character in the **Code field**, before the _final_ right brace.
 
-<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Notes</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;color: gray;">Notes</span></summary><div class="notes">
 
 |         |
 | :----- |
@@ -619,7 +619,7 @@ expression: `` `⍵1 `⍵2 `⍵3 ``.
 The **Quote** shortcut `` `Q `` recursively scans its right argument, matching rows of character arrays, character vectors, and character scalars, doubling internal single quotes and
 placing single quotes around the items found.¹ Non-character data is returned as is. This is useful, for example, when you wish to clearly distinguish character from numeric data.
 
-<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;color: gray;">Note</span></summary><div class="notes">
 
 |       |
 | :---  |
@@ -665,7 +665,7 @@ Here we make a quick mention of the **_experimental_** shortcut **Wrap**¹ `` `W
 - The decorators are in `⍺`, the left argument to **Wrap**: the left decorator, `0⊃2⍴⍺`, and the right decorator, `1⊃2⍴⍺`, with `⍺` defaulting to a single quote.
 - If you need to omit one or the other decorator, simply make it a null string `""` or a _zilde_ `⍬`.
 
-<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;color: gray;">Note</span></summary><div class="notes">
 
 |        |
 | :----- |
@@ -710,7 +710,7 @@ However, if the initial option (**_DFN_**) is `1`, as in *(b),*
     
 then **∆F** returns a **dfn** that, *when called later*, will return precisely the same character expression as for *(a)*.² This is most useful when you are making repeated use of an *f-string*, since the overhead for analyzing the *f-string* contents _once_ will be amortized over all the calls.
 
-<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Notes</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;color: gray;">Notes</span></summary><div class="notes">
 
 |   |
 | :----- |
@@ -752,7 +752,7 @@ Now, let's proceed. Here's the code:
 
 Finally, we want to show you that the _dfn_ returned from `1…∆F…` can retrieve argument(s) passed on the right side of **∆F**, using the very same omega shortcut expressions (`` `⍵1 ``, etc.) as described above.¹  
 
-<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;color: gray;">Note</span></summary><div class="notes">
 
 |        |
 | :----- |
@@ -787,7 +787,7 @@ Below, we summarize key information you've already gleaned from the examples.
 ## ∆F Syntax and Other Information
 
 <details>        <!-- option: open -->       
-<summary>Show/Hide Syntax Info</summary>
+<summary class="aside">Show/Hide Syntax Info</summary>
 
 ### ∆F Call Syntax Overview
 
@@ -868,7 +868,7 @@ which contains one or more **Text fields**, **Code fields**, and **Space fields*
 
 <br>
 
-<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;color: gray;">Note</span></summary><div class="notes">
 
 |        |
 | :----- |
@@ -916,7 +916,7 @@ You may *not* use an escape sequence (e.g. `` `" ``) for this purpose.¹
 
 Note that the opening quote ` « ` is treated as an ordinary character within the string. The clumsiness of the standard single quote ` ' ` examples is due to the fact that the single quote is the required delimiter for the outermost (APL-level) string. 
 
-<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary><span style="margin: 12px;color: gray;">Note</span></summary><div class="notes">
 
 |        |
 | :----- |
@@ -978,7 +978,7 @@ If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. H
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251008T123910]
+(C) 2025 Sam the Cat Foundation. [20251008T142743]
 </span>
 <hr> 
 &emsp;
