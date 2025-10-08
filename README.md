@@ -1,7 +1,7 @@
 
 <div class="notes">
 
-|<span style="font-size: 110%;">**∆F** is a function for Dyalog APL that interprets *f-strings*, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional, expressions in an APL-friendly style.¹ </span>|
+|<span style="font-size: 110%;padding: 10px;">**∆F** is a function for Dyalog APL that interpret *f-strings*, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional, expressions in an APL-friendly style.¹</span>|
 | :----------: |
 
 </div>
@@ -101,15 +101,27 @@ Inspired by Python *f-strings*,² **∆F** includes a variety of capabilities to
 
 **∆F** is designed for ease of use, _ad hoc_ debugging, fine-grained formatting and informal user interaction,⁷ built using Dyalog functions and operators.
 
+<details>     <!-- option: open -->
+<summary>Summary of Field Types</summary> <br>
+
+   | Field Type | Syntax | Examples | Displaying |
+   |:------------|:--------|:---------|:---------|
+   | **Text** | *Unicode text* | `` abc`◇def `` | 2-D Text  |
+   | **Code** | `{`*dfn code plus*`}` | `{(32+9×÷∘5)degC}`<br> `{↑"one" "two"}` | Arbitrary APL<br>expressions via dfns |
+   | **Space** | `{`&emsp;`}` | `{  }` `{}`| Spacing & separation |
+
+<br>
+</details>
+
 <details><summary><span style="margin: 20px;">Notes</span></summary><div class="notes">
 
 |        |
 | :----- |
-| ¹ Throughout this documentation, notably in the many examples, an index origin of zero (`⎕IO=0`) is assumed. **Code fields** inherit the index origin and other system variables from the environment (*i.e.* namespace) in which **∆F** is called, so your own examples will work as you expect. If you wish to modify the `⎕IO` or any system variable temporarily, you may do so right in the **Code field**:<br>&emsp;&emsp; `∆F '{⎕IO←1 ◇ 26=⎕A⍳"Z": "Success" ◇ "Failure"}'`. |
+| ¹ Throughout this documentation, especially in the examples, an index origin of zero (`⎕IO=0`) is assumed. **Code fields** inherit the index origin and other system variables from the environment (*i.e.* namespace) in which **∆F** is called, so your own examples will work as you expect. If you wish to modify the `⎕IO` or any system variable temporarily, you may do so right in the **Code field**:<br>&emsp;&emsp; `∆F '{⎕IO←1 ◇ 26=⎕A⍳"Z": "Success" ◇ "Failure"}'`. |
 | ² **∆F** is inspired by Python _[f-strings](https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals)_, short for "**formatted string literals**", but designed for APL's multi-dimensional worldview.  Python introduced *f-strings* in 2016. **∆F** *f-strings* and Python's are **not** compatible. |
 | ³ In this document, we use the symbol `◇` (`⎕UCS 9671`) to represent the APL *statement separator* (`⎕UCS 8900`), since the latter is displayed _in some browsers_ as a hard-to-read glyph. **∆F** will recognize `` `◇ `` with _either_ glyph. |
 | ⁴ **∆F Code fields** _as input_ are limited to a single, possibly very long, line.     |
-| ⁵ **Double angle quotation marks** <big>**«&nbsp;»**</big> (_guillemets_) are Unicode chars `⎕UCS 171 187` (on the std Mac keyboard: _*option-backslash*_ and _*option-shift-backslash*_). When including literal guillemets in guillemet-bracketed quotations (<span style="color: red;">_but why?_</span>&ThinSpace;), opening guillemets <big>**«**</big> are _not_ doubled, but _two_ closing guillemets are needed for each literal <big>**»**</big> required. |
+| ⁵ **Double angle quotation marks** <big>**«&nbsp;»**</big> (_guillemets_) are Unicode chars `⎕UCS 171 187` (on the std Mac keyboard: _*option-backslash*_ and _*option-shift-backslash*_). |
 | ⁶ Details on all the shortcuts are provided later in this document. See **_Code Field Shortcuts._**        |
 | ⁷ As a prototype, **∆F** is relatively slow, using an APL recursive scan to analyze the **f-string**. See the ***DFN*** option (below) for a way to speed up frequently used *f-strings*. |
 
@@ -940,7 +952,8 @@ If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. H
  
 ---
 
-<div class="fixed-footer">
+<div class="doc-footer">
+<button onclick="expandAll()">Expand All</button>&emsp;
 <a href="#top">Top</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="#table-of-contents">Table of Contents</a> 
@@ -950,13 +963,14 @@ If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. H
 <a href="#f-syntax-and-other-information">Syntax</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="#copyright">Copyright</a>
+&emsp;<button onclick="collapseAll()">Collapse All</button>
 </div>
 
 
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251006T184846]
+(C) 2025 Sam the Cat Foundation. [20251007T213120]
 </span>
 <hr> 
 &emsp;

@@ -31,7 +31,7 @@
       font-family: Georgia, serif;
       font-size:   15pt;
       padding: 1% 4%;
-      margin: 0 auto; /* Centers the body content */
+      margin: 0  auto;   /* Centers the body content */
       max-width: 1200px; /* Sets a maximum width */
     }
     /* Inline code */
@@ -43,8 +43,7 @@
       font-family: "APL386 Unicode", APL386, "APL385 Unicode", APL385,
         "Courier New", Courier, Lucida Console", "Consolas", monospace;
     }
-    /* Code blocks */
-    pre {
+    pre {   /* Code blocks */
       background-color: #ddfafaff;
       color: #0a0a0aff;
       font-size: 13pt;
@@ -64,8 +63,7 @@
       font-family: "APL386 Unicode", APL386, "APL385 Unicode", APL385,
           "Courier New", Courier, "Lucida Console", "Consolas", monospace;
     }
-    /* Table header */
-    th {
+    th {   /* Table header */
       font-family:  Georgia,"Courier New", Courier, "Lucida Console", "Consolas", monospace;
       font-weight: 900;
       line-height: 1.1;
@@ -74,8 +72,7 @@
       background-color: #25027eff;
       color: #ffffffff;
     }
-    /* Table data */
-    td {
+    td {   /* Table data */
       font-family: Georgia,"Courier New", Courier, "Lucida Console", "Consolas", monospace;
       font-weight: 200;
       padding: 5px 7px;
@@ -98,7 +95,14 @@
     h1 {  
     font-size: 1.5em;   /* Same size as default h2 */
      }
-    .fixed-footer {
+    .content-with-left-bar { /* Experimental item(s) have left red bar */
+      border-left: 2px solid #ea2f0eff; /* Adjust color and thickness as needed */
+      padding-left: 15px; /* Space between the bar and content */
+      margin-left: 0px; /* Optional: Space from the left edge of the page */
+      height: auto; /* Or set a fixed height, *e.g.*, 200px */
+      overflow: hidden; /* Clear floats if internal content uses them */
+    }
+    .doc-footer {
       position: fixed;
       font-size: 90%;
       left: 0;
@@ -109,19 +113,20 @@
       text-align: center;
       padding: 5px 0;
     }
-    .content-with-left-bar { /* Experimental item(s) have left red bar */
-      border-left: 2px solid #ea2f0eff; /* Adjust color and thickness as needed */
-      padding-left: 15px; /* Space between the bar and content */
-      margin-left: 0px; /* Optional: Space from the left edge of the page */
-      height: auto; /* Or set a fixed height, *e.g.*, 200px */
-      overflow: hidden; /* Clear floats if internal content uses them */
-    }
-    .notes {
-      font-size: 90%;
-      margin-left: 30px;
-      width: 90%; /* Adjust width as needed */
-    }
   </style>
+  <script>
+  function expandAll() {
+    document.querySelectorAll('details').forEach(details => {
+      details.setAttribute('open', true);
+    });
+  }
+
+  function collapseAll() {
+    document.querySelectorAll('details').forEach(details => {
+      details.removeAttribute('open');
+    });
+  }
+  </script>
 </head>
 <body>
 <header id="title-block-header">
@@ -133,11 +138,11 @@
 <thead>
 <tr>
 <th
-style="text-align: center;"><span style="font-size: 110%;"><strong>∆F</strong>
-is a function for Dyalog APL that interprets <em>f-strings</em>, a
+style="text-align: center;"><span style="font-size: 110%;padding: 10px;"><strong>∆F</strong>
+is a function for Dyalog APL that interpret <em>f-strings</em>, a
 concise, yet powerful way to display multiline Unicode text and complex,
-often multidimensional, expressions in an APL-friendly style.¹
-</span></th>
+often multidimensional, expressions in an APL-friendly
+style.¹</span></th>
 </tr>
 </thead>
 <tbody>
@@ -301,17 +306,55 @@ appropriate vertical alignment) to form a single character matrix:
 <p><strong>∆F</strong> is designed for ease of use, <em>ad hoc</em>
 debugging, fine-grained formatting and informal user interaction,⁷ built
 using Dyalog functions and operators.</p>
+<details>     <!-- option: open -->
+<summary>Summary of Field Types</summary> <br>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Field Type</th>
+<th style="text-align: left;">Syntax</th>
+<th style="text-align: left;">Examples</th>
+<th style="text-align: left;">Displaying</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Text</strong></td>
+<td style="text-align: left;"><em>Unicode text</em></td>
+<td style="text-align: left;"><code>abc`◇def</code></td>
+<td style="text-align: left;">2-D Text</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Code</strong></td>
+<td style="text-align: left;"><code>{</code><em>dfn code
+plus</em><code>}</code></td>
+<td style="text-align: left;"><code>{(32+9×÷∘5)degC}</code><br>
+<code>{↑"one" "two"}</code></td>
+<td style="text-align: left;">Arbitrary APL<br>expressions via dfns</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Space</strong></td>
+<td style="text-align: left;"><code>{</code> <code>}</code></td>
+<td style="text-align: left;"><code>{  }</code> <code>{}</code></td>
+<td style="text-align: left;">Spacing &amp; separation</td>
+</tr>
+</tbody>
+</table>
+<br>
+</details>
+
 <details><summary><span style="margin: 20px;">Notes</span></summary><div class="notes">
 
 <table>
 <tbody>
 <tr>
-<td style="text-align: left;">¹ Throughout this documentation, notably
-in the many examples, an index origin of zero (<code>⎕IO=0</code>) is
-assumed. <strong>Code fields</strong> inherit the index origin and other
-system variables from the environment (<em>i.e.</em> namespace) in which
-<strong>∆F</strong> is called, so your own examples will work as you
-expect. If you wish to modify the <code>⎕IO</code> or any system
+<td style="text-align: left;">¹ Throughout this documentation,
+especially in the examples, an index origin of zero (<code>⎕IO=0</code>)
+is assumed. <strong>Code fields</strong> inherit the index origin and
+other system variables from the environment (<em>i.e.</em> namespace) in
+which <strong>∆F</strong> is called, so your own examples will work as
+you expect. If you wish to modify the <code>⎕IO</code> or any system
 variable temporarily, you may do so right in the <strong>Code
 field</strong>:<br>  
 <code>∆F '{⎕IO←1 ◇ 26=⎕A⍳"Z": "Success" ◇ "Failure"}'</code>.</td>
@@ -342,12 +385,7 @@ input</em> are limited to a single, possibly very long, line.</td>
 marks</strong> <big><strong>« »</strong></big> (<em>guillemets</em>) are
 Unicode chars <code>⎕UCS 171 187</code> (on the std Mac keyboard:
 <em><em>option-backslash</em></em> and
-<em><em>option-shift-backslash</em></em>). When including literal
-guillemets in guillemet-bracketed quotations
-(<span style="color: red;"><em>but why?</em></span> ), opening
-guillemets <big><strong>«</strong></big> are <em>not</em> doubled, but
-<em>two</em> closing guillemets are needed for each literal
-<big><strong>»</strong></big> required.</td>
+<em><em>option-shift-backslash</em></em>).</td>
 </tr>
 <tr>
 <td style="text-align: left;">⁶ Details on all the shortcuts are
@@ -1555,7 +1593,8 @@ option won't <em>display</em> the code string redundantly.</li>
  </details> 
 
 <hr />
-<div class="fixed-footer">
+<div class="doc-footer">
+<button onclick="expandAll()">Expand All</button>&emsp;
 <a href="#top">Top</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="#table-of-contents">Table of Contents</a> 
@@ -1565,11 +1604,12 @@ option won't <em>display</em> the code string redundantly.</li>
 <a href="#f-syntax-and-other-information">Syntax</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="#copyright">Copyright</a>
+&emsp;<button onclick="collapseAll()">Collapse All</button>
 </div>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251006T184846]
+(C) 2025 Sam the Cat Foundation. [20251007T213120]
 </span>
 <hr> 
 &emsp;
