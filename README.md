@@ -5,7 +5,7 @@
 ## Table of Contents
 
 <details>     <!-- option: open -->
-<summary class="aside">Show/Hide Table of Contents</summary> 
+<summary class="aside">Show/Hide <em>Table of Contents</em></summary> 
 <span style="font-size: 90%;">
 
 - [Table of Contents](#table-of-contents)
@@ -55,7 +55,7 @@
 ## Installing and Running **∆F** in Dyalog APL
 
 <details>            <!-- option: open -->
-<summary class="aside">Show/Hide Installation and Running <bold>∆F</bold></summary>
+<summary class="aside">Show/Hide <em>Installing and Running <bold>∆F</bold></em></summary>
 
 ### Installing **∆F**
 
@@ -71,14 +71,14 @@ Now, **∆F** is available in the active namespace (or **_myns_**), along with *
 
 ### Running **∆F** (After It's Been Installed)
 
-1. `]load ∆Fapl` (see above), ensuring that **∆F** is accessible from the current namespace. 
+1. `]load ∆Fapl` (see above), ensuring that **∆F** and **⍙Fapl** are accessible from the current namespace. 
 2. Call `∆F` with the desired argument(s) and options.
 
 </details>
 
 ## Overview  
 
-<details open><summary class="aside">Show/Hide Overview</summary> 
+<details open><summary class="aside">Show/Hide <em>Overview</em></summary> 
 
 Inspired by Python *f-strings*,¹ **∆F** includes a variety of capabilities to make it easy to evaluate, format, annotate, and display related multidimensional information.² **∆F** *f-strings* include:
 
@@ -126,15 +126,14 @@ Inspired by Python *f-strings*,¹ **∆F** includes a variety of capabilities to
 
 </details> 
 
-
 <details>     <!-- option: open -->
-<summary>Summary of Field Types</summary> <br> <!-- Not a class="aside" -->
+<summary>Recap: <em>The Three Field Types</em></summary> <br> <!-- Not a class="aside" -->
 
    | Field Type | Syntax | Examples | Displaying |
    |:------------:|:--------:|:---------:|:---------:|
    | **Text** | *Unicode text* | `` abc`◇def `` | 2-D Text  |
    | **Code** | `{`*dfn code plus*`}` | `{(32+9×÷∘5)degC}`<br> `{↑"one" "two"}` | Arbitrary APL<br>expressions via dfns |
-   | **Space** | `{`␠ ␠ ␠`}` | `{  }` `{}`| Spacing & separation |
+   | **Space** | `{`<big>␠ ␠ ␠</big>`}` | `{  }` `{}`| Spacing & separation |
 
 </details>
 
@@ -166,7 +165,7 @@ Inspired by Python *f-strings*,¹ **∆F** includes a variety of capabilities to
 ## ∆F Examples: A Primer
 
 <details>            <!-- option: open -->
-<summary class="aside">Show/Hide Examples: A Primer</summary>
+<summary class="aside">Show/Hide <em>Examples: A Primer</em></summary>
 
 
 Before providing information on **∆F** syntax and other details, *let's start with some examples*…
@@ -352,6 +351,16 @@ Null **Space fields** `{}`, *i.e.* 0-width **Space fields**, are discarded once 
    0 0 1 ∆F 'abc{}def{}{}ghi{""}jkl{ }mno'
 ```
 
+<details class="pmsnote"  name="pmsnote">            <!-- option: open -->  
+<summary class="aside"><span style="margin: 12px;">Peek at solution.</span></summary>
+
+`┌───┬───┬───┬┬───┬─┬───┐`<br>
+`│abc│def│ghi││jkl│ │mno│`<br>
+`└───┴───┴───┴┴───┴─┴───┘`
+
+
+</details>
+
 In contrast, **Code fields** that return null values (like `{""}` above) _will_ be displayed!
 
 ### Omega Shortcuts (Explicit)  
@@ -380,6 +389,16 @@ The expression `` `⍵0 `` always refers to the *f-string* itself.¹ Try this yo
 ```
    ∆F 'Our string {`⍵0↓} is {≢`⍵0} characters'
 ```
+
+<details class="pmsnote"  name="pmsnote">            <!-- option: open -->  
+<summary class="aside"><span style="margin: 12px;">Peek at solution.</span>
+</summary>
+
+```
+Our string                  `⍵0↓                  is 38 characters
+           Our string {`⍵0↓} is {≢`⍵0} characters                 
+``` 
+</details>
 
 <details class="pmsnote" name="pmsnote"><summary class="aside"><span style="margin: 12px;">Notes</span></summary><div class="notes">
 
@@ -798,7 +817,7 @@ Below, we summarize key information you've already gleaned from the examples.
 ## ∆F Syntax and Other Information
 
 <details>        <!-- option: open -->       
-<summary class="aside">Show/Hide Syntax Info</summary>
+<summary class="aside">Show/Hide <em>Syntax Info</em></summary>
 
 ### ∆F Call Syntax Overview
 
@@ -989,7 +1008,7 @@ If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. H
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251008T150143]
+(C) 2025 Sam the Cat Foundation. [20251008T204230]
 </span>
 <hr> 
 &emsp;

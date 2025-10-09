@@ -139,7 +139,7 @@
     const toggleButton = document.getElementById('toggleDetails');
     
     toggleButton.addEventListener('click', () => {
-      // Select all <details> elements that do NOT have the "no-toggle" class
+      // Select all <details> elements that do NOT have the "pmsnote" class
       const detailsToToggle = document.querySelectorAll('details:not(.pmsnote)');
       
       // Check if the button should expand or collapse
@@ -194,7 +194,7 @@ style.</span></th>
 </table>
 <h2 id="table-of-contents">Table of Contents</h2>
 <details>     <!-- option: open -->
-<summary class="aside">Show/Hide Table of Contents</summary> 
+<summary class="aside">Show/Hide <em>Table of Contents</em></summary> 
 <span style="font-size: 90%;">
 
 <ul>
@@ -271,7 +271,7 @@ Expressions: Details</a></li>
 <h2 id="installing-and-running-f-in-dyalog-apl">Installing and Running
 <strong>∆F</strong> in Dyalog APL</h2>
 <details>            <!-- option: open -->
-<summary class="aside">Show/Hide Installation and Running <bold>∆F</bold></summary>
+<summary class="aside">Show/Hide <em>Installing and Running <bold>∆F</bold></em></summary>
 
 <h3 id="installing-f">Installing <strong>∆F</strong></h3>
 <ol type="1">
@@ -301,13 +301,14 @@ note its absence).</li>
 (After It's Been Installed)</h3>
 <ol type="1">
 <li><code>]load ∆Fapl</code> (see above), ensuring that
-<strong>∆F</strong> is accessible from the current namespace.</li>
+<strong>∆F</strong> and <strong>⍙Fapl</strong> are accessible from the
+current namespace.</li>
 <li>Call <code>∆F</code> with the desired argument(s) and options.</li>
 </ol>
 </details>
 
 <h2 id="overview">Overview</h2>
-<details open><summary class="aside">Show/Hide Overview</summary> 
+<details open><summary class="aside">Show/Hide <em>Overview</em></summary> 
 
 <p>Inspired by Python <em>f-strings</em>,¹ <strong>∆F</strong> includes
 a variety of capabilities to make it easy to evaluate, format, annotate,
@@ -396,7 +397,7 @@ using Dyalog functions and operators.</p>
 </details> 
 
 <details>     <!-- option: open -->
-<summary>Summary of Field Types</summary> <br> <!-- Not a class="aside" -->
+<summary>Recap: <em>The Three Field Types</em></summary> <br> <!-- Not a class="aside" -->
 
 <table>
 <thead>
@@ -425,7 +426,8 @@ dfns</td>
 </tr>
 <tr>
 <td style="text-align: center;"><strong>Space</strong></td>
-<td style="text-align: center;"><code>{</code>␠ ␠ ␠<code>}</code></td>
+<td style="text-align: center;"><code>{</code><big>␠ ␠
+␠</big><code>}</code></td>
 <td style="text-align: center;"><code>{  }</code> <code>{}</code></td>
 <td style="text-align: center;">Spacing &amp; separation</td>
 </tr>
@@ -497,7 +499,7 @@ APL</h2>
 <hr />
 <h2 id="f-examples-a-primer">∆F Examples: A Primer</h2>
 <details>            <!-- option: open -->
-<summary class="aside">Show/Hide Examples: A Primer</summary>
+<summary class="aside">Show/Hide <em>Examples: A Primer</em></summary>
 
 <p>Before providing information on <strong>∆F</strong> syntax and other
 details, <em>let's start with some examples</em>…</p>
@@ -643,6 +645,14 @@ they've done their work of separating adjacent fields (typically
 <strong>Text fields</strong>), so they won't be placed in boxes. Try
 this expression on your own:</p>
 <pre><code>   0 0 1 ∆F &#39;abc{}def{}{}ghi{&quot;&quot;}jkl{ }mno&#39;</code></pre>
+<details class="pmsnote"  name="pmsnote">            <!-- option: open -->  
+<summary class="aside"><span style="margin: 12px;">Peek at solution.</span></summary>
+
+<p><code>┌───┬───┬───┬┬───┬─┬───┐</code><br>
+<code>│abc│def│ghi││jkl│ │mno│</code><br>
+<code>└───┴───┴───┴┴───┴─┴───┘</code></p>
+</details>
+
 <p>In contrast, <strong>Code fields</strong> that return null values
 (like <code>{""}</code> above) <em>will</em> be displayed!</p>
 <h3 id="omega-shortcuts-explicit">Omega Shortcuts (Explicit)</h3>
@@ -669,6 +679,14 @@ Itself</h3>
 <p>The expression <code>`⍵0</code> always refers to the
 <em>f-string</em> itself.¹ Try this yourself:²</p>
 <pre><code>   ∆F &#39;Our string {`⍵0↓} is {≢`⍵0} characters&#39;</code></pre>
+<details class="pmsnote"  name="pmsnote">            <!-- option: open -->  
+<summary class="aside"><span style="margin: 12px;">Peek at solution.</span>
+</summary>
+
+<pre><code>Our string                  `⍵0↓                  is 38 characters
+           Our string {`⍵0↓} is {≢`⍵0} characters                 </code></pre>
+</details>
+
 <details class="pmsnote" name="pmsnote"><summary class="aside"><span style="margin: 12px;">Notes</span></summary><div class="notes">
 
 <table>
@@ -1122,7 +1140,7 @@ examples.</p>
 <h2 id="f-syntax-and-other-information">∆F Syntax and Other
 Information</h2>
 <details>        <!-- option: open -->       
-<summary class="aside">Show/Hide Syntax Info</summary>
+<summary class="aside">Show/Hide <em>Syntax Info</em></summary>
 
 <h3 id="f-call-syntax-overview">∆F Call Syntax Overview</h3>
 <table>
@@ -1674,7 +1692,7 @@ option won't <em>display</em> the code string redundantly.</li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251008T150143]
+(C) 2025 Sam the Cat Foundation. [20251008T204230]
 </span>
 <hr> 
 &emsp;
