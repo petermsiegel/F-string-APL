@@ -130,7 +130,14 @@
       color: grey;
     }
     details summary::marker {
-    color: grey; /* Change marker color to a deep red */
+      color: grey; /* Change marker color to a deep red */
+    }
+    details > summary {
+       list-style-type: '▶️';  
+    /* list-style-type: none; */
+    }
+    details[open] > summary {
+      list-style-type: '🔽';  
     }
   </style>
   <script>
@@ -185,8 +192,7 @@
 style="text-align: center;"><span style="font-size: 110%;padding: 10px;"><strong>∆F</strong>
 is a function for Dyalog APL that interpret <em>f-strings</em>, a
 concise, yet powerful way to display multiline Unicode text and complex,
-often multidimensional, expressions in an APL-friendly
-style.</span></th>
+often multidimensional expressions in an APL-friendly style.</span></th>
 </tr>
 </thead>
 <tbody>
@@ -194,7 +200,7 @@ style.</span></th>
 </table>
 <h2 id="table-of-contents">Table of Contents</h2>
 <details>     <!-- option: open -->
-<summary class="aside">Show/Hide <em>Table of Contents</em></summary> 
+<summary class="aside"><span style="margin: 12px;">Show/Hide <em>Table of Contents</em></span></summary>
 <span style="font-size: 90%;">
 
 <ul>
@@ -261,17 +267,24 @@ Fields</a></li>
 Expressions: Details</a></li>
 <li><a href="#wrap-shortcut-details-experimental">Wrap Shortcut: Details
 (Experimental)</a></li>
-<li><a href="#undocumented-options">Undocumented Options</a></li>
+</ul></li>
+<li><a href="#appendices">Appendices</a>
+<ul>
+<li><a href="#appendix-i-undocumented-options">Appendix I: Undocumented
+Options</a></li>
+<li><a href="#appendix-ii-python-f-strings">Appendix II: Python
+F-strings</a></li>
 </ul></li>
 <li><a href="#copyright">Copyright</a></li>
 </ul>
+<hr />
 </span>
 </details>
 
 <h2 id="installing-and-running-f-in-dyalog-apl">Installing and Running
 <strong>∆F</strong> in Dyalog APL</h2>
 <details>            <!-- option: open -->
-<summary class="aside">Show/Hide <em>Installing and Running <bold>∆F</bold></em></summary>
+<summary class="aside"><span style="margin: 12px;">Show/Hide <em>Installing and Running <bold>∆F</bold></em></span></summary>
 
 <h3 id="installing-f">Installing <strong>∆F</strong></h3>
 <ol type="1">
@@ -284,16 +297,23 @@ href="https://github.com/petermsiegel/f-string-apl">https://github.com/petermsie
 <strong>∆F_Help.html</strong> into your current working directory (the
 one shown via <code>]cd</code>).</li>
 <li>Then, from your Dyalog session (typically <code>#</code> or
-<code>⎕SE</code>), enter:<br />
-<code>]load ∆Fapl [-target=</code><strong><em>myns</em></strong><code>]</code><br />
-a. Each time it is called, the <code>]load</code> will create both
-function <strong>∆F</strong> and namespace <strong>⍙Fapl</strong> in the
-active namespace (or <strong><em>myns</em></strong>).
-<strong>⍙Fapl</strong> contains utilities used by
-<strong>∆F</strong>.<br />
-b. If <strong>∆F_Help.html</strong> is available at <code>]load</code>
+<code>⎕SE</code>), enter:<br>
+<code>]load ∆Fapl [-target=</code><strong><em>myns</em></strong><code>]</code>
+<ol type="1">
+<li>Each time it is called, the <code>]load</code> will create function
+<strong>∆F</strong> and namespace <strong>⍙Fapl</strong> in the active
+namespace (or <strong><em>myns</em></strong>).
+<ol type="1">
+<li><strong>⍙Fapl</strong> contains utilities used by
+<strong>∆F</strong> and, once<code>]load</code>ed, <em><strong>should
+not</strong></em> be moved.</li>
+<li><strong>∆F</strong> <em>may</em> be relocated; it will refer to
+<strong>⍙Fapl</strong> in its original location.</li>
+</ol></li>
+<li>If <strong>∆F_Help.html</strong> is available at <code>]load</code>
 time, it will be copied into <strong>⍙Fapl</strong> (or a message will
 note its absence).</li>
+</ol></li>
 </ol>
 <p>Now, <strong>∆F</strong> is available in the active namespace (or
 <strong><em>myns</em></strong>), along with <strong>⍙Fapl</strong>.</p>
@@ -305,10 +325,11 @@ note its absence).</li>
 current namespace.</li>
 <li>Call <code>∆F</code> with the desired argument(s) and options.</li>
 </ol>
+<hr />
 </details>
 
 <h2 id="overview">Overview</h2>
-<details open><summary class="aside">Show/Hide <em>Overview</em></summary> 
+<details open><summary class="aside"><span style="margin: 12px;">Show/Hide <em>Overview</em></span></summary>
 
 <p>Inspired by Python <em>f-strings</em>,¹ <strong>∆F</strong> includes
 a variety of capabilities to make it easy to evaluate, format, annotate,
@@ -394,10 +415,8 @@ appropriate vertical alignment) to form a single character matrix:
 <p><strong>∆F</strong> is designed for ease of use, <em>ad hoc</em>
 debugging, fine-grained formatting and informal user interaction,⁷ built
 using Dyalog functions and operators.</p>
-</details> 
-
 <details>     <!-- option: open -->
-<summary>Recap: <em>The Three Field Types</em></summary> <br> <!-- Not a class="aside" -->
+<summary class="aside"><span style="margin: 12px;">Recap: <em>The Three Field Types</em></span></summary><br>  
 
 <table>
 <thead>
@@ -433,29 +452,27 @@ dfns</td>
 </tr>
 </tbody>
 </table>
-</details>
-
 <br>
+</details>
 
 <details class="pmsnote" name="pmsnote"><summary class="aside"><span style="margin: 12px;">Notes</span></summary><div class="notes">
 
 <table>
 <tbody>
 <tr>
-<td style="text-align: left;">¹ <strong>∆F</strong> is inspired by
-Python <em><a
-href="https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals">f-strings</a></em>,
-short for "<strong>formatted string literals</strong>", but designed for
-APL's multi-dimensional worldview. Python introduced <em>f-strings</em>
-in 2016. <strong>∆F</strong> <em>f-strings</em> and Python's are
+<td style="text-align: left;">¹ <strong>∆F</strong> is inspired by <a
+href="#python-ref">Python f-strings</a>, short for "<strong>formatted
+string literals</strong>", but designed for APL's multi-dimensional
+worldview. Python introduced <em>f-strings</em> in 2016.
+<strong>∆F</strong> <em>f-strings</em> and Python's are
 <strong>not</strong> compatible.</td>
 </tr>
 <tr>
-<td style="text-align: left;">² Throughout this documentation,
-especially in the examples, an index origin of zero (<code>⎕IO=0</code>)
-is assumed. <strong>Code fields</strong> inherit the index origin and
-other system variables from the environment in which <strong>∆F</strong>
-is called, so your own examples will work as you expect.</td>
+<td style="text-align: left;">² Throughout this documentation, an index
+origin of zero (<code>⎕IO←0</code>) is assumed. Since
+<strong>Code</strong> fields inherit the index origin and other system
+variables from the environment in which <strong>∆F</strong> is called,
+your own examples will work as you expect.</td>
 </tr>
 <tr>
 <td style="text-align: left;">³ In this document, we use the symbol
@@ -466,20 +483,19 @@ is displayed <em>in some browsers</em> as a hard-to-read glyph.
 glyph.</td>
 </tr>
 <tr>
-<td style="text-align: left;">⁴ <strong>∆F Code fields</strong> <em>as
-input</em> are limited to a single, possibly very long, line.</td>
+<td style="text-align: left;">⁴ An <strong>∆F</strong>
+<em>f-string</em>— including any <strong>Code</strong> fields— is
+limited to a single, possibly very long, character vector.</td>
 </tr>
 <tr>
 <td style="text-align: left;">⁵ <strong>Double angle quotation
 marks</strong> <big><strong>« »</strong></big> (<em>guillemets</em>) are
-Unicode chars <code>⎕UCS 171 187</code> (on the std Mac keyboard:
-<em><em>option-backslash</em></em> and
-<em><em>option-shift-backslash</em></em>).</td>
+Unicode chars <code>⎕UCS 171 187</code>.</td>
 </tr>
 <tr>
 <td style="text-align: left;">⁶ Details on all the shortcuts are
-provided later in this document. See <strong><em>Code Field
-Shortcuts.</em></strong></td>
+provided later in this document. See <a
+href="#code-field-shortcuts">Code Field Shortcuts</a>.</td>
 </tr>
 <tr>
 <td style="text-align: left;">⁷ As a prototype, <strong>∆F</strong> is
@@ -490,16 +506,15 @@ relatively slow, using an APL recursive scan to analyze the
 </tbody>
 </table>
 </div></details>
+</details> 
 
-<hr />
 <h2 id="displaying-f-help-in-apl">Displaying ∆F <strong>Help</strong> in
 APL</h2>
 <p><span style="font-size: 130%;">👉 </span>To display this
 <strong>HELP</strong> information, type: <code>∆F⍨ 'help'</code>.</p>
-<hr />
 <h2 id="f-examples-a-primer">∆F Examples: A Primer</h2>
 <details>            <!-- option: open -->
-<summary class="aside">Show/Hide <em>Examples: A Primer</em></summary>
+<summary class="aside"><span style="margin: 12px;">Show/Hide <em>Examples: A Primer</em></span></summary>
 
 <p>Before providing information on <strong>∆F</strong> syntax and other
 details, <em>let's start with some examples</em>…</p>
@@ -645,13 +660,12 @@ they've done their work of separating adjacent fields (typically
 <strong>Text fields</strong>), so they won't be placed in boxes. Try
 this expression on your own:</p>
 <pre><code>   0 0 1 ∆F &#39;abc{}def{}{}ghi{&quot;&quot;}jkl{ }mno&#39;</code></pre>
-<details class="pmsnote"  name="pmsnote">            <!-- option: open -->  
-<summary class="aside"><span style="margin: 12px;">Peek at solution.</span></summary>
+<details class="pmsnote" name="pmsnote"><summary class="aside"><span style="margin: 12px;">Peek at solution.</span></summary><div class="notes"></span></summary>
 
 <p><code>┌───┬───┬───┬┬───┬─┬───┐</code><br>
 <code>│abc│def│ghi││jkl│ │mno│</code><br>
 <code>└───┴───┴───┴┴───┴─┴───┘</code></p>
-</details>
+</div></details>
 
 <p>In contrast, <strong>Code fields</strong> that return null values
 (like <code>{""}</code> above) <em>will</em> be displayed!</p>
@@ -680,8 +694,7 @@ Itself</h3>
 <em>f-string</em> itself.¹ Try this yourself:²</p>
 <pre><code>   ∆F &#39;Our string {`⍵0↓} is {≢`⍵0} characters&#39;</code></pre>
 <details class="pmsnote"  name="pmsnote">            <!-- option: open -->  
-<summary class="aside"><span style="margin: 12px;">Peek at solution.</span>
-</summary>
+<summary class="aside"><span style="margin: 12px;">Peek at solution. </span></summary>
 
 <pre><code>Our string                  `⍵0↓                  is 38 characters
            Our string {`⍵0↓} is {≢`⍵0} characters                 </code></pre>
@@ -784,11 +797,11 @@ be shown in <strong>∆F</strong>'s output—</p>
 <tbody>
 <tr>
 <td style="text-align: left;">¹ Our SDCFs are based on Python's single
-type of <strong><a
+type of <a
 href="https://docs.python.org/3/whatsnew/3.8.html#f-strings-support-for-self-documenting-expressions-and-debugging">self-documenting
-expressions</a></strong> in <em>f-strings</em>, but work somewhat
-differently. SDCFs are used <strong><em>only</em></strong> in
-<strong>Code fields</strong> (<em>duh</em>).</td>
+expressions</a> in <em>f-strings</em>, but work somewhat differently.
+SDCFs are used <strong><em>only</em></strong> in <strong>Code
+fields</strong> (<em>duh</em>).</td>
 </tr>
 <tr>
 <td style="text-align: left;">² <code>%</code> is the same glyph as for
@@ -1133,6 +1146,7 @@ The temperature is 35°C or 95.0°F
    T 35 → 8.9E¯6 | -95% ⎕⎕</code></pre>
 </div>
 
+<hr />
 <p>Below, we summarize key information you've already gleaned from the
 examples.</p>
 </details>
@@ -1140,7 +1154,7 @@ examples.</p>
 <h2 id="f-syntax-and-other-information">∆F Syntax and Other
 Information</h2>
 <details>        <!-- option: open -->       
-<summary class="aside">Show/Hide <em>Syntax Info</em></summary>
+<summary class="aside"><span style="margin: 12px;">Show/Hide <em>Syntax Info</em></span></summary>
 
 <h3 id="f-call-syntax-overview">∆F Call Syntax Overview</h3>
 <table>
@@ -1656,9 +1670,15 @@ replicated <em>per (2) above</em>.</li>
 <li>By default,<code>⍺← ''''</code>,<em>i.e.</em> APL quotes will wrap
 the array ⍵, row by row, whether character, numeric or otherwise.</li>
 </ol>
+<hr />
 </div> 
+</details> 
 
-<h3 id="undocumented-options">Undocumented Options</h3>
+<h2 id="appendices">Appendices</h2>
+<details><summary class="aside"><span style="margin: 12px;">Show/Hide Appendices</span></summary>
+
+<h3 id="appendix-i-undocumented-options">Appendix I: Undocumented
+Options</h3>
 <ol type="1">
 <li>If <code>options[0]</code> is <code>¯1</code>, then
 <strong>∆F</strong> returns a character vector that contains the source
@@ -1669,30 +1689,38 @@ are shown as visible <code>␤</code>. However, since this option returns
 the code string <em>verbatim</em>, the <em><strong>DBG</strong></em>
 option won't <em>display</em> the code string redundantly.</li>
 </ol>
- </details> 
+<h3 id="appendix-ii-python-f-strings">Appendix II: Python F-strings</h3>
+<div id="python-ref">
+<iframe src="https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals" width="100%"  name="python-ref" height="600">
+</iframe>
+</div>
 
 <hr />
+</details>
+
 <!-- Put a set of navigation tools at a fixed position at the bottom of the Help screen
 -->
 
 <div class="doc-footer">
 <button id="toggleDetails" class="button happybutton">Expand All Sections</button>&emsp;
-<a href="#top">Top</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="#table-of-contents">Table of Contents</a> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="#f-primer-with-examples">Examples</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="#top">→Top</a>
+&nbsp;&nbsp;&nbsp;
+<a href="#table-of-contents">Contents</a> 
+&nbsp;&nbsp;&nbsp;  
+<a href="#f-examples-a-primer">Examples</a>
+&nbsp;&nbsp;&nbsp; 
 <a href="#f-syntax-and-other-information">Syntax</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; 
+<a href="#appendices">Appendices</a>
+&nbsp;&nbsp;&nbsp; 
 <a href="#copyright">Copyright</a>
+&nbsp;&nbsp;&nbsp; 
 &emsp;<button onclick="closeWindowNow()" class="button warnbutton">Close Window</span></button>
-
 </div>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251008T204230]
+(C) 2025 Sam the Cat Foundation. [20251009T193555]
 </span>
 <hr> 
 &emsp;

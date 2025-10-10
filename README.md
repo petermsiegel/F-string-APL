@@ -1,11 +1,11 @@
 
-|<span style="font-size: 110%;padding: 10px;">**∆F** is a function for Dyalog APL that interpret *f-strings*, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional, expressions in an APL-friendly style.</span>|
+|<span style="font-size: 110%;padding: 10px;">**∆F** is a function for Dyalog APL that interpret *f-strings*, a concise, yet powerful way to display multiline Unicode text and complex, often multidimensional expressions in an APL-friendly style.</span>|
 | :----------: |
 
 ## Table of Contents
 
 <details>     <!-- option: open -->
-<summary class="aside">Show/Hide <em>Table of Contents</em></summary> 
+<summary class="aside"><span style="margin: 12px;">Show/Hide <em>Table of Contents</em></span></summary>
 <span style="font-size: 90%;">
 
 - [Table of Contents](#table-of-contents)
@@ -45,27 +45,32 @@
   - [Quoted Strings in Code Fields](#quoted-strings-in-code-fields)
   - [Omega Shortcut Expressions: Details](#omega-shortcut-expressions-details)
   - [Wrap Shortcut: Details (Experimental)](#wrap-shortcut-details-experimental)
-  - [Undocumented Options](#undocumented-options)
+- [Appendices](#appendices)
+  - [Appendix I: Undocumented Options](#appendix-i-undocumented-options)
+  - [Appendix II: Python F-strings](#appendix-ii-python-f-strings)
 - [Copyright](#copyright)
+
+---
 
 </span>
 </details>
 
-
 ## Installing and Running **∆F** in Dyalog APL
 
 <details>            <!-- option: open -->
-<summary class="aside">Show/Hide <em>Installing and Running <bold>∆F</bold></em></summary>
+<summary class="aside"><span style="margin: 12px;">Show/Hide <em>Installing and Running <bold>∆F</bold></em></span></summary>
 
 ### Installing **∆F**
 
 1. On Github, search for `"f-string-apl"`. 
    - During test phrase, go to https://github.com/petermsiegel/f-string-apl. 
 2. Copy the files **∆Fapl.dyalog** and **∆F_Help.html** into your current working directory (the one shown via `]cd`). 
-3. Then, from your Dyalog session (typically `#` or `⎕SE`), enter:  
-      `]load ∆Fapl [-target=`**_myns_**`]`  
-    a. Each time it is called, the `]load` will create both function **∆F** and namespace **⍙Fapl** in the active namespace (or **_myns_**). **⍙Fapl** contains utilities used by **∆F**.   
-    b. If **∆F_Help.html** is available at `]load` time, it will be copied into **⍙Fapl** (or a message will note its absence).    
+3. Then, from your Dyalog session (typically `#` or `⎕SE`), enter:<br>
+  `]load ∆Fapl [-target=`**_myns_**`]` 
+   1. Each time it is called, the `]load` will create function **∆F** and namespace **⍙Fapl** in the active namespace (or **_myns_**).
+      1. **⍙Fapl** contains utilities used by **∆F** and, once`]load`ed, ***should not*** be moved. 
+      2. **∆F** *may* be relocated; it will refer to **⍙Fapl** in its original location.
+   2. If **∆F_Help.html** is available at `]load` time, it will be copied into **⍙Fapl** (or a message will note its absence).
 
 Now, **∆F** is available in the active namespace (or **_myns_**), along with **⍙Fapl**. 
 
@@ -74,11 +79,14 @@ Now, **∆F** is available in the active namespace (or **_myns_**), along with *
 1. `]load ∆Fapl` (see above), ensuring that **∆F** and **⍙Fapl** are accessible from the current namespace. 
 2. Call `∆F` with the desired argument(s) and options.
 
+---
+
 </details>
+
 
 ## Overview  
 
-<details open><summary class="aside">Show/Hide <em>Overview</em></summary> 
+<details open><summary class="aside"><span style="margin: 12px;">Show/Hide <em>Overview</em></span></summary>
 
 Inspired by Python *f-strings*,¹ **∆F** includes a variety of capabilities to make it easy to evaluate, format, annotate, and display related multidimensional information.² **∆F** *f-strings* include:
 
@@ -124,10 +132,8 @@ Inspired by Python *f-strings*,¹ **∆F** includes a variety of capabilities to
 
 **∆F** is designed for ease of use, _ad hoc_ debugging, fine-grained formatting and informal user interaction,⁷ built using Dyalog functions and operators.
 
-</details> 
-
 <details>     <!-- option: open -->
-<summary>Recap: <em>The Three Field Types</em></summary> <br> <!-- Not a class="aside" -->
+<summary class="aside"><span style="margin: 12px;">Recap: <em>The Three Field Types</em></span></summary><br>  
 
    | Field Type | Syntax | Examples | Displaying |
    |:------------:|:--------:|:---------:|:---------:|
@@ -135,37 +141,32 @@ Inspired by Python *f-strings*,¹ **∆F** includes a variety of capabilities to
    | **Code** | `{`*dfn code plus*`}` | `{(32+9×÷∘5)degC}`<br> `{↑"one" "two"}` | Arbitrary APL<br>expressions via dfns |
    | **Space** | `{`<big>␠ ␠ ␠</big>`}` | `{  }` `{}`| Spacing & separation |
 
-</details>
-
 <br>
+</details>
 
 <details class="pmsnote" name="pmsnote"><summary class="aside"><span style="margin: 12px;">Notes</span></summary><div class="notes">
 
 |        |
 | :----- |
-| ¹ **∆F** is inspired by Python _[f-strings](https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals)_, short for "**formatted string literals**", but designed for APL's multi-dimensional worldview.  Python introduced *f-strings* in 2016. **∆F** *f-strings* and Python's are **not** compatible. |
-| ² Throughout this documentation, especially in the examples, an index origin of zero (`⎕IO=0`) is assumed. **Code fields** inherit the index origin and other system variables from the environment in which **∆F** is called, so your own examples will work as you expect.|
+| ¹ **∆F** is inspired by [Python f-strings](#python-ref), short for "**formatted string literals**", but designed for APL's multi-dimensional worldview.  Python introduced *f-strings* in 2016. **∆F** *f-strings* and Python's are **not** compatible. |
+| ² Throughout this documentation, an index origin of zero (`⎕IO←0`) is assumed. Since **Code** fields inherit the index origin and other system variables from the environment in which **∆F** is called, your own examples will work as you expect.|
 | ³ In this document, we use the symbol `◇` (`⎕UCS 9671`) to represent the APL *statement separator* (`⎕UCS 8900`), since the latter is displayed _in some browsers_ as a hard-to-read glyph. **∆F** will recognize `` `◇ `` with _either_ glyph. |
-| ⁴ **∆F Code fields** _as input_ are limited to a single, possibly very long, line.     |
-| ⁵ **Double angle quotation marks** <big>**«&nbsp;»**</big> (_guillemets_) are Unicode chars `⎕UCS 171 187` (on the std Mac keyboard: _*option-backslash*_ and _*option-shift-backslash*_). |
-| ⁶ Details on all the shortcuts are provided later in this document. See **_Code Field Shortcuts._**        |
+| ⁴ An **∆F** *f-string*— including any **Code** fields— is limited to a single, possibly very long, character vector. |
+| ⁵ **Double angle quotation marks** <big>**«&nbsp;»**</big> (_guillemets_) are Unicode chars `⎕UCS 171 187`. |
+| ⁶ Details on all the shortcuts are provided later in this document. See [Code Field Shortcuts](#code-field-shortcuts).|
 | ⁷ As a prototype, **∆F** is relatively slow, using an APL recursive scan to analyze the **f-string**. See the ***DFN*** option (below) for a way to speed up frequently used *f-strings*. |
 
 </div></details>
-
----
-
+</details> 
 
 ## Displaying ∆F **Help** in APL 
 
 <span style="font-size: 130%;">👉 </span>To display this **HELP** information, type: `∆F⍨ 'help'`.
 
----
-
 ## ∆F Examples: A Primer
 
 <details>            <!-- option: open -->
-<summary class="aside">Show/Hide <em>Examples: A Primer</em></summary>
+<summary class="aside"><span style="margin: 12px;">Show/Hide <em>Examples: A Primer</em></span></summary>
 
 
 Before providing information on **∆F** syntax and other details, *let's start with some examples*…
@@ -351,15 +352,13 @@ Null **Space fields** `{}`, *i.e.* 0-width **Space fields**, are discarded once 
    0 0 1 ∆F 'abc{}def{}{}ghi{""}jkl{ }mno'
 ```
 
-<details class="pmsnote"  name="pmsnote">            <!-- option: open -->  
-<summary class="aside"><span style="margin: 12px;">Peek at solution.</span></summary>
+<details class="pmsnote" name="pmsnote"><summary class="aside"><span style="margin: 12px;">Peek at solution.</span></summary><div class="notes"></span></summary>
 
 `┌───┬───┬───┬┬───┬─┬───┐`<br>
 `│abc│def│ghi││jkl│ │mno│`<br>
 `└───┴───┴───┴┴───┴─┴───┘`
 
-
-</details>
+</div></details>
 
 In contrast, **Code fields** that return null values (like `{""}` above) _will_ be displayed!
 
@@ -391,8 +390,7 @@ The expression `` `⍵0 `` always refers to the *f-string* itself.¹ Try this yo
 ```
 
 <details class="pmsnote"  name="pmsnote">            <!-- option: open -->  
-<summary class="aside"><span style="margin: 12px;">Peek at solution.</span>
-</summary>
+<summary class="aside"><span style="margin: 12px;">Peek at solution. </span></summary>
 
 ```
 Our string                  `⍵0↓                  is 38 characters
@@ -481,7 +479,7 @@ as the **_last non-space_** character in the **Code field**, before the _final_ 
 
 |         |
 | :----- |
-| ¹ Our SDCFs are based on Python's single type of **[self-documenting expressions](https://docs.python.org/3/whatsnew/3.8.html#f-strings-support-for-self-documenting-expressions-and-debugging)** in _f-strings_, but work somewhat differently. SDCFs are used **_only_** in **Code fields** (_duh_). |
+| ¹ Our SDCFs are based on Python's single type of [self-documenting expressions](https://docs.python.org/3/whatsnew/3.8.html#f-strings-support-for-self-documenting-expressions-and-debugging) in *f-strings*, but work somewhat differently. SDCFs are used **_only_** in **Code fields** (_duh_). |
 | ² `%` is the same glyph as for the **Above** shortcut, `%` or `` `A ``, discussed in [the next section](#the-above-shortcut). |
 
 </div></details>
@@ -810,14 +808,17 @@ The temperature is 35°C or 95.0°F
 
 </div>
 
+---
+
 Below, we summarize key information you've already gleaned from the examples.
 
 </details>
 
+
 ## ∆F Syntax and Other Information
 
 <details>        <!-- option: open -->       
-<summary class="aside">Show/Hide <em>Syntax Info</em></summary>
+<summary class="aside"><span style="margin: 12px;">Show/Hide <em>Syntax Info</em></span></summary>
 
 ### ∆F Call Syntax Overview
 
@@ -976,39 +977,57 @@ Note that the opening quote ` « ` is treated as an ordinary character within th
 5. If there is one scalar or enclosed vector `⍺`, it is replicated _per (2) above_.
 6. By default,`⍺← ''''`,*i.e.* APL quotes will wrap the array ⍵, row by row, whether character, numeric or otherwise.
 
-</div> 
+---
 
-### Undocumented Options
+</div> 
+</details> 
+
+
+## Appendices
+ 
+<details><summary class="aside"><span style="margin: 12px;">Show/Hide Appendices</span></summary>
+
+### Appendix I: Undocumented Options
 
 1. If `options[0]` is `¯1`, then **∆F** returns a character vector that contains the source code for the *dfn* that would have been returned via the ***DFN*** option, `options[0]=1`. 
 If ***DBG*** is also set, newlines from `` `◇ `` are shown as visible `␤`. However, since this option returns the code string *verbatim*, the ***DBG*** option won't *display* the code string redundantly. 
- 
- </details> 
- 
+
+### Appendix II: Python F-strings
+
+<div id="python-ref">
+<iframe src="https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals" width="100%"  name="python-ref" height="600">
+</iframe>
+</div>
+
 ---
+
+</details>
+
 
 <!-- Put a set of navigation tools at a fixed position at the bottom of the Help screen
 -->
 <div class="doc-footer">
 <button id="toggleDetails" class="button happybutton">Expand All Sections</button>&emsp;
-<a href="#top">Top</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="#table-of-contents">Table of Contents</a> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="#f-primer-with-examples">Examples</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="#top">→Top</a>
+&nbsp;&nbsp;&nbsp;
+<a href="#table-of-contents">Contents</a> 
+&nbsp;&nbsp;&nbsp;  
+<a href="#f-examples-a-primer">Examples</a>
+&nbsp;&nbsp;&nbsp; 
 <a href="#f-syntax-and-other-information">Syntax</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; 
+<a href="#appendices">Appendices</a>
+&nbsp;&nbsp;&nbsp; 
 <a href="#copyright">Copyright</a>
+&nbsp;&nbsp;&nbsp; 
 &emsp;<button onclick="closeWindowNow()" class="button warnbutton">Close Window</span></button>
-
 </div>
 
 
 ## Copyright
 
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251008T204230]
+(C) 2025 Sam the Cat Foundation. [20251009T193555]
 </span>
 <hr> 
 &emsp;

@@ -1,4 +1,4 @@
-:Namespace ⍙Fapl 
+:Namespace ⍙Fapl
   ⎕IO  ⎕ML←0 1                 ⍝ Namespace scope. User code is executed in caller space (⊃⎕RSI)  
   DEBUG← 0                     ⍝ DEBUG←1 turns off top-level error trapping...
   helpHtmlFi← '∆F_Help.html'   ⍝ Called from 'help' option. Globally set here
@@ -348,18 +348,20 @@
 ⍝          name is (⍕⎕THIS),'.A'
 ⍝          codeString is the executable dfn in string form.
 ⍝ At runtime, we'll generate shortcut code "pointers" scA, scB etc. based on flag ¨inline¨.
+⍝ Warning: Be sure these can run in user env with any ⎕IO and ⎕ML.
+⍝ (Localize them where needed)
   ∇ {ok}← ⍙LoadShortcuts 
     ; XR ;HT 
     XR← ⎕THIS.⍎⊃∘⌽                                   ⍝ XR: Execute the right-hand expression
     HT← '⎕THIS' ⎕R (⍕⎕THIS)                          ⍝ HT: "Hardwire" absolute ⎕THIS. 
     ⎕SHADOW '; sc; scA2; scB2; scC2; scÐ2; scF2; scM2; scT2; scQ2; scW2' ~';' 
-    A← XR scA2← HT   ' ⎕THIS.A ' '{⍺←⍬⋄⎕ML←1⋄⊃⍪/(⌈2÷⍨w-m)⌽¨f↑⍤1⍨¨m←⌈/w←⊃∘⌽⍤⍴¨f←⎕FMT¨⍺⍵}' 
-    B← XR scB2← HT   ' ⎕THIS.B ' '{⍺←0⋄⎕ML←1⋄⍺⎕SE.Dyalog.Utils.disp⊂⍣(1≥≡⍵),⍣(0=≡⍵)⊢⍵}' 
+    A← XR scA2← HT   ' ⎕THIS.A ' '{⎕ML←1⋄⍺←⍬⋄⊃⍪/(⌈2÷⍨w-m)⌽¨f↑⍤1⍨¨m←⌈/w←⊃∘⌽⍤⍴¨f←⎕FMT¨⍺⍵}' 
+    B← XR scB2← HT   ' ⎕THIS.B ' '{⎕ML←1⋄⍺←0⋄⍺⎕SE.Dyalog.Utils.disp⊂⍣(1≥≡⍵),⍣(0=≡⍵)⊢⍵}' 
       ⎕SHADOW 'cCod' 
       cCod← {
             _←  '{'
             _,←    '1<⍴⍴⍵: ∇⍤1⊢ ⍵⋄'
-            _,←    '⎕FR ⎕PP← 1287 34⋄'
+            _,←    '⎕FR ⎕PP ⎕ML← 1287 34 1⋄'
             _,←    't←''[.Ee].*$'' ''(?<=\d)(?=(\d{3})+([-¯.Ee]|$))''⎕R''&'' '',&''⍕¨⍵⋄'
             _,←    '1=≢⍵:⊃t⋄'
             _,←    't'
@@ -368,20 +370,21 @@
     C← XR scC2← HT   ' ⎕THIS.C ' cCod 
     Ð← XR scÐ2← HT   ' ⎕THIS.Ð ' ' 0∘⎕SE.Dyalog.Utils.disp¯1∘↓'                           
     F← XR scF2←      ' ⎕FMT '    ' ⎕FMT '                                                
-    M← XR scM2← HT   ' ⎕THIS.M ' '{⍺←⊢⋄⎕ML←1⋄⊃,/((⌈/≢¨)↑¨⊢)⎕FMT¨⍺⍵}'                     
+    M← XR scM2← HT   ' ⎕THIS.M ' '{⎕ML←1⋄⍺←⊢⋄⊃,/((⌈/≢¨)↑¨⊢)⎕FMT¨⍺⍵}'                     
       ⎕SHADOW 'qCod'
       qCod← {
           _←  '{'
           _,← ' ⍺←⎕UCS 39⋄'                               ⍝ ⍺ defaults to a single quote.
           _,← ' 1<|≡⍵:⍺∘∇¨⍵⋄'                             ⍝ It's not simple ==> handle.
           _,← ' (0=⍴⍴⍵)∧1=≡⍵:⍵⋄'                          ⍝ It's an ⎕OR ==> handle.
-          _,← ' (0≠≡⍵)∧326=⎕DR⍵:⍺∘∇¨⍵⋄'                   ⍝ It's heterogeneous: 1 'x' 2 3.                                              
+          _,← ' (0≠≡⍵)∧326=⎕DR⍵:⍺∘∇¨⍵⋄'                   ⍝ It's heterogeneous: 1 'x' 2 3.  
+          _,← ' ⎕ML←1⋄'                                   ⍝ Safe after |≡                                             
           _,← ' ⍺{0=80|⎕DR⍵:⍺,⍺,⍨⍵/⍨ 1+⍺=⍵⋄⍵}⍤1⊢⍵'        ⍝ If a vector/row is char, put in quotes.
           _,  '}'
       }⍬
     Q← XR scQ2← HT   ' ⎕THIS.Q ' qCod 
-    T← XR scT2← HT   ' ⎕THIS.T ' '{⍺←''YYYY-MM-DD hh:mm:ss''⋄∊⍣(1=≡⍵)⊢⍺(1200⌶)⊢1⎕DT⊆⍵}'  
-    W← XR scW2← HT ' ⎕THIS.W ' '{⍺←⎕UCS 39⋄ 1<|≡⍵: ⍺∘∇¨⍵⋄L R←2⍴⍺⋄{L,R,⍨⍕⍵}⍤1⊢⍵}'
+    T← XR scT2← HT   ' ⎕THIS.T ' '{⎕ML←1⋄⍺←''YYYY-MM-DD hh:mm:ss''⋄∊⍣(1=≡⍵)⊢⍺(1200⌶)⊢1⎕DT⊆⍵}'  
+    W← XR scW2← HT   ' ⎕THIS.W ' '{⎕ML←1⋄⍺←⎕UCS 39⋄ 1<|≡⍵: ⍺∘∇¨⍵⋄L R←2⍴⍺⋄{L,R,⍨⍕⍵}⍤1⊢⍵}'
   ⍝ Load externals: scList, nSC, MapSC 
     scList← scA2 scB2 scC2 scÐ2 scF2 scM2 scT2 scQ2 scW2  ⍝ All shortcuts, including internal ones.
     nSC← ≢  sc← 'ABCFTDQW'                                ⍝ sc: User-callable shortcuts  (`A, etc.)
