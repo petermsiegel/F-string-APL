@@ -140,6 +140,7 @@
       list-style-type: '🔽';  
     }
   </style>
+
   <script>
   //  Handle Expand/Collapse button at bottom of Help page 
   document.addEventListener('DOMContentLoaded', () => {
@@ -179,6 +180,7 @@
       window.close();
     }
   }
+
   </script>
 </head>
 <body>
@@ -200,7 +202,7 @@ often multidimensional expressions in an APL-friendly style.</span></th>
 </table>
 <h2 id="table-of-contents">Table of Contents</h2>
 <details>     <!-- option: open -->
-<summary class="aside"><span style="margin: 12px;">Show/Hide <em>Table of Contents</em></span></summary>
+<summary class="aside" ><span style="margin: 12px;">Show/Hide <em>Table of Contents</em></span></summary>
 <span style="font-size: 90%;">
 
 <ul>
@@ -284,7 +286,7 @@ F-strings</a></li>
 <h2 id="installing-and-running-f-in-dyalog-apl">Installing and Running
 <strong>∆F</strong> in Dyalog APL</h2>
 <details>            <!-- option: open -->
-<summary class="aside"><span style="margin: 12px;">Show/Hide <em>Installing and Running <bold>∆F</bold></em></span></summary>
+<summary class="aside" ><span style="margin: 12px;">Show/Hide <em>Installing and Running <bold>∆F</bold></em></span></summary>
 
 <h3 id="installing-f">Installing <strong>∆F</strong></h3>
 <ol type="1">
@@ -329,11 +331,13 @@ current namespace.</li>
 </details>
 
 <h2 id="overview">Overview</h2>
-<details open><summary class="aside"><span style="margin: 12px;">Show/Hide <em>Overview</em></span></summary>
+<details open><summary class="aside" ><span style="margin: 12px;">Show/Hide <em>Overview</em></span></summary>
 
-<p>Inspired by Python <em>f-strings</em>,¹ <strong>∆F</strong> includes
-a variety of capabilities to make it easy to evaluate, format, annotate,
-and display related multidimensional information.² <strong>∆F</strong>
+<p>Inspired by Python
+<em>f-strings</em>,<span style="color: red;">¹</span>
+<strong>∆F</strong> includes a variety of capabilities to make it easy
+to evaluate, format, annotate, and display related multidimensional
+information.<span style="color: red;">²</span> <strong>∆F</strong>
 <em>f-strings</em> include:</p>
 <ul>
 <li><p>The abstraction of 2-dimensional character
@@ -342,15 +346,16 @@ specifications and data, then aligned and catenated into a single
 overall character matrix result;</p></li>
 <li><p><strong>Text fields</strong>, supporting multiline Unicode text
 within each field, with the sequence <code>`◇</code>
-(<strong>backtick</strong> + <strong>statement separator</strong>³)
-generating a newline (<small><strong>⎕UCS 13</strong></small>);</p></li>
+(<strong>backtick</strong> + <strong>statement
+separator</strong><span style="color: red;">³</span>) generating a
+newline (<small><strong>⎕UCS 13</strong></small>);</p></li>
 <li><p><strong>Code fields</strong>, allowing users to evaluate and
 display APL arrays of any dimensionality, depth and type in the user
 environment, arrays passed as <strong>∆F</strong> arguments, as well as
-arbitrary APL expressions based on full multi-statement dfn logic.⁴ Each
-<strong>Code field</strong> must return a value, simple or otherwise,
-which will be catenated with other fields and returned from
-<strong>∆F</strong>;</p>
+arbitrary APL expressions based on full multi-statement dfn
+logic.<span style="color: red;">⁴</span> Each <strong>Code
+field</strong> must return a value, simple or otherwise, which will be
+catenated with other fields and returned from <strong>∆F</strong>;</p>
 <p><strong>Code fields</strong> also provide a number of concise,
 convenient extensions, such as:</p>
 <ul>
@@ -359,13 +364,14 @@ with several quote styles:</p>
 <ul>
 <li><strong>double-quotes</strong><br> <code>∆F '{"like this"}'</code>
 or <code>∆F '{"on`◇""three""`◇lines"}</code>,</li>
-<li><strong>double angle quotation marks</strong>,⁵<br>
+<li><strong>double angle quotation
+marks</strong>,<span style="color: red;">⁵</span><br>
 <code>∆F '{«with internal quotes like "this" or ''this''»}'</code>, not
 to mention</li>
 <li>APL's tried-and-true embedded <strong>single-quotes</strong>,<br>
 <code>∆F '{''shown ''''right'''' here''}'</code>.</li>
 </ul></li>
-<li><p>Simple shortcuts⁶ for</p>
+<li><p>Simple shortcuts<span style="color: red;">⁶</span> for</p>
 <ul>
 <li><strong>format</strong>ting numeric arrays, <strong>$</strong>
 (short for <strong>⎕FMT</strong>):
@@ -413,10 +419,11 @@ appropriate vertical alignment) to form a single character matrix:
 </ul></li>
 </ul>
 <p><strong>∆F</strong> is designed for ease of use, <em>ad hoc</em>
-debugging, fine-grained formatting and informal user interaction,⁷ built
-using Dyalog functions and operators.</p>
+debugging, fine-grained formatting and informal user
+interaction,<span style="color: red;">⁷</span> built using Dyalog
+functions and operators.</p>
 <details>     <!-- option: open -->
-<summary class="aside"><span style="margin: 12px;">Recap: <em>The Three Field Types</em></span></summary><br>  
+<summary class="aside" ><span style="margin: 12px;">Recap: <em>The Three Field Types</em></span></summary><br>  
 
 <table>
 <thead>
@@ -455,53 +462,57 @@ dfns</td>
 <br>
 </details>
 
-<details class="pmsnote" name="pmsnote"><summary class="aside"><span style="margin: 12px;">Notes</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary class="aside" style="text-align: right;margin-right: 30px;">&nbsp; Notes</summary><div class="notes">
 
 <table>
 <tbody>
 <tr>
-<td style="text-align: left;">¹ <strong>∆F</strong> is inspired by <a
-href="#python-ref">Python f-strings</a>, short for "<strong>formatted
-string literals</strong>", but designed for APL's multi-dimensional
-worldview. Python introduced <em>f-strings</em> in 2016.
-<strong>∆F</strong> <em>f-strings</em> and Python's are
-<strong>not</strong> compatible.</td>
+<td style="text-align: left;"><span style="color: red;">¹</span>
+<strong>∆F</strong> is inspired by <a href="#python-ref">Python
+f-strings</a>, short for "<strong>formatted string literals</strong>",
+but designed for APL's multi-dimensional worldview. Python introduced
+<em>f-strings</em> in 2016. <strong>∆F</strong> <em>f-strings</em> and
+Python's are <strong>not</strong> compatible.</td>
 </tr>
 <tr>
-<td style="text-align: left;">² Throughout this documentation, an index
-origin of zero (<code>⎕IO←0</code>) is assumed. Since
-<strong>Code</strong> fields inherit the index origin and other system
-variables from the environment in which <strong>∆F</strong> is called,
-your own examples will work as you expect.</td>
+<td style="text-align: left;"><span style="color: red;">²</span>
+Throughout this documentation, an index origin of zero
+(<code>⎕IO←0</code>) is assumed. Since <strong>Code</strong> fields
+inherit the index origin and other system variables from the environment
+in which <strong>∆F</strong> is called, your own examples will work as
+you expect.</td>
 </tr>
 <tr>
-<td style="text-align: left;">³ In this document, we use the symbol
-<code>◇</code> (<code>⎕UCS 9671</code>) to represent the APL
-<em>statement separator</em> (<code>⎕UCS 8900</code>), since the latter
-is displayed <em>in some browsers</em> as a hard-to-read glyph.
-<strong>∆F</strong> will recognize <code>`◇</code> with <em>either</em>
-glyph.</td>
+<td style="text-align: left;"><span style="color: red;">³</span> In this
+document, we use the symbol <code>◇</code> (<code>⎕UCS 9671</code>) to
+represent the APL <em>statement separator</em> (<code>⎕UCS 8900</code>),
+since the latter is displayed <em>in some browsers</em> as a
+hard-to-read glyph. <strong>∆F</strong> will recognize <code>`◇</code>
+with <em>either</em> glyph.</td>
 </tr>
 <tr>
-<td style="text-align: left;">⁴ An <strong>∆F</strong>
-<em>f-string</em>— including any <strong>Code</strong> fields— is
-limited to a single, possibly very long, character vector.</td>
+<td style="text-align: left;"><span style="color: red;">⁴</span> An
+<strong>∆F</strong> <em>f-string</em>— including any
+<strong>Code</strong> fields— is limited to a single, possibly very
+long, character vector.</td>
 </tr>
 <tr>
-<td style="text-align: left;">⁵ <strong>Double angle quotation
-marks</strong> <big><strong>« »</strong></big> (<em>guillemets</em>) are
-Unicode chars <code>⎕UCS 171 187</code>.</td>
+<td style="text-align: left;"><span style="color: red;">⁵</span>
+<strong>Double angle quotation marks</strong>
+<big><strong>« »</strong></big> (<em>guillemets</em>) are Unicode chars
+<code>⎕UCS 171 187</code>.</td>
 </tr>
 <tr>
-<td style="text-align: left;">⁶ Details on all the shortcuts are
-provided later in this document. See <a
+<td style="text-align: left;"><span style="color: red;">⁶</span> Details
+on all the shortcuts are provided later in this document. See <a
 href="#code-field-shortcuts">Code Field Shortcuts</a>.</td>
 </tr>
 <tr>
-<td style="text-align: left;">⁷ As a prototype, <strong>∆F</strong> is
-relatively slow, using an APL recursive scan to analyze the
-<strong>f-string</strong>. See the <em><strong>DFN</strong></em> option
-(below) for a way to speed up frequently used <em>f-strings</em>.</td>
+<td style="text-align: left;"><span style="color: red;">⁷</span> As a
+prototype, <strong>∆F</strong> is relatively slow, using an APL
+recursive scan to analyze the <strong>f-string</strong>. See the
+<em><strong>DFN</strong></em> option (below) for a way to speed up
+frequently used <em>f-strings</em>.</td>
 </tr>
 </tbody>
 </table>
@@ -514,7 +525,7 @@ APL</h2>
 <strong>HELP</strong> information, type: <code>∆F⍨ 'help'</code>.</p>
 <h2 id="f-examples-a-primer">∆F Examples: A Primer</h2>
 <details>            <!-- option: open -->
-<summary class="aside"><span style="margin: 12px;">Show/Hide <em>Examples: A Primer</em></span></summary>
+<summary class="aside" ><span style="margin: 12px;">Show/Hide <em>Examples: A Primer</em></span></summary>
 
 <p>Before providing information on <strong>∆F</strong> syntax and other
 details, <em>let's start with some examples</em>…</p>
@@ -660,12 +671,12 @@ they've done their work of separating adjacent fields (typically
 <strong>Text fields</strong>), so they won't be placed in boxes. Try
 this expression on your own:</p>
 <pre><code>   0 0 1 ∆F &#39;abc{}def{}{}ghi{&quot;&quot;}jkl{ }mno&#39;</code></pre>
-<details class="pmsnote" name="pmsnote"><summary class="aside"><span style="margin: 12px;">Peek at solution.</span></summary><div class="notes"></span></summary>
+<details><summary class="aside" ><span style="margin: 12px;">Peek</span></summary>
 
 <p><code>┌───┬───┬───┬┬───┬─┬───┐</code><br>
 <code>│abc│def│ghi││jkl│ │mno│</code><br>
 <code>└───┴───┴───┴┴───┴─┴───┘</code></p>
-</div></details>
+</details>
 
 <p>In contrast, <strong>Code fields</strong> that return null values
 (like <code>{""}</code> above) <em>will</em> be displayed!</p>
@@ -691,29 +702,29 @@ The temperature is 11°C or 51.8°F
 <h3 id="referencing-the-f-string-itself">Referencing the F-string
 Itself</h3>
 <p>The expression <code>`⍵0</code> always refers to the
-<em>f-string</em> itself.¹ Try this yourself:²</p>
+<em>f-string</em> itself.<span style="color: red;">¹</span> Try this
+yourself:<span style="color: red;">²</span></p>
 <pre><code>   ∆F &#39;Our string {`⍵0↓} is {≢`⍵0} characters&#39;</code></pre>
-<details class="pmsnote"  name="pmsnote">            <!-- option: open -->  
-<summary class="aside"><span style="margin: 12px;">Peek at solution. </span></summary>
+<details><summary class="aside" ><span style="margin: 12px;">Peek</span></summary>
 
-<pre><code>Our string                  `⍵0↓                  is 38 characters
+<pre><code>   ∆F &#39;Our string {`⍵0↓} is {≢`⍵0} characters&#39;
+Our string                  `⍵0↓                  is 38 characters
            Our string {`⍵0↓} is {≢`⍵0} characters                 </code></pre>
 </details>
-
-<details class="pmsnote" name="pmsnote"><summary class="aside"><span style="margin: 12px;">Notes</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary class="aside" style="text-align: right;margin-right: 30px;">&nbsp; Notes</summary><div class="notes">
 
 <table>
 <tbody>
 <tr>
-<td style="text-align: left;">¹ <code>`⍵0</code> refers to the
-<em>f-string</em> independent of the the number of elements in the right
-argument to <strong>∆F</strong> (<em>effectively</em>,
-<code>⊆⍵</code>).</td>
+<td style="text-align: left;"><span style="color: red;">¹</span>
+<code>`⍵0</code> refers to the <em>f-string</em> independent of the the
+number of elements in the right argument to <strong>∆F</strong>
+(<em>effectively</em>, <code>⊆⍵</code>).</td>
 </tr>
 <tr>
-<td style="text-align: left;">² We explain the <code>↓</code> before the
-closing brace <code>}</code> under <a
-href="#self-documenting-code-fields-sdcfs">Self-documenting Code
+<td style="text-align: left;"><span style="color: red;">²</span> We
+explain the <code>↓</code> before the closing brace <code>}</code> under
+<a href="#self-documenting-code-fields-sdcfs">Self-documenting Code
 fields</a> below.</td>
 </tr>
 </tbody>
@@ -735,17 +746,18 @@ The sun&#39;s core is at 15,000,000°C or 27,000,032°F</code></pre>
 Commas</h3>
 <p>The [<strong>Numeric</strong>] <strong>Commas</strong> shortcut
 <code>`C</code> adds commas every 3 digits (from the right) to one or
-more numbers or numeric strings.¹ It has an advantage over the
-<code>$</code> (Dyalog's <code>⎕FMT</code>) specifier: it doesn't
-require you to guesstimate field widths.</p>
-<details class="pmsnote" name="pmsnote"><summary class="aside"><span style="margin: 12px;">Note</span></summary><div class="notes">
+more numbers or numeric strings.<span style="color: red;">¹</span> It
+has an advantage over the <code>$</code> (Dyalog's <code>⎕FMT</code>)
+specifier: it doesn't require you to guesstimate field widths.</p>
+<details class="pmsnote" name="pmsnote"><summary class="aside" style="text-align: right;margin-right: 30px;">&nbsp;  Note</summary><div class="notes">
 
 <table>
 <tbody>
 <tr>
-<td style="text-align: left;">¹ Typically, each number or numeric string
-presented to <code>`C</code> will represent an integer, but if a real
-number is presented, only the integer part will have commas added.</td>
+<td style="text-align: left;"><span style="color: red;">¹</span>
+Typically, each number or numeric string presented to <code>`C</code>
+will represent an integer, but if a real number is presented, only the
+integer part will have commas added.</td>
 </tr>
 </tbody>
 </table>
@@ -773,9 +785,10 @@ fields</strong>.</p>
 <blockquote>
 <p>Self-documenting Code fields are a useful debugging tool.</p>
 </blockquote>
-<p>What's an SDCF? An SDCF¹ allows whatever source code is in a
-<strong>Code Field</strong> to be automatically displayed literally
-along with the result of evaluating that code.</p>
+<p>What's an SDCF? An SDCF<span style="color: red;">¹</span> allows
+whatever source code is in a <strong>Code Field</strong> to be
+automatically displayed literally along with the result of evaluating
+that code.</p>
 <p>The source code for a <strong>Code field</strong> can automatically
 be shown in <strong>∆F</strong>'s output—</p>
 <ul>
@@ -787,26 +800,28 @@ be shown in <strong>∆F</strong>'s output—</p>
 <li>a right arrow <big><code>→</code></big> for a
 <strong>horizontal</strong> SDCF, or</li>
 <li>a down arrow <big><code>↓</code></big> (or
-<big><code>%</code></big>²) for a <strong>vertical</strong> SDCF,</li>
+<big><code>%</code></big><span style="color: red;">²</span>) for a
+<strong>vertical</strong> SDCF,</li>
 </ul>
 <p>as the <strong><em>last non-space</em></strong> character in the
 <strong>Code field</strong>, before the <em>final</em> right brace.</p>
-<details class="pmsnote" name="pmsnote"><summary class="aside"><span style="margin: 12px;">Notes</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary class="aside" style="text-align: right;margin-right: 30px;">&nbsp; Notes</summary><div class="notes">
 
 <table>
 <tbody>
 <tr>
-<td style="text-align: left;">¹ Our SDCFs are based on Python's single
-type of <a
+<td style="text-align: left;"><span style="color: red;">¹</span> Our
+SDCFs are based on Python's single type of <a
 href="https://docs.python.org/3/whatsnew/3.8.html#f-strings-support-for-self-documenting-expressions-and-debugging">self-documenting
 expressions</a> in <em>f-strings</em>, but work somewhat differently.
 SDCFs are used <strong><em>only</em></strong> in <strong>Code
 fields</strong> (<em>duh</em>).</td>
 </tr>
 <tr>
-<td style="text-align: left;">² <code>%</code> is the same glyph as for
-the <strong>Above</strong> shortcut, <code>%</code> or <code>`A</code>,
-discussed in <a href="#the-above-shortcut">the next section</a>.</td>
+<td style="text-align: left;"><span style="color: red;">²</span>
+<code>%</code> is the same glyph as for the <strong>Above</strong>
+shortcut, <code>%</code> or <code>`A</code>, discussed in <a
+href="#the-above-shortcut">the next section</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -960,17 +975,19 @@ expressions: <code>`⍵ `⍵ `⍵</code>. This is equivalent to the
 <p>The <strong>Quote</strong> shortcut <code>`Q</code> recursively scans
 its right argument, matching rows of character arrays, character
 vectors, and character scalars, doubling internal single quotes and
-placing single quotes around the items found.¹ Non-character data is
-returned as is. This is useful, for example, when you wish to clearly
-distinguish character from numeric data.</p>
-<details class="pmsnote" name="pmsnote"><summary class="aside"><span style="margin: 12px;">Note</span></summary><div class="notes">
+placing single quotes around the items
+found.<span style="color: red;">¹</span> Non-character data is returned
+as is. This is useful, for example, when you wish to clearly distinguish
+character from numeric data.</p>
+<details class="pmsnote" name="pmsnote"><summary class="aside" style="text-align: right;margin-right: 30px;">&nbsp;  Note</summary><div class="notes">
 
 <table>
 <tbody>
 <tr>
-<td style="text-align: left;">¹ If a multidimensional character array is
-found, its rows are quoted; if a character vector, it is quoted <em>in
-toto</em>; else, each character scalar is quoted in isolation.</td>
+<td style="text-align: left;"><span style="color: red;">¹</span> If a
+multidimensional character array is found, its rows are quoted; if a
+character vector, it is quoted <em>in toto</em>; else, each character
+scalar is quoted in isolation.</td>
 </tr>
 </tbody>
 </table>
@@ -1004,11 +1021,12 @@ character digits, but not the actual numbers!</p>
 <div class="content-with-left-bar">
 
 <p>Here we make a quick mention of the
-<strong><em>experimental</em></strong> shortcut <strong>Wrap</strong>¹
-<code>`W</code> which is used when you want a
-<strong><em>decorator</em></strong> string that is placed immediately to
-the left or right of <strong><em>each</em></strong> row of simple
-objects in the right argument, <code>⍵</code>.</p>
+<strong><em>experimental</em></strong> shortcut
+<strong>Wrap</strong><span style="color: red;">¹</span> <code>`W</code>
+which is used when you want a <strong><em>decorator</em></strong> string
+that is placed immediately to the left or right of
+<strong><em>each</em></strong> row of simple objects in the right
+argument, <code>⍵</code>.</p>
 <ul>
 <li>The decorators are in <code>⍺</code>, the left argument to
 <strong>Wrap</strong>: the left decorator, <code>0⊃2⍴⍺</code>, and the
@@ -1017,16 +1035,17 @@ single quote.</li>
 <li>If you need to omit one or the other decorator, simply make it a
 null string <code>""</code> or a <em>zilde</em> <code>⍬</code>.</li>
 </ul>
-<details class="pmsnote" name="pmsnote"><summary class="aside"><span style="margin: 12px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary class="aside" style="text-align: right;margin-right: 30px;">&nbsp;  Note</summary><div class="notes">
 
 <table>
 <tbody>
 <tr>
-<td style="text-align: left;">¹ <strong>Wrap</strong> differs from the
-<strong>Quote</strong> shortcut <code>`Q</code>, which puts quotes
-<strong><em>only</em></strong> around the character arrays in
-<code>⍵</code>. For more, see <strong>Wrap</strong> (<code>`W</code>)
-<strong>Details</strong> <em>below</em>.</td>
+<td style="text-align: left;"><span style="color: red;">¹</span>
+<strong>Wrap</strong> differs from the <strong>Quote</strong> shortcut
+<code>`Q</code>, which puts quotes <strong><em>only</em></strong> around
+the character arrays in <code>⍵</code>. For more, see
+<strong>Wrap</strong> (<code>`W</code>) <strong>Details</strong>
+<em>below</em>.</td>
 </tr>
 </tbody>
 </table>
@@ -1057,31 +1076,32 @@ simple array in a complex array.</p>
 with the <em><strong>DFN</strong></em> Option</h3>
 <p>The default returned from <strong>∆F</strong> is always (on success)
 a character matrix. That can be expressed schematically via expression
-<em>(a),</em> shown here¹:</p>
+<em>(a),</em> shown here<span style="color: red;">¹</span>:</p>
 <pre><code>(a) 0 ∆F… </code></pre>
 <p>However, if the initial option (<strong><em>DFN</em></strong>) is
 <code>1</code>, as in <em>(b),</em></p>
 <pre><code>(b) 1 ∆F… </code></pre>
 <p>then <strong>∆F</strong> returns a <strong>dfn</strong> that,
 <em>when called later</em>, will return precisely the same character
-expression as for <em>(a)</em>.² This is most useful when you are making
-repeated use of an <em>f-string</em>, since the overhead for analyzing
-the <em>f-string</em> contents <em>once</em> will be amortized over all
-the calls.</p>
-<details class="pmsnote" name="pmsnote"><summary class="aside"><span style="margin: 12px;">Notes</span></summary><div class="notes">
+expression as for <em>(a)</em>.<span style="color: red;">²</span> This
+is most useful when you are making repeated use of an <em>f-string</em>,
+since the overhead for analyzing the <em>f-string</em> contents
+<em>once</em> will be amortized over all the calls.</p>
+<details class="pmsnote" name="pmsnote"><summary class="aside" style="text-align: right;margin-right: 30px;">&nbsp; Notes</summary><div class="notes">
 
 <table>
 <tbody>
 <tr>
-<td style="text-align: left;">¹ <strong>∆F</strong>'s default initial
-option (left argument) is <code>0</code>, so <code>0 ∆F…</code> and
-<code>∆F…</code> are equivalent. We discuss all the options to
-<strong>∆F</strong> later in this document.</td>
+<td style="text-align: left;"><span style="color: red;">¹</span>
+<strong>∆F</strong>'s default initial option (left argument) is
+<code>0</code>, so <code>0 ∆F…</code> and <code>∆F…</code> are
+equivalent. We discuss all the options to <strong>∆F</strong> later in
+this document.</td>
 </tr>
 <tr>
-<td style="text-align: left;">² This assumes the resulting dfn is called
-with the same arguments in the same calling environment in the same
-state.</td>
+<td style="text-align: left;"><span style="color: red;">²</span> This
+assumes the resulting dfn is called with the same arguments in the same
+calling environment in the same state.</td>
 </tr>
 </tbody>
 </table>
@@ -1114,15 +1134,17 @@ performance…</p>
 <p>Finally, we want to show you that the <em>dfn</em> returned from
 <code>1…∆F…</code> can retrieve argument(s) passed on the right side of
 <strong>∆F</strong>, using the very same omega shortcut expressions
-(<code>`⍵1</code>, etc.) as described above.¹</p>
-<details class="pmsnote" name="pmsnote"><summary class="aside"><span style="margin: 12px;">Note</span></summary><div class="notes">
+(<code>`⍵1</code>, etc.) as described
+above.<span style="color: red;">¹</span></p>
+<details class="pmsnote" name="pmsnote"><summary class="aside" style="text-align: right;margin-right: 30px;">&nbsp;  Note</summary><div class="notes">
 
 <table>
 <tbody>
 <tr>
-<td style="text-align: left;">¹ The <em>dfn</em> returned from
-<code>1…∆F…</code> includes the original f-string text used to generate
-it. The f-string is available as <code>`⍵0</code>, as expected.</td>
+<td style="text-align: left;"><span style="color: red;">¹</span> The
+<em>dfn</em> returned from <code>1…∆F…</code> includes the original
+f-string text used to generate it. The f-string is available as
+<code>`⍵0</code>, as expected.</td>
 </tr>
 </tbody>
 </table>
@@ -1154,7 +1176,7 @@ examples.</p>
 <h2 id="f-syntax-and-other-information">∆F Syntax and Other
 Information</h2>
 <details>        <!-- option: open -->       
-<summary class="aside"><span style="margin: 12px;">Show/Hide <em>Syntax Info</em></span></summary>
+<summary class="aside" ><span style="margin: 12px;">Show/Hide <em>Syntax Info</em></span></summary>
 
 <h3 id="f-call-syntax-overview">∆F Call Syntax Overview</h3>
 <table>
@@ -1422,7 +1444,8 @@ or numbers.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>`D</strong></td>
-<td style="text-align: left;">Date-Time¹</td>
+<td
+style="text-align: left;">Date-Time<span style="color: red;">¹</span></td>
 <td style="text-align: left;">Synonym for <strong>`T</strong>.</td>
 </tr>
 <tr>
@@ -1442,7 +1465,8 @@ If omitted, <code>⍺←''''</code>.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>`T</strong></td>
-<td style="text-align: left;">Date-Time¹</td>
+<td
+style="text-align: left;">Date-Time<span style="color: red;">¹</span></td>
 <td style="text-align: left;"><code>[⍺]`T ⍵</code>. Displays
 timestamp(s) <code>⍵</code> according to date-time template
 <code>⍺</code>. <code>⍵</code> is one or more APL timestamps
@@ -1494,15 +1518,15 @@ href="#self-documenting-code-fields-sdcfs">SDCFs</a> in
 </table>
 <br>
 
-<details class="pmsnote" name="pmsnote"><summary class="aside"><span style="margin: 12px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary class="aside" style="text-align: right;margin-right: 30px;">&nbsp;  Note</summary><div class="notes">
 
 <table>
 <tbody>
 <tr>
-<td style="text-align: left;">¹ The syntax for the Date-Time
-specifications (left arg) can be found in the Dyalog documentation under
-<b>1200⌶</b>. For the curious, here's the code actually used by the
-Date-Time shortcut:
+<td style="text-align: left;"><span style="color: red;">¹</span> The
+syntax for the Date-Time specifications (left arg) can be found in the
+Dyalog documentation under <b>1200⌶</b>. For the curious, here's the
+code actually used by the Date-Time shortcut:
 <br>  <code>{⍺←'YYYY-MM-DD hh:mm:ss' ◇ ∊⍣(1=≡⍵)⊢ ⍺(1200⌶)⊢ 1⎕DT ⊆⍵}</code>.</td>
 </tr>
 </tbody>
@@ -1574,7 +1598,8 @@ as well as</li>
 or <code>"</code>) or the closing quote of a quote pair
 (<code>«</code> <code>»</code>) within the <strong>Quoted
 string</strong>, you must double it. You may <em>not</em> use an escape
-sequence (e.g. <code>`"</code>) for this purpose.¹</p>
+sequence (e.g. <code>`"</code>) for this
+purpose.<span style="color: red;">¹</span></p>
 <table>
 <thead>
 <tr>
@@ -1607,12 +1632,13 @@ style="text-align: left;"><code>∆F '{''or ''''this'''' one''}'</code></td>
 character within the string. The clumsiness of the standard single quote
 <code>'</code> examples is due to the fact that the single quote is the
 required delimiter for the outermost (APL-level) string.</p>
-<details class="pmsnote" name="pmsnote"><summary class="aside"><span style="margin: 12px;">Note</span></summary><div class="notes">
+<details class="pmsnote" name="pmsnote"><summary class="aside" style="text-align: right;margin-right: 30px;">&nbsp;  Note</summary><div class="notes">
 
 <table>
 <tbody>
 <tr>
-<td style="text-align: left;">¹ Compare these
+<td style="text-align: left;"><span style="color: red;">¹</span> Compare
+these
 examples:<br> <strong>Invalid:</strong> <span style="color: red;">∆F '{"abc`"def"}'</span> <strong>Valid:</strong> <code>∆F '{"abc""def"}'</code></td>
 </tr>
 </tbody>
@@ -1675,7 +1701,7 @@ the array ⍵, row by row, whether character, numeric or otherwise.</li>
 </details> 
 
 <h2 id="appendices">Appendices</h2>
-<details><summary class="aside"><span style="margin: 12px;">Show/Hide Appendices</span></summary>
+<details><summary class="aside" ><span style="margin: 12px;">Show/Hide Appendices</span></summary>
 
 <h3 id="appendix-i-undocumented-options">Appendix I: Undocumented
 Options</h3>
@@ -1691,6 +1717,7 @@ option won't <em>display</em> the code string redundantly.</li>
 </ol>
 <h3 id="appendix-ii-python-f-strings">Appendix II: Python F-strings</h3>
 <div id="python-ref">
+<center>See&ensp;<b>7.1.1</b>&ensp;<em>Formatted String Literals</em></center>
 <iframe src="https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals" width="100%"  name="python-ref" height="600">
 </iframe>
 </div>
@@ -1720,7 +1747,7 @@ option won't <em>display</em> the code string redundantly.</li>
 
 <h2 id="copyright">Copyright</h2>
 <span style="font-family:cursive;" >
-(C) 2025 Sam the Cat Foundation. [20251009T193555]
+(C) 2025 Sam the Cat Foundation. [20251010T160432]
 </span>
 <hr> 
 &emsp;
